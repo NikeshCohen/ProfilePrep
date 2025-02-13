@@ -2,9 +2,9 @@ import ThemeToggle from "./ThemeToggle";
 
 function Footer() {
   return (
-    <footer className="ml-auto mr-auto flex max-w-[1800px] flex-col items-center justify-center space-y-4 border-t p-4 lg:flex-row lg:justify-between lg:space-y-0">
-      <h1 className="text-xl font-bold tracking-wider">
-        Profile<span className="text-blue-500">Prep</span>
+    <footer className="flex lg:flex-row flex-col justify-center lg:justify-between items-center space-y-4 lg:space-y-0 mr-auto ml-auto p-4 border-t max-w-[1800px]">
+      <h1 className="font-bold text-xl tracking-wider">
+        Profile<span className="text-primary">Prep</span>
       </h1>
       <ThemeToggle />
     </footer>
