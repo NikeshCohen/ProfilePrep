@@ -88,7 +88,7 @@ export function PDFUploader({ setExtractedText }: PDFUploaderProps) {
       onDragOver={handleDrag}
       onDrop={handleDrop}
       onClick={onButtonClick}
-      className={`relative min-h-[200px] min-w-[500px] rounded-lg border-2 border-dashed p-8 transition-all duration-300 ease-in-out ${isDragActive ? "border-primary bg-primary/10" : "hover:border-primary hover:bg-primary/5"} ${isExtracting ? "cursor-not-allowed opacity-50" : "cursor-pointer"} `}
+      className={`relative min-h-[200px] w-full max-w-2xl rounded-lg border-2 border-dashed p-8 transition-all duration-300 ease-in-out ${isDragActive ? "border-primary bg-primary/10" : "hover:border-primary hover:bg-primary/5"} ${isExtracting ? "cursor-not-allowed opacity-50" : "cursor-pointer"} `}
     >
       <input
         ref={fileInputRef}
