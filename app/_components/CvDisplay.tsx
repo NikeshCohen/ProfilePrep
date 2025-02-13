@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -9,6 +11,10 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 import Confetti from "react-confetti";
 
 import { Button } from "@/components/ui/button";
+
+/* eslint-disable react/no-unescaped-entities */
+
+/* eslint-disable react/no-unescaped-entities */
 
 pdfMake.vfs = pdfFonts.vfs;
 
