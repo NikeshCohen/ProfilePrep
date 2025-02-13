@@ -1,58 +1,33 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
 import { useId } from "react";
 
 import type { CandidateData } from "@/types";
-import { toast } from "react-hot-toast";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-
-import { NextButton } from "./NextButton";
 
 interface CandidateInfoProps {
   candidateData: CandidateData;
   onInputChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  showNotes: boolean;
 }
 
 export function CandidateInfo({
   candidateData,
   onInputChange,
+  showNotes,
 }: CandidateInfoProps) {
-  const [showNotes, setShowNotes] = useState(false);
-
   const documentTitleId = useId();
   const nameId = useId();
   const locationId = useId();
   const rightToWorkId = useId();
   const salaryExpectationId = useId();
   const notesId = useId();
-
-  const handleNext = () => {
-    if (!showNotes) {
-      if (
-        Object.entries(candidateData).some(
-          ([key, value]) => key !== "notes" && value === "",
-        )
-      ) {
-        toast.error("Please fill in all required fields");
-        return;
-      }
-      setShowNotes(true);
-    } else {
-      if (candidateData.notes === "") {
-        toast.error("Please fill in the notes field");
-        return;
-      }
-      // Process the data or move to the next step
-      console.log("Candidate Data:", candidateData);
-    }
-  };
 
   return (
     <div className="space-y-4 w-full max-w-2xl">
@@ -142,10 +117,6 @@ export function CandidateInfo({
           </p>
         </div>
       )}
-
-      <div className="flex justify-end mt-4 w-full max-w-2xl">
-        <NextButton onClick={handleNext} />
-      </div>
     </div>
   );
 }
