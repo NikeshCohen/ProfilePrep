@@ -76,7 +76,7 @@ body {
 
 @layer components {
   .layout {
-    @apply mr-auto ml-auto max-w-7xl;
+    @apply ml-auto mr-auto max-w-7xl;
   }
 }
 
@@ -87,6 +87,7 @@ body {
     box-shadow 0.2s ease;
 }
 
+/* pretty :) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 4px;
