@@ -9,12 +9,17 @@ import pdfToText from "react-pdftotext";
 
 interface PDFUploaderProps {
   setExtractedText: (text: string) => void;
+  selectedFile: File | null;
+  setSelectedFile: (file: File | null) => void;
 }
 
-export function PDFUploader({ setExtractedText }: PDFUploaderProps) {
+export function PDFUploader({
+  setExtractedText,
+  selectedFile,
+  setSelectedFile,
+}: PDFUploaderProps) {
   const [isDragActive, setIsDragActive] = useState(false);
   const [isExtracting, setIsExtracting] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +58,7 @@ export function PDFUploader({ setExtractedText }: PDFUploaderProps) {
       setError("Please upload a PDF file.");
       return;
     }
-    setFile(newFile);
+    setSelectedFile(newFile);
     extractPDFText(newFile);
   };
 
@@ -77,7 +82,7 @@ export function PDFUploader({ setExtractedText }: PDFUploaderProps) {
   };
 
   const removeFile = () => {
-    setFile(null);
+    setSelectedFile(null);
     setError(null);
   };
 
@@ -98,41 +103,41 @@ export function PDFUploader({ setExtractedText }: PDFUploaderProps) {
         accept=".pdf"
         disabled={isExtracting}
       />
-      <div className="flex flex-col justify-center items-center space-y-4 h-full">
+      <div className="flex h-full flex-col items-center justify-center space-y-4">
         {isDragActive ? (
-          <ArrowUpIcon className="w-12 h-12 text-primary animate-bounce" />
+          <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
         ) : (
-          <FileIcon className="w-12 h-12 text-gray-400" />
+          <FileIcon className="h-12 w-12 text-gray-400" />
         )}
-        <p className="font-medium text-lg text-center">
+        <p className="text-center text-lg font-medium">
           {isDragActive
             ? "Drop the PDF here"
             : "Drag & drop a PDF file here, or click to select"}
         </p>
-        <p className="text-gray-500 text-sm">Only PDF files are accepted</p>
+        <p className="text-sm text-gray-500">Only PDF files are accepted</p>
       </div>
       {error && (
-        <div className="absolute inset-0 flex justify-center items-center bg-destructive/10 rounded-lg">
-          <div className="flex items-center space-x-2 bg-background shadow-lg p-4 rounded-md">
-            <XCircleIcon className="w-6 h-6 text-destructive" />
-            <p className="font-medium text-destructive text-sm">{error}</p>
+        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-destructive/10">
+          <div className="flex items-center space-x-2 rounded-md bg-background p-4 shadow-lg">
+            <XCircleIcon className="h-6 w-6 text-destructive" />
+            <p className="text-sm font-medium text-destructive">{error}</p>
           </div>
         </div>
       )}
       {isExtracting && (
-        <div className="absolute inset-0 flex justify-center items-center bg-background/50 rounded-lg">
-          <div className="border-primary border-t-2 border-b-2 rounded-full w-12 h-12 animate-spin"></div>
+        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-background/50">
+          <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
         </div>
       )}
-      {file && !isExtracting && (
-        <div className="mt-4 p-4 border rounded-lg">
-          <div className="flex justify-between items-center">
+      {selectedFile && !isExtracting && (
+        <div className="mt-4 rounded-lg border p-4">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <FileIcon className="w-6 h-6 text-primary" />
+              <FileIcon className="h-6 w-6 text-primary" />
               <div>
-                <p className="font-medium text-sm">{file.name}</p>
-                <p className="text-gray-500 text-xs">
-                  {(file.size / 1024 / 1024).toFixed(2)} MB • PDF
+                <p className="text-sm font-medium">{selectedFile.name}</p>
+                <p className="text-xs text-gray-500">
+                  {(selectedFile.size / 1024 / 1024).toFixed(2)} MB • PDF
                 </p>
               </div>
             </div>
@@ -142,10 +147,10 @@ export function PDFUploader({ setExtractedText }: PDFUploaderProps) {
                 setExtractedText("");
                 removeFile();
               }}
-              className="text-muted-foreground hover:text-red-500 transition-colors"
+              className="text-muted-foreground transition-colors hover:text-red-500"
               aria-label="Remove file"
             >
-              <XCircleIcon className="w-5 h-5" />
+              <XCircleIcon className="h-5 w-5" />
             </button>
           </div>
         </div>

@@ -15,6 +15,7 @@ import { PDFUploader } from "./_components/FileUpload";
 import { BackButton, NextButton } from "./_components/NavigationButtons";
 
 export default function Page() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>("");
   const [showCandidateInfo, setShowCandidateInfo] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
@@ -83,7 +84,9 @@ export default function Page() {
   };
 
   const handleReset = () => {
+    setSelectedFile(null);
     setExtractedText("");
+    setShowCandidateInfo(false);
     setCandidateData({
       documentTitle: "",
       name: "",
@@ -93,7 +96,6 @@ export default function Page() {
       notes: "",
     });
     setGeneratedCV(null);
-    setShowCandidateInfo(false);
   };
 
   if (isGenerating) {
@@ -116,7 +118,11 @@ export default function Page() {
         </>
       ) : !showCandidateInfo ? (
         <>
-          <PDFUploader setExtractedText={setExtractedText} />
+          <PDFUploader
+            setExtractedText={setExtractedText}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
+          />
           {extractedText && (
             <div className="mt-4 flex w-full max-w-2xl justify-end">
               <NextButton onClick={handleNext} />

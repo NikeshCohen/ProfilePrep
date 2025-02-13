@@ -22,7 +22,7 @@ export const generate = async (
   let cleanedText = response.text;
 
   if (cleanedText.includes("```") || cleanedText.startsWith("markdown")) {
-    cleanedText = cleanedText.replace(/```/g, "").replace(/^md/g, "");
+    cleanedText = cleanedText.replace(/```/g, "").replace(/^markdown/g, "");
   }
 
   console.log(cleanedText);
