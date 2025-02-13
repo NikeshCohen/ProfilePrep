@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import { Spinner } from "@/components/global/Spinner";
 
 import { CandidateInfo } from "./_components/CandidateInfo";
+import { CVDisplay } from "./_components/CvDisplay";
 import { PDFUploader } from "./_components/FileUpload";
 import { BackButton, NextButton } from "./_components/NavigationButtons";
 
@@ -18,6 +19,7 @@ export default function Page() {
   const [showCandidateInfo, setShowCandidateInfo] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generatedCV, setGeneratedCV] = useState<string | null>(null);
   const [candidateData, setCandidateData] = useState<CandidateData>({
     documentTitle: "",
     name: "",
@@ -50,7 +52,9 @@ export default function Page() {
   };
 
   const handleBack = () => {
-    if (showNotes) {
+    if (generatedCV) {
+      setGeneratedCV(null);
+    } else if (showNotes) {
       setShowNotes(false);
     } else if (showCandidateInfo) {
       setShowCandidateInfo(false);
@@ -67,8 +71,9 @@ export default function Page() {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      await generate(extractedText, candidateData);
-      toast.success("Generation completed successfully");
+      const result = await generate(extractedText, candidateData);
+      setGeneratedCV(result);
+      toast.success("CV generated successfully");
     } catch (error) {
       console.error("Generation failed:", error);
       toast.error("Generation failed. Please try again.");
@@ -77,21 +82,43 @@ export default function Page() {
     }
   };
 
+  const handleReset = () => {
+    setExtractedText("");
+    setCandidateData({
+      documentTitle: "",
+      name: "",
+      location: "",
+      rightToWork: "",
+      salaryExpectation: "",
+      notes: "",
+    });
+    setGeneratedCV(null);
+    setShowCandidateInfo(false);
+  };
+
   if (isGenerating) {
     return (
-      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
         <Spinner />
       </section>
     );
   }
 
   return (
-    <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
-      {!showCandidateInfo ? (
+    <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
+      {generatedCV ? (
+        <>
+          <CVDisplay
+            markdown={generatedCV}
+            docName={candidateData.documentTitle}
+            handleReset={handleReset}
+          />
+        </>
+      ) : !showCandidateInfo ? (
         <>
           <PDFUploader setExtractedText={setExtractedText} />
           {extractedText && (
-            <div className="flex justify-end mt-4 w-full max-w-2xl">
+            <div className="mt-4 flex w-full max-w-2xl justify-end">
               <NextButton onClick={handleNext} />
             </div>
           )}
@@ -103,7 +130,7 @@ export default function Page() {
             onInputChange={handleCandidateDataChange}
             showNotes={showNotes}
           />
-          <div className="flex justify-between mt-4 w-full max-w-2xl">
+          <div className="mt-4 flex w-full max-w-2xl justify-between">
             <BackButton onClick={handleBack} />
             <NextButton onClick={handleNext} />
           </div>
