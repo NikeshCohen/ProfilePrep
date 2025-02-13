@@ -68,5 +68,35 @@ body {
   }
   body {
     @apply bg-background text-foreground;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
+}
+
+@layer components {
+  .layout {
+    @apply ml-auto mr-auto max-w-7xl;
+  }
+}
+
+.theme-transition {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary));
 }

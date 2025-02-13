@@ -1,7 +1,7 @@
 import React from "react";
 
 function page() {
-  return <div>page</div>;
+  return <section className="layout min-h-[93vh]"></section>;
 }
 
 export default page;
