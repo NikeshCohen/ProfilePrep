@@ -9,10 +9,10 @@ import { toast } from "react-hot-toast";
 
 import { Spinner } from "@/components/global/Spinner";
 
+import { BackButton, NextButton } from "../components/global/NavigationButtons";
 import { CandidateInfo } from "./_components/CandidateInfo";
 import { CVDisplay } from "./_components/CvDisplay";
 import { PDFUploader } from "./_components/FileUpload";
-import { BackButton, NextButton } from "./_components/NavigationButtons";
 
 export default function Page() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);

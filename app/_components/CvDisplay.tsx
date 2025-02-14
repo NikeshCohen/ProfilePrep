@@ -16,6 +16,14 @@ import { Button } from "@/components/ui/button";
 
 /* eslint-disable react/no-unescaped-entities */
 
+/* eslint-disable react/no-unescaped-entities */
+
+/* eslint-disable react/no-unescaped-entities */
+
+/* eslint-disable react/no-unescaped-entities */
+
+/* eslint-disable react/no-unescaped-entities */
+
 pdfMake.vfs = pdfFonts.vfs;
 
 interface CVDisplayProps {
@@ -74,9 +82,12 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
         gravity={0.3}
       />
 
-      <h1 className="mb-8 text-center text-3xl font-bold">
+      <h1 className="text-center text-3xl font-bold">
         We Generated Your Candidate's CV Content!
       </h1>
+      <p className="mb-8 mt-1 text-center text-muted-foreground">
+        *Please ensure the accuracy of candidate information
+      </p>
       <div className="flex justify-center gap-4">
         <Button onClick={handleDownload} disabled={isGenerating}>
           {isGenerating ? "Generating PDF..." : "Download CV"}
