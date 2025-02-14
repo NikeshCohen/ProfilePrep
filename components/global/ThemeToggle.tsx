@@ -17,7 +17,10 @@ export default function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return null;
+    // skeleton toggle while mounting
+    return (
+      <div className="relative inline-grid h-9 w-16 animate-pulse grid-cols-[1fr_1fr] items-center rounded-full bg-muted" />
+    );
   }
 
   return (
