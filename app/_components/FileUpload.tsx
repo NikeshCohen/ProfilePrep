@@ -3,7 +3,7 @@
 import type React from "react";
 import { useRef, useState } from "react";
 
-import { ArrowUpIcon, FileIcon, XCircleIcon } from "lucide-react";
+import { ArrowUpIcon, FileText, XCircleIcon } from "lucide-react";
 import { toast } from "react-hot-toast";
 import pdfToText from "react-pdftotext";
 
@@ -107,7 +107,7 @@ export function PDFUploader({
         {isDragActive ? (
           <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
         ) : (
-          <FileIcon className="h-12 w-12 text-gray-400" />
+          <FileText className="h-12 w-12 text-gray-400" />
         )}
         <p className="text-center text-lg font-medium">
           {isDragActive
@@ -133,7 +133,7 @@ export function PDFUploader({
         <div className="mt-4 rounded-lg border p-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <FileIcon className="h-6 w-6 text-primary" />
+              <FileText className="h-6 w-6 text-primary" />
               <div>
                 <p className="text-sm font-medium">{selectedFile.name}</p>
                 <p className="text-xs text-gray-500">
