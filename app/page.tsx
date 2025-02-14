@@ -44,8 +44,8 @@ export default function Page() {
       }
       setShowNotes(true);
     } else {
-      if (candidateData.notes === "") {
-        toast.error("Please fill in the notes field");
+      if (candidateData.notes.length < 400) {
+        toast.error("Please enter at least 400 characters");
         return;
       }
       handleGenerate();

@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
 
 import type { CandidateData } from "@/types";
 
@@ -29,9 +29,20 @@ export function CandidateInfo({
   const salaryExpectationId = useId();
   const notesId = useId();
 
+  const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    setCharCount(candidateData.notes.length);
+  }, [candidateData.notes]);
+
+  const handleNotesChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onInputChange(e);
+    setCharCount(e.target.value.length);
+  };
+
   return (
-    <div className="space-y-4 w-full max-w-2xl">
-      <h1 className="mb-4 font-bold text-primary text-3xl">
+    <div className="w-full max-w-2xl space-y-4">
+      <h1 className="mb-4 text-3xl font-bold text-primary">
         Candidate Information
       </h1>
 
@@ -46,7 +57,7 @@ export function CandidateInfo({
               onChange={onInputChange}
             />
             <p
-              className="mt-2 text-muted-foreground text-xs"
+              className="mt-2 text-xs text-muted-foreground"
               role="region"
               aria-live="polite"
             >
@@ -100,15 +111,23 @@ export function CandidateInfo({
       {showNotes && (
         <div className="space-y-2">
           <Label htmlFor={notesId}>Notes</Label>
-          <Textarea
-            id="notes"
-            placeholder="Add any additional notes here"
-            className="min-h-[200px] resize-none"
-            value={candidateData.notes}
-            onChange={onInputChange}
-          />
+          <div className="relative">
+            <Textarea
+              id="notes"
+              placeholder="Add any additional notes here"
+              className="min-h-[200px] resize-none pr-16"
+              value={candidateData.notes}
+              onChange={handleNotesChange}
+              minLength={200}
+            />
+            <div
+              className={`absolute bottom-2 right-2 text-xs ${charCount >= 400 ? "text-green-500" : "text-red-500"}`}
+            >
+              {charCount}/400
+            </div>
+          </div>
           <p
-            className="mt-2 text-muted-foreground text-xs"
+            className="mt-2 text-xs text-muted-foreground"
             role="region"
             aria-live="polite"
           >
