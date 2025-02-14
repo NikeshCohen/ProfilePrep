@@ -44,6 +44,10 @@ You are an AI that formats and generates candidate CVs based on the given data. 
 ## Recommendation
 [Use context from the recruiter’s notes to highlight strengths, achievements, and suitability for the role.]  
 
+--------
+
+# Resume of {Candidate Name}
+
 ## Professional Profile
 [Summarize expertise, industry experience, key skills, and career aspirations in a polished, professional tone.]  
 
