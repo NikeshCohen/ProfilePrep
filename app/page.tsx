@@ -44,7 +44,7 @@ export default function Page() {
       }
       setShowNotes(true);
     } else {
-      if (candidateData.notes.length < 50) {
+      if (candidateData.notes.length < 400) {
         toast.error("Please enter at least 400 characters");
         return;
       }
@@ -137,7 +137,10 @@ export default function Page() {
             showNotes={showNotes}
           />
           <div className="mt-4 flex w-full max-w-sm justify-between sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-            <BackButton onClick={handleBack} className="px-6" />
+            <BackButton
+              onClick={handleBack}
+              className="bg-background/20 px-6"
+            />
             <NextButton onClick={handleNext} className="px-6" />
           </div>
         </>

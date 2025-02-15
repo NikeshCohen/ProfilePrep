@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background/20 hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
@@ -96,7 +96,7 @@ const Button = React.forwardRef<
         {Icon &&
           iconPlacement === "left" &&
           (effect === "expandIcon" ? (
-            <div className="group-hover:w-5 group-hover:pr-2 opacity-0 group-hover:opacity-100 pr-0 w-0 transition-all translate-x-[0%] group-hover:translate-x-100 duration-200">
+            <div className="group-hover:translate-x-100 w-0 translate-x-[0%] pr-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:pr-2 group-hover:opacity-100">
               <Icon />
             </div>
           ) : (
@@ -106,7 +106,7 @@ const Button = React.forwardRef<
         {Icon &&
           iconPlacement === "right" &&
           (effect === "expandIcon" ? (
-            <div className="group-hover:w-5 group-hover:pl-2 opacity-0 group-hover:opacity-100 pl-0 w-0 transition-all translate-x-[100%] group-hover:translate-x-0 duration-200">
+            <div className="w-0 translate-x-[100%] pl-0 opacity-0 transition-all duration-200 group-hover:w-5 group-hover:translate-x-0 group-hover:pl-2 group-hover:opacity-100">
               <Icon />
             </div>
           ) : (

@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 
+import Background from "@/components/global/Background";
 import Footer from "@/components/global/Footer";
 import Toaster from "@/components/global/Toaster";
 
@@ -46,6 +47,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} theme-transition antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Background />
           <Toaster />
           <Analytics />
           {children}
