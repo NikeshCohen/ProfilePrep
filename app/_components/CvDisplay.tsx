@@ -2,27 +2,16 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import htmlToPdfmake from "html-to-pdfmake";
+import { Download } from "lucide-react";
 import MarkdownIt from "markdown-it";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import Confetti from "react-confetti";
 
 import { Button } from "@/components/ui/button";
-
-/* eslint-disable react/no-unescaped-entities */
-
-/* eslint-disable react/no-unescaped-entities */
-
-/* eslint-disable react/no-unescaped-entities */
-
-/* eslint-disable react/no-unescaped-entities */
-
-/* eslint-disable react/no-unescaped-entities */
-
-/* eslint-disable react/no-unescaped-entities */
 
 pdfMake.vfs = pdfFonts.vfs;
 
@@ -42,15 +31,18 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
     height: window.innerHeight,
   });
 
-  const detectSize = () => {
+  // memoise with useCallback to avoid dependency warning
+  const detectSize = useCallback(() => {
     setWindowDimension({
       width: window.innerWidth,
       height: window.innerHeight,
     });
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", detectSize);
+    detectSize();
+
     return () => {
       window.removeEventListener("resize", detectSize);
     };
@@ -73,7 +65,8 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
   };
 
   return (
-    <div className="w-full max-w-2xl">
+    <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+      {/* hehehehe :) */}
       <Confetti
         width={windowDimension.width}
         height={windowDimension.height}
@@ -83,19 +76,61 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
       />
 
       <h1 className="text-center text-3xl font-bold">
-        We Generated Your Candidate's CV Content!
+        We've Generated Your Candidate's CV Content!
       </h1>
-      <p className="mb-8 mt-1 text-center text-muted-foreground">
-        *Please ensure the accuracy of candidate information
+      <p className="mb-8 mt-2 text-center font-thin tracking-wide text-muted-foreground">
+        Please verify the accuracy of the candidate's information.
       </p>
+
+      {/* you're changing it back, aren't you O_O */}
       <div className="flex justify-center gap-4">
         <Button onClick={handleDownload} disabled={isGenerating}>
-          {isGenerating ? "Generating PDF..." : "Download CV"}
+          {isGenerating ? (
+            "Generating PDF..."
+          ) : (
+            <>
+              <Download className="h-4 w-4 text-secondary" />
+              <span className="text-secondary">Download CV</span>
+            </>
+          )}
         </Button>
-        <Button onClick={handleReset} disabled={isGenerating} variant="outline">
+        <Button
+          onClick={handleReset}
+          disabled={isGenerating}
+          variant="link"
+          className="border border-primary px-6 hover:bg-primary/5 hover:no-underline"
+        >
           Reset
         </Button>
       </div>
+
+      {/* link reset button:
+      <div>
+        <div className="flex justify-center gap-4">
+          <Button onClick={handleDownload} disabled={isGenerating}>
+            {isGenerating ? (
+              "Generating PDF..."
+            ) : (
+              <>
+                <Download className="h-4 w-4 text-secondary" />
+                <span className="text-secondary">Download CV</span>
+              </>
+            )}
+          </Button>
+        </div>
+
+        <div className="mt-1 flex justify-center gap-4">
+          <Button
+            onClick={handleReset}
+            disabled={isGenerating}
+            variant="link"
+            className="font-bold"
+          >
+            Reset
+          </Button>
+        </div>
+      </div>
+      */}
     </div>
   );
 }

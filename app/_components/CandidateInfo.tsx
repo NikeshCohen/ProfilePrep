@@ -41,7 +41,7 @@ export function CandidateInfo({
   };
 
   return (
-    <div className="w-full max-w-2xl space-y-4">
+    <div className="w-full max-w-sm space-y-4 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
       <h1 className="mb-4 text-3xl font-bold text-primary">
         Candidate Information
       </h1>
@@ -110,11 +110,16 @@ export function CandidateInfo({
 
       {showNotes && (
         <div className="space-y-2">
-          <Label htmlFor={notesId}>Notes</Label>
+          <Label
+            htmlFor={notesId}
+            className="sr-only text-primary underline underline-offset-4"
+          >
+            Notes
+          </Label>
           <div className="relative">
             <Textarea
               id="notes"
-              placeholder="Add any additional notes here"
+              placeholder="Add any additional notes here..."
               className="min-h-[200px] resize-none pr-16"
               value={candidateData.notes}
               onChange={handleNotesChange}

@@ -96,7 +96,7 @@ export function PDFUploader({
       onDragOver={handleDrag}
       onDrop={handleDrop}
       onClick={onButtonClick}
-      className={`relative min-h-[200px] w-full max-w-md rounded-md border-2 border-dashed sm:max-w-lg md:max-w-xl lg:max-w-2xl ${error ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
+      className={`relative min-h-[200px] w-full max-w-sm rounded-md border-2 border-dashed sm:max-w-lg md:max-w-xl lg:max-w-2xl ${error ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
         isDragActive
           ? error
             ? "border-destructive bg-destructive/10"

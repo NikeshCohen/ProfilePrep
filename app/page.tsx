@@ -124,8 +124,8 @@ export default function Page() {
             setSelectedFile={setSelectedFile}
           />
           {extractedText && (
-            <div className="mt-4 flex w-full max-w-2xl justify-end">
-              <NextButton onClick={handleNext} />
+            <div className="mt-4 flex w-full max-w-sm justify-end sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+              <NextButton onClick={handleNext} className="px-6" />
             </div>
           )}
         </>
@@ -136,9 +136,9 @@ export default function Page() {
             onInputChange={handleCandidateDataChange}
             showNotes={showNotes}
           />
-          <div className="mt-4 flex w-full max-w-2xl justify-between">
-            <BackButton onClick={handleBack} />
-            <NextButton onClick={handleNext} />
+          <div className="mt-4 flex w-full max-w-sm justify-between sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+            <BackButton onClick={handleBack} className="px-6" />
+            <NextButton onClick={handleNext} className="px-6" />
           </div>
         </>
       )}

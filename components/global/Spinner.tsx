@@ -1,7 +1,8 @@
 export function Spinner() {
   return (
-    <div className="flex flex-col justify-center items-center">
-      <div className="border-t-4 border-blue-500 border-solid rounded-full w-16 h-16 animate-spin"></div>
+    /* pretty! */
+    <div className="flex flex-col items-center justify-center">
+      <div className="h-16 w-16 animate-spin rounded-full border-t-4 border-solid border-blue-500"></div>
     </div>
   );
 }
