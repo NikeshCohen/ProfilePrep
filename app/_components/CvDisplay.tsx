@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
@@ -65,7 +63,7 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
   };
 
   return (
-    <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+    <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-3xl">
       {/* hehehehe :) */}
       <Confetti
         width={windowDimension.width}
@@ -76,61 +74,32 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
       />
 
       <h1 className="text-center text-3xl font-bold">
-        We've Generated Your Candidate's CV Content!
+        We&apos;ve Generated Your Candidate&apos;s CV Content!
       </h1>
-      <p className="mb-8 mt-2 text-center font-thin tracking-wide text-muted-foreground">
-        Please verify the accuracy of the candidate's information.
+      <p className="mb-8 mt-2 text-center text-sm font-thin tracking-wide text-muted-foreground">
+        *Please verify the accuracy of the candidate&apos;s information.
       </p>
 
       {/* you're changing it back, aren't you O_O */}
       <div className="flex justify-center gap-4">
-        <Button onClick={handleDownload} disabled={isGenerating}>
+        <Button
+          onClick={handleDownload}
+          disabled={isGenerating}
+          effect="shineHover"
+        >
           {isGenerating ? (
             "Generating PDF..."
           ) : (
             <>
-              <Download className="h-4 w-4 text-secondary" />
-              <span className="text-secondary">Download CV</span>
+              <Download className="h-4 w-4" />
+              <span>Download CV</span>
             </>
           )}
         </Button>
-        <Button
-          onClick={handleReset}
-          disabled={isGenerating}
-          variant="link"
-          className="border border-primary px-6 hover:bg-primary/5 hover:no-underline"
-        >
+        <Button onClick={handleReset} disabled={isGenerating} variant="outline">
           Reset
         </Button>
       </div>
-
-      {/* link reset button:
-      <div>
-        <div className="flex justify-center gap-4">
-          <Button onClick={handleDownload} disabled={isGenerating}>
-            {isGenerating ? (
-              "Generating PDF..."
-            ) : (
-              <>
-                <Download className="h-4 w-4 text-secondary" />
-                <span className="text-secondary">Download CV</span>
-              </>
-            )}
-          </Button>
-        </div>
-
-        <div className="mt-1 flex justify-center gap-4">
-          <Button
-            onClick={handleReset}
-            disabled={isGenerating}
-            variant="link"
-            className="font-bold"
-          >
-            Reset
-          </Button>
-        </div>
-      </div>
-      */}
     </div>
   );
 }
