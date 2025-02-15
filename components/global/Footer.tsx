@@ -2,8 +2,8 @@ import Link from "next/link";
 
 import { Github } from "lucide-react";
 
-import { Button } from "../ui/button";
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "@/components/global/ThemeToggle";
+import { Button } from "@/components/ui/button";
 
 function Footer() {
   return (
@@ -13,12 +13,12 @@ function Footer() {
       </h1>
 
       <div className="flex gap-2">
-        <Button asChild variant="outline" className="rounded-full py-2">
+        <Button asChild variant="outline" className="h-9 rounded-full p-2.5">
           <Link
             href="https://github.com/NikeshCohen/ProfilePrep"
             target="_blank"
           >
-            <Github />
+            <Github size={16} />
           </Link>
         </Button>
 

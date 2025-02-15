@@ -96,7 +96,7 @@ export function PDFUploader({
       onDragOver={handleDrag}
       onDrop={handleDrop}
       onClick={onButtonClick}
-      className={`relative min-h-[200px] w-full max-w-2xl rounded-lg border-2 border-dashed ${error ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
+      className={`relative min-h-[200px] w-full max-w-sm rounded-md border-2 border-dashed sm:max-w-lg md:max-w-xl lg:max-w-2xl ${error ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
         isDragActive
           ? error
             ? "border-destructive bg-destructive/10"
@@ -107,6 +107,7 @@ export function PDFUploader({
       } ${isExtracting ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
     >
       <input
+        title="Upload PDF File"
         ref={fileInputRef}
         type="file"
         className="hidden"
@@ -118,14 +119,27 @@ export function PDFUploader({
         {isDragActive ? (
           <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
         ) : (
+          // NOTE: i typically use the CloudUpload icon for drag and drop
           <FileIcon className="h-12 w-12 text-gray-400" />
         )}
-        <p className="text-center text-lg font-medium">
-          {isDragActive
-            ? "Drop the PDF here"
-            : "Drag & drop a PDF file here, or click to select"}
-        </p>
+
+        {isDragActive ? (
+          <p className="text-center text-lg font-medium">Drop the PDF here</p>
+        ) : (
+          <p className="text-center text-lg">
+            <span className="font-semibold">Click to upload</span>
+            <span className="hidden lg:inline"> or drag and drop</span>
+          </p>
+        )}
+
         <p className="text-sm text-gray-500">Only PDF files are accepted</p>
+
+        {/* TODO: add if using cloud instead of file icon:
+        <div className="flex items-center text-gray-500">
+          <FileWarningIcon className="mr-1 h-3 w-3" />
+          <p className="text-sm">PDF Files Only</p>
+        </div>
+        */}
       </div>
       {error && (
         <div className="absolute left-0 right-0 top-0 flex items-center justify-between rounded-t-lg bg-destructive px-4 py-2 text-sm text-destructive-foreground">

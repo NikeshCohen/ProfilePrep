@@ -58,6 +58,7 @@ export default {
       },
       animation: {
         text: "text 5s ease infinite",
+        shine: "shine 3s ease-out infinite",
       },
       keyframes: {
         text: {
@@ -69,6 +70,11 @@ export default {
             "background-size": "200% 200%",
             "background-position": "right center",
           },
+        },
+        shine: {
+          "0%": { backgroundPosition: "200% 0" },
+          "25%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "-200% 0" },
         },
       },
     },
