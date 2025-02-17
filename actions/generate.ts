@@ -1,7 +1,7 @@
 "use server";
 
 import { prompt as mainPrompt } from "@/constants";
-import { CandidateData } from "@/types";
+import type { CandidateData } from "@/types";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 
@@ -24,6 +24,12 @@ export const generate = async (
   if (cleanedText.includes("```") || cleanedText.startsWith("markdown")) {
     cleanedText = cleanedText.replace(/```/g, "").replace(/^markdown/g, "");
   }
+
+  // Log token usage
+  console.log("Token Usage:");
+  console.log("Input Tokens:", response.usage.promptTokens);
+  console.log("Output Tokens:", response.usage.completionTokens);
+  console.log("Total Tokens:", response.usage.totalTokens);
 
   console.log(cleanedText);
 
