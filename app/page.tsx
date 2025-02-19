@@ -43,7 +43,7 @@ function PageContent() {
           ([key, value]) => key !== "notes" && value === "",
         )
       ) {
-        toast.error("Please fill in all required fields");
+        toast.error("Please fill in all fields");
         return;
       }
       setShowNotes(true);
