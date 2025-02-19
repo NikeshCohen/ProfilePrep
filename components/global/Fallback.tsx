@@ -41,7 +41,7 @@ function FallBack({ error, resetErrorBoundary }: FallbackProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        Whoops! We Ran into an error :(
+        Whoops! We ran into an error :&#40;
       </motion.h1>
       <motion.div
         className="mb-6 flex max-w-2xl flex-col items-center overflow-auto rounded-md bg-muted p-2 font-mono text-muted-foreground"
