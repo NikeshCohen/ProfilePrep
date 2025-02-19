@@ -5,8 +5,10 @@ import { useState } from "react";
 
 import { generate } from "@/actions/generate";
 import type { CandidateData } from "@/types";
+import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
 import { toast } from "react-hot-toast";
 
+import Fallback from "@/components/global/Fallback";
 import { Spinner } from "@/components/global/Spinner";
 
 import { BackButton, NextButton } from "../components/global/NavigationButtons";
@@ -14,7 +16,9 @@ import { CandidateInfo } from "./_components/CandidateInfo";
 import { CVDisplay } from "./_components/CvDisplay";
 import { PDFUploader } from "./_components/FileUpload";
 
-export default function Page() {
+function PageContent() {
+  const { showBoundary } = useErrorBoundary();
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>("");
   const [showCandidateInfo, setShowCandidateInfo] = useState(false);
@@ -77,7 +81,7 @@ export default function Page() {
       toast.success("CV generated successfully");
     } catch (error) {
       console.error("Generation failed:", error);
-      toast.error("Generation failed. Please try again.");
+      showBoundary(error);
     } finally {
       setIsGenerating(false);
     }
@@ -146,5 +150,13 @@ export default function Page() {
         </>
       )}
     </section>
+  );
+}
+
+export default function Page() {
+  return (
+    <ErrorBoundary FallbackComponent={Fallback}>
+      <PageContent />
+    </ErrorBoundary>
   );
 }
