@@ -1,6 +1,6 @@
 "use server";
 
-import { prompt as mainPrompt } from "@/constants";
+import { prompt as mainPrompt } from "@/constants/prompt";
 import type { CandidateData } from "@/types";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";

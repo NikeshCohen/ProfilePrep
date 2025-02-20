@@ -87,7 +87,6 @@ body {
     box-shadow 0.2s ease;
 }
 
-/* pretty :) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 4px;
