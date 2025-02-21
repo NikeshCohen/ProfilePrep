@@ -5,8 +5,14 @@ export const content = {
     badge: "FREE TRIAL - FIRST 5 CVS ON US!",
     title: "From Raw CV to Client-Ready in",
     subtitle: "Seconds",
-    description:
-      "Stop wasting hours on manual CV formatting. Our tool transforms messy candidate CVs into polished, client-ready documents instantly",
+    description: (
+      <>
+        <b>Stop wasting hours</b> on manual formatting!
+        <br />
+        Our tool transforms messy candidate CVs into polished documents
+        <b> instantly</b>.
+      </>
+    ),
     cta: "Get Started",
   },
   features: {
@@ -63,17 +69,19 @@ export const content = {
         title: "Startup",
         originalPrice: "15",
         price: "10",
+        hasDollarSign: true,
         timeline: "monthly",
-        features: ["Up to 30 CVs per month"],
+        features: ["Up to 30 CVs per month", "Placeholder 2", "Placeholder 3"],
         isEarlyBird: true,
         cta: "Try Now",
       },
       {
         title: "Growth",
+        hasDollarSign: true,
         originalPrice: "35",
         price: "25",
         timeline: "monthly",
-        features: ["Up to 150 CVs per month"],
+        features: ["Up to 150 CVs per month", "Placeholder 2", "Placeholder 3"],
         isEarlyBird: true,
         cta: "Try Now",
       },
@@ -81,8 +89,10 @@ export const content = {
         title: "Enterprise",
         price: "Custom",
         timeline: "monthly",
-        features: ["Unlimited CVs"],
+        features: ["Unlimited CVs", "Placeholder 2", "Placeholder 3"],
         cta: "Contact Sales",
+        hasDollarSign: false,
+        label: "Scale with Us",
       },
     ],
     earlyBirdLabel: "Launch Offer",

@@ -110,7 +110,7 @@ function Comparison() {
             </ul>
           </CardContent>
         </Card>
-        <Card className="border-primary">
+        <Card className="border-primary bg-background/50">
           <CardHeader>
             <CardTitle className="text-primary">
               {content.comparison.advantagesTitle}
@@ -139,39 +139,48 @@ function Pricing() {
         {content.pricing.tiers.map((tier, index) => (
           <Card
             key={index}
-            className={`relative ${index === 1 ? "bg-primary text-primary-foreground" : ""}`}
+            className={`relative ${index === 1 ? "border-primary bg-primary/80 text-primary-foreground dark:bg-primary/20" : "bg-background/50"}`}
           >
-            {tier.isEarlyBird && (
-              <Badge
-                className={`absolute right-4 top-4 ${index === 1 ? "bg-primary-foreground text-primary" : "bg-primary text-primary-foreground"}`}
-              >
-                {content.pricing.earlyBirdLabel}
-              </Badge>
-            )}
-            <CardHeader>
-              <CardTitle>{tier.title}</CardTitle>
-              <div className="mt-4">
-                {tier.originalPrice && (
+            <Badge
+              className={`absolute right-4 top-4 py-1 ${index === 1 ? "bg-primary-foreground text-primary" : "bg-primary text-primary-foreground"}`}
+            >
+              {tier.isEarlyBird ? content.pricing.earlyBirdLabel : tier.label}
+            </Badge>
+
+            <CardHeader className="mt-12">
+              <CardTitle className="text-center">{tier.title}</CardTitle>
+              <div className="mt-4 text-center">
+                <div className={tier.hasDollarSign ? "-ml-12" : ""}>
+                  {tier.originalPrice && (
+                    <span
+                      className={`text-lg ${index === 1 ? "text-primary-foreground/70" : "text-gray-400"} line-through`}
+                    >
+                      {tier.hasDollarSign
+                        ? `$${tier.originalPrice}`
+                        : tier.originalPrice}{" "}
+                    </span>
+                  )}
                   <span
-                    className={`text-lg ${index === 1 ? "text-primary-foreground/70" : "text-gray-400"} line-through`}
+                    className={`ml-2 text-4xl font-bold ${index === 1 ? "text-primary-foreground" : "text-primary"}`}
                   >
-                    ${tier.originalPrice}
+                    {tier.hasDollarSign ? `$${tier.price}` : tier.price}{" "}
                   </span>
-                )}
-                <span
-                  className={`ml-2 text-4xl font-bold ${index === 1 ? "text-primary-foreground" : "text-primary"}`}
-                >
-                  ${tier.price}
-                </span>
-                <span
+                </div>
+                <div
                   className={`ml-1 text-sm ${index === 1 ? "text-primary-foreground/70" : "text-gray-500"}`}
                 >
                   per user / month
-                </span>
+                </div>
               </div>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-4">
+              <Button
+                className={`mb-8 mt-3 w-full ${index === 1 ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}
+              >
+                {tier.cta}
+              </Button>
+
+              <ul className="space-y-1.5">
                 {tier.features.map((feature, featureIndex) => (
                   <li
                     key={featureIndex}
@@ -184,11 +193,6 @@ function Pricing() {
                   </li>
                 ))}
               </ul>
-              <Button
-                className={`mt-6 w-full ${index === 1 ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}
-              >
-                {tier.cta}
-              </Button>
             </CardContent>
           </Card>
         ))}
@@ -206,7 +210,14 @@ function Cta() {
             {content.finalCta.title}
           </h2>
           <p className="mb-8 text-blue-100">{content.finalCta.subtitle}</p>
-          <Button variant="secondary" size="lg" effect="shineHover">
+          <Button
+            variant="secondary"
+            effect="expandIcon"
+            icon={ArrowRightIcon}
+            iconPlacement="right"
+            size="lg"
+            className="text-primary"
+          >
             {content.finalCta.cta}
           </Button>
         </div>
@@ -217,22 +228,19 @@ function Cta() {
 
 function Faq() {
   return (
-    <section className="py-20">
-      <div className="container px-4 md:px-6">
-        <h2 className="mb-12 text-center text-3xl font-bold">
-          {content.faq.title}
-        </h2>
-        <div className="mx-auto max-w-3xl">
-          <Accordion type="single" collapsible>
-            {content.faq.items.map((item, index) => (
-              <AccordionItem key={index} value={`item-${index}`}>
-                <AccordionTrigger>{item.question}</AccordionTrigger>
-                <AccordionContent>{item.answer}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
+    <Section title={content.faq.title}>
+      <div className="mx-auto max-w-3xl">
+        <Accordion type="single" collapsible>
+          {content.faq.items.map((item, index) => (
+            <AccordionItem key={index} value={`item-${index}`}>
+              <AccordionTrigger>{item.question}</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">
+                {item.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
-    </section>
+    </Section>
   );
 }
