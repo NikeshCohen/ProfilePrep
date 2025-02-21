@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 
 import { content } from "@/constants/webcontent";
@@ -218,27 +216,23 @@ function Cta() {
 }
 
 function Faq() {
-  const [openIndex, setOpenIndex] = React.useState<string>("");
   return (
-    <Section title={content.faq.title}>
-      <div className="mx-auto max-w-3xl">
-        <Accordion type="single" collapsible value={openIndex}>
-          {content.faq.items.map((item, index) => (
-            <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger
-                // toggle open on hover
-                onMouseEnter={() => setOpenIndex(`item-${index}`)}
-                onMouseLeave={() => setOpenIndex("")}
-              >
-                {item.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">
-                {item.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+    <section className="py-20">
+      <div className="container px-4 md:px-6">
+        <h2 className="mb-12 text-center text-3xl font-bold">
+          {content.faq.title}
+        </h2>
+        <div className="mx-auto max-w-3xl">
+          <Accordion type="single" collapsible>
+            {content.faq.items.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
-    </Section>
+    </section>
   );
 }
