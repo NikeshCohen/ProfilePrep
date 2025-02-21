@@ -11,7 +11,7 @@ export const content = {
   },
   features: {
     title: "Format CVs at Lightning Speed",
-    titleHighlight: "Save Hours Every Day",
+    titleHighlight: "Save Hours Each Day",
     items: [
       {
         icon: Clock,
