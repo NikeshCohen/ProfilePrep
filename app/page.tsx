@@ -216,7 +216,7 @@ function Cta() {
             icon={ArrowRightIcon}
             iconPlacement="right"
             size="lg"
-            className="text-primary"
+            className="bg-white text-primary hover:bg-white"
           >
             {content.finalCta.cta}
           </Button>
