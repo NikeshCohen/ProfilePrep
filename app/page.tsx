@@ -204,7 +204,7 @@ function Pricing() {
 function Cta() {
   return (
     <section className="py-10 md:py-20">
-      <section className="place-items-center rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 py-10 md:py-20">
+      <section className="flex justify-center rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 py-10 md:py-20">
         <div className="container px-4 text-center md:px-6">
           <h2 className="mb-2 text-3xl font-bold text-white">
             {content.finalCta.title}
