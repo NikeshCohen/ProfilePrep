@@ -13,6 +13,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import SpotlightCard from "@/components/ui/spot-light-card";
 
 export default function LandingPage() {
   return (
@@ -78,13 +79,11 @@ function Features() {
     >
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {content.features.items.map((feature, index) => (
-          <Card key={index} className="bg-background/40">
-            <CardContent className="pt-6">
-              <feature.icon className="mb-4 h-10 w-10 text-primary" />
-              <h3 className="mb-2 font-semibold">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
-            </CardContent>
-          </Card>
+          <SpotlightCard key={index}>
+            <feature.icon className="mb-4 h-10 w-10 text-primary" />
+            <h3 className="mb-2 font-semibold">{feature.title}</h3>
+            <p className="text-muted-foreground">{feature.description}</p>
+          </SpotlightCard>
         ))}
       </div>
     </Section>
