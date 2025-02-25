@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "db:format": "npx prisma format",
-    "db:migrate": "npx prisma migrate dev",
+    "proxy": "cd auth-proxy && npm run dev",
+    "dev:all": "concurrently \"npm run dev\" \"npm run proxy\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "db:format": "npx prisma format",
+    "db:migrate": "npx prisma migrate dev",
     "postinstall": "prisma generate"
   },
   "dependencies": {
@@ -52,6 +54,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "postcss": "^8",
