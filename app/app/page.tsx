@@ -1,10 +1,12 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { use, useState } from "react";
 
 import { generate } from "@/actions/generate";
+import { useSession } from "@/providers/SessionProvider";
 import type { CandidateData } from "@/types";
+import { useErrorBoundary } from "react-error-boundary";
 import { toast } from "react-hot-toast";
 
 import { BackButton, NextButton } from "@/components/global/NavigationButtons";
@@ -15,6 +17,9 @@ import { CVDisplay } from "./_components/CvDisplay";
 import { PDFUploader } from "./_components/FileUpload";
 
 export default function Page() {
+  const { showBoundary } = useErrorBoundary();
+  const { user } = useSession();
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>("");
   const [showCandidateInfo, setShowCandidateInfo] = useState(false);
@@ -72,12 +77,18 @@ export default function Page() {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      const result = await generate(extractedText, candidateData);
+      const result = await generate(extractedText, candidateData, user);
+
+      if (!result) {
+        toast.error("You have reached your generation limit!");
+        return;
+      }
+
       setGeneratedCV(result);
       toast.success("CV generated successfully");
     } catch (error) {
       console.error("Generation failed:", error);
-      toast.error("Generation failed. Please try again.");
+      showBoundary(error);
     } finally {
       setIsGenerating(false);
     }
@@ -100,14 +111,14 @@ export default function Page() {
 
   if (isGenerating) {
     return (
-      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
         <Spinner />
       </section>
     );
   }
 
   return (
-    <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+    <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
       {generatedCV ? (
         <>
           <CVDisplay
@@ -124,7 +135,7 @@ export default function Page() {
             setSelectedFile={setSelectedFile}
           />
           {extractedText && (
-            <div className="flex justify-end mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="mt-4 flex w-full max-w-sm justify-end sm:max-w-lg md:max-w-xl lg:max-w-2xl">
               <NextButton onClick={handleNext} className="px-6" />
             </div>
           )}
@@ -136,7 +147,7 @@ export default function Page() {
             onInputChange={handleCandidateDataChange}
             showNotes={showNotes}
           />
-          <div className="flex justify-between mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+          <div className="mt-4 flex w-full max-w-sm justify-between sm:max-w-lg md:max-w-xl lg:max-w-2xl">
             <BackButton
               onClick={handleBack}
               className="bg-background/20 px-6"

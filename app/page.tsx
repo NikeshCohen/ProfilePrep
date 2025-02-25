@@ -1,5 +1,7 @@
 import React from "react";
 
+import Link from "next/link";
+
 import { content } from "@/constants/webcontent";
 import { ArrowRightIcon, Check, X } from "lucide-react";
 
@@ -56,8 +58,9 @@ function Hero() {
             icon={ArrowRightIcon}
             iconPlacement="right"
             className="mt-1 px-6"
+            asChild
           >
-            {content.hero.cta}
+            <Link href="/app">{content.hero.cta}</Link>
           </Button>
         </div>
       </div>
@@ -175,8 +178,9 @@ function Pricing() {
             <CardContent>
               <Button
                 className={`mb-8 mt-3 w-full ${index === 1 ? "bg-primary-foreground text-primary hover:bg-primary-foreground/90" : "bg-primary text-primary-foreground hover:bg-primary/90"}`}
+                asChild
               >
-                {tier.cta}
+                <Link href={tier.link}>{tier.cta}</Link>
               </Button>
 
               <ul className="space-y-1.5">
@@ -216,8 +220,9 @@ function Cta() {
             iconPlacement="right"
             size="lg"
             className="bg-white text-primary hover:bg-white"
+            asChild
           >
-            {content.finalCta.cta}
+            <Link href="/app">{content.finalCta.cta}</Link>
           </Button>
         </div>
       </section>

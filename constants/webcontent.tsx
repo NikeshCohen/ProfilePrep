@@ -62,6 +62,7 @@ export const content = {
       "Immediate client submissions",
     ],
   },
+
   pricing: {
     title: "Pricing",
     tiers: [
@@ -74,6 +75,7 @@ export const content = {
         features: ["Up to 30 CVs per month"],
         isEarlyBird: true,
         cta: "Try Now",
+        link: "https://cal.com/profileprep/quick-chat",
       },
       {
         title: "Growth",
@@ -84,6 +86,7 @@ export const content = {
         features: ["Up to 150 CVs per month"],
         isEarlyBird: true,
         cta: "Try Now",
+        link: "https://cal.com/profileprep/quick-chat",
       },
       {
         title: "Enterprise",
@@ -93,10 +96,12 @@ export const content = {
         cta: "Contact Sales",
         hasDollarSign: false,
         label: "Scale with Us",
+        link: "https://cal.com/profileprep/quick-chat",
       },
     ],
     earlyBirdLabel: "Launch Offer",
   },
+
   faq: {
     title: "Frequently Asked Questions",
     items: [

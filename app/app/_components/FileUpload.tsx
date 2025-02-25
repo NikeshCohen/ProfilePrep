@@ -3,9 +3,18 @@
 import type React from "react";
 import { useRef, useState } from "react";
 
-import { ArrowUpIcon, FileIcon, XCircleIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowUpIcon,
+  FileIcon,
+  FileText,
+  FileWarningIcon,
+  XCircleIcon,
+} from "lucide-react";
 import { toast } from "react-hot-toast";
 import pdfToText from "react-pdftotext";
+
+import { fadeUpAnimation } from "@/lib/animations";
 
 interface PDFUploaderProps {
   setExtractedText: (text: string) => void;
@@ -90,106 +99,110 @@ export function PDFUploader({
   };
 
   return (
-    <div
-      onDragEnter={handleDrag}
-      onDragLeave={handleDrag}
-      onDragOver={handleDrag}
-      onDrop={handleDrop}
-      onClick={onButtonClick}
-      className={`relative min-h-[200px] w-full max-w-sm rounded-md border-2 border-dashed sm:max-w-lg md:max-w-xl lg:max-w-2xl ${error ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
-        isDragActive
-          ? error
-            ? "border-destructive bg-destructive/10"
-            : "border-primary bg-primary/10"
-          : error
-            ? "hover:border-destructive hover:bg-destructive/5"
-            : "hover:border-primary hover:bg-primary/5"
-      } ${isExtracting ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+    <motion.div
+      {...fadeUpAnimation}
+      className="`min-h-[200px] w-full max-w-sm rounded-md border-2 border-dashed sm:max-w-lg md:max-w-xl lg:max-w-2xl"
     >
-      <input
-        title="Upload PDF File"
-        ref={fileInputRef}
-        type="file"
-        className="hidden"
-        onChange={handleChange}
-        accept=".pdf"
-        disabled={isExtracting}
-      />
-      <div className="flex h-full flex-col items-center justify-center space-y-4">
-        {isDragActive ? (
-          <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
-        ) : (
-          // NOTE: i typically use the CloudUpload icon for drag and drop
-          <FileIcon className="h-12 w-12 text-gray-400" />
-        )}
+      <div
+        onDragEnter={handleDrag}
+        onDragLeave={handleDrag}
+        onDragOver={handleDrag}
+        onDrop={handleDrop}
+        onClick={onButtonClick}
+        className={`relative ${error ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
+          isDragActive
+            ? error
+              ? "border-destructive bg-destructive/10"
+              : "border-primary bg-primary/10"
+            : error
+              ? "hover:border-destructive hover:bg-destructive/5"
+              : "hover:border-primary hover:bg-primary/5"
+        } ${isExtracting ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+      >
+        <input
+          title="Upload PDF File"
+          ref={fileInputRef}
+          type="file"
+          className="hidden"
+          onChange={handleChange}
+          accept=".pdf"
+          disabled={isExtracting}
+        />
+        <div className="flex h-full flex-col items-center justify-center space-y-4">
+          {isDragActive ? (
+            <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
+          ) : (
+            <FileText className="h-12 w-12 text-gray-400" />
+          )}
 
-        {isDragActive ? (
-          <p className="text-center text-lg font-medium">Drop the PDF here</p>
-        ) : (
-          <p className="text-center text-lg">
-            <span className="font-semibold">Click to upload</span>
-            <span className="hidden lg:inline"> or drag and drop</span>
-          </p>
-        )}
+          {isDragActive ? (
+            <p className="text-center text-lg font-medium">Drop the PDF here</p>
+          ) : (
+            <p className="text-center text-lg">
+              <span className="font-semibold">Click to upload</span>
+              <span className="hidden lg:inline"> or drag and drop</span>
+            </p>
+          )}
 
-        <p className="text-sm text-gray-500">Only PDF files are accepted</p>
+          <p className="text-sm text-gray-500">Only PDF files are accepted</p>
 
-        {/* TODO: add if using cloud instead of file icon:
-        <div className="flex items-center text-gray-500">
-          <FileWarningIcon className="mr-1 h-3 w-3" />
-          <p className="text-sm">PDF Files Only</p>
+          {error && (
+            <div className="flex items-center text-destructive">
+              <FileWarningIcon className="mr-1 h-4 w-4" />
+              <p className="text-sm">PDF Files Only</p>
+            </div>
+          )}
         </div>
-        */}
-      </div>
-      {error && (
-        <div className="absolute left-0 right-0 top-0 flex items-center justify-between rounded-t-lg bg-destructive px-4 py-2 text-sm text-destructive-foreground">
-          <div className="flex items-center space-x-2">
-            <XCircleIcon className="h-4 w-4" />
-            <p>{error}</p>
-          </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setError(null);
-            }}
-            className="text-destructive-foreground/80 transition-colors hover:text-destructive-foreground"
-            aria-label="Dismiss error"
-          >
-            <XCircleIcon className="h-4 w-4" />
-          </button>
-        </div>
-      )}
-      {isExtracting && (
-        <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-background/50">
-          <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
-        </div>
-      )}
-      {selectedFile && !isExtracting && (
-        <div className="mt-4 rounded-lg border p-4">
-          <div className="flex items-center justify-between">
+        {error && (
+          <div className="absolute left-0 right-0 top-0 flex items-center justify-between rounded-t-lg bg-destructive px-4 py-2 text-sm text-destructive-foreground">
             <div className="flex items-center space-x-2">
-              <FileIcon className="h-6 w-6 text-primary" />
-              <div>
-                <p className="text-sm font-medium">{selectedFile.name}</p>
-                <p className="text-xs text-gray-500">
-                  {(selectedFile.size / 1024 / 1024).toFixed(2)} MB • PDF
-                </p>
-              </div>
+              <XCircleIcon className="h-4 w-4" />
+              <p>{error}</p>
             </div>
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setExtractedText("");
-                removeFile();
+                setError(null);
               }}
-              className="text-muted-foreground transition-colors hover:text-red-500"
-              aria-label="Remove file"
+              className="text-destructive-foreground/80 transition-colors hover:text-destructive-foreground"
+              aria-label="Dismiss error"
             >
-              <XCircleIcon className="h-5 w-5" />
+              <XCircleIcon className="h-4 w-4" />
             </button>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+        {isExtracting && (
+          <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-background/50">
+            <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
+          </div>
+        )}
+        {selectedFile && !isExtracting && (
+          <div className="mt-4 rounded-lg border p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <FileIcon className="h-6 w-6 text-primary" />
+                <div>
+                  <p className="text-sm font-medium">{selectedFile.name}</p>
+                  <p className="text-xs text-gray-500">
+                    {(selectedFile.size / 1024 / 1024).toFixed(2)} MB • PDF
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setExtractedText("");
+                  removeFile();
+                }}
+                className="text-muted-foreground transition-colors hover:text-red-500"
+                aria-label="Remove file"
+              >
+                <XCircleIcon className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </motion.div>
   );
 }

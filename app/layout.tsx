@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { QueryProviders } from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -21,7 +22,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ProfilePrep - Streamlined CV Formatting for Recruiters",
+  title: {
+    template: "%s / ProfilePrep - Streamlined CV Formatting for Recruiters",
+    absolute: "ProfilePrep - Streamlined CV Formatting for Recruiters",
+  },
   description:
     "ProfilePrep helps recruiters refine and format candidate CVs before sending them to clients. Streamline the process, tailor resumes for specific roles, and present candidates professionally.",
   keywords: [
@@ -50,8 +54,7 @@ export default function RootLayout({
           <Background />
           <Toaster />
           <Analytics />
-          {children}
-
+          <QueryProviders>{children}</QueryProviders>
           <Footer />
         </ThemeProvider>
       </body>
