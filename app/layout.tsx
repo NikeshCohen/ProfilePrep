@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import { QueryProviders } from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -53,8 +54,7 @@ export default function RootLayout({
           <Background />
           <Toaster />
           <Analytics />
-          {children}
-
+          <QueryProviders>{children}</QueryProviders>
           <Footer />
         </ThemeProvider>
       </body>
