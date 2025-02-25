@@ -20,9 +20,8 @@ export const metadata: Metadata = {
 };
 
 interface PageProps {
-  searchParams: { callback?: string };
+  searchParams: Promise<{ callback?: string }>;
 }
-
 export default async function LoginPage({ searchParams }: PageProps) {
   const session = await getSession();
 
