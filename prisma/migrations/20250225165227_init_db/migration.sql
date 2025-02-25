@@ -25,6 +25,8 @@ CREATE TABLE "users" (
     "image" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdDocs" INTEGER NOT NULL DEFAULT 0,
+    "allowedDocs" INTEGER NOT NULL DEFAULT 5,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );

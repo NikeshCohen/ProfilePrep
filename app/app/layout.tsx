@@ -16,7 +16,7 @@ async function layout({ children }: { children: React.ReactNode }) {
   return (
     <ErrorBoundary FallbackComponent={FallBack}>
       <SessionProvider session={session}>
-        <section className="layout">{children}</section>;
+        <section className="layout">{children}</section>
       </SessionProvider>
     </ErrorBoundary>
   );

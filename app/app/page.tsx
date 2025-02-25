@@ -1,9 +1,10 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { use, useState } from "react";
 
 import { generate } from "@/actions/generate";
+import { useSession } from "@/providers/SessionProvider";
 import type { CandidateData } from "@/types";
 import { useErrorBoundary } from "react-error-boundary";
 import { toast } from "react-hot-toast";
@@ -17,6 +18,7 @@ import { PDFUploader } from "./_components/FileUpload";
 
 export default function Page() {
   const { showBoundary } = useErrorBoundary();
+  const { user } = useSession();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>("");
@@ -75,7 +77,13 @@ export default function Page() {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      const result = await generate(extractedText, candidateData);
+      const result = await generate(extractedText, candidateData, user);
+
+      if (!result) {
+        toast.error("You have reached your generation limit!");
+        return;
+      }
+
       setGeneratedCV(result);
       toast.success("CV generated successfully");
     } catch (error) {
