@@ -21,7 +21,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ProfilePrep - Streamlined CV Formatting for Recruiters",
+  title: {
+    template: "%s / ProfilePrep - Streamlined CV Formatting for Recruiters",
+    absolute: "ProfilePrep - Streamlined CV Formatting for Recruiters",
+  },
   description:
     "ProfilePrep helps recruiters refine and format candidate CVs before sending them to clients. Streamline the process, tailor resumes for specific roles, and present candidates professionally.",
   keywords: [
