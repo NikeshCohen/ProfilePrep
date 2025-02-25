@@ -4,10 +4,13 @@ import type React from "react";
 import { useEffect, useId, useState } from "react";
 
 import type { CandidateData } from "@/types";
+import { motion } from "framer-motion";
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+
+import { containerVariants, itemVariants } from "@/lib/animations";
 
 interface CandidateInfoProps {
   candidateData: CandidateData;
@@ -41,14 +44,22 @@ export function CandidateInfo({
   };
 
   return (
-    <div className="w-full max-w-sm space-y-4 sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-      <h1 className="mb-4 text-3xl font-bold text-primary">
+    <motion.div
+      className="w-full max-w-sm space-y-4 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <motion.h1
+        className="mb-4 text-3xl font-bold text-primary"
+        variants={itemVariants}
+      >
         Candidate Information
-      </h1>
+      </motion.h1>
 
       {!showNotes && (
         <>
-          <div className="space-y-2">
+          <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={documentTitleId}>Document Title</Label>
             <Input
               id="documentTitle"
@@ -64,9 +75,9 @@ export function CandidateInfo({
               This will appear at the top of the document and be the name of the
               file
             </p>
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={nameId}>Candidate Name</Label>
             <Input
               id="name"
@@ -74,9 +85,9 @@ export function CandidateInfo({
               value={candidateData.name}
               onChange={onInputChange}
             />
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={locationId}>Location</Label>
             <Input
               id="location"
@@ -84,9 +95,9 @@ export function CandidateInfo({
               value={candidateData.location}
               onChange={onInputChange}
             />
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={rightToWorkId}>Right to Work</Label>
             <Input
               id="rightToWork"
@@ -94,9 +105,9 @@ export function CandidateInfo({
               value={candidateData.rightToWork}
               onChange={onInputChange}
             />
-          </div>
+          </motion.div>
 
-          <div className="space-y-2">
+          <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={salaryExpectationId}>Salary Expectation</Label>
             <Input
               id="salaryExpectation"
@@ -104,12 +115,12 @@ export function CandidateInfo({
               value={candidateData.salaryExpectation}
               onChange={onInputChange}
             />
-          </div>
+          </motion.div>
         </>
       )}
 
       {showNotes && (
-        <div className="space-y-2">
+        <motion.div className="space-y-2" variants={itemVariants}>
           <Label
             htmlFor={notesId}
             className="sr-only text-primary underline underline-offset-4"
@@ -139,8 +150,8 @@ export function CandidateInfo({
             Add additional information. The more descriptive you are, the better
             for the AI.
           </p>
-        </div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 }
