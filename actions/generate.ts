@@ -17,7 +17,7 @@ export const generate = async (
 ) => {
   const prompt = `${mainPrompt}, Candidate CV DATA: ${cvContent} Document Title: ${candidateInfo.documentTitle}, Candidate Name: ${candidateInfo.name}, Candidate Location: ${candidateInfo.location}, Candidate Right to work: ${candidateInfo.rightToWork}, Salary Expectation: ${candidateInfo.salaryExpectation}, Additional Notes to use: ${candidateInfo.notes} `;
 
-  if (user.allowedDocs !== user.createdDocs) return;
+  if (user.allowedDocs === user.createdDocs) return;
 
   const response = await generateText({
     model: selectedModel,

@@ -127,29 +127,56 @@ export function CandidateInfo({
           >
             Notes
           </Label>
-          <div className="relative">
+          <div className="space-y-2">
             <Textarea
               id="notes"
               placeholder="Add any additional notes here..."
-              className="min-h-[200px] resize-none pr-16"
+              className="min-h-[200px] resize-none"
               value={candidateData.notes}
               onChange={handleNotesChange}
               minLength={200}
             />
-            <div
-              className={`absolute bottom-2 right-2 text-xs ${charCount >= 400 ? "text-green-500" : "text-red-500"}`}
-            >
-              {charCount}/400
+            <div className="flex items-center justify-between text-xs">
+              <p className="text-muted-foreground">
+                Add additional information. Aim for 800 characters for best
+                results.
+              </p>
+              <div className="flex items-center gap-2">
+                <span
+                  className={`rounded-full px-2 py-0.5 ${
+                    charCount < 200
+                      ? "bg-red-100 text-red-700"
+                      : charCount < 400
+                        ? "bg-orange-100 text-orange-700"
+                        : charCount < 800
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-green-100 text-green-700"
+                  }`}
+                >
+                  {charCount < 200
+                    ? "Poor"
+                    : charCount < 400
+                      ? "Limited"
+                      : charCount < 800
+                        ? "Good"
+                        : "Excellent"}
+                </span>
+                <span
+                  className={`font-medium ${
+                    charCount < 200
+                      ? "text-red-600"
+                      : charCount < 400
+                        ? "text-orange-600"
+                        : charCount < 800
+                          ? "text-yellow-600"
+                          : "text-green-600"
+                  }`}
+                >
+                  {charCount}/800
+                </span>
+              </div>
             </div>
           </div>
-          <p
-            className="mt-2 text-xs text-muted-foreground"
-            role="region"
-            aria-live="polite"
-          >
-            Add additional information. The more descriptive you are, the better
-            for the AI.
-          </p>
         </motion.div>
       )}
     </motion.div>
