@@ -160,4 +160,5 @@ function GenerateContent() {
     </section>
   );
 }
+
 export default GenerateContent;

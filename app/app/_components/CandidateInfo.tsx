@@ -139,7 +139,7 @@ export function CandidateInfo({
             <div className="flex items-center justify-between text-xs">
               <p className="text-muted-foreground">
                 Add additional information. Aim for 800 characters for best
-                results.
+                results. Minium 200 characters.
               </p>
               <div className="flex items-center gap-2">
                 <span
@@ -172,7 +172,7 @@ export function CandidateInfo({
                           : "text-green-600"
                   }`}
                 >
-                  {charCount}/800
+                  {charCount}/200
                 </span>
               </div>
             </div>
