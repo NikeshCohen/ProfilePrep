@@ -13,6 +13,7 @@ async function layout({ children }: { children: React.ReactNode }) {
   if (!session) {
     redirect("/login?redirectUrl=/app");
   }
+
   return (
     <ErrorBoundary FallbackComponent={FallBack}>
       <SessionProvider session={session}>
