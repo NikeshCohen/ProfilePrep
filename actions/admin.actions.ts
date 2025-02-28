@@ -1,5 +1,6 @@
 "use server";
 
+import { NewUserData } from "@/app/app/users/_components/NewUser";
 import prisma from "@/prisma/prisma";
 
 export const fetchAllUsers = async (user: {
@@ -31,4 +32,24 @@ export const fetchAllUsers = async (user: {
       company: true,
     },
   });
+};
+
+export const createUser = async (userData: NewUserData) => {
+  return await prisma.user.create({
+    data: {
+      name: userData.name,
+      email: userData.email,
+      role:
+        userData.role === "user"
+          ? "USER"
+          : userData.role === "admin"
+            ? "ADMIN"
+            : "SUPERADMIN",
+      ...(userData.companyId && { companyId: userData.companyId }),
+    },
+  });
+};
+
+export const fetchAllCompanies = async () => {
+  return await prisma.company.findMany();
 };

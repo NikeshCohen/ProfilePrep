@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
 
+import NewUser from "./_components/NewUser";
 import UserList from "./_components/UserList";
 
 export const metadata: Metadata = {
@@ -19,11 +20,15 @@ async function page() {
   }
 
   return (
-    <section className="pt-16 min-h-[93vh] layout">
-      <h1 className="mb-8 font-bold text-2xl tracking-wider">
-        User Management For {user.company?.name || "All Companies"}
-      </h1>
-
+    <section className="layout min-h-[93vh] pt-16">
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-wider">
+          User Management For{" "}
+          {(user.role === "SUPERADMIN" && "All Companies") ||
+            user.company?.name}
+        </h1>
+        <NewUser sessionUser={user} />
+      </div>
       <UserList sessionUser={user} />
     </section>
   );

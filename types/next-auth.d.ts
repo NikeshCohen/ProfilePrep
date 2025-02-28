@@ -10,6 +10,7 @@ declare module "next-auth" {
     createdDocs: number;
     allowedDocs: number;
     company?: {
+      id: string;
       name: string;
     } | null;
     role: UserRole;

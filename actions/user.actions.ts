@@ -27,6 +27,7 @@ export async function getUserWithCompany(userId: string) {
       include: {
         company: {
           select: {
+            id: true,
             name: true,
           },
         },

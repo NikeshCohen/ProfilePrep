@@ -9,7 +9,7 @@ import prisma from "./prisma/prisma";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   adapter: PrismaAdapter(prisma) as Adapter,
-  providers: [Google],
+  providers: [Google({ allowDangerousEmailAccountLinking: true })],
   callbacks: {
     session: async ({ session, user }) => {
       const { success, user: dbUser } = await getUserWithCompany(user.id);

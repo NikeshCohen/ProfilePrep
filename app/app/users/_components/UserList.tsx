@@ -83,8 +83,8 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
                     user.role === "SUPERADMIN"
                       ? "destructive"
                       : user.role === "ADMIN"
-                        ? "secondary"
-                        : "default"
+                        ? "default"
+                        : "secondary"
                   }
                 >
                   {user.role}
