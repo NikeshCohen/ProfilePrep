@@ -23,6 +23,10 @@ jest.mock("react-error-boundary", () => ({
   }),
 }));
 
+// confetti
+Object.defineProperty(window, "innerWidth", { value: 1024 });
+Object.defineProperty(window, "innerHeight", { value: 768 });
+
 describe("CVDisplay Component", () => {
   it("should render the CV content and buttons", () => {
     render(
@@ -53,5 +57,22 @@ describe("CVDisplay Component", () => {
     fireEvent.click(resetButton);
 
     expect(mockMarkdownData.handleReset).toHaveBeenCalledTimes(1);
+  });
+
+  it("should have proper button labels for screen readers", () => {
+    render(
+      <CVDisplay
+        markdown={mockMarkdownData.markdown}
+        docName={mockMarkdownData.docName}
+        handleReset={mockMarkdownData.handleReset}
+      />,
+    );
+
+    // check that buttons have accessible names
+    const downloadButton = screen.getByText(/download cv/i);
+    expect(downloadButton).toBeInTheDocument();
+
+    const resetButton = screen.getByText(/reset/i);
+    expect(resetButton).toBeInTheDocument();
   });
 });

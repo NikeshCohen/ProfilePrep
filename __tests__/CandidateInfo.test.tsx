@@ -69,4 +69,21 @@ describe("CandidateInfo Component", () => {
 
     expect(onInputChange).toHaveBeenCalled();
   });
+
+  it("should have proper form labeling", async () => {
+    const { getByLabelText } = render(
+      <CandidateInfo
+        candidateData={mockCandidateData}
+        onInputChange={jest.fn()}
+        showNotes={false}
+      />,
+    );
+
+    // verify that all form fields have associated labels
+    expect(getByLabelText(/document title/i)).toBeInTheDocument();
+    expect(getByLabelText(/candidate name/i)).toBeInTheDocument();
+    expect(getByLabelText(/location/i)).toBeInTheDocument();
+    expect(getByLabelText(/right to work/i)).toBeInTheDocument();
+    expect(getByLabelText(/salary expectation/i)).toBeInTheDocument();
+  });
 });
