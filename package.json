@@ -17,7 +17,9 @@
     "db:migrate-pr": "npx prisma migrate deploy",
     "postinstall": "prisma generate",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@ai-sdk/google": "^1.1.13",
