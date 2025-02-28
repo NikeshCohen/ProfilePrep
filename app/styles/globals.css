@@ -76,7 +76,7 @@ body {
 
 @layer components {
   .layout {
-    @apply ml-auto mr-auto max-w-7xl;
+    @apply mr-auto ml-auto max-w-7xl;
   }
 }
 
@@ -98,4 +98,13 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--primary));
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
