@@ -13,9 +13,33 @@ export async function incrementUserGenerations(userId: string) {
       },
     });
 
-    return { success: true, createdDocs: updatedUser.createdDocs };
+    return { createdDocs: updatedUser.createdDocs };
   } catch (error) {
     console.error("Failed to increment user docs:", error);
-    return { success: false, error: "Failed to update user docs count" };
+    return { error: "Failed to update user docs count" };
+  }
+}
+
+export async function getUserWithCompany(userId: string) {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      include: {
+        company: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    return { success: true, user };
+  } catch (error) {
+    console.error("Failed to fetch user with company:", error);
+    return { success: false, error: "Failed to fetch user data" };
   }
 }

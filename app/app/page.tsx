@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { use, useState } from "react";
+import { useState } from "react";
 
 import { generate } from "@/actions/generate";
 import { useSession } from "@/providers/SessionProvider";
@@ -111,14 +111,14 @@ export default function Page() {
 
   if (isGenerating) {
     return (
-      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
+      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
         <Spinner />
       </section>
     );
   }
 
   return (
-    <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
+    <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
       {generatedCV ? (
         <>
           <CVDisplay
@@ -135,7 +135,7 @@ export default function Page() {
             setSelectedFile={setSelectedFile}
           />
           {extractedText && (
-            <div className="mt-4 flex w-full max-w-sm justify-end sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="flex justify-end mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
               <NextButton onClick={handleNext} className="px-6" />
             </div>
           )}
@@ -147,7 +147,7 @@ export default function Page() {
             onInputChange={handleCandidateDataChange}
             showNotes={showNotes}
           />
-          <div className="mt-4 flex w-full max-w-sm justify-between sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+          <div className="flex justify-between mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
             <BackButton
               onClick={handleBack}
               className="bg-background/20 px-6"
