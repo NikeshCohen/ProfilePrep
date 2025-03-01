@@ -15,7 +15,8 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -31,3 +32,6 @@ jobs:
 
       - name: Type check
         run: npm run typecheck
+
+      - name: Run tests
+        run: npm run test

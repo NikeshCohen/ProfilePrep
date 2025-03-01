@@ -1,6 +1,5 @@
 "use client";
 
-import type React from "react";
 import { useEffect, useId, useState } from "react";
 
 import type { CandidateData } from "@/types";
@@ -62,7 +61,7 @@ export function CandidateInfo({
           <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={documentTitleId}>Document Title</Label>
             <Input
-              id="documentTitle"
+              id={documentTitleId}
               placeholder="Enter document title"
               value={candidateData.documentTitle}
               onChange={onInputChange}
@@ -80,7 +79,7 @@ export function CandidateInfo({
           <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={nameId}>Candidate Name</Label>
             <Input
-              id="name"
+              id={nameId}
               placeholder="John Doe"
               value={candidateData.name}
               onChange={onInputChange}
@@ -90,7 +89,7 @@ export function CandidateInfo({
           <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={locationId}>Location</Label>
             <Input
-              id="location"
+              id={locationId}
               placeholder="Cape Town, SA"
               value={candidateData.location}
               onChange={onInputChange}
@@ -100,7 +99,7 @@ export function CandidateInfo({
           <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={rightToWorkId}>Right to Work</Label>
             <Input
-              id="rightToWork"
+              id={rightToWorkId}
               placeholder="SA Citizen, no sponsorship required"
               value={candidateData.rightToWork}
               onChange={onInputChange}
@@ -110,7 +109,7 @@ export function CandidateInfo({
           <motion.div className="space-y-2" variants={itemVariants}>
             <Label htmlFor={salaryExpectationId}>Salary Expectation</Label>
             <Input
-              id="salaryExpectation"
+              id={salaryExpectationId}
               placeholder="Open to discussion"
               value={candidateData.salaryExpectation}
               onChange={onInputChange}
@@ -129,7 +128,7 @@ export function CandidateInfo({
           </Label>
           <div className="space-y-2">
             <Textarea
-              id="notes"
+              id={notesId}
               placeholder="Add any additional notes here..."
               className="min-h-[200px] resize-none"
               value={candidateData.notes}
