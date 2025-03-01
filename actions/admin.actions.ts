@@ -1,6 +1,6 @@
 "use server";
 
-import { NewUserData } from "@/app/app/users/_components/NewUser";
+import { NewUserData } from "@/app/app/users/_components/UserManipulations";
 import prisma from "@/prisma/prisma";
 
 export const fetchAllUsers = async (user: {
@@ -36,6 +36,23 @@ export const fetchAllUsers = async (user: {
 
 export const createUser = async (userData: NewUserData) => {
   return await prisma.user.create({
+    data: {
+      name: userData.name,
+      email: userData.email,
+      role:
+        userData.role === "user"
+          ? "USER"
+          : userData.role === "admin"
+            ? "ADMIN"
+            : "SUPERADMIN",
+      ...(userData.companyId && { companyId: userData.companyId }),
+    },
+  });
+};
+
+export const editUser = async (userId: string, userData: NewUserData) => {
+  return await prisma.user.update({
+    where: { id: userId },
     data: {
       name: userData.name,
       email: userData.email,

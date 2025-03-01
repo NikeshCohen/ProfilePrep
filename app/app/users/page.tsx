@@ -5,8 +5,8 @@ import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
 
-import NewUser from "./_components/NewUser";
 import UserList from "./_components/UserList";
+import NewUser from "./_components/UserManipulations";
 
 export const metadata: Metadata = {
   title: "App / Users",

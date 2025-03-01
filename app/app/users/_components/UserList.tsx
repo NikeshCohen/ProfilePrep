@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { useUsersQuery } from "@/actions/queries/admin.queries";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
@@ -28,9 +30,11 @@ import {
 } from "@/components/ui/table";
 
 import Skeleton from "./Skeleton";
+import UserManipulations from "./UserManipulations";
 
 interface UserContextMenuProps {
-  userId: string;
+  userData: User;
+  sessionUser: User;
 }
 
 const UserTable = ({ sessionUser }: { sessionUser: User }) => {
@@ -41,7 +45,7 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
   if (!users) return <NoDataFallback />;
 
   return (
-    <div className="bg-background/30 border rounded-md">
+    <div className="rounded-md border bg-background/30">
       <Table>
         <TableHeader>
           <TableRow>
@@ -58,7 +62,7 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
             <TableRow key={user.id}>
               <TableCell className="font-medium">
                 <div className="flex items-center gap-3">
-                  <Avatar className="w-8 h-8">
+                  <Avatar className="h-8 w-8">
                     <AvatarImage
                       src={user.image || "/user.jpg"}
                       alt={user.name || user.email.split("@")[0]}
@@ -101,7 +105,7 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
                   : "N/A"}
               </TableCell>
               <TableCell>
-                <UserContextMenu userId={user.id} />
+                <UserContextMenu userData={user} sessionUser={sessionUser} />
               </TableCell>
             </TableRow>
           ))}
@@ -111,24 +115,39 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
   );
 };
 
-const UserContextMenu = ({ userId }: UserContextMenuProps) => {
+const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="p-0 w-8 h-8">
-          <span className="sr-only">Open menu</span>
-          <MoreHorizontal className="w-4 h-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => console.log("Placeholder 1", userId)}>
-          Placeholder 1
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => console.log("Placeholder 2", userId)}>
-          Placeholder 2
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onClick={() => setEditModalOpen(true)}>
+            Edit User
+          </DropdownMenuItem>
+          <DropdownMenuItem>Placeholder 2</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <UserManipulations
+        sessionUser={sessionUser}
+        userToEdit={{
+          id: userData.id!,
+          name: userData.name!,
+          email: userData.email!,
+          role: userData.role.toLowerCase() as "user" | "admin" | "superadmin",
+          companyId: userData.company?.id,
+        }}
+        isOpenExternal={isEditModalOpen}
+        onOpenChangeExternal={setEditModalOpen}
+      />
+    </>
   );
 };
 
