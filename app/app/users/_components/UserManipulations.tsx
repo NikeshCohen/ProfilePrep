@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import * as z from "zod";
 
+import { LoaderButton } from "@/components/global/LoaderButton";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -306,13 +307,17 @@ export default function CreateUserModal({
               />
             )}
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <LoaderButton
+              type="submit"
+              className="w-full"
+              isLoading={isSubmitting}
+            >
               {isSubmitting
                 ? "Processing..."
                 : userToEdit
                   ? "Update User"
                   : "Create User"}
-            </Button>
+            </LoaderButton>
           </form>
         </Form>
       </DialogContent>
