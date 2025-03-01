@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 import { useUsersQuery } from "@/actions/queries/admin.queries";
 import { formatDistanceToNow } from "date-fns";
@@ -118,6 +118,23 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
 const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
 
+  // Memoize the user data to prevent unnecessary re-renders
+  const userToEdit = useMemo(
+    () => ({
+      id: userData.id!,
+      name: userData.name!,
+      email: userData.email!,
+      role: userData.role.toLowerCase() as "user" | "admin" | "superadmin",
+      companyId: userData.company?.id,
+    }),
+    [userData],
+  );
+
+  // Use callback to prevent unnecessary re-renders
+  const handleEditClick = useCallback(() => {
+    setEditModalOpen(true);
+  }, []);
+
   return (
     <>
       <DropdownMenu>
@@ -128,25 +145,21 @@ const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={() => setEditModalOpen(true)}>
+          <DropdownMenuItem onClick={handleEditClick}>
             Edit User
           </DropdownMenuItem>
           <DropdownMenuItem>Placeholder 2</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <UserManipulations
-        sessionUser={sessionUser}
-        userToEdit={{
-          id: userData.id!,
-          name: userData.name!,
-          email: userData.email!,
-          role: userData.role.toLowerCase() as "user" | "admin" | "superadmin",
-          companyId: userData.company?.id,
-        }}
-        isOpenExternal={isEditModalOpen}
-        onOpenChangeExternal={setEditModalOpen}
-      />
+      {isEditModalOpen && (
+        <UserManipulations
+          sessionUser={sessionUser}
+          userToEdit={userToEdit}
+          isOpenExternal={isEditModalOpen}
+          onOpenChangeExternal={setEditModalOpen}
+        />
+      )}
     </>
   );
 };

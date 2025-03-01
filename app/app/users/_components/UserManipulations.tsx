@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { createUser, editUser } from "@/actions/admin.actions";
 import { useCompaniesQuery } from "@/actions/queries/admin.queries";
@@ -65,17 +65,24 @@ export default function CreateUserModal({
   onOpenChangeExternal,
 }: CreateUserModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isOpenInternal, setIsOpenInternal] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
+  // Only create the query client once the dialog is actually open
   const queryClient = getQueryClient();
 
   // Determine if the current user is a super admin or admin
   const isSuperAdmin = sessionUser?.role === "SUPERADMIN";
   const isAdmin = sessionUser?.role === "ADMIN";
 
-  console.log(isSuperAdmin);
-
-  const { data: companies = [], error, isLoading } = useCompaniesQuery();
+  // Only fetch companies data when the dialog is open AND the user is a superadmin
+  const {
+    data: companies = [],
+    error,
+    isLoading,
+  } = useCompaniesQuery({
+    enabled: isDialogOpen && isSuperAdmin,
+  });
 
   // Initialize the form with react-hook-form
   const form = useForm<NewUserData>({
@@ -108,6 +115,7 @@ export default function CreateUserModal({
       if (onOpenChangeExternal) {
         onOpenChangeExternal(false);
       }
+      setIsDialogOpen(false);
     } catch (error) {
       console.error("Error creating or editing user:", error);
       toast.error("Error processing user. Please try again.");
@@ -116,14 +124,22 @@ export default function CreateUserModal({
     }
   };
 
+  // Update the internal dialog state when external state changes
+  useEffect(() => {
+    if (isOpenExternal !== undefined) {
+      setIsDialogOpen(isOpenExternal);
+    }
+  }, [isOpenExternal]);
+
   return (
     <Dialog
-      open={isOpenExternal || isEditModalOpen}
+      open={isOpenExternal !== undefined ? isOpenExternal : isOpenInternal}
       onOpenChange={(open) => {
+        setIsDialogOpen(open);
         if (onOpenChangeExternal) {
           onOpenChangeExternal(open);
         } else {
-          setEditModalOpen(open);
+          setIsOpenInternal(open);
         }
       }}
     >
@@ -141,7 +157,7 @@ export default function CreateUserModal({
           </DialogTitle>
           <DialogDescription>
             {userToEdit
-              ? "Edit the user details"
+              ? "Edit an existing user details"
               : "Add a new user to the system"}
           </DialogDescription>
         </DialogHeader>
@@ -154,7 +170,11 @@ export default function CreateUserModal({
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input
+                      placeholder="John Doe"
+                      autoFocus={false}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -168,7 +188,11 @@ export default function CreateUserModal({
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="john@example.com" {...field} />
+                    <Input
+                      placeholder="john@example.com"
+                      autoFocus={false}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -266,13 +290,16 @@ export default function CreateUserModal({
                         <SelectItem value="admin">Admin</SelectItem>
                       </SelectContent>
                     </Select>
-                    <FormDescription>
-                      User will be added to your company:{" "}
-                      {
-                        companies.find((c) => c.id === sessionUser.company?.id)
-                          ?.name
-                      }
-                    </FormDescription>
+                    {!editUser && (
+                      <FormDescription>
+                        User will be added to your company:{" "}
+                        {
+                          companies.find(
+                            (c) => c.id === sessionUser.company?.id,
+                          )?.name
+                        }
+                      </FormDescription>
+                    )}
                     <FormMessage />
                   </FormItem>
                 )}
