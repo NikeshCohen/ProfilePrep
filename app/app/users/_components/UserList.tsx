@@ -29,6 +29,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import DeleteUser from "./DeleteUser";
 import Skeleton from "./Skeleton";
 import UserManipulations from "./UserManipulations";
 
@@ -105,7 +106,9 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
                   : "N/A"}
               </TableCell>
               <TableCell>
-                <UserContextMenu userData={user} sessionUser={sessionUser} />
+                {user.id !== sessionUser.id && (
+                  <UserContextMenu userData={user} sessionUser={sessionUser} />
+                )}
               </TableCell>
             </TableRow>
           ))}
@@ -117,6 +120,7 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
 
 const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   // Memoize the user data to prevent unnecessary re-renders
   const userToEdit = useMemo(
@@ -135,6 +139,10 @@ const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
     setEditModalOpen(true);
   }, []);
 
+  const handleDeleteClick = useCallback(() => {
+    setDeleteModalOpen(true);
+  }, []);
+
   return (
     <>
       <DropdownMenu>
@@ -146,9 +154,14 @@ const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuItem onClick={handleEditClick}>
-            Edit User
+            <span>Edit</span>
           </DropdownMenuItem>
-          <DropdownMenuItem>Placeholder 2</DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={handleDeleteClick}
+            className="text-destructive focus:text-destructive"
+          >
+            Delete
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
 
@@ -158,6 +171,15 @@ const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
           userToEdit={userToEdit}
           isOpenExternal={isEditModalOpen}
           onOpenChangeExternal={setEditModalOpen}
+        />
+      )}
+
+      {isDeleteModalOpen && (
+        <DeleteUser
+          userData={userData}
+          sessionUser={sessionUser}
+          isOpenExternal={isDeleteModalOpen}
+          onOpenChangeExternal={setDeleteModalOpen}
         />
       )}
     </>
