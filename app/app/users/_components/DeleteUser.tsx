@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 
-import { Loader2 } from "lucide-react";
+import { deleteUser } from "@/actions/admin.actions";
 import type { User } from "next-auth";
 import toast from "react-hot-toast";
 
+import { LoaderIcon } from "@/components/global/LoaderButton";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -18,6 +19,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+import { getQueryClient } from "@/lib/getQueryClient";
+
 interface DeleteUserProps {
   userData: User;
   sessionUser: User;
@@ -28,8 +31,11 @@ interface DeleteUserProps {
 const DeleteUser = ({
   userData,
   isOpenExternal,
+  sessionUser,
   onOpenChangeExternal,
 }: DeleteUserProps) => {
+  const queryClient = getQueryClient();
+
   const [confirmEmail, setConfirmEmail] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
@@ -44,13 +50,14 @@ const DeleteUser = ({
     setIsDeleting(true);
 
     try {
-      // This would be replaced with your actual delete user API call
-      // For example: await deleteUser(userData.id, sessionUser);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulating API call
+      await deleteUser(userData.id!, sessionUser);
 
       toast.success(
         `${userData.name || userData.email} has been successfully deleted.`,
       );
+
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+
       onOpenChangeExternal(false);
     } catch (error) {
       toast.error(
@@ -72,8 +79,8 @@ const DeleteUser = ({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
+        <div className="gap-4 grid py-4">
+          <div className="gap-2 grid">
             <Label htmlFor="confirmEmail" className="text-left">
               To confirm, type{" "}
               <span className="font-semibold">{userData.email}</span> below
@@ -104,8 +111,8 @@ const DeleteUser = ({
           >
             {isDeleting ? (
               <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Deleting...
+                <LoaderIcon className="w-4 h-4 animate-spin" />
               </>
             ) : (
               "Delete User"

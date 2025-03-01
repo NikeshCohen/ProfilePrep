@@ -19,7 +19,7 @@ export const LoaderButton = React.forwardRef<
     return (
       <Button ref={ref} disabled={isLoading} className={className}>
         {children}
-        <LoaderIcon className="h-4 w-4 animate-spin" />
+        <LoaderIcon className="w-4 h-4 animate-spin" />
       </Button>
     );
   }
@@ -40,7 +40,7 @@ export const LoaderButton = React.forwardRef<
 
 LoaderButton.displayName = "LoaderButton";
 
-function LoaderIcon(props: React.SVGProps<SVGSVGElement>) {
+export function LoaderIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}

@@ -2,6 +2,7 @@
 
 import { NewUserData } from "@/app/app/users/_components/UserManipulations";
 import prisma from "@/prisma/prisma";
+import { User } from "next-auth";
 
 export const fetchAllUsers = async (user: {
   role: string;
@@ -70,6 +71,34 @@ export const editUser = async (userId: string, userData: NewUserData) => {
             : "SUPERADMIN",
       ...(userData.companyId && { companyId: userData.companyId }),
     },
+  });
+};
+
+export const deleteUser = async (userId: string, sessionUser: User) => {
+  // Check permissions
+  if (sessionUser.role === "USER") {
+    throw new Error(
+      "403 Forbidden: You do not have permission to delete users.",
+    );
+  }
+
+  // If admin, verify the user belongs to their company
+  if (sessionUser.role === "ADMIN") {
+    const userToDelete = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { companyId: true },
+    });
+
+    if (!userToDelete || userToDelete.companyId !== sessionUser.company?.id) {
+      throw new Error(
+        "403 Forbidden: You can only delete users from your company.",
+      );
+    }
+  }
+
+  // Perform the deletion
+  return await prisma.user.delete({
+    where: { id: userId },
   });
 };
 
