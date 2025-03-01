@@ -23,6 +23,9 @@ export const fetchAllUsers = async (user: {
       include: {
         company: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   }
 
@@ -30,6 +33,9 @@ export const fetchAllUsers = async (user: {
   return await prisma.user.findMany({
     include: {
       company: true,
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 };
@@ -63,6 +69,14 @@ export const editUser = async (userId: string, userData: NewUserData) => {
             ? "ADMIN"
             : "SUPERADMIN",
       ...(userData.companyId && { companyId: userData.companyId }),
+    },
+  });
+};
+
+export const createCompany = async (companyName: string) => {
+  return await prisma.company.create({
+    data: {
+      name: companyName,
     },
   });
 };

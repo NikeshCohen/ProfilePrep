@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
 
+import CreateCompany from "./_components/CreateCompany";
 import UserList from "./_components/UserList";
 import NewUser from "./_components/UserManipulations";
 
@@ -27,7 +28,11 @@ async function page() {
           {(user.role === "SUPERADMIN" && "All Companies") ||
             user.company?.name}
         </h1>
-        <NewUser sessionUser={user} />
+
+        <div className="flex items-center gap-4">
+          {user.role === "SUPERADMIN" && <CreateCompany />}
+          <NewUser sessionUser={user} />
+        </div>
       </div>
       <UserList sessionUser={user} />
     </section>
