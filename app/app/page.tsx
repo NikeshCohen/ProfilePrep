@@ -1,17 +1,17 @@
 import React from "react";
 
-import { redirect } from "next/navigation";
+import { Metadata } from "next";
 
-import getSession from "@/lib/getSession";
+import { requireAuth } from "@/lib/utils";
 
 import GenerateContent from "./_components/GenerateContent";
 
-async function page() {
-  const session = await getSession();
+export const metadata: Metadata = {
+  title: "App",
+};
 
-  if (!session) {
-    redirect("/login?redirectUrl=/app");
-  }
+async function page() {
+  await requireAuth("/app");
 
   return (
     <>

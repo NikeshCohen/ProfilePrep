@@ -99,3 +99,12 @@ body {
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--primary));
 }
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

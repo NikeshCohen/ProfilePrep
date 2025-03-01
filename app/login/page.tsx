@@ -20,14 +20,15 @@ export const metadata: Metadata = {
 };
 
 interface PageProps {
-  searchParams: Promise<{ callback?: string }>;
+  searchParams: Promise<{ redirectUrl?: string }>;
 }
+
 export default async function LoginPage({ searchParams }: PageProps) {
   const session = await getSession();
 
   const params = await searchParams; // Need to await dynamic APIs in Next.js 15
 
-  const redirectUrl = params.callback;
+  const redirectUrl = params.redirectUrl;
 
   if (session) redirect("/app");
 

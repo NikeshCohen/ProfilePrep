@@ -4,8 +4,8 @@ import type React from "react";
 import { useState } from "react";
 
 import { generate } from "@/actions/generate";
-import { useSession } from "@/providers/SessionProvider";
 import type { CandidateData } from "@/types";
+import { useSession } from "next-auth/react";
 import { useErrorBoundary } from "react-error-boundary";
 import { toast } from "react-hot-toast";
 
@@ -18,7 +18,7 @@ import { PDFUploader } from "./FileUpload";
 
 function GenerateContent() {
   const { showBoundary } = useErrorBoundary();
-  const { user } = useSession();
+  const { data: session } = useSession();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [extractedText, setExtractedText] = useState<string>("");
@@ -80,7 +80,11 @@ function GenerateContent() {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      const result = await generate(extractedText, candidateData, user);
+      const result = await generate(
+        extractedText,
+        candidateData,
+        session!.user,
+      );
 
       if (!result) {
         toast.error("You have reached your generation limit!");

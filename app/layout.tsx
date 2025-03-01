@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProviders } from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
+import { SessionProvider } from "next-auth/react";
 
 import Background from "@/components/global/Background";
 import Footer from "@/components/global/Footer";
@@ -50,13 +51,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} theme-transition antialiased`}
       >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Background />
-          <Toaster />
-          <Analytics />
-          <QueryProviders>{children}</QueryProviders>
-          <Footer />
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+            <Background />
+            <Toaster />
+            <Analytics />
+            <QueryProviders>{children}</QueryProviders>
+            <Footer />
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

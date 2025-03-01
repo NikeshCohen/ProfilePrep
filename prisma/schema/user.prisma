@@ -1,15 +1,20 @@
+
+
 model User {
   id             String    @id @default(cuid())
   name           String?
   email          String    @unique
   emailVerified  DateTime?
   image          String?
+  companyId      String?
   accounts       Account[]
   sessions       Session[]
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
-  createdDocs Int       @default(0)
-  allowedDocs Int       @default(5)
+  createdDocs    Int       @default(0)
+  allowedDocs    Int       @default(5)
+  company        Company?  @relation(fields: [companyId], references: [id])
+  role           UserRole  @default(USER)
 
   @@map("users")
 }
@@ -34,4 +39,11 @@ model Account {
 
   @@id([provider, providerAccountId])
   @@map("accounts")
+}
+
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPERADMIN
 }

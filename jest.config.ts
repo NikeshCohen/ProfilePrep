@@ -24,7 +24,7 @@ const customConfig: Config = {
   transformIgnorePatterns: [
     "node_modules/(?!(lucide-react|framer-motion|react-confetti|html-to-pdfmake|pdfmake|markdown-it)/)",
   ],
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.tsx"],
+  // setupFilesAfterEnv: ["<rootDir>/jest.setup.tsx"],
   testMatch: [
     "<rootDir>/__tests__/**/*.test.ts",
     "<rootDir>/__tests__/**/*.test.tsx",
