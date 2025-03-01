@@ -79,8 +79,8 @@ const DeleteUser = ({
           </DialogDescription>
         </DialogHeader>
 
-        <div className="gap-4 grid py-4">
-          <div className="gap-2 grid">
+        <div className="grid gap-4 py-4">
+          <div className="grid gap-2">
             <Label htmlFor="confirmEmail" className="text-left">
               To confirm, type{" "}
               <span className="font-semibold">{userData.email}</span> below
@@ -112,7 +112,7 @@ const DeleteUser = ({
             {isDeleting ? (
               <>
                 Deleting...
-                <LoaderIcon className="w-4 h-4 animate-spin" />
+                <LoaderIcon className="h-4 w-4 animate-spin" />
               </>
             ) : (
               "Delete User"

@@ -118,14 +118,14 @@ function GenerateContent() {
 
   if (isGenerating) {
     return (
-      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
         <Spinner />
       </section>
     );
   }
 
   return (
-    <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+    <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
       {generatedCV ? (
         <CVDisplay
           markdown={generatedCV}
@@ -140,7 +140,7 @@ function GenerateContent() {
             setSelectedFile={setSelectedFile}
           />
           {extractedText && (
-            <div className="flex justify-end mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="mt-4 flex w-full max-w-sm justify-end sm:max-w-lg md:max-w-xl lg:max-w-2xl">
               <NextButton onClick={handleNext} className="px-6" />
             </div>
           )}
@@ -152,7 +152,7 @@ function GenerateContent() {
             onInputChange={handleCandidateDataChange}
             showNotes={showNotes}
           />
-          <div className="flex justify-between mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+          <div className="mt-4 flex w-full max-w-sm justify-between sm:max-w-lg md:max-w-xl lg:max-w-2xl">
             <BackButton
               onClick={handleBack}
               className="bg-background/20 px-6"

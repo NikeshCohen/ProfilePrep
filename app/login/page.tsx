@@ -33,11 +33,11 @@ export default async function LoginPage({ searchParams }: PageProps) {
   if (session) redirect("/app");
 
   return (
-    <section className="flex justify-center items-center w-full h-[93vh]">
-      <Card className="bg-background/40 mx-auto md:min-w-[400px] max-w-sm">
+    <section className="flex h-[93vh] w-full items-center justify-center">
+      <Card className="mx-auto max-w-sm bg-background/40 md:min-w-[400px]">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">
-            <h1 className="font-bold text-xl tracking-wider">
+          <CardTitle className="text-center text-2xl">
+            <h1 className="text-xl font-bold tracking-wider">
               Profile<span className="text-primary">Prep</span>
             </h1>
           </CardTitle>
@@ -58,7 +58,7 @@ export default async function LoginPage({ searchParams }: PageProps) {
             >
               <Button
                 type="submit"
-                className="flex justify-center items-center gap-1 w-full text-white"
+                className="flex w-full items-center justify-center gap-1 text-white"
               >
                 <Image
                   src={"/google.svg"}

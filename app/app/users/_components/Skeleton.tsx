@@ -11,7 +11,7 @@ import {
 
 function Skeleton() {
   return (
-    <div className="bg-background/30 border rounded-md">
+    <div className="rounded-md border bg-background/30">
       <Table>
         <TableHeader>
           <TableRow>
@@ -28,27 +28,27 @@ function Skeleton() {
             <TableRow key={index}>
               <TableCell className="font-medium">
                 <div className="flex items-center gap-3">
-                  <div className="bg-neutral-500 rounded-full w-8 h-8 animate-pulse"></div>
+                  <div className="h-8 w-8 animate-pulse rounded-full bg-neutral-500"></div>
                   <div className="flex flex-col gap-2">
-                    <div className="bg-neutral-500 rounded w-32 h-2 animate-pulse"></div>
-                    <div className="bg-neutral-500 rounded w-24 h-2 animate-pulse"></div>
+                    <div className="h-2 w-32 animate-pulse rounded bg-neutral-500"></div>
+                    <div className="h-2 w-24 animate-pulse rounded bg-neutral-500"></div>
                   </div>
                 </div>
               </TableCell>
               <TableCell>
-                <div className="bg-neutral-500 rounded w-32 h-2 animate-pulse"></div>
+                <div className="h-2 w-32 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
-                <div className="bg-neutral-500 rounded w-20 h-2 animate-pulse"></div>
+                <div className="h-2 w-20 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
-                <div className="bg-neutral-500 rounded w-24 h-2 animate-pulse"></div>
+                <div className="h-2 w-24 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
-                <div className="bg-neutral-500 rounded w-32 h-2 animate-pulse"></div>
+                <div className="h-2 w-32 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
-                <div className="bg-neutral-500 rounded w-8 h-2 animate-pulse"></div>
+                <div className="h-2 w-8 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
             </TableRow>
           ))}
