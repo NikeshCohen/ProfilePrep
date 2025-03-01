@@ -17,7 +17,7 @@ import { containerVariants, itemVariants } from "@/lib/animations";
 
 pdfMake.vfs = pdfFonts.vfs;
 
-interface CVDisplayProps {
+export interface CVDisplayProps {
   markdown: string;
   docName: string;
   handleReset: () => void;
