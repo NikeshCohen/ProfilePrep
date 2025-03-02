@@ -41,7 +41,7 @@ import {
 import { getQueryClient } from "@/lib/getQueryClient";
 
 // Define the form schema with Zod
-const formSchema = z.object({
+export const NewUserDataSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   companyId: z.string().optional(),
@@ -49,7 +49,7 @@ const formSchema = z.object({
 });
 
 // Define a type that can be either a new user or an existing user
-export type NewUserData = z.infer<typeof formSchema>;
+export type NewUserData = z.infer<typeof NewUserDataSchema>;
 export type UserData = NewUserData & { id: string };
 
 interface CreateUserModalProps {
@@ -81,13 +81,13 @@ export default function CreateUserModal({
     data: companies = [],
     error,
     isLoading,
-  } = useCompaniesQuery({
+  } = useCompaniesQuery(sessionUser, {
     enabled: isDialogOpen && isSuperAdmin,
   });
 
   // Initialize the form with react-hook-form
   const form = useForm<NewUserData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(NewUserDataSchema),
     defaultValues: {
       name: userToEdit?.name || "",
       email: userToEdit?.email || "",
@@ -103,7 +103,7 @@ export default function CreateUserModal({
     setIsSubmitting(true);
     try {
       if (userToEdit) {
-        await editUser(userToEdit.id, data);
+        await editUser(userToEdit.id, data, sessionUser);
         toast.success("User updated successfully!");
       } else {
         await createUser(data);
