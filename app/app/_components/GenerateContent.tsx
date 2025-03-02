@@ -25,6 +25,7 @@ function GenerateContent() {
   const [showCandidateInfo, setShowCandidateInfo] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generationProgress, setGenerationProgress] = useState(0);
   const [generatedCV, setGeneratedCV] = useState<string | null>(null);
   const [candidateData, setCandidateData] = useState<CandidateData>({
     documentTitle: "",
@@ -79,6 +80,20 @@ function GenerateContent() {
 
   const handleGenerate = async () => {
     setIsGenerating(true);
+    setGenerationProgress(0);
+
+    // Start the progress simulation
+    const duration = 10000; // 10 seconds
+    const interval = 50; // Update every 50ms
+    const steps = duration / interval;
+    let currentStep = 0;
+
+    const progressInterval = setInterval(() => {
+      currentStep++;
+      const progress = Math.min(99, Math.round((currentStep / steps) * 99));
+      setGenerationProgress(progress);
+    }, interval);
+
     try {
       const result = await generate(
         extractedText,
@@ -91,12 +106,22 @@ function GenerateContent() {
         return;
       }
 
-      setGeneratedCV(result);
+      clearInterval(progressInterval);
+      setGenerationProgress(100);
+
+      if (typeof result === "object" && "text" in result) {
+        setGeneratedCV(result);
+      } else {
+        setGeneratedCV(result);
+      }
+
       toast.success("CV generated successfully");
     } catch (error) {
+      clearInterval(progressInterval);
       console.error("Generation failed:", error);
       showBoundary(error);
     } finally {
+      clearInterval(progressInterval);
       setIsGenerating(false);
     }
   };
@@ -116,16 +141,19 @@ function GenerateContent() {
     setGeneratedCV(null);
   };
 
-  if (isGenerating) {
+  if (!isGenerating) {
     return (
-      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
-        <Spinner />
+      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+        <Spinner progress={generationProgress} />
+        <span className="mt-2 text-muted-foreground text-sm">
+          {Math.round(generationProgress)}% Complete
+        </span>
       </section>
     );
   }
 
   return (
-    <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
+    <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
       {generatedCV ? (
         <CVDisplay
           markdown={generatedCV}
@@ -140,7 +168,7 @@ function GenerateContent() {
             setSelectedFile={setSelectedFile}
           />
           {extractedText && (
-            <div className="mt-4 flex w-full max-w-sm justify-end sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+            <div className="flex justify-end mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
               <NextButton onClick={handleNext} className="px-6" />
             </div>
           )}
@@ -152,7 +180,7 @@ function GenerateContent() {
             onInputChange={handleCandidateDataChange}
             showNotes={showNotes}
           />
-          <div className="mt-4 flex w-full max-w-sm justify-between sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+          <div className="flex justify-between mt-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
             <BackButton
               onClick={handleBack}
               className="bg-background/20 px-6"
