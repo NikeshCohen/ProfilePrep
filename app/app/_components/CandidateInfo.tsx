@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { CandidateData } from "@/types";
 import { motion } from "framer-motion";
@@ -24,13 +24,6 @@ export function CandidateInfo({
   onInputChange,
   showNotes,
 }: CandidateInfoProps) {
-  const documentTitleId = useId();
-  const nameId = useId();
-  const locationId = useId();
-  const rightToWorkId = useId();
-  const salaryExpectationId = useId();
-  const notesId = useId();
-
   const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
@@ -59,9 +52,9 @@ export function CandidateInfo({
       {!showNotes && (
         <>
           <motion.div className="space-y-2" variants={itemVariants}>
-            <Label htmlFor={documentTitleId}>Document Title</Label>
+            <Label htmlFor="documentTitle">Document Title</Label>
             <Input
-              id={documentTitleId}
+              id="documentTitle"
               placeholder="Enter document title"
               value={candidateData.documentTitle}
               onChange={onInputChange}
@@ -77,9 +70,9 @@ export function CandidateInfo({
           </motion.div>
 
           <motion.div className="space-y-2" variants={itemVariants}>
-            <Label htmlFor={nameId}>Candidate Name</Label>
+            <Label htmlFor="name">Candidate Name</Label>
             <Input
-              id={nameId}
+              id="name"
               placeholder="John Doe"
               value={candidateData.name}
               onChange={onInputChange}
@@ -87,9 +80,9 @@ export function CandidateInfo({
           </motion.div>
 
           <motion.div className="space-y-2" variants={itemVariants}>
-            <Label htmlFor={locationId}>Location</Label>
+            <Label htmlFor="location">Location</Label>
             <Input
-              id={locationId}
+              id="location"
               placeholder="Cape Town, SA"
               value={candidateData.location}
               onChange={onInputChange}
@@ -97,9 +90,9 @@ export function CandidateInfo({
           </motion.div>
 
           <motion.div className="space-y-2" variants={itemVariants}>
-            <Label htmlFor={rightToWorkId}>Right to Work</Label>
+            <Label htmlFor="rightToWork">Right to Work</Label>
             <Input
-              id={rightToWorkId}
+              id="rightToWork"
               placeholder="SA Citizen, no sponsorship required"
               value={candidateData.rightToWork}
               onChange={onInputChange}
@@ -107,9 +100,9 @@ export function CandidateInfo({
           </motion.div>
 
           <motion.div className="space-y-2" variants={itemVariants}>
-            <Label htmlFor={salaryExpectationId}>Salary Expectation</Label>
+            <Label htmlFor="salaryExpectation">Salary Expectation</Label>
             <Input
-              id={salaryExpectationId}
+              id="salaryExpectation"
               placeholder="Open to discussion"
               value={candidateData.salaryExpectation}
               onChange={onInputChange}
@@ -121,14 +114,14 @@ export function CandidateInfo({
       {showNotes && (
         <motion.div className="space-y-2" variants={itemVariants}>
           <Label
-            htmlFor={notesId}
+            htmlFor="notes"
             className="sr-only text-primary underline underline-offset-4"
           >
             Notes
           </Label>
           <div className="space-y-2">
             <Textarea
-              id={notesId}
+              id="notes"
               placeholder="Add any additional notes here..."
               className="min-h-[200px] resize-none"
               value={candidateData.notes}
