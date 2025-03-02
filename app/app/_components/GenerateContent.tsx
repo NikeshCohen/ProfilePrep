@@ -130,6 +130,7 @@ function GenerateContent() {
     setSelectedFile(null);
     setExtractedText("");
     setShowCandidateInfo(false);
+    setShowNotes(false);
     setCandidateData({
       documentTitle: "",
       name: "",
@@ -141,7 +142,7 @@ function GenerateContent() {
     setGeneratedCV(null);
   };
 
-  if (!isGenerating) {
+  if (isGenerating) {
     return (
       <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
         <Spinner progress={generationProgress} />
