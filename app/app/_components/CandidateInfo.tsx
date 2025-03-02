@@ -164,7 +164,14 @@ export function CandidateInfo({
                           : "text-green-600"
                   }`}
                 >
-                  {charCount}/200
+                  {charCount}/
+                  {charCount < 200
+                    ? 200
+                    : charCount < 400
+                      ? 400
+                      : charCount < 800
+                        ? 800
+                        : 1000}
                 </span>
               </div>
             </div>

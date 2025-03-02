@@ -13,10 +13,10 @@ export const useUsersQuery = (sessionUser: User) => {
   });
 };
 
-export const useCompaniesQuery = (options = {}) => {
+export const useCompaniesQuery = (sessionUser: User, options = {}) => {
   return useQuery({
     queryKey: ["companies"],
-    queryFn: fetchAllCompanies,
+    queryFn: () => fetchAllCompanies(sessionUser),
     ...options,
   });
 };

@@ -154,7 +154,7 @@ function GenerateContent() {
   }
 
   return (
-    <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+    <section className="flex flex-col justify-center items-center min-h-[92vh] layout">
       {generatedCV ? (
         <CVDisplay
           markdown={generatedCV}
