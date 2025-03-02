@@ -1,3 +1,6 @@
+// NEEDS TO BE IMPORTED FIRST, it will auto move to top on save based on .prettierrc
+import { ReactScan } from "@/components/global/ReactScan";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -48,6 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
+      <ReactScan />
       <body
         className={`${geistSans.variable} ${geistMono.variable} theme-transition antialiased`}
       >
