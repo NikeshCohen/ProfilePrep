@@ -97,6 +97,9 @@ export function PDFUploader({
     setSelectedFile(null);
     setError(null);
     setExtractedText("");
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   return (
