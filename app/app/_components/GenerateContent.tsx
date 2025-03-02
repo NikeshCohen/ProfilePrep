@@ -25,6 +25,7 @@ function GenerateContent() {
   const [showCandidateInfo, setShowCandidateInfo] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generationProgress, setGenerationProgress] = useState(0);
   const [generatedCV, setGeneratedCV] = useState<string | null>(null);
   const [candidateData, setCandidateData] = useState<CandidateData>({
     documentTitle: "",
@@ -79,6 +80,20 @@ function GenerateContent() {
 
   const handleGenerate = async () => {
     setIsGenerating(true);
+    setGenerationProgress(0);
+
+    // Start the progress simulation
+    const duration = 10000; // 10 seconds
+    const interval = 50; // Update every 50ms
+    const steps = duration / interval;
+    let currentStep = 0;
+
+    const progressInterval = setInterval(() => {
+      currentStep++;
+      const progress = Math.min(99, Math.round((currentStep / steps) * 99));
+      setGenerationProgress(progress);
+    }, interval);
+
     try {
       const result = await generate(
         extractedText,
@@ -91,12 +106,22 @@ function GenerateContent() {
         return;
       }
 
-      setGeneratedCV(result);
+      clearInterval(progressInterval);
+      setGenerationProgress(100);
+
+      if (typeof result === "object" && "text" in result) {
+        setGeneratedCV(result);
+      } else {
+        setGeneratedCV(result);
+      }
+
       toast.success("CV generated successfully");
     } catch (error) {
+      clearInterval(progressInterval);
       console.error("Generation failed:", error);
       showBoundary(error);
     } finally {
+      clearInterval(progressInterval);
       setIsGenerating(false);
     }
   };
@@ -105,6 +130,7 @@ function GenerateContent() {
     setSelectedFile(null);
     setExtractedText("");
     setShowCandidateInfo(false);
+    setShowNotes(false);
     setCandidateData({
       documentTitle: "",
       name: "",
@@ -118,8 +144,11 @@ function GenerateContent() {
 
   if (isGenerating) {
     return (
-      <section className="flex flex-col justify-center items-center min-h-[92vh] layout">
-        <Spinner />
+      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+        <Spinner progress={generationProgress} />
+        <span className="mt-2 text-muted-foreground text-sm">
+          {Math.round(generationProgress)}% Complete
+        </span>
       </section>
     );
   }
