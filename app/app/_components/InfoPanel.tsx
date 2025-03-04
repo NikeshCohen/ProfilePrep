@@ -11,10 +11,13 @@ import {
   X,
 } from "lucide-react";
 
+import { BackButton, NextButton } from "@/components/global/NavigationButtons";
+import { Stepper } from "@/components/global/Stepper";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -27,12 +30,6 @@ import {
 } from "@/components/ui/tooltip";
 
 import { containerVariants, itemVariants } from "@/lib/animations";
-
-import {
-  BackButton,
-  NextButton,
-} from "../../../components/global/NavigationButtons";
-import { Stepper } from "../../../components/global/Stepper";
 
 interface InfoPanelProps {
   isOpen: boolean;
@@ -73,7 +70,9 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               className="flex items-center gap-2"
             >
               <Sparkles className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">Welcome to ProfilePrep</h3>
+              <h3 className="text-lg font-semibold">
+                Welcome to Profile<span className="text-primary">Prep</span>
+              </h3>
             </motion.div>
             <motion.p variants={itemVariants} className="text-muted-foreground">
               ProfilePrep uses AI to help recruiters refine and format candidate
@@ -250,8 +249,9 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               className="rounded-md border bg-primary/10 p-3"
             >
               <p className="text-sm font-medium">
-                By using ProfilePrep, you acknowledge that you will verify all
-                AI-generated content before professional use.
+                By using Profile<span className="text-primary">Prep</span>, you
+                acknowledge that you will verify all AI-generated content before
+                professional use.
               </p>
             </motion.div>
           </motion.div>
@@ -263,9 +263,13 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md" hideCloseButton={true}>
+      <DialogContent
+        className="sm:max-w-md"
+        hideCloseButton={true}
+        aria-describedby="AI Interaction Guidance"
+      >
         <DialogHeader>
-          <DialogTitle>AI Guidance</DialogTitle>
+          <DialogTitle>AI Interaction Guidance</DialogTitle>
           <Button
             variant="ghost"
             size="icon"
@@ -275,6 +279,10 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
             <X className="h-4 w-4" />
           </Button>
         </DialogHeader>
+
+        <DialogDescription className="sr-only">
+          AI Interaction Guidance
+        </DialogDescription>
 
         <div className="py-4">
           <Stepper currentStep={currentStep} totalSteps={totalSteps} />
@@ -295,7 +303,7 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
         </div>
 
         <DialogFooter
-          className={`flex ${currentStep === 1 ? "justify-end sm:justify-end md:justify-end lg:justify-end" : "justify-between"} sm:justify-between`}
+          className={`flex ${currentStep === 1 ? "justify-end sm:justify-end md:justify-end lg:justify-end" : "justify-between sm:justify-between"}`}
         >
           {currentStep !== 1 && (
             <BackButton
