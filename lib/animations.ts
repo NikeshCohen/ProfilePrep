@@ -23,6 +23,8 @@ export const itemVariants = {
       type: "spring",
       stiffness: 300,
       damping: 24,
+      duration: 0.6,
+      ease: "easeOut",
     },
   },
 };
