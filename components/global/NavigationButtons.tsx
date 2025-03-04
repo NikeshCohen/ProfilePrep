@@ -15,6 +15,7 @@ type NextButtonProps = {
 
 type BackButtonProps = {
   onClick: () => void;
+  disabled?: boolean;
   className?: string;
 };
 
@@ -39,12 +40,17 @@ export function NextButton({
   );
 }
 
-export function BackButton({ onClick, className = "" }: BackButtonProps) {
+export function BackButton({
+  onClick,
+  disabled = false,
+  className = "",
+}: BackButtonProps) {
   return (
     <motion.div {...fadeUpAnimation}>
       <Button
         variant="outline"
         onClick={onClick}
+        disabled={disabled}
         className={className}
         effect="expandIcon"
         icon={ArrowLeft}
