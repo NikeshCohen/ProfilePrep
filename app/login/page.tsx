@@ -78,14 +78,6 @@ export default async function LoginPage({ searchParams }: PageProps) {
               </Button>
             </form>
 
-            <div className="flex items-center gap-3 px-2">
-              <Separator className="flex-1" />
-              <span className="text-xs text-muted-foreground">
-                Welcome, Profile<span className="text-primary">Prepper</span>
-              </span>
-              <Separator className="flex-1" />
-            </div>
-
             <div className="rounded-lg bg-primary/5 p-4">
               <p className="text-center text-sm text-muted-foreground">
                 By signing in, you agree to our{" "}
