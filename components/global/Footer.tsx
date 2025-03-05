@@ -16,7 +16,7 @@ function Footer() {
       </h1>
 
       <div className="flex gap-2">
-        {pathname === "/app" && (
+        {pathname.includes("/app") && (
           <>
             <LogoutButton />
             <InfoButton />
