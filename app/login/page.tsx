@@ -88,11 +88,11 @@ export default async function LoginPage({ searchParams }: PageProps) {
             <div className="rounded-lg bg-primary/5 p-4">
               <p className="text-center text-sm text-muted-foreground">
                 By signing in, you agree to our{" "}
-                <Link href="#" className="text-primary hover:underline">
+                <Link href="/tos" className="text-primary hover:underline">
                   Terms of Service
                 </Link>{" "}
                 and{" "}
-                <Link href="#" className="text-primary hover:underline">
+                <Link href="/tos" className="text-primary hover:underline">
                   Privacy Policy
                 </Link>
               </p>
