@@ -14,7 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 
 import getSession from "@/lib/getSession";
 
@@ -77,6 +76,14 @@ export default async function LoginPage({ searchParams }: PageProps) {
                 <span className="font-medium">Continue with Google</span>
               </Button>
             </form>
+
+            {/* <div className="flex items-center gap-3 px-2">
+              <Separator className="flex-1" />
+              <span className="text-muted-foreground text-xs">
+                Welcome, Profile<span className="text-primary">Prep</span>
+              </span>
+              <Separator className="flex-1" />
+            </div> */}
 
             <div className="rounded-lg bg-primary/5 p-4">
               <p className="text-center text-sm text-muted-foreground">
