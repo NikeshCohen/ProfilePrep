@@ -6,7 +6,7 @@ import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { User } from "next-auth";
 
-import { incrementUserGenerations } from "./user.actions";
+import { createGeneratedDoc, incrementUserGenerations } from "./user.actions";
 
 const selectedModel = google("gemini-2.0-flash-001");
 
@@ -39,6 +39,12 @@ export const generate = async (
   console.log(cleanedText);
 
   incrementUserGenerations(user.id!);
+  createGeneratedDoc({
+    documentContent: candidateInfo,
+    rawContent: cleanedText,
+    userId: user.id!,
+    companyId: user.company?.id || " ",
+  });
 
   return cleanedText;
 };

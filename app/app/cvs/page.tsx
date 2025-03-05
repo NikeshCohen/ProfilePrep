@@ -1,16 +1,15 @@
 import React from "react";
 
 import { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
 
-import CreateCompany from "./_components/CreateCompany";
-import UserList from "./_components/UserList";
-import NewUser from "./_components/UserManipulations";
+import GeneratedDocsList from "./_components/DocList";
 
 export const metadata: Metadata = {
-  title: "Users",
+  title: "CVs",
 };
 
 async function page() {
@@ -24,17 +23,13 @@ async function page() {
     <section className="pt-16 min-h-[93vh] layout">
       <div className="flex justify-between items-center mb-8">
         <h1 className="font-bold text-2xl tracking-wider">
-          User Management For{" "}
-          {(user.role === "SUPERADMIN" && "All Companies") ||
-            user.company?.name}
+          Previously Generated Documents
         </h1>
-
-        <div className="flex items-center gap-4">
-          {user.role === "SUPERADMIN" && <CreateCompany />}
-          <NewUser sessionUser={user} />
-        </div>
       </div>
-      <UserList sessionUser={user} />
+
+      <Link href="/app/users">Link</Link>
+
+      <GeneratedDocsList userId={user.id!} />
     </section>
   );
 }
