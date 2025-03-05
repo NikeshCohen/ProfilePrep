@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+
+import { MoonIcon } from "../icons/MoonIcon";
+import { SunIcon } from "../icons/SunIcon";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
@@ -34,10 +36,10 @@ export default function ThemeToggle() {
         />
 
         <span className="pointer-events-none relative ms-0.5 flex min-w-8 items-center justify-center text-center peer-data-[state=checked]:text-muted-foreground/70">
-          <Sun size={16} strokeWidth={2} aria-hidden="true" />
+          <SunIcon size={16} aria-hidden="true" />
         </span>
         <span className="pointer-events-none relative me-0.5 flex min-w-8 items-center justify-center text-center peer-data-[state=unchecked]:text-muted-foreground/70">
-          <Moon size={16} strokeWidth={2} aria-hidden="true" />
+          <MoonIcon size={16} aria-hidden="true" />
         </span>
       </div>
       <Label htmlFor="theme-toggle" className="sr-only">

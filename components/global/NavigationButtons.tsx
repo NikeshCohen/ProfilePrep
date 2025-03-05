@@ -1,11 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRightIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
 import { fadeUpAnimation } from "@/lib/animations";
+
+import { ArrowLeftIcon } from "../icons/ArrowLeftIcon";
+import { ArrowRightIcon } from "../icons/ArrowRightIcon";
 
 type NextButtonProps = {
   onClick: () => void;
@@ -53,7 +55,7 @@ export function BackButton({
         disabled={disabled}
         className={className}
         effect="expandIcon"
-        icon={ArrowLeft}
+        icon={ArrowLeftIcon}
         iconPlacement="left"
       >
         <span>Back</span>

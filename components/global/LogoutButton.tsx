@@ -5,10 +5,11 @@ import React from "react";
 import { useRouter } from "next/navigation";
 
 import { motion } from "framer-motion";
-import { PowerCircle } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
+
+import { LogoutIcon } from "../icons/LogOutIcon";
 
 export default function LogoutButton() {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function LogoutButton() {
           aria-label="AI Information"
           className="relative h-9 w-9 rounded-full bg-input/50"
         >
-          <PowerCircle size={16} />
+          <LogoutIcon size={16} />
         </Button>
       </motion.div>
     </>

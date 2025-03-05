@@ -4,9 +4,10 @@ import { useState } from "react";
 
 import { InfoPanel } from "@/app/app/_components/InfoPanel";
 import { motion } from "framer-motion";
-import { HelpCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+
+import { CircleHelpIcon } from "../icons/CircleHelpIcon";
 
 export default function InfoButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,7 @@ export default function InfoButton() {
           aria-label="AI Information"
           className="relative h-9 w-9 rounded-full bg-input/50"
         >
-          <HelpCircle size={16} />
+          <CircleHelpIcon size={16} />
           <motion.span
             className="absolute right-0.5 top-0 h-2 w-2 rounded-full bg-primary"
             initial={{ scale: 0 }}
