@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 
 import InfoButton from "@/components/global/InfoButton";
+import LogoutButton from "@/components/global/LogoutButton";
 import ThemeToggle from "@/components/global/ThemeToggle";
 
 function Footer() {
@@ -15,7 +16,12 @@ function Footer() {
       </h1>
 
       <div className="flex gap-2">
-        {pathname === "/app" && <InfoButton />}
+        {pathname === "/app" && (
+          <>
+            <LogoutButton />
+            <InfoButton />
+          </>
+        )}
         <ThemeToggle />
       </div>
     </footer>
