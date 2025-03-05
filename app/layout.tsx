@@ -13,7 +13,7 @@ import Background from "@/components/global/Background";
 import Footer from "@/components/global/Footer";
 import Toaster from "@/components/global/Toaster";
 
-import "./styles/globals.css";
+import "./_styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

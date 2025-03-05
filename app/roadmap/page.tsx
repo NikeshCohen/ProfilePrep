@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import Roadmap from "./Roadmap";
 
 export const metadata: Metadata = {
-  title: "RoadMap | ProfilePrep",
+  title: "RoadMap",
   description: "Track the development progress of ProfilePrep.",
 };
 

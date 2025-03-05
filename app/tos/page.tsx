@@ -1,4 +1,11 @@
+import { Metadata } from "next";
+
 import { Separator } from "@/components/ui/separator";
+
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "Terms of Service and Privacy Policy for ProfilePrep.",
+};
 
 export default function TermsOfService() {
   return (

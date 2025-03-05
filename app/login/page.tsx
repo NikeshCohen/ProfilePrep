@@ -18,7 +18,7 @@ import {
 import getSession from "@/lib/getSession";
 
 export const metadata: Metadata = {
-  title: "Login | ProfilePrep",
+  title: "Login",
   description: "Sign in to your ProfilePrep account",
 };
 
@@ -40,7 +40,7 @@ export default async function LoginPage({ searchParams }: PageProps) {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-50" />
 
           <CardHeader className="relative space-y-4 pt-8">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
               <CardTitle className="text-center">
                 <h1 className="text-2xl font-bold tracking-wider">
                   Profile<span className="text-primary">Prep</span>
