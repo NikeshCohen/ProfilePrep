@@ -19,9 +19,9 @@ async function page() {
   }
 
   return (
-    <section className="layout min-h-[93vh] pt-16">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-wider">
+    <section className="pt-32 min-h-[93vh] layout">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="font-bold text-2xl tracking-wider">
           Previously Generated Documents
         </h1>
       </div>

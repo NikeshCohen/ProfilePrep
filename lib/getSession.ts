@@ -1,12 +1,13 @@
 import { cache } from "react";
 
 import { auth } from "@/auth";
+import { Session } from "next-auth";
 
 // Cache storage
 const sessionCache = new Map();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-const getSession = async () => {
+const getSession = async (): Promise<Session | null> => {
   const now = Date.now();
   const cachedData = sessionCache.get("session");
 

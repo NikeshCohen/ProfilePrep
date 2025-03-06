@@ -6,6 +6,7 @@ import { content } from "@/constants/webcontent";
 import { ArrowRightIcon, Check, X } from "lucide-react";
 
 import Footer from "@/components/global/Footer";
+import Header from "@/components/global/Header";
 import Section from "@/components/global/Section";
 import {
   Accordion,
@@ -21,6 +22,7 @@ import SpotlightCard from "@/components/ui/spot-light-card";
 export default function LandingPage() {
   return (
     <>
+      <Header />
       <section className="layout">
         <Hero />
         <Features />

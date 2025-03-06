@@ -5,17 +5,17 @@ import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
+    <div className="flex justify-center items-center min-h-screen">
       <div className="px-4 text-center">
-        <h1 className="mb-4 text-6xl font-extrabold">404</h1>
-        <h2 className="mb-4 text-2xl font-semibold text-gray-700">
+        <h1 className="mb-4 font-extrabold text-6xl">404</h1>
+        <h2 className="mb-4 font-semibold text-muted-foreground text-2xl">
           Page Not Found
         </h2>
-        <p className="mb-8 max-w-lg text-gray-600">
+        <p className="mb-8 max-w-lg text-muted-foreground">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
         </p>
         <Button asChild>
-          <Link href="/" className="gap- flex items-center justify-center">
+          <Link href="/" className="flex justify-center items-center gap-">
             <HomeIcon size={16} />
           </Link>
         </Button>

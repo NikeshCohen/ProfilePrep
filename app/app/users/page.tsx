@@ -21,7 +21,7 @@ async function page() {
   }
 
   return (
-    <section className="pt-16 min-h-[93vh] layout">
+    <section className="pt-32 min-h-[93vh] layout">
       <div className="flex justify-between items-center mb-8">
         <h1 className="font-bold text-2xl tracking-wider">
           User Management For{" "}
