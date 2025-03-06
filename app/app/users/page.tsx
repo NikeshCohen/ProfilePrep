@@ -10,7 +10,7 @@ import UserList from "./_components/UserList";
 import NewUser from "./_components/UserManipulations";
 
 export const metadata: Metadata = {
-  title: "App / Users",
+  title: "Users",
 };
 
 async function page() {
@@ -21,9 +21,9 @@ async function page() {
   }
 
   return (
-    <section className="layout min-h-[93vh] pt-16">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-wider">
+    <section className="pt-16 min-h-[93vh] layout">
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="font-bold text-2xl tracking-wider">
           User Management For{" "}
           {(user.role === "SUPERADMIN" && "All Companies") ||
             user.company?.name}

@@ -1,13 +1,16 @@
 import { redirect } from "next/navigation";
 
 import { type ClassValue, clsx } from "clsx";
+import htmlToPdfmake from "html-to-pdfmake";
+import MarkdownIt from "markdown-it";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 import { twMerge } from "tailwind-merge";
 
 import { getQueryClient } from "./getQueryClient";
 import getSession from "./getSession";
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
   return twMerge(clsx(inputs));
 }
 
@@ -35,4 +38,23 @@ export const refreshQuery = (queryKey: string | string[]) => {
   queryClient.invalidateQueries({
     queryKey: Array.isArray(queryKey) ? queryKey : [queryKey],
   });
+};
+
+/**
+ * Converts Markdown content to a PDF file and triggers a download
+ * @param content - The markdown content to be converted to PDF
+ * @param fileName - The name of the file (without extension) to be downloaded
+ * @returns Promise<void>
+ */
+export const MdToPdf = async (
+  content: string,
+  fileName: string,
+): Promise<void> => {
+  pdfMake.vfs = pdfFonts.vfs;
+
+  const markdownParser = new MarkdownIt();
+  const htmlContent = markdownParser.render(content);
+  const pdfContent = htmlToPdfmake(htmlContent);
+  const docDefinition = { content: pdfContent };
+  pdfMake.createPdf(docDefinition).download(`${fileName}.pdf`);
 };

@@ -3,19 +3,14 @@
 import { useCallback, useEffect, useState } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import htmlToPdfmake from "html-to-pdfmake";
 import { Download } from "lucide-react";
-import MarkdownIt from "markdown-it";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
 import Confetti from "react-confetti";
 import { useErrorBoundary } from "react-error-boundary";
 
 import { Button } from "@/components/ui/button";
 
 import { containerVariants, itemVariants } from "@/lib/animations";
-
-pdfMake.vfs = pdfFonts.vfs;
+import { MdToPdf } from "@/lib/utils";
 
 export interface CVDisplayProps {
   markdown: string;
@@ -57,11 +52,7 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
   const handleDownload = async () => {
     setIsGenerating(true);
     try {
-      const markdownParser = new MarkdownIt();
-      const htmlContent = markdownParser.render(markdown);
-      const pdfContent = htmlToPdfmake(htmlContent);
-      const docDefinition = { content: pdfContent };
-      pdfMake.createPdf(docDefinition).download(`${docName}.pdf`);
+      MdToPdf(markdown, docName);
     } catch (error) {
       console.error("Error generating PDF:", error);
       showBoundary(error);
@@ -86,13 +77,13 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
       />
 
       <motion.h1
-        className="text-center text-3xl font-bold"
+        className="font-bold text-3xl text-center"
         variants={itemVariants}
       >
         We&apos;ve Generated Your Candidate&apos;s CV Content!
       </motion.h1>
       <motion.p
-        className="mb-8 mt-2 text-center text-sm font-thin tracking-wide text-muted-foreground"
+        className="mt-2 mb-8 font-thin text-muted-foreground text-sm text-center tracking-wide"
         variants={itemVariants}
       >
         *Please verify the accuracy of the candidate&apos;s information.
@@ -116,7 +107,7 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
                 "Generating PDF..."
               ) : (
                 <>
-                  <Download className="mr-2 h-4 w-4" />
+                  <Download className="mr-2 w-4 h-4" />
                   <span>Download CV</span>
                 </>
               )}
