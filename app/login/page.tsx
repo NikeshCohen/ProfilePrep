@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { signIn } from "@/auth";
-
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -16,6 +12,8 @@ import {
 } from "@/components/ui/card";
 
 import getSession from "@/lib/getSession";
+
+import GoogleButton from "./_components/GoogleButton";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -53,29 +51,7 @@ export default async function LoginPage({ searchParams }: PageProps) {
           </CardHeader>
 
           <CardContent className="relative space-y-6 pb-8 pt-2">
-            <form
-              action={async () => {
-                "use server";
-                await signIn("google", {
-                  redirectTo: redirectUrl ? redirectUrl : "/app",
-                });
-              }}
-              className="w-full"
-            >
-              <Button
-                type="submit"
-                className="flex w-full items-center justify-center gap-1 text-white"
-              >
-                <Image
-                  src={"/google.svg"}
-                  width={20}
-                  height={20}
-                  alt="Google logo"
-                  className="transition-transform group-hover:scale-110"
-                />
-                <span className="font-medium">Continue with Google</span>
-              </Button>
-            </form>
+            <GoogleButton redirectUrl={redirectUrl ?? "/app"} />
 
             {/* <div className="flex items-center gap-3 px-2">
               <Separator className="flex-1" />
