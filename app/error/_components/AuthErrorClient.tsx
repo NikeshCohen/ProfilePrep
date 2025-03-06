@@ -137,26 +137,24 @@ export default function AuthErrorClient({
               {errorMap[error as Error] || errorMap[Error.Default]}
             </motion.div>
 
-            {clientDetails && process.env.NODE_ENV === "development" && (
-              <motion.div variants={itemVariants} className="space-y-2">
-                <div className="text-sm font-medium text-foreground">
-                  Developer Information
-                </div>
-                <div className="rounded-md bg-slate-100 p-4 font-mono text-xs">
-                  <pre className="overflow-x-auto">
-                    {JSON.stringify(
-                      {
-                        error,
-                        timestamp: new Date().toISOString(),
-                        ...clientDetails,
-                      },
-                      null,
-                      2,
-                    )}
-                  </pre>
-                </div>
-              </motion.div>
-            )}
+            <motion.div variants={itemVariants} className="space-y-2">
+              <div className="text-sm font-medium text-foreground">
+                Developer Information
+              </div>
+              <div className="rounded-md bg-slate-100 p-4 font-mono text-xs">
+                <pre className="overflow-x-auto">
+                  {JSON.stringify(
+                    {
+                      error,
+                      timestamp: new Date().toISOString(),
+                      ...clientDetails,
+                    },
+                    null,
+                    2,
+                  )}
+                </pre>
+              </div>
+            </motion.div>
 
             {process.env.NODE_ENV === "development" && (
               <motion.div variants={itemVariants} className="space-y-2">
@@ -172,25 +170,24 @@ export default function AuthErrorClient({
             )}
           </CardContent>
           <CardFooter className="justify-between gap-2">
-            {process.env.NODE_ENV === "development" && (
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={copyErrorDetails}
-                className="group flex items-center gap-2"
-                disabled={!clientDetails}
-              >
-                {copied ? (
-                  <>
-                    <CheckIcon className="h-4 w-4" />
-                  </>
-                ) : (
-                  <>
-                    <CopyIcon className="p-0" size={16} />
-                  </>
-                )}
-              </Button>
-            )}
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={copyErrorDetails}
+              className="group flex items-center gap-2"
+              disabled={!clientDetails}
+            >
+              {copied ? (
+                <>
+                  <CheckIcon className="h-4 w-4" />
+                </>
+              ) : (
+                <>
+                  <CopyIcon className="p-0" size={16} />
+                </>
+              )}
+            </Button>
+
             <Button
               variant="default"
               size="sm"
