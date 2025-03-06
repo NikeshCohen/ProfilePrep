@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Metadata } from "next";
-import Link from "next/link";
 
 import { requireAuth } from "@/lib/utils";
 
@@ -16,7 +15,6 @@ async function page() {
 
   return (
     <>
-      <Link href="/app/cvs">Cvs</Link>
       <GenerateContent />
     </>
   );

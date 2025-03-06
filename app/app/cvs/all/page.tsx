@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
 
@@ -11,7 +12,11 @@ export const metadata: Metadata = {
 };
 
 async function page() {
-  const { user } = await requireAuth("/app/cvs");
+  const { user } = await requireAuth("/app/cvs/all");
+
+  if (user.role !== "SUPERADMIN") {
+    redirect("/app/cvs");
+  }
 
   return (
     <section className="layout min-h-[93vh] pt-16">
@@ -21,7 +26,7 @@ async function page() {
         </h1>
       </div>
 
-      <GeneratedDocsList userId={user.id!} />
+      <GeneratedDocsList sessionUser={user} />
     </section>
   );
 }

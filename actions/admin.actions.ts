@@ -177,3 +177,44 @@ export const fetchAllCompanies = async (sessionUser: User) => {
 
   return await prisma.company.findMany();
 };
+
+export async function getAllUserDocs(sessionUser: User) {
+  if (sessionUser.role !== "SUPERADMIN") {
+    return {
+      success: false,
+      message: "403 Forbidden: You do not have permission to delete users.",
+    };
+  }
+
+  try {
+    const docInfo = await prisma.generatedDocs.findMany({
+      select: {
+        id: true,
+        createdAt: true,
+        candidateName: true,
+        location: true,
+        notes: true,
+        user: {
+          select: {
+            name: true,
+            email: true,
+            image: true,
+          },
+        },
+        company: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return { success: true, docInfo };
+  } catch (error) {
+    console.error("Failed to fetch basic document info:", error);
+    return { success: false, error: "Failed to fetch document info" };
+  }
+}

@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 
-import {
-  useDocContentQuery,
-  useUserDocsQuery,
-} from "@/actions/queries/user.queries";
+import { useAdminDocsQuery } from "@/actions/queries/admin.queries";
+import { useDocContentQuery } from "@/actions/queries/user.queries";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
+import { User } from "next-auth";
 import { toast } from "react-hot-toast";
 
 import {
@@ -15,6 +14,7 @@ import {
   NoDataFallback,
 } from "@/components/global/QueryFallbacks";
 import TruncatedText from "@/components/global/TuncateText";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -42,11 +42,11 @@ import { MdToPdf } from "@/lib/utils";
 import Skeleton from "./Skeleton";
 
 interface GeneratedDocsListProps {
-  userId: string;
+  sessionUser: User;
 }
 
-const GeneratedDocsList = ({ userId }: GeneratedDocsListProps) => {
-  const { data, error, isLoading } = useUserDocsQuery(userId);
+const GeneratedDocsList = ({ sessionUser }: GeneratedDocsListProps) => {
+  const { data, error, isLoading } = useAdminDocsQuery(sessionUser);
 
   if (isLoading) return <Skeleton />;
   if (error) return <ErrorFallback error={error} />;
@@ -57,10 +57,10 @@ const GeneratedDocsList = ({ userId }: GeneratedDocsListProps) => {
       <Table>
         <TableHeader>
           <TableRow>
+            <TableHead>User</TableHead>
+            <TableHead>User Email</TableHead>
             <TableHead>Candidate</TableHead>
             <TableHead>Location</TableHead>
-            <TableHead>Salary</TableHead>
-            <TableHead>Right to Work</TableHead>
             <TableHead>Created</TableHead>
             <TableHead className="w-[50px]"></TableHead>
           </TableRow>
@@ -69,16 +69,35 @@ const GeneratedDocsList = ({ userId }: GeneratedDocsListProps) => {
           {data.docInfo!.map((doc) => (
             <TableRow key={doc.id}>
               <TableCell className="font-medium">
+                <div className="flex items-center gap-3">
+                  <Avatar className="h-8 w-8">
+                    <AvatarImage
+                      src={doc.user?.image || "/user.jpg"}
+                      alt={doc.user?.name || doc.user?.email.split("@")[0]}
+                    />
+                    <AvatarFallback>
+                      {doc.user?.name?.charAt(0) ||
+                        doc.user?.email.charAt(0).toUpperCase()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col">
+                    <span>
+                      {doc.user?.name || doc.user?.email.split("@")[0]}
+                    </span>
+                    <span className="text-muted-foreground">
+                      {doc.company?.name || "No company"}
+                    </span>
+                  </div>
+                </div>
+              </TableCell>
+              <TableCell>
+                <TruncatedText text={doc.user?.email ?? ""} />
+              </TableCell>
+              <TableCell className="font-medium">
                 <TruncatedText text={doc.candidateName} limit={40} />
               </TableCell>
               <TableCell>
                 <TruncatedText text={doc.location} />
-              </TableCell>
-              <TableCell>
-                <TruncatedText text={doc.salaryExpectation} />
-              </TableCell>
-              <TableCell>
-                <TruncatedText text={doc.rightToWork} />
               </TableCell>
               <TableCell>
                 {formatDistanceToNow(new Date(doc.createdAt), {
