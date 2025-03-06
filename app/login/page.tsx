@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import Logo from "@/components/global/Logo";
 import {
   Card,
   CardContent,
@@ -38,13 +39,9 @@ export default async function LoginPage({ searchParams }: PageProps) {
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-50" />
 
           <CardHeader className="relative space-y-4 pt-8">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary/20">
-              <CardTitle className="text-center">
-                <h1 className="text-2xl font-bold tracking-wider">
-                  Profile<span className="text-primary">Prep</span>
-                </h1>
-              </CardTitle>
-            </div>
+            <CardTitle className="text-center">
+              <Logo size="2xl" circleSize={14} />
+            </CardTitle>
             <CardDescription className="text-center text-base">
               Connect your account to login
             </CardDescription>
