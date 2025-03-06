@@ -1,13 +1,8 @@
 "use client";
 
-import { useState } from "react";
-
 import { useAdminDocsQuery } from "@/actions/queries/admin.queries";
-import { useDocContentQuery } from "@/actions/queries/user.queries";
 import { formatDistanceToNow } from "date-fns";
-import { MoreHorizontal } from "lucide-react";
 import { User } from "next-auth";
-import { toast } from "react-hot-toast";
 
 import {
   ErrorFallback,
@@ -15,19 +10,6 @@ import {
 } from "@/components/global/QueryFallbacks";
 import TruncatedText from "@/components/global/TuncateText";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -37,9 +19,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { MdToPdf } from "@/lib/utils";
-
-import Skeleton from "./Skeleton";
+import DocContextMenu from "../../_components/ContextMenu";
+import Skeleton from "../../_components/Skeleton";
 
 interface GeneratedDocsListProps {
   sessionUser: User;
@@ -48,7 +29,7 @@ interface GeneratedDocsListProps {
 const GeneratedDocsList = ({ sessionUser }: GeneratedDocsListProps) => {
   const { data, error, isLoading } = useAdminDocsQuery(sessionUser);
 
-  if (isLoading) return <Skeleton />;
+  if (isLoading) return <Skeleton isAdmin={true} />;
   if (error) return <ErrorFallback error={error} />;
   if (!data?.success || !data.docInfo?.length) return <NoDataFallback />;
 
@@ -112,84 +93,6 @@ const GeneratedDocsList = ({ sessionUser }: GeneratedDocsListProps) => {
         </TableBody>
       </Table>
     </div>
-  );
-};
-
-interface DocContextMenuProps {
-  docId: string;
-  notes: string;
-}
-
-const DocContextMenu = ({ docId, notes }: DocContextMenuProps) => {
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [isDownloading, setIsDownloading] = useState(false);
-
-  const { refetch: fetchContent } = useDocContentQuery(docId, false);
-
-  const handleDownload = async () => {
-    setIsDownloading(true);
-    const loadingToast = toast.loading("Fetching document...");
-
-    try {
-      const result = await fetchContent();
-      if (result.data?.success) {
-        console.log("Document content:", result.data.docContent);
-        toast.success("Document fetched successfully");
-      } else {
-        toast.error("Failed to fetch document");
-      }
-
-      if (
-        result.data?.docContent?.content &&
-        result.data?.docContent?.documentTitle
-      ) {
-        MdToPdf(
-          result.data.docContent.content,
-          result.data.docContent.documentTitle,
-        );
-      } else {
-        toast.error("Invalid document data");
-      }
-    } catch (error) {
-      console.error("Download error:", error);
-      toast.error("Error downloading document");
-    } finally {
-      toast.dismiss(loadingToast);
-      setIsDownloading(false);
-    }
-  };
-
-  return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem onSelect={() => setIsNotesOpen(true)}>
-            Notes
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={handleDownload} disabled={isDownloading}>
-            Download
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      <Dialog open={isNotesOpen} onOpenChange={setIsNotesOpen}>
-        <DialogContent className="p-6 sm:max-w-[700px]">
-          <DialogHeader>
-            <DialogTitle className="text-xl">Notes</DialogTitle>
-          </DialogHeader>
-
-          <div className="max-h-[60vh] overflow-y-auto whitespace-pre-wrap pr-2 text-sm leading-relaxed text-muted-foreground">
-            {notes}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
   );
 };
 
