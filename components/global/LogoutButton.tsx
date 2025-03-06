@@ -1,11 +1,10 @@
-"use client";
-
+// LogoutButton.tsx
 import React from "react";
 
 import { useRouter } from "next/navigation";
 
+import { handleLogout } from "@/actions/auth.actions";
 import { motion } from "framer-motion";
-import { signOut } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 
@@ -14,24 +13,22 @@ import { LogoutIcon } from "../icons/LogOutIcon";
 export default function LogoutButton() {
   const router = useRouter();
 
-  async function handleLogout() {
-    await signOut();
-    router.push("/login");
+  async function handleClick() {
+    await handleLogout();
+    router.refresh();
   }
 
   return (
-    <>
-      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        <Button
-          variant="outline"
-          size="icon"
-          onClick={handleLogout}
-          aria-label="AI Information"
-          className="relative h-9 w-9 rounded-full bg-input/50"
-        >
-          <LogoutIcon size={16} />
-        </Button>
-      </motion.div>
-    </>
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={handleClick}
+        aria-label="Log out"
+        className="relative h-9 w-9 rounded-full bg-input/50"
+      >
+        <LogoutIcon size={16} />
+      </Button>
+    </motion.div>
   );
 }

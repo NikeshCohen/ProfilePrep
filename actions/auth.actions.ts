@@ -1,11 +1,11 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 
-export async function googleAuthentication(redirectUrl: string) {
-  console.log(redirectUrl);
+import { clearSessionCache } from "@/lib/getSession";
 
+export async function googleAuthentication(redirectUrl: string) {
   try {
     await signIn("google", {
       redirectTo: redirectUrl,
@@ -16,4 +16,9 @@ export async function googleAuthentication(redirectUrl: string) {
     }
     throw error;
   }
+}
+
+export async function handleLogout() {
+  clearSessionCache();
+  await signOut({ redirect: false });
 }

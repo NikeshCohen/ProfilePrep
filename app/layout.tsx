@@ -10,7 +10,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SessionProvider } from "next-auth/react";
 
 import Background from "@/components/global/Background";
-import Footer from "@/components/global/Footer";
 import Toaster from "@/components/global/Toaster";
 
 import "./_styles/globals.css";
@@ -61,7 +60,6 @@ export default function RootLayout({
             <Toaster />
             <Analytics />
             <QueryProviders>{children}</QueryProviders>
-            <Footer />
           </ThemeProvider>
         </SessionProvider>
       </body>
