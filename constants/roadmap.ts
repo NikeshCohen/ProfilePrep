@@ -24,4 +24,11 @@ export const roadmap = [
     description:
       "Strengthening security measures and optimizing API performance.",
   },
+  {
+    id: 5,
+    date: "March 15, 2025",
+    title: "CV History & Downloads",
+    description:
+      "Access and download your previously generated CVs with version history.",
+  },
 ];
