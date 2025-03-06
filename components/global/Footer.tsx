@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import InfoButton from "@/components/global/InfoButton";
-import LogoutButton from "@/components/global/LogoutButton";
 import ThemeToggle from "@/components/global/ThemeToggle";
 
 function Footer() {
@@ -23,7 +22,6 @@ function Footer() {
       <div className="flex gap-2">
         {pathname.includes("/app") && (
           <>
-            <LogoutButton />
             <InfoButton />
           </>
         )}
