@@ -14,6 +14,7 @@ const getSession = async (): Promise<Session | null> => {
   // Check if we have valid cached data
   if (cachedData && now - cachedData.timestamp < CACHE_DURATION) {
     console.log("📦 Using cached session for:", cachedData.data?.user?.email);
+    // console.log(`Cached Data: ${JSON.stringify(cachedData.data.user)}`);
     return cachedData.data;
   }
 
@@ -32,6 +33,7 @@ const getSession = async (): Promise<Session | null> => {
     console.log("❌ No session found");
   }
 
+  // console.log(`Session Data: ${JSON.stringify(session?.user)}`);
   return session;
 };
 

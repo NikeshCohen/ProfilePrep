@@ -23,7 +23,7 @@ export const useCompaniesQuery = (sessionUser: User, options = {}) => {
 
 export const useAdminDocsQuery = (user: User) => {
   return useQuery({
-    queryKey: ["userDocs", user.id],
+    queryKey: ["allUserDocs", user.id],
     queryFn: () => getAllUserDocs(user),
   });
 };
