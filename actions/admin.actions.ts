@@ -1,5 +1,6 @@
 "use server";
 
+import { NewCompanyData } from "@/app/app/companies/_components/CompanyManipulations";
 import { NewUserData } from "@/app/app/users/_components/UserManipulations";
 import prisma from "@/prisma/prisma";
 import { User } from "next-auth";
@@ -105,6 +106,7 @@ export const editUser = async (
               ? "ADMIN"
               : "SUPERADMIN",
         ...(userData.companyId && { companyId: userData.companyId }),
+        updatedAt: new Date(),
       },
     });
     return {
@@ -155,14 +157,113 @@ export const deleteUser = async (userId: string, sessionUser: User) => {
   }
 };
 
-export const createCompany = async (companyName: string) => {
+export const createCompany = async (companyData: NewCompanyData) => {
   try {
     const company = await prisma.company.create({
       data: {
-        name: companyName,
+        name: companyData.name,
+        allowedDocsPerUsers: companyData.allowedDocsPerUsers,
       },
     });
     return company;
+  } catch (error: unknown) {
+    return handleError(error);
+  }
+};
+
+export const updateCompany = async (
+  companyId: string,
+  companyData: NewCompanyData,
+  sessionUser: User,
+) => {
+  // Check permissions
+  if (sessionUser.role !== "SUPERADMIN") {
+    return {
+      success: false,
+      message: "403 Forbidden: Only superadmins can update companies.",
+    };
+  }
+
+  try {
+    // First get the current company to check if allowedDocsPerUsers changed
+    const currentCompany = await prisma.company.findUnique({
+      where: { id: companyId },
+      select: { allowedDocsPerUsers: true },
+    });
+
+    if (!currentCompany) {
+      return {
+        success: false,
+        message: "Company not found.",
+      };
+    }
+
+    // Update company
+    const updatedCompany = await prisma.company.update({
+      where: { id: companyId },
+      data: {
+        name: companyData.name,
+        allowedDocsPerUsers: companyData.allowedDocsPerUsers,
+      },
+    });
+
+    // If allowedDocsPerUsers changed, update all users in the company
+    if (
+      currentCompany.allowedDocsPerUsers !== companyData.allowedDocsPerUsers
+    ) {
+      await prisma.user.updateMany({
+        where: { companyId },
+        data: { allowedDocs: companyData.allowedDocsPerUsers },
+      });
+    }
+
+    return {
+      success: true,
+      message: "Company updated successfully.",
+      data: updatedCompany,
+    };
+  } catch (error: unknown) {
+    return handleError(error);
+  }
+};
+
+export const deleteCompany = async (companyId: string, sessionUser: User) => {
+  // Check permissions
+  if (sessionUser.role !== "SUPERADMIN") {
+    return {
+      success: false,
+      message: "403 Forbidden: Only superadmins can delete companies.",
+    };
+  }
+
+  try {
+    // First, delete all generated documents for users in this company
+    await prisma.generatedDocs.deleteMany({
+      where: {
+        user: {
+          companyId: companyId,
+        },
+      },
+    });
+
+    // Then, delete all users in the company
+    await prisma.user.deleteMany({
+      where: {
+        companyId: companyId,
+      },
+    });
+
+    // Finally, delete the company
+    await prisma.company.delete({
+      where: {
+        id: companyId,
+      },
+    });
+
+    return {
+      success: true,
+      message: "Company deleted successfully.",
+    };
   } catch (error: unknown) {
     return handleError(error);
   }
@@ -175,7 +276,24 @@ export const fetchAllCompanies = async (sessionUser: User) => {
     );
   }
 
-  return await prisma.company.findMany();
+  return await prisma.company.findMany({
+    include: {
+      _count: {
+        select: {
+          users: true,
+          GeneratedDocs: true,
+        },
+      },
+      users: {
+        select: {
+          allowedDocs: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
 };
 
 export async function getAllUserDocs(sessionUser: User) {

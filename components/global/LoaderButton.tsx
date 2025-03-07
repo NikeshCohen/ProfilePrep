@@ -14,29 +14,42 @@ type LoaderButtonProps = ButtonProps & {
 export const LoaderButton = React.forwardRef<
   HTMLButtonElement,
   LoaderButtonProps
->(({ isLoading, icon: Icon, children, className }, ref) => {
-  if (isLoading) {
+>(
+  (
+    { isLoading, icon: Icon, children, className, variant, size, ...props },
+    ref,
+  ) => {
+    if (isLoading) {
+      return (
+        <Button
+          ref={ref}
+          disabled={isLoading}
+          className={className}
+          variant={variant}
+          size={size}
+          {...props}
+        >
+          {children}
+          <LoaderIcon className="ml-2 w-4 h-4 animate-spin" />
+        </Button>
+      );
+    }
+
     return (
-      <Button ref={ref} disabled={isLoading} className={className}>
+      <Button
+        ref={ref}
+        disabled={isLoading}
+        className={className}
+        variant={variant}
+        size={size}
+        {...props}
+      >
+        {Icon && <Icon className="mr-2 w-4 h-4" />}
         {children}
-        <LoaderIcon className="h-4 w-4 animate-spin" />
       </Button>
     );
-  }
-
-  return (
-    <Button ref={ref} disabled={isLoading} className={className}>
-      {Icon ? (
-        <>
-          {children}
-          {/* <Icon size={18} className="mr-3" /> */}
-        </>
-      ) : (
-        children
-      )}
-    </Button>
-  );
-});
+  },
+);
 
 LoaderButton.displayName = "LoaderButton";
 
