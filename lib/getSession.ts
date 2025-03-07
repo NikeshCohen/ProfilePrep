@@ -9,9 +9,13 @@ const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 const getSession = async (): Promise<Session | null> => {
   const now = Date.now();
-  const cachedData = sessionCache.get("session");
+  const session = await auth();
 
-  // Check if we have valid cached data
+  // Get user-specific cache key
+  const cacheKey = session?.user?.id || "anonymous";
+  const cachedData = sessionCache.get(cacheKey);
+
+  // Check if we have valid cached data for this specific user
   if (cachedData && now - cachedData.timestamp < CACHE_DURATION) {
     console.log("📦 Using cached session for:", cachedData.data?.user?.email);
     // console.log(`Cached Data: ${JSON.stringify(cachedData.data.user)}`);
@@ -20,12 +24,11 @@ const getSession = async (): Promise<Session | null> => {
 
   // If no cache or expired, fetch new session
   console.log("🔐 Fetching session from database...");
-  const session = await auth();
 
   if (session) {
     console.log("✅ Session found:", session.user?.email);
-    // Update cache
-    sessionCache.set("session", {
+    // Update cache with user-specific key
+    sessionCache.set(cacheKey, {
       data: session,
       timestamp: now,
     });
