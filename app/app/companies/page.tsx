@@ -5,17 +5,16 @@ import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
 
-import UserList from "./_components/UserList";
-import NewUser from "./_components/UserManipulations";
+import CreateCompany from "./_components/CreateCompany";
 
 export const metadata: Metadata = {
   title: "Users",
 };
 
 async function page() {
-  const { user } = await requireAuth("/app/users");
+  const { user } = await requireAuth("/app/companies");
 
-  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+  if (user.role !== "SUPERADMIN") {
     redirect("/app");
   }
 
@@ -23,16 +22,13 @@ async function page() {
     <section className="layout min-h-[93vh] pt-32">
       <div className="mb-8 flex items-center justify-between">
         <h1 className="text-2xl font-bold tracking-wider">
-          User Management For{" "}
-          {(user.role === "SUPERADMIN" && "All Companies") ||
-            user.company?.name}
+          Company Management
         </h1>
 
         <div>
-          <NewUser sessionUser={user} />
+          <CreateCompany />
         </div>
       </div>
-      <UserList sessionUser={user} />
     </section>
   );
 }
