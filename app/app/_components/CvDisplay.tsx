@@ -77,16 +77,16 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
       />
 
       <motion.h1
-        className="font-bold text-3xl text-center"
+        className="text-center text-3xl font-bold"
         variants={itemVariants}
       >
         We&apos;ve Generated Your Candidate&apos;s CV Content!
       </motion.h1>
       <motion.p
-        className="mt-2 mb-8 font-thin text-muted-foreground text-sm text-center tracking-wide"
+        className="mb-8 mt-2 text-center text-sm font-thin tracking-wide text-muted-foreground"
         variants={itemVariants}
       >
-        *Please verify the accuracy of the candidate&apos;s information.
+        Please verify the accuracy of the candidate&apos;s information.
       </motion.p>
 
       <motion.div className="flex justify-center gap-4" variants={itemVariants}>
@@ -107,7 +107,7 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
                 "Generating PDF..."
               ) : (
                 <>
-                  <Download className="mr-2 w-4 h-4" />
+                  <Download className="mr-2 h-4 w-4" />
                   <span>Download CV</span>
                 </>
               )}
