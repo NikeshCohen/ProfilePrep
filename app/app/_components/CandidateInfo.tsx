@@ -37,13 +37,13 @@ export function CandidateInfo({
 
   return (
     <motion.div
-      className="w-full max-w-sm space-y-4 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+      className="space-y-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.h1
-        className="mb-4 text-3xl font-bold text-primary"
+        className="mb-4 font-bold text-primary text-3xl"
         variants={itemVariants}
       >
         Candidate Information
@@ -55,12 +55,12 @@ export function CandidateInfo({
             <Label htmlFor="documentTitle">Document Title</Label>
             <Input
               id="documentTitle"
-              placeholder="Enter document title"
+              placeholder="Enter the title of the document"
               value={candidateData.documentTitle}
               onChange={onInputChange}
             />
             <p
-              className="mt-2 text-xs text-muted-foreground"
+              className="mt-2 text-muted-foreground text-xs"
               role="region"
               aria-live="polite"
             >
@@ -73,7 +73,7 @@ export function CandidateInfo({
             <Label htmlFor="name">Candidate Name</Label>
             <Input
               id="name"
-              placeholder="John Doe"
+              placeholder="Enter the candidate's full name"
               value={candidateData.name}
               onChange={onInputChange}
             />
@@ -83,7 +83,7 @@ export function CandidateInfo({
             <Label htmlFor="location">Location</Label>
             <Input
               id="location"
-              placeholder="Cape Town, SA"
+              placeholder="Enter the candidate's location"
               value={candidateData.location}
               onChange={onInputChange}
             />
@@ -93,7 +93,7 @@ export function CandidateInfo({
             <Label htmlFor="rightToWork">Right to Work</Label>
             <Input
               id="rightToWork"
-              placeholder="SA Citizen, no sponsorship required"
+              placeholder="Specify the right to work status"
               value={candidateData.rightToWork}
               onChange={onInputChange}
             />
@@ -103,7 +103,7 @@ export function CandidateInfo({
             <Label htmlFor="salaryExpectation">Salary Expectation</Label>
             <Input
               id="salaryExpectation"
-              placeholder="Open to discussion"
+              placeholder="State salary expectations"
               value={candidateData.salaryExpectation}
               onChange={onInputChange}
             />
@@ -122,13 +122,13 @@ export function CandidateInfo({
           <div className="space-y-2">
             <Textarea
               id="notes"
-              placeholder="Add any additional notes here..."
+              placeholder="Provide additional notes or comments here..."
               className="min-h-[200px] resize-none"
               value={candidateData.notes}
               onChange={handleNotesChange}
               minLength={200}
             />
-            <div className="flex items-center justify-between text-xs">
+            <div className="flex justify-between items-center text-xs">
               <p className="text-muted-foreground">
                 Add additional information. Aim for 800 characters for best
                 results. Minium 200 characters.
