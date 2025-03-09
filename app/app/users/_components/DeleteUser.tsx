@@ -7,15 +7,15 @@ import type { User } from "next-auth";
 import toast from "react-hot-toast";
 
 import { LoaderIcon } from "@/components/global/LoaderButton";
-import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -69,18 +69,18 @@ const DeleteUser = ({
   };
 
   return (
-    <Dialog open={isOpenExternal} onOpenChange={onOpenChangeExternal}>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Delete User</DialogTitle>
-          <DialogDescription>
+    <AlertDialog open={isOpenExternal} onOpenChange={onOpenChangeExternal}>
+      <AlertDialogContent className="sm:max-w-[425px]">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete User</AlertDialogTitle>
+          <AlertDialogDescription>
             This action cannot be undone. This will permanently delete the user
             account and remove their data from our servers.
-          </DialogDescription>
-        </DialogHeader>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
 
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
+        <div className="gap-4 grid py-4">
+          <div className="gap-2 grid">
             <Label htmlFor="confirmEmail" className="text-left">
               To confirm, type{" "}
               <span className="font-semibold">{userData.email}</span> below
@@ -96,7 +96,7 @@ const DeleteUser = ({
           </div>
         </div>
 
-        <DialogFooter>
+        <AlertDialogFooter>
           <Button
             variant="outline"
             onClick={() => onOpenChangeExternal(false)}
@@ -112,15 +112,15 @@ const DeleteUser = ({
             {isDeleting ? (
               <>
                 Deleting...
-                <LoaderIcon className="h-4 w-4 animate-spin" />
+                <LoaderIcon className="w-4 h-4 animate-spin" />
               </>
             ) : (
               "Delete User"
             )}
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
 

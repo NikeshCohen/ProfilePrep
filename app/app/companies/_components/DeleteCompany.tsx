@@ -9,15 +9,15 @@ import { User } from "next-auth";
 import toast from "react-hot-toast";
 
 import { LoaderButton } from "@/components/global/LoaderButton";
-import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type CompanyWithCounts = Prisma.CompanyGetPayload<{
@@ -152,7 +152,7 @@ export default function DeleteCompany({
   };
 
   return (
-    <Dialog
+    <AlertDialog
       open={isOpenExternal !== undefined ? isOpenExternal : true}
       onOpenChange={(open) => {
         if (onOpenChangeExternal) {
@@ -160,12 +160,14 @@ export default function DeleteCompany({
         }
       }}
     >
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Delete Company</DialogTitle>
-          <DialogDescription asChild>{renderStepContent()}</DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
+      <AlertDialogContent className="sm:max-w-[425px]">
+        <AlertDialogHeader>
+          <AlertDialogTitle>Delete Company</AlertDialogTitle>
+          <AlertDialogDescription asChild>
+            {renderStepContent()}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
           <Button
             type="button"
             variant="outline"
@@ -203,8 +205,8 @@ export default function DeleteCompany({
               {isDeleting ? "Deleting..." : "Delete Company"}
             </LoaderButton>
           )}
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }
