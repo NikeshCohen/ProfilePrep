@@ -17,7 +17,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 
 import { getQueryClient } from "@/lib/getQueryClient";
 
@@ -75,25 +74,23 @@ const DeleteUser = ({
           <AlertDialogTitle>Delete User</AlertDialogTitle>
           <AlertDialogDescription>
             This action cannot be undone. This will permanently delete the user
-            account and remove their data from our servers.
+            account and remove their data from our servers. To confirm deletion,
+            please type the users email exactly as shown:
           </AlertDialogDescription>
         </AlertDialogHeader>
 
-        <div className="gap-4 grid py-4">
-          <div className="gap-2 grid">
-            <Label htmlFor="confirmEmail" className="text-left">
-              To confirm, type{" "}
-              <span className="font-semibold">{userData.email}</span> below
-            </Label>
-            <Input
-              id="confirmEmail"
-              value={confirmEmail}
-              onChange={(e) => setConfirmEmail(e.target.value)}
-              placeholder={userData.email!}
-              className="col-span-3"
-              autoComplete="off"
-            />
-          </div>
+        <div className="flex flex-col gap-4">
+          <p className="bg-muted p-2 rounded-md font-mono text-muted-foreground">
+            {userData.email}
+          </p>
+          <Input
+            id="confirmEmail"
+            value={confirmEmail}
+            onChange={(e) => setConfirmEmail(e.target.value)}
+            placeholder={userData.email!}
+            className="col-span-3"
+            autoComplete="off"
+          />
         </div>
 
         <AlertDialogFooter>
