@@ -1,0 +1,10 @@
+#!/bin/sh
+
+git status
+
+echo "\nSo you can commit, huh :)\nReminder to push to the remote repository 🌐.\n"
+
+# ran `chmod +x .husky/post-commit`
+
+# automatically push to the remote
+# git push origin $(git rev-parse --abbrev-ref HEAD)

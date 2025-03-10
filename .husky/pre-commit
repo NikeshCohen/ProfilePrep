@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# check if branch is up to date with 'main'
+bash .husky/check-branch.sh
+
+# track if changes are stashed
+STASHED=0
+
+# stash unstaged and untracked changes, while keeping staged changes
+if ! git diff --quiet || ! git diff --cached --quiet; then
+  git stash --keep-index -u
+  echo "\n🐣 Unstaged and untracked changes have been stashed."
+  STASHED=1
+fi
+
+# lint and format code
+npm run eslint
+
+# check if changes were made
+if ! git diff --quiet --exit-code; then
+  echo "\n🎀 Files linted and formatted successfully. Please review the changes before committing."
+  # cancel commit so user can review
+  exit 1
+fi
+
+# apply stash only if it was stashed during this session
+if [ $STASHED -eq 1 ]; then
+  git stash apply
+  echo "\n🐥 Stashed changes have been reapplied.\n"
+fi
