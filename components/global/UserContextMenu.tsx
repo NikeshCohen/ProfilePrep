@@ -42,14 +42,14 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
             <AppWindow className="mr-2" /> <span>App</span>
           </Link>
         </DropdownMenuItem>
-        {sessionUser.role === "ADMIN" ||
-          (sessionUser.role === "SUPERADMIN" && (
-            <DropdownMenuItem asChild>
-              <Link href="/app/users" className="flex">
-                <UsersIcon className="mr-2" /> Users
-              </Link>
-            </DropdownMenuItem>
-          ))}
+        {(sessionUser.role === "ADMIN" ||
+          sessionUser.role === "SUPERADMIN") && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/users" className="flex">
+              <UsersIcon className="mr-2" /> Users
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem asChild>
           <Link href="/app/cvs" className="flex">
             <FileText className="mr-2" /> My CVs
