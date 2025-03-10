@@ -6,9 +6,8 @@ import { useRouter } from "next/navigation";
 import { handleLogout } from "@/actions/auth.actions";
 import { motion } from "framer-motion";
 
+import { LogoutIcon } from "@/components/icons/LogOutIcon";
 import { Button } from "@/components/ui/button";
-
-import { LogoutIcon } from "../icons/LogOutIcon";
 
 export default function LogoutButton() {
   const router = useRouter();

@@ -4,6 +4,9 @@ import type React from "react";
 import { useState } from "react";
 
 import { generate } from "@/actions/generate";
+import { CandidateInfo } from "@/app/app/_components/CandidateInfo";
+import { CVDisplay } from "@/app/app/_components/CvDisplay";
+import { PDFUploader } from "@/app/app/_components/FileUpload";
 import type { CandidateData } from "@/types";
 import { useSession } from "next-auth/react";
 import { useErrorBoundary } from "react-error-boundary";
@@ -12,10 +15,6 @@ import { toast } from "react-hot-toast";
 import { BackButton, NextButton } from "@/components/global/NavigationButtons";
 import { Spinner } from "@/components/global/Spinner";
 import { Stepper } from "@/components/global/Stepper";
-
-import { CandidateInfo } from "./CandidateInfo";
-import { CVDisplay } from "./CvDisplay";
-import { PDFUploader } from "./FileUpload";
 
 function GenerateContent() {
   const { showBoundary } = useErrorBoundary();

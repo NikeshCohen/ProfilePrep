@@ -1,10 +1,9 @@
 "use client";
 
 import { fetchAllUsers, getAllUserDocs } from "@/actions/admin.actions";
+import { fetchAllCompanies } from "@/actions/admin.actions";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "next-auth";
-
-import { fetchAllCompanies } from "../admin.actions";
 
 export const useUsersQuery = (sessionUser: User) => {
   return useQuery({

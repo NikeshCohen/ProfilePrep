@@ -3,6 +3,9 @@
 import { useCallback, useMemo, useState } from "react";
 
 import { useCompaniesQuery } from "@/actions/queries/admin.queries";
+import CompanyManipulations from "@/app/app/companies/_components/CompanyManipulations";
+import DeleteCompany from "@/app/app/companies/_components/DeleteCompany";
+import Skeleton from "@/app/app/companies/_components/Skeleton";
 import { Prisma } from "@prisma/client";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
@@ -28,10 +31,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import CompanyManipulations from "./CompanyManipulations";
-import DeleteCompany from "./DeleteCompany";
-import Skeleton from "./Skeleton";
 
 type CompanyWithDetails = Prisma.CompanyGetPayload<{
   include: {
@@ -62,7 +61,7 @@ const CompanyTable = ({ sessionUser }: { sessionUser: User }) => {
   if (!companies) return <NoDataFallback />;
 
   return (
-    <div className="bg-background/30 border rounded-md">
+    <div className="rounded-md border bg-background/30">
       <Table>
         <TableHeader>
           <TableRow>
@@ -154,9 +153,9 @@ const CompanyContextMenu = ({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="p-0 w-8 h-8">
+          <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="w-4 h-4" />
+            <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

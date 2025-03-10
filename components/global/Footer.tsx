@@ -3,9 +3,8 @@
 import { usePathname } from "next/navigation";
 
 import InfoButton from "@/components/global/InfoButton";
+import Logo from "@/components/global/Logo";
 import ThemeToggle from "@/components/global/ThemeToggle";
-
-import Logo from "./Logo";
 
 function Footer() {
   const pathname = usePathname();

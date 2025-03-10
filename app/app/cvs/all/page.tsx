@@ -3,9 +3,9 @@ import React from "react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { requireAuth } from "@/lib/utils";
+import GeneratedDocsList from "@/app/app/cvs/all/_components/DocList";
 
-import GeneratedDocsList from "./_components/DocList";
+import { requireAuth } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "CVs",
@@ -19,9 +19,9 @@ async function page() {
   }
 
   return (
-    <section className="pt-32 min-h-[93vh] layout">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="font-bold text-2xl tracking-wider">
+    <section className="layout min-h-[93vh] pt-32">
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-wider">
           Previously Generated Documents
         </h1>
       </div>

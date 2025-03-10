@@ -99,7 +99,7 @@ export default function DeleteCompany({
               <span className="font-bold text-primary">{companyData.name}</span>
               ? This will:
             </p>
-            <ul className="pl-4 list-disc">
+            <ul className="list-disc pl-4">
               <li>
                 Delete {companyData._count.GeneratedDocs} generated documents
               </li>
@@ -119,7 +119,7 @@ export default function DeleteCompany({
               <span className="font-bold text-primary">{companyData.name}</span>{" "}
               and all associated data. This action will:
             </p>
-            <ul className="pl-4 list-disc">
+            <ul className="list-disc pl-4">
               <li>Delete all generated documents</li>
               <li>Delete all user accounts</li>
               <li>Delete the company</li>
@@ -135,7 +135,7 @@ export default function DeleteCompany({
               To confirm deletion, please type the company name exactly as
               shown:
             </p>
-            <p className="bg-muted p-2 rounded-md font-mono">
+            <p className="rounded-md bg-muted p-2 font-mono">
               {companyData.name}
             </p>
             <Input

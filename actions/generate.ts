@@ -1,12 +1,14 @@
 "use server";
 
+import {
+  createGeneratedDoc,
+  incrementUserGenerations,
+} from "@/actions/user.actions";
 import { prompt as mainPrompt } from "@/constants/prompt";
 import type { CandidateData } from "@/types";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { User } from "next-auth";
-
-import { createGeneratedDoc, incrementUserGenerations } from "./user.actions";
 
 const selectedModel = google("gemini-2.0-flash-001");
 

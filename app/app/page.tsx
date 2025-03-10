@@ -2,9 +2,9 @@ import React from "react";
 
 import { Metadata } from "next";
 
-import { requireAuth } from "@/lib/utils";
+import GenerateContent from "@/app/app/_components/GenerateContent";
 
-import GenerateContent from "./_components/GenerateContent";
+import { requireAuth } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "App",
