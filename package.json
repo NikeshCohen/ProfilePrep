@@ -19,7 +19,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "eslint:check": "eslint .",
+    "eslint": "eslint . --fix && prettier --write ."
   },
   "dependencies": {
     "@ai-sdk/google": "^1.1.13",
@@ -45,6 +47,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
+    "eslint-plugin-no-relative-import-paths": "^1.6.1",
     "html-to-pdfmake": "^2.5.21",
     "lucide-react": "^0.475.0",
     "markdown-it": "^14.1.0",
