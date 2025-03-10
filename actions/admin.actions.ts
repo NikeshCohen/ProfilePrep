@@ -94,6 +94,32 @@ export const editUser = async (
   }
 
   try {
+    // Get the current user to check if company is changing
+    const currentUser = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { companyId: true },
+    });
+
+    if (!currentUser) {
+      return {
+        success: false,
+        message: "User not found.",
+      };
+    }
+
+    // If company is changing, get the new company's allowedDocsPerUsers
+    let allowedDocs = undefined;
+    if (userData.companyId && userData.companyId !== currentUser.companyId) {
+      const newCompany = await prisma.company.findUnique({
+        where: { id: userData.companyId },
+        select: { allowedDocsPerUsers: true },
+      });
+
+      if (newCompany) {
+        allowedDocs = newCompany.allowedDocsPerUsers;
+      }
+    }
+
     const user = await prisma.user.update({
       where: { id: userId },
       data: {
@@ -106,6 +132,7 @@ export const editUser = async (
               ? "ADMIN"
               : "SUPERADMIN",
         ...(userData.companyId && { companyId: userData.companyId }),
+        ...(allowedDocs !== undefined && { allowedDocs }),
         updatedAt: new Date(),
       },
     });
