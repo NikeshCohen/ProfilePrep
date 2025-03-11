@@ -14,7 +14,6 @@ import { toast } from "react-hot-toast";
 
 import { BackButton, NextButton } from "@/components/global/NavigationButtons";
 import { Spinner } from "@/components/global/Spinner";
-import { Stepper } from "@/components/global/Stepper";
 
 function GenerateContent() {
   const { showBoundary } = useErrorBoundary();
@@ -35,14 +34,6 @@ function GenerateContent() {
     salaryExpectation: "",
     notes: "",
   });
-
-  // upload, info, notes - generate cv step not added for stepper
-  const totalSteps = 3;
-  const getCurrentStep = () => {
-    if (showNotes) return 3;
-    if (showCandidateInfo) return 2;
-    return 1;
-  };
 
   const handleNext = () => {
     if (!showCandidateInfo) {
@@ -152,9 +143,9 @@ function GenerateContent() {
 
   if (isGenerating) {
     return (
-      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
+      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
         <Spinner progress={generationProgress} />
-        <span className="mt-2 text-sm text-muted-foreground">
+        <span className="mt-2 text-muted-foreground text-sm">
           {Math.round(generationProgress)}% Complete
         </span>
       </section>
@@ -162,16 +153,8 @@ function GenerateContent() {
   }
 
   return (
-    <section className="layout flex min-h-[92vh] flex-col items-center justify-center">
+    <section className="flex flex-col justify-center items-center min-h-[92vh] layout">
       <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
-        {!generatedCV && (
-          <Stepper
-            currentStep={getCurrentStep()}
-            totalSteps={totalSteps}
-            className={`mb-6 w-1/3 ${getCurrentStep() === 2 ? "mt-16" : ""}`}
-          />
-        )}
-
         {generatedCV ? (
           <CVDisplay
             markdown={generatedCV}
@@ -186,7 +169,7 @@ function GenerateContent() {
               setSelectedFile={setSelectedFile}
             />
             {extractedText && (
-              <div className="mt-4 flex w-full justify-end">
+              <div className="flex justify-end mt-4 w-full">
                 <NextButton onClick={handleNext} className="px-6" />
               </div>
             )}
@@ -198,7 +181,7 @@ function GenerateContent() {
               onInputChange={handleCandidateDataChange}
               showNotes={showNotes}
             />
-            <div className="mt-4 flex w-full justify-between">
+            <div className="flex justify-between mt-4 w-full">
               <BackButton
                 onClick={handleBack}
                 className="bg-background/20 px-6"

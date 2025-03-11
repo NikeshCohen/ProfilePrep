@@ -190,6 +190,8 @@ export const createCompany = async (companyData: NewCompanyData) => {
       data: {
         name: companyData.name,
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
+        allowedTemplates: companyData.allowedTemplates,
+        createdTemplates: 0,
       },
     });
     return company;
@@ -215,7 +217,11 @@ export const updateCompany = async (
     // First get the current company to check if allowedDocsPerUsers changed
     const currentCompany = await prisma.company.findUnique({
       where: { id: companyId },
-      select: { allowedDocsPerUsers: true },
+      select: {
+        allowedDocsPerUsers: true,
+        allowedTemplates: true,
+        createdTemplates: true,
+      },
     });
 
     if (!currentCompany) {
@@ -225,12 +231,22 @@ export const updateCompany = async (
       };
     }
 
+    // Validate template limits
+    if (companyData.allowedTemplates < currentCompany.createdTemplates) {
+      return {
+        success: false,
+        message:
+          "Cannot set allowed templates lower than current created templates count.",
+      };
+    }
+
     // Update company
     const updatedCompany = await prisma.company.update({
       where: { id: companyId },
       data: {
         name: companyData.name,
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
+        allowedTemplates: companyData.allowedTemplates,
       },
     });
 
@@ -273,6 +289,13 @@ export const deleteCompany = async (companyId: string, sessionUser: User) => {
       },
     });
 
+    // Delete all templates for this company
+    await prisma.template.deleteMany({
+      where: {
+        companyId: companyId,
+      },
+    });
+
     // Then, delete all users in the company
     await prisma.user.deleteMany({
       where: {
@@ -309,11 +332,17 @@ export const fetchAllCompanies = async (sessionUser: User) => {
         select: {
           users: true,
           GeneratedDocs: true,
+          templates: true,
         },
       },
       users: {
         select: {
           allowedDocs: true,
+        },
+      },
+      templates: {
+        select: {
+          id: true,
         },
       },
     },
