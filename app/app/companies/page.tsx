@@ -3,10 +3,10 @@ import React from "react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { requireAuth } from "@/lib/utils";
+import CompanyList from "@/app/app/companies/_components/CompanyList";
+import CreateCompany from "@/app/app/companies/_components/CompanyManipulations";
 
-import CompanyList from "./_components/CompanyList";
-import CreateCompany from "./_components/CompanyManipulations";
+import { requireAuth } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Companies",
@@ -20,9 +20,9 @@ async function page() {
   }
 
   return (
-    <section className="pt-32 min-h-[93vh] layout">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="font-bold text-2xl tracking-wider">
+    <section className="layout min-h-[93vh] pt-32">
+      <div className="mb-8 flex items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-wider">
           Company Management
         </h1>
 

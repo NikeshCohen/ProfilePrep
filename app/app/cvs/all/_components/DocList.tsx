@@ -1,6 +1,8 @@
 "use client";
 
 import { useAdminDocsQuery } from "@/actions/queries/admin.queries";
+import DocContextMenu from "@/app/app/cvs/_components/ContextMenu";
+import Skeleton from "@/app/app/cvs/_components/Skeleton";
 import { formatDistanceToNow } from "date-fns";
 import { User } from "next-auth";
 
@@ -18,9 +20,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import DocContextMenu from "../../_components/ContextMenu";
-import Skeleton from "../../_components/Skeleton";
 
 interface GeneratedDocsListProps {
   sessionUser: User;

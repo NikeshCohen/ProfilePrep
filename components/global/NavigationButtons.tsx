@@ -2,12 +2,11 @@
 
 import { motion } from "framer-motion";
 
+import { ArrowLeftIcon } from "@/components/icons/ArrowLeftIcon";
+import { ArrowRightIcon } from "@/components/icons/ArrowRightIcon";
 import { Button } from "@/components/ui/button";
 
 import { fadeUpAnimation } from "@/lib/animations";
-
-import { ArrowLeftIcon } from "../icons/ArrowLeftIcon";
-import { ArrowRightIcon } from "../icons/ArrowRightIcon";
 
 type NextButtonProps = {
   onClick: () => void;

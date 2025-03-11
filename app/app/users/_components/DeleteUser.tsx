@@ -80,7 +80,7 @@ const DeleteUser = ({
         </AlertDialogHeader>
 
         <div className="flex flex-col gap-4">
-          <p className="bg-muted p-2 rounded-md font-mono text-muted-foreground">
+          <p className="rounded-md bg-muted p-2 font-mono text-muted-foreground">
             {userData.email}
           </p>
           <Input
@@ -109,7 +109,7 @@ const DeleteUser = ({
             {isDeleting ? (
               <>
                 Deleting...
-                <LoaderIcon className="w-4 h-4 animate-spin" />
+                <LoaderIcon className="h-4 w-4 animate-spin" />
               </>
             ) : (
               "Delete User"

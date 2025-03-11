@@ -1,6 +1,8 @@
 "use client";
 
 import { useUserDocsQuery } from "@/actions/queries/user.queries";
+import DocContextMenu from "@/app/app/cvs/_components/ContextMenu";
+import Skeleton from "@/app/app/cvs/_components/Skeleton";
 import { formatDistanceToNow } from "date-fns";
 
 import {
@@ -16,9 +18,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
-import DocContextMenu from "./ContextMenu";
-import Skeleton from "./Skeleton";
 
 interface GeneratedDocsListProps {
   userId: string;

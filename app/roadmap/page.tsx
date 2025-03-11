@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-import Roadmap from "./Roadmap";
+import Roadmap from "@/app/roadmap/Roadmap";
 
 export const metadata: Metadata = {
   title: "RoadMap",

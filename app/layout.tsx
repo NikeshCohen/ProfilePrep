@@ -4,6 +4,7 @@ import { ReactScan } from "@/components/global/ReactScan";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
+import "@/app/_styles/globals.css";
 import { QueryProviders } from "@/providers/QueryProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Analytics } from "@vercel/analytics/react";
@@ -11,8 +12,6 @@ import { SessionProvider } from "next-auth/react";
 
 import Background from "@/components/global/Background";
 import Toaster from "@/components/global/Toaster";
-
-import "./_styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

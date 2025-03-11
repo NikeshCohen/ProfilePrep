@@ -1,8 +1,7 @@
 "use client";
 
+import { getDocContent, getUserDocs } from "@/actions/user.actions";
 import { useQuery } from "@tanstack/react-query";
-
-import { getDocContent, getUserDocs } from "../user.actions";
 
 export const useUserDocsQuery = (userId: string) => {
   return useQuery({

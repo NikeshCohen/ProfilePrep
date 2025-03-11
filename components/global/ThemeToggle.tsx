@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 
 import { useTheme } from "next-themes";
 
+import { MoonIcon } from "@/components/icons/MoonIcon";
+import { SunIcon } from "@/components/icons/SunIcon";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-
-import { MoonIcon } from "../icons/MoonIcon";
-import { SunIcon } from "../icons/SunIcon";
 
 export default function ThemeToggle() {
   const [mounted, setMounted] = useState(false);

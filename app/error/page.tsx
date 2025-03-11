@@ -1,4 +1,4 @@
-import AuthErrorClient from "./_components/AuthErrorClient";
+import AuthErrorClient from "@/app/error/_components/AuthErrorClient";
 
 interface PageProps {
   searchParams: Promise<{ error?: string }>;

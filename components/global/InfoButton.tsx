@@ -5,9 +5,8 @@ import { useState } from "react";
 import { InfoPanel } from "@/app/app/_components/InfoPanel";
 import { motion } from "framer-motion";
 
+import { CircleHelpIcon } from "@/components/icons/CircleHelpIcon";
 import { Button } from "@/components/ui/button";
-
-import { CircleHelpIcon } from "../icons/CircleHelpIcon";
 
 export default function InfoButton() {
   const [isOpen, setIsOpen] = useState(false);

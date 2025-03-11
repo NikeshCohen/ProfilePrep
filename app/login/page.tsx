@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import GoogleButton from "@/app/login/_components/GoogleButton";
+
 import Logo from "@/components/global/Logo";
 import {
   Card,
@@ -13,8 +15,6 @@ import {
 } from "@/components/ui/card";
 
 import getSession from "@/lib/getSession";
-
-import GoogleButton from "./_components/GoogleButton";
 
 export const metadata: Metadata = {
   title: "Login",

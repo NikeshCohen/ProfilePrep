@@ -3,10 +3,10 @@ import React from "react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { requireAuth } from "@/lib/utils";
+import UserList from "@/app/app/users/_components/UserList";
+import NewUser from "@/app/app/users/_components/UserManipulations";
 
-import UserList from "./_components/UserList";
-import NewUser from "./_components/UserManipulations";
+import { requireAuth } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Users",

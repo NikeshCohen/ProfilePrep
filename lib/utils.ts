@@ -7,8 +7,8 @@ import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { twMerge } from "tailwind-merge";
 
-import { getQueryClient } from "./getQueryClient";
-import getSession from "./getSession";
+import { getQueryClient } from "@/lib/getQueryClient";
+import getSession from "@/lib/getSession";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
