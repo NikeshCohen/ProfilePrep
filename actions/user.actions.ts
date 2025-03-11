@@ -71,6 +71,19 @@ export async function getUserDocs(userId: string) {
   }
 }
 
+export async function deleteDoc(docId: string) {
+  try {
+    await prisma.generatedDocs.delete({
+      where: { id: docId },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to delete document:", error);
+    return { success: false, error: "Failed to delete document" };
+  }
+}
+
 export async function getDocContent(docId: string) {
   try {
     const docContent = await prisma.generatedDocs.findUnique({
