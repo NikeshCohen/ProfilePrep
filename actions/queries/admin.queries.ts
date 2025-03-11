@@ -1,6 +1,10 @@
 "use client";
 
-import { fetchAllUsers, getAllUserDocs } from "@/actions/admin.actions";
+import {
+  fetchAllTemplates,
+  fetchAllUsers,
+  getAllUserDocs,
+} from "@/actions/admin.actions";
 import { fetchAllCompanies } from "@/actions/admin.actions";
 import { useQuery } from "@tanstack/react-query";
 import { User } from "next-auth";
@@ -24,5 +28,12 @@ export const useAdminDocsQuery = (user: User) => {
   return useQuery({
     queryKey: ["allUserDocs", user.id],
     queryFn: () => getAllUserDocs(user),
+  });
+};
+
+export const useTemplatesQuery = (user: User) => {
+  return useQuery({
+    queryKey: ["templates"],
+    queryFn: () => fetchAllTemplates(user),
   });
 };

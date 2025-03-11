@@ -392,3 +392,64 @@ export async function getAllUserDocs(sessionUser: User) {
     return { success: false, error: "Failed to fetch document info" };
   }
 }
+
+export async function fetchAllTemplates(user: User) {
+  // Check permissions
+  if (user.role === "USER") {
+    return {
+      success: false,
+      message: "403 Forbidden: You do not have permission to access templates.",
+    };
+  }
+
+  try {
+    // If admin, fetch only company templates
+    if (user.role === "ADMIN") {
+      const templates = await prisma.template.findMany({
+        where: {
+          companyId: user.company?.id,
+        },
+        select: {
+          id: true,
+          name: true,
+          createdAt: true,
+          updatedAt: true,
+          company: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      return { success: true, templates };
+    }
+
+    const templates = await prisma.template.findMany({
+      select: {
+        id: true,
+        name: true,
+        createdAt: true,
+        updatedAt: true,
+        company: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return { success: true, templates };
+  } catch (error) {
+    console.error("Failed to fetch templates:", error);
+    return { success: false, error: "Failed to fetch templates" };
+  }
+}
