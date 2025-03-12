@@ -24,7 +24,8 @@ export const useDocContentQuery = (docId: string, enabled = false) => {
 
 export const useTemplatesQuery = (user: User) => {
   return useQuery({
-    queryKey: ["templates"],
+    queryKey: ["templates", user.company?.id],
     queryFn: () => fetchAllTemplates(user),
+    enabled: !!user.company,
   });
 };

@@ -226,6 +226,13 @@ function TemplateSelect({
 }: TemplateSelectProps) {
   const { data: templates, isLoading } = useTemplatesQuery(sessionUser);
 
+  useEffect(() => {
+    // Auto-select ProfilePrep template if user doesn't have a company
+    if (!sessionUser.company && !value) {
+      onValueChange("pp", undefined);
+    }
+  }, [sessionUser.company, value, onValueChange]);
+
   const handleTemplateChange = (selectedId: string) => {
     const selectedTemplate = templates?.templates?.find(
       (template) => template.id === selectedId,
@@ -233,34 +240,39 @@ function TemplateSelect({
     onValueChange(selectedId, selectedTemplate?.templateContent);
   };
 
+  const hasCustomTemplates =
+    sessionUser.company &&
+    templates?.success &&
+    templates.templates &&
+    templates.templates.length > 0;
+
   return (
     <motion.div className="space-y-2" variants={itemVariants}>
       <Select
         value={value || undefined}
         onValueChange={handleTemplateChange}
-        disabled={isLoading}
+        disabled={isLoading || !sessionUser.company}
       >
         <SelectTrigger className="bg-background/20">
           <SelectValue placeholder="Choose a template style" />
           {isLoading && <LoaderIcon className="ml-2 w-4 h-4 animate-spin" />}
         </SelectTrigger>
         <SelectContent>
-          {isLoading ? (
+          {isLoading && sessionUser.company ? (
             <div className="flex justify-center items-center py-2">
               <p className="text-muted-foreground text-sm">
                 Loading templates...
               </p>
             </div>
-          ) : !templates?.success || !templates.templates?.length ? (
-            <SelectItem value="pp">ProfilePrep Default</SelectItem>
           ) : (
             <>
               <SelectItem value="pp">ProfilePrep Default</SelectItem>
-              {templates.templates.map((template) => (
-                <SelectItem key={template.id} value={template.id}>
-                  {template.name}
-                </SelectItem>
-              ))}
+              {hasCustomTemplates &&
+                templates.templates.map((template) => (
+                  <SelectItem key={template.id} value={template.id}>
+                    {template.name}
+                  </SelectItem>
+                ))}
             </>
           )}
         </SelectContent>
