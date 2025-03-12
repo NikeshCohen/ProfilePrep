@@ -5,4 +5,6 @@ export type CandidateData = {
   rightToWork: string;
   salaryExpectation: string;
   notes: string;
+  templateId: string;
+  templateContent?: string;
 };

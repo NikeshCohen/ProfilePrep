@@ -26,14 +26,38 @@ function GenerateContent() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationProgress, setGenerationProgress] = useState(0);
   const [generatedCV, setGeneratedCV] = useState<string | null>(null);
-  const [candidateData, setCandidateData] = useState<CandidateData>({
-    documentTitle: "",
-    name: "",
-    location: "",
-    rightToWork: "",
-    salaryExpectation: "",
-    notes: "",
+  const [candidateData, setCandidateData] = useState<CandidateData>(() => {
+    // Try to get the last used template from localStorage
+    const savedTemplate =
+      typeof window !== "undefined"
+        ? localStorage.getItem("lastUsedTemplate")
+        : "pp";
+    return {
+      documentTitle: "",
+      name: "",
+      location: "",
+      rightToWork: "",
+      salaryExpectation: "",
+      notes: "",
+      templateId: savedTemplate || "pp",
+      templateContent: undefined,
+    };
   });
+
+  const handleTemplateChange = (
+    templateId: string,
+    templateContent?: string,
+  ) => {
+    // Save the template choice to localStorage
+    if (typeof window !== "undefined") {
+      localStorage.setItem("lastUsedTemplate", templateId);
+    }
+    setCandidateData((prev) => ({
+      ...prev,
+      templateId,
+      templateContent,
+    }));
+  };
 
   const handleNext = () => {
     if (!showCandidateInfo) {
@@ -130,6 +154,8 @@ function GenerateContent() {
     setExtractedText("");
     setShowCandidateInfo(false);
     setShowNotes(false);
+    // Keep the last used template when resetting
+    const lastTemplate = candidateData.templateId;
     setCandidateData({
       documentTitle: "",
       name: "",
@@ -137,15 +163,17 @@ function GenerateContent() {
       rightToWork: "",
       salaryExpectation: "",
       notes: "",
+      templateId: lastTemplate,
+      templateContent: undefined,
     });
     setGeneratedCV(null);
   };
 
   if (isGenerating) {
     return (
-      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
+      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
         <Spinner progress={generationProgress} />
-        <span className="mt-2 text-sm text-muted-foreground">
+        <span className="mt-2 text-muted-foreground text-sm">
           {Math.round(generationProgress)}% Complete
         </span>
       </section>
@@ -153,7 +181,7 @@ function GenerateContent() {
   }
 
   return (
-    <section className="layout flex min-h-[92vh] flex-col items-center justify-center">
+    <section className="flex flex-col justify-center items-center pt-18 min-h-[92vh] layout">
       <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
         {generatedCV ? (
           <CVDisplay
@@ -169,7 +197,7 @@ function GenerateContent() {
               setSelectedFile={setSelectedFile}
             />
             {extractedText && (
-              <div className="mt-4 flex w-full justify-end">
+              <div className="flex justify-end mt-4 w-full">
                 <NextButton onClick={handleNext} className="px-6" />
               </div>
             )}
@@ -177,11 +205,14 @@ function GenerateContent() {
         ) : (
           <>
             <CandidateInfo
+              sessionUser={session!.user}
               candidateData={candidateData}
               onInputChange={handleCandidateDataChange}
               showNotes={showNotes}
+              selectedTemplate={candidateData.templateId}
+              onTemplateChange={handleTemplateChange}
             />
-            <div className="mt-4 flex w-full justify-between">
+            <div className="flex justify-between mt-4 w-full">
               <BackButton
                 onClick={handleBack}
                 className="bg-background/20 px-6"

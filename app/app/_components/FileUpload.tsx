@@ -14,20 +14,18 @@ import {
 import { toast } from "react-hot-toast";
 
 import { fadeUpAnimation } from "@/lib/animations";
-import { MdToPdf, extractTextFromPdf } from "@/lib/utils";
+import { extractTextFromPdf } from "@/lib/utils";
 
 interface PDFUploaderProps {
   setExtractedText: (text: string) => void;
   selectedFile: File | null;
   setSelectedFile: (file: File | null) => void;
-  onConvertToPdf?: (content: string, fileName: string) => Promise<void>;
 }
 
 export function PDFUploader({
   setExtractedText,
   selectedFile,
   setSelectedFile,
-  onConvertToPdf = MdToPdf,
 }: PDFUploaderProps) {
   const [isDragActive, setIsDragActive] = useState(false);
   const [isExtracting, setIsExtracting] = useState(false);

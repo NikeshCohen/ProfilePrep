@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 
-import { useTemplatesQuery } from "@/actions/queries/admin.queries";
+import { useTemplatesQuery } from "@/actions/queries/user.queries";
 import DeleteTemplate from "@/app/app/templates/_components/DeleteTemplate";
 import EditTemplate from "@/app/app/templates/_components/EditTemplate";
 import Skeleton from "@/app/app/templates/_components/Skeleton";

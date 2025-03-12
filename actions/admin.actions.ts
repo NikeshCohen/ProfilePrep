@@ -406,17 +406,9 @@ export async function getAllUserDocs(sessionUser: User) {
 }
 
 export async function fetchAllTemplates(user: User) {
-  // Check permissions
-  if (user.role === "USER") {
-    return {
-      success: false,
-      message: "403 Forbidden: You do not have permission to access templates.",
-    };
-  }
-
   try {
-    // If admin, fetch only company templates
-    if (user.role === "ADMIN") {
+    // If admin or user, fetch only company templates
+    if (user.role === "ADMIN" || user.role === "USER") {
       const templates = await prisma.template.findMany({
         where: {
           companyId: user.company?.id,

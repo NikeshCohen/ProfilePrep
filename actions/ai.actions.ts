@@ -23,10 +23,18 @@ export const generateDocument = async (
   candidateInfo: CandidateData,
   user: User,
 ) => {
+  let templateStructure;
+
+  if (candidateInfo.templateId === "pp") {
+    templateStructure = baseTemplate;
+  } else {
+    templateStructure = candidateInfo.templateContent;
+  }
+
   const prompt = `${mainPrompt}
 
         TEMPLATE STRUCTURE:
-        ${baseTemplate}
+        ${templateStructure}
 
         CANDIDATE INFORMATION:
         - Document Title: ${candidateInfo.documentTitle}
@@ -60,6 +68,7 @@ export const generateDocument = async (
     prompt,
     temperature: 0.2,
   });
+
   let cleanedText = response.text;
 
   if (cleanedText.includes("```") || cleanedText.startsWith("markdown")) {
