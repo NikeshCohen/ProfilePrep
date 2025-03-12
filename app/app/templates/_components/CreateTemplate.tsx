@@ -191,7 +191,7 @@ export default function CreateTemplate({ sessionUser }: CreateTemplateProps) {
         throw new Error(result.message);
       }
 
-      queryClient.invalidateQueries({ queryKey: ["companies"] });
+      queryClient.invalidateQueries({ queryKey: ["templates"] });
 
       toast.success("Template created successfully!");
       form.reset();

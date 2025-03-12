@@ -141,7 +141,7 @@ export default function AuthErrorClient({
               <div className="text-sm font-medium text-foreground">
                 Developer Information
               </div>
-              <div className="rounded-md bg-slate-100 p-4 font-mono text-xs">
+              <div className="rounded-md bg-foreground p-4 font-mono text-xs text-foreground text-white dark:text-black">
                 <pre className="overflow-x-auto">
                   {JSON.stringify(
                     {

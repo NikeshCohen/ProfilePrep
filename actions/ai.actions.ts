@@ -106,7 +106,5 @@ export const generateTemplate = async (textContent: string) => {
 
   logTokenUsage(response.usage, "Template Generation");
 
-  console.log(cleanedText);
-
   return cleanedText;
 };

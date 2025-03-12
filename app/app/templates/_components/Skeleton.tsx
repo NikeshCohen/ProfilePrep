@@ -15,7 +15,7 @@ function Skeleton() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Id</TableHead>
+            <TableHead className="w-[100px]">Id</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Company</TableHead>
             <TableHead>Created At</TableHead>
@@ -26,10 +26,10 @@ function Skeleton() {
           {Array.from({ length: 10 }).map((_, index) => (
             <TableRow key={index}>
               <TableCell>
-                <div className="h-2 w-20 animate-pulse rounded bg-neutral-500"></div>
+                <div className="h-2 w-10 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
-                <div className="h-2 w-20 animate-pulse rounded bg-neutral-500"></div>
+                <div className="h-2 w-72 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
                 <div className="h-2 w-24 animate-pulse rounded bg-neutral-500"></div>
