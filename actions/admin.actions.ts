@@ -6,6 +6,13 @@ import prisma from "@/prisma/prisma";
 import { User } from "next-auth";
 
 import { handleError } from "@/lib/apiUtils";
+import { getQueryClient } from "@/lib/getQueryClient";
+
+interface CreateTemplateData {
+  name: string;
+  templateContent: string;
+  companyId: string;
+}
 
 export const fetchAllUsers = async (user: {
   role: string;
@@ -453,3 +460,77 @@ export async function fetchAllTemplates(user: User) {
     return { success: false, error: "Failed to fetch templates" };
   }
 }
+
+export const createTemplate = async (
+  templateData: CreateTemplateData,
+  sessionUser: User,
+) => {
+  // Check permissions
+  if (sessionUser.role === "USER") {
+    return {
+      success: false,
+      message: "403 Forbidden: You do not have permission to create templates.",
+    };
+  }
+
+  try {
+    // If admin, verify the template is being created for their company
+    if (
+      sessionUser.role === "ADMIN" &&
+      templateData.companyId !== sessionUser.company?.id
+    ) {
+      return {
+        success: false,
+        message:
+          "403 Forbidden: You can only create templates for your company.",
+      };
+    }
+
+    // Check company template limits
+    const company = await prisma.company.findUnique({
+      where: { id: templateData.companyId },
+      select: { allowedTemplates: true, createdTemplates: true },
+    });
+
+    if (!company) {
+      return {
+        success: false,
+        message: "Company not found.",
+      };
+    }
+
+    if (company.createdTemplates >= company.allowedTemplates) {
+      return {
+        success: false,
+        message: "Template limit reached for this company.",
+      };
+    }
+
+    // Create the template
+    const template = await prisma.template.create({
+      data: {
+        name: templateData.name,
+        templateContent: templateData.templateContent,
+        companyId: templateData.companyId,
+      },
+    });
+
+    // Increment the company's created templates count
+    await prisma.company.update({
+      where: { id: templateData.companyId },
+      data: { createdTemplates: { increment: 1 } },
+    });
+
+    // Invalidate the templates query cache
+    const queryClient = getQueryClient();
+    queryClient.invalidateQueries({ queryKey: ["templates"] });
+
+    return {
+      success: true,
+      message: "Template created successfully.",
+      data: template,
+    };
+  } catch (error: unknown) {
+    return handleError(error);
+  }
+};

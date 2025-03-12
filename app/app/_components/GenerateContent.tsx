@@ -3,7 +3,7 @@
 import type React from "react";
 import { useState } from "react";
 
-import { generate } from "@/actions/generate";
+import { generateDocument } from "@/actions/ai.actions";
 import { CandidateInfo } from "@/app/app/_components/CandidateInfo";
 import { CVDisplay } from "@/app/app/_components/CvDisplay";
 import { PDFUploader } from "@/app/app/_components/FileUpload";
@@ -94,7 +94,7 @@ function GenerateContent() {
     }, interval);
 
     try {
-      const result = await generate(
+      const result = await generateDocument(
         extractedText,
         candidateData,
         session!.user,
@@ -143,9 +143,9 @@ function GenerateContent() {
 
   if (isGenerating) {
     return (
-      <section className="flex flex-col justify-center items-center min-h-[93vh] layout">
+      <section className="layout flex min-h-[93vh] flex-col items-center justify-center">
         <Spinner progress={generationProgress} />
-        <span className="mt-2 text-muted-foreground text-sm">
+        <span className="mt-2 text-sm text-muted-foreground">
           {Math.round(generationProgress)}% Complete
         </span>
       </section>
@@ -153,7 +153,7 @@ function GenerateContent() {
   }
 
   return (
-    <section className="flex flex-col justify-center items-center min-h-[92vh] layout">
+    <section className="layout flex min-h-[92vh] flex-col items-center justify-center">
       <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
         {generatedCV ? (
           <CVDisplay
@@ -169,7 +169,7 @@ function GenerateContent() {
               setSelectedFile={setSelectedFile}
             />
             {extractedText && (
-              <div className="flex justify-end mt-4 w-full">
+              <div className="mt-4 flex w-full justify-end">
                 <NextButton onClick={handleNext} className="px-6" />
               </div>
             )}
@@ -181,7 +181,7 @@ function GenerateContent() {
               onInputChange={handleCandidateDataChange}
               showNotes={showNotes}
             />
-            <div className="flex justify-between mt-4 w-full">
+            <div className="mt-4 flex w-full justify-between">
               <BackButton
                 onClick={handleBack}
                 className="bg-background/20 px-6"

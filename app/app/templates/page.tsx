@@ -3,9 +3,10 @@ import React from "react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { requireAuth } from "@/lib/utils";
-
+import CreateTemplate from "@/app/app/templates/_components/CreateTemplate";
 import TemplateList from "@/app/app/templates/_components/TemplateList";
+
+import { requireAuth } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Users",
@@ -27,7 +28,9 @@ async function page() {
             user.company?.name}
         </h1>
 
-        <div></div>
+        <div>
+          <CreateTemplate sessionUser={user} />
+        </div>
       </div>
 
       <TemplateList sessionUser={user} />

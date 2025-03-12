@@ -12,20 +12,22 @@ import {
   XCircleIcon,
 } from "lucide-react";
 import { toast } from "react-hot-toast";
-import pdfToText from "react-pdftotext";
 
 import { fadeUpAnimation } from "@/lib/animations";
+import { MdToPdf, extractTextFromPdf } from "@/lib/utils";
 
 interface PDFUploaderProps {
   setExtractedText: (text: string) => void;
   selectedFile: File | null;
   setSelectedFile: (file: File | null) => void;
+  onConvertToPdf?: (content: string, fileName: string) => Promise<void>;
 }
 
 export function PDFUploader({
   setExtractedText,
   selectedFile,
   setSelectedFile,
+  onConvertToPdf = MdToPdf,
 }: PDFUploaderProps) {
   const [isDragActive, setIsDragActive] = useState(false);
   const [isExtracting, setIsExtracting] = useState(false);
@@ -60,7 +62,7 @@ export function PDFUploader({
     }
   };
 
-  const validateAndSetFile = (newFile: File) => {
+  const validateAndSetFile = async (newFile: File) => {
     setError(null);
 
     if (newFile.type !== "application/pdf") {
@@ -70,23 +72,12 @@ export function PDFUploader({
       return;
     }
     setSelectedFile(newFile);
-    extractPDFText(newFile);
-  };
-
-  const extractPDFText = async (pdfFile: File) => {
-    setIsExtracting(true);
-    try {
-      const text = await pdfToText(pdfFile);
-      setExtractedText(text);
-      toast.success("Text extracted successfully");
-    } catch (err) {
-      console.error("Error extracting text from PDF:", err);
-      const errorMessage = "Failed to extract text from PDF";
-      toast.error(errorMessage);
-      setError(errorMessage);
-    } finally {
-      setIsExtracting(false);
-    }
+    await extractTextFromPdf(
+      newFile,
+      setIsExtracting,
+      setExtractedText,
+      setError,
+    );
   };
 
   const onButtonClick = () => {
