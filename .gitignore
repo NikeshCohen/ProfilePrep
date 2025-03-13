@@ -42,3 +42,6 @@ auth-proxy/.env*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# husky (git hooks)
+.husky/_

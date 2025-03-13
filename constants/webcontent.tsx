@@ -134,3 +134,7 @@ export const content = {
     cta: "Try Now",
   },
 };
+
+export const siteConfig = {
+  supportEmail: "placeholder@example.com",
+};
