@@ -94,7 +94,7 @@ export function PDFUploader({
   return (
     <motion.div
       {...fadeUpAnimation}
-      className="`min-h-[200px] w-full max-w-sm rounded-md border-2 border-dashed sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+      className="border-2 border-dashed rounded-md w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl `min-h-[200px]"
     >
       <div
         onDragEnter={handleDrag}
@@ -121,35 +121,35 @@ export function PDFUploader({
           accept=".pdf"
           disabled={isExtracting}
         />
-        <div className="flex h-full flex-col items-center justify-center space-y-4">
+        <div className="flex flex-col justify-center items-center space-y-4 h-full">
           {isDragActive ? (
-            <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
+            <ArrowUpIcon className="w-12 h-12 text-primary animate-bounce" />
           ) : (
-            <FileText className="h-12 w-12 text-gray-400" />
+            <FileText className="w-12 h-12 text-gray-400" />
           )}
 
           {isDragActive ? (
-            <p className="text-center text-lg font-medium">Drop the PDF here</p>
+            <p className="font-medium text-lg text-center">Drop the PDF here</p>
           ) : (
-            <p className="text-center text-lg">
+            <p className="text-lg text-center">
               <span className="font-semibold">Click to upload</span>
               <span className="hidden lg:inline"> or drag and drop</span>
             </p>
           )}
 
-          <p className="text-sm text-gray-500">Only PDF files are accepted</p>
+          <p className="text-gray-500 text-sm">Only PDF files are accepted</p>
 
           {error && (
             <div className="flex items-center text-destructive">
-              <FileWarningIcon className="mr-1 h-4 w-4" />
+              <FileWarningIcon className="mr-1 w-4 h-4" />
               <p className="text-sm">PDF Files Only</p>
             </div>
           )}
         </div>
         {error && (
-          <div className="absolute left-0 right-0 top-0 flex items-center justify-between rounded-t-lg bg-destructive px-4 py-2 text-sm text-destructive-foreground">
+          <div className="top-0 right-0 left-0 absolute flex justify-between items-center bg-destructive px-4 py-2 rounded-t-lg text-destructive-foreground text-sm">
             <div className="flex items-center space-x-2">
-              <XCircleIcon className="h-4 w-4" />
+              <XCircleIcon className="w-4 h-4" />
               <p>{error}</p>
             </div>
             <button
@@ -157,26 +157,26 @@ export function PDFUploader({
                 e.stopPropagation();
                 setError(null);
               }}
-              className="text-destructive-foreground/80 transition-colors hover:text-destructive-foreground"
+              className="text-destructive-foreground/80 hover:text-destructive-foreground transition-colors"
               aria-label="Dismiss error"
             >
-              <XCircleIcon className="h-4 w-4" />
+              <XCircleIcon className="w-4 h-4" />
             </button>
           </div>
         )}
         {isExtracting && (
-          <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-background/50">
-            <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
+          <div className="absolute inset-0 flex justify-center items-center bg-background/50 rounded-lg">
+            <div className="border-primary border-t-2 border-b-2 rounded-full w-12 h-12 animate-spin"></div>
           </div>
         )}
         {selectedFile && !isExtracting && (
-          <div className="mt-4 rounded-lg border p-4">
-            <div className="flex items-center justify-between">
+          <div className="mt-4 p-4 border rounded-lg">
+            <div className="flex justify-between items-center">
               <div className="flex items-center space-x-2">
-                <FileIcon className="h-6 w-6 text-primary" />
+                <FileIcon className="w-6 h-6 text-primary" />
                 <div>
-                  <p className="text-sm font-medium">{selectedFile.name}</p>
-                  <p className="text-xs text-gray-500">
+                  <p className="font-medium text-sm">{selectedFile.name}</p>
+                  <p className="text-gray-500 text-xs">
                     {(selectedFile.size / 1024 / 1024).toFixed(2)} MB • PDF
                   </p>
                 </div>
@@ -187,10 +187,10 @@ export function PDFUploader({
                   setExtractedText("");
                   removeFile();
                 }}
-                className="text-muted-foreground transition-colors hover:text-red-500"
+                className="text-muted-foreground hover:text-destructive transition-colors"
                 aria-label="Remove file"
               >
-                <XCircleIcon className="h-5 w-5" />
+                <XCircleIcon className="w-5 h-5" />
               </button>
             </div>
           </div>

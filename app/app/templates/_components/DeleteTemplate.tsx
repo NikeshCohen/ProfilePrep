@@ -77,7 +77,7 @@ export default function DeleteTemplate({
       <AlertDialogTrigger asChild>
         <DropdownMenuItem
           onSelect={(e) => e.preventDefault()}
-          className="text-red-600 focus:text-red-600"
+          className="text-destructive"
         >
           Delete
         </DropdownMenuItem>
@@ -116,7 +116,7 @@ export default function DeleteTemplate({
             onClick={handleDelete}
             isLoading={isDeleting}
           >
-            {isDeleting ? "Deleting..." : "Delete Template"}
+            {isDeleting ? "Deleting..." : "Delete"}
           </LoaderButton>
         </AlertDialogFooter>
       </AlertDialogContent>
