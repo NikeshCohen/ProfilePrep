@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import GoogleButton from "@/app/login/_components/GoogleButton";
+import { siteConfig } from "@/constants/webcontent";
 
 import Logo from "@/components/global/Logo";
 import {
@@ -36,7 +37,7 @@ export default async function LoginPage({ searchParams }: PageProps) {
     <section className="flex min-h-[93vh] w-full items-center justify-center p-4">
       <div className="relative w-full max-w-md">
         <Card className="relative overflow-hidden border-t-4 border-t-primary bg-background/40 backdrop-blur-sm transition-all duration-300">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-50" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-50" />
 
           <CardHeader className="relative space-y-4 pt-8">
             <CardTitle className="text-center">
@@ -72,10 +73,13 @@ export default async function LoginPage({ searchParams }: PageProps) {
             </div>
           </CardContent>
 
-          <CardFooter className="flex justify-center border-t bg-muted/20 pb-6 pt-4">
+          <CardFooter className="pointer-events-auto flex justify-center border-t bg-muted/20 pb-6 pt-4">
             <p className="text-sm text-muted-foreground">
               Need help?{" "}
-              <Link href="#" className="text-primary hover:underline">
+              <Link
+                href={`mailto:${siteConfig.supportEmail}`}
+                className="cursor-pointer text-primary hover:underline"
+              >
                 Contact Support
               </Link>
             </p>

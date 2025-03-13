@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+import { siteConfig } from "@/constants/webcontent";
+
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
@@ -185,10 +187,10 @@ export default function TermsOfService() {
             If you have any questions about these terms or our privacy
             practices, contact us at{" "}
             <a
-              href="mailto:support@profileprep.com"
+              href={`mailto:${siteConfig.supportEmail}`}
               className="text-blue-600 hover:text-blue-800"
             >
-              support@profileprep.com
+              {siteConfig.supportEmail}
             </a>
             .
           </p>
