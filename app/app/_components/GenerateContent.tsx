@@ -76,8 +76,8 @@ function GenerateContent() {
       if (candidateData.notes.length < 200) {
         toast.error("Please enter at least 200 characters");
         return;
-      } else if (candidateData.notes.length > 3000) {
-        toast.error("Keep notes under 3000 characters");
+      } else if (candidateData.notes.length > 2000) {
+        toast.error("Keep notes under 2000 characters");
         return;
       }
       handleGenerate();

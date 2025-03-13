@@ -167,7 +167,7 @@ export function CandidateInfo({
               <div className="flex justify-between items-center text-xs">
                 <p className="text-muted-foreground">
                   Add additional information. Aim for 800 characters for best
-                  results. Minium 200 characters.
+                  results. Minimum 200 characters
                 </p>
                 <div className="flex items-center gap-2">
                   <span
@@ -178,7 +178,9 @@ export function CandidateInfo({
                           ? "bg-orange-100 text-orange-700"
                           : charCount < 800
                             ? "bg-yellow-100 text-yellow-700"
-                            : "bg-green-100 text-green-700"
+                            : charCount > 2000
+                              ? "bg-red-100 text-red-700"
+                              : "bg-green-100 text-green-700"
                     }`}
                   >
                     {charCount < 200
@@ -187,7 +189,9 @@ export function CandidateInfo({
                         ? "Limited"
                         : charCount < 800
                           ? "Good"
-                          : "Excellent"}
+                          : charCount > 2000
+                            ? "Limit"
+                            : "Excellent"}
                   </span>
                   <span
                     className={`font-medium ${
@@ -197,17 +201,12 @@ export function CandidateInfo({
                           ? "text-orange-600"
                           : charCount < 800
                             ? "text-yellow-600"
-                            : "text-green-600"
+                            : charCount > 2000
+                              ? "text-red-600"
+                              : "text-green-600"
                     }`}
                   >
-                    {charCount}/
-                    {charCount < 200
-                      ? 200
-                      : charCount < 400
-                        ? 400
-                        : charCount < 800
-                          ? 800
-                          : 1000}
+                    {charCount}/2000
                   </span>
                 </div>
               </div>
