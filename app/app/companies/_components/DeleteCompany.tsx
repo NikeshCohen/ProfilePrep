@@ -26,6 +26,7 @@ type CompanyWithCounts = Prisma.CompanyGetPayload<{
       select: {
         users: true;
         GeneratedDocs: true;
+        templates: true;
       };
     };
   };
@@ -104,6 +105,7 @@ export default function DeleteCompany({
                 Delete {companyData._count.GeneratedDocs} generated documents
               </li>
               <li>Delete {companyData._count.users} users</li>
+              <li>Delete {companyData._count.templates} templates</li>
               <li>Delete the company itself</li>
             </ul>
             <p className="font-semibold text-destructive">
@@ -122,6 +124,7 @@ export default function DeleteCompany({
             <ul className="list-disc pl-4">
               <li>Delete all generated documents</li>
               <li>Delete all user accounts</li>
+              <li>Delete all templates</li>
               <li>Delete the company</li>
             </ul>
             <p>Are you absolutely sure you want to proceed?</p>

@@ -45,13 +45,13 @@ model GeneratedDocs {
   content           String   @db.Text
   createdAt         DateTime @default(now())
   createdBy         String
-  candidateName      String
+  candidateName     String
   companyId         String
   documentTitle     String
   location          String
   rightToWork       String
   salaryExpectation String
-  notes             String @db.Text
+  notes             String   @db.Text
 
   user    User     @relation(fields: [createdBy], references: [id])
   company Company? @relation(fields: [companyId], references: [id])

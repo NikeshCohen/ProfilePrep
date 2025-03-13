@@ -1,11 +1,26 @@
 model Company {
-  id                String          @id @default(cuid())
-  name              String
-  users             User[]
-  GeneratedDocs     GeneratedDocs[]
-  allowedDocsPerUsers Int            @default(5)
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
+  id                  String          @id @default(cuid())
+  name                String
+  users               User[]
+  GeneratedDocs       GeneratedDocs[]
+  templates           Template[]
+  createdAt           DateTime        @default(now())
+  updatedAt           DateTime        @updatedAt
+  allowedDocsPerUsers Int             @default(5)
+  allowedTemplates    Int             @default(2)
+  createdTemplates    Int             @default(0)
 
   @@map("companies")
+}
+
+model Template {
+  id              String   @id @default(cuid())
+  name            String
+  templateContent String   @db.Text
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId       String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("templates")
 }

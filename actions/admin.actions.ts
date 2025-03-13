@@ -6,6 +6,18 @@ import prisma from "@/prisma/prisma";
 import { User } from "next-auth";
 
 import { handleError } from "@/lib/apiUtils";
+import { getQueryClient } from "@/lib/getQueryClient";
+
+interface CreateTemplateData {
+  name: string;
+  templateContent: string;
+  companyId: string;
+}
+
+interface EditTemplateData {
+  name: string;
+  companyId?: string;
+}
 
 export const fetchAllUsers = async (user: {
   role: string;
@@ -190,6 +202,8 @@ export const createCompany = async (companyData: NewCompanyData) => {
       data: {
         name: companyData.name,
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
+        allowedTemplates: companyData.allowedTemplates,
+        createdTemplates: 0,
       },
     });
     return company;
@@ -215,7 +229,11 @@ export const updateCompany = async (
     // First get the current company to check if allowedDocsPerUsers changed
     const currentCompany = await prisma.company.findUnique({
       where: { id: companyId },
-      select: { allowedDocsPerUsers: true },
+      select: {
+        allowedDocsPerUsers: true,
+        allowedTemplates: true,
+        createdTemplates: true,
+      },
     });
 
     if (!currentCompany) {
@@ -225,12 +243,22 @@ export const updateCompany = async (
       };
     }
 
+    // Validate template limits
+    if (companyData.allowedTemplates < currentCompany.createdTemplates) {
+      return {
+        success: false,
+        message:
+          "Cannot set allowed templates lower than current created templates count.",
+      };
+    }
+
     // Update company
     const updatedCompany = await prisma.company.update({
       where: { id: companyId },
       data: {
         name: companyData.name,
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
+        allowedTemplates: companyData.allowedTemplates,
       },
     });
 
@@ -273,6 +301,13 @@ export const deleteCompany = async (companyId: string, sessionUser: User) => {
       },
     });
 
+    // Delete all templates for this company
+    await prisma.template.deleteMany({
+      where: {
+        companyId: companyId,
+      },
+    });
+
     // Then, delete all users in the company
     await prisma.user.deleteMany({
       where: {
@@ -309,11 +344,17 @@ export const fetchAllCompanies = async (sessionUser: User) => {
         select: {
           users: true,
           GeneratedDocs: true,
+          templates: true,
         },
       },
       users: {
         select: {
           allowedDocs: true,
+        },
+      },
+      templates: {
+        select: {
+          id: true,
         },
       },
     },
@@ -363,3 +404,317 @@ export async function getAllUserDocs(sessionUser: User) {
     return { success: false, error: "Failed to fetch document info" };
   }
 }
+
+export async function fetchAllTemplates(sessionUser: User) {
+  try {
+    // If admin or user, fetch only company templates
+    if (sessionUser.role === "ADMIN" || sessionUser.role === "USER") {
+      const templates = await prisma.template.findMany({
+        where: {
+          companyId: sessionUser.company?.id,
+        },
+        select: {
+          id: true,
+          name: true,
+          createdAt: true,
+          updatedAt: true,
+          templateContent: true,
+          company: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+
+      return { success: true, templates };
+    }
+
+    const templates = await prisma.template.findMany({
+      select: {
+        id: true,
+        name: true,
+        createdAt: true,
+        updatedAt: true,
+        templateContent: true,
+        company: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return { success: true, templates };
+  } catch (error) {
+    console.error("Failed to fetch templates:", error);
+    return { success: false, error: "Failed to fetch templates" };
+  }
+}
+
+export async function checkTemplateLimit(companyId: string) {
+  try {
+    const company = await prisma.company.findUnique({
+      where: {
+        id: companyId,
+      },
+      select: {
+        allowedTemplates: true,
+        createdTemplates: true,
+      },
+    });
+
+    if (!company) {
+      return {
+        success: false,
+        error: "Company not found",
+      };
+    }
+
+    return {
+      success: true,
+      limitReached: company.createdTemplates >= company.allowedTemplates,
+    };
+  } catch (error) {
+    console.error("Failed to fetch templates:", error);
+    return { success: false, error: "Failed to fetch templates" };
+  }
+}
+
+export const createTemplate = async (
+  templateData: CreateTemplateData,
+  sessionUser: User,
+) => {
+  // Check permissions
+  if (sessionUser.role === "USER") {
+    return {
+      success: false,
+      message: "403 Forbidden: You do not have permission to create templates.",
+    };
+  }
+
+  try {
+    // If admin, verify the template is being created for their company
+    if (
+      sessionUser.role === "ADMIN" &&
+      templateData.companyId !== sessionUser.company?.id
+    ) {
+      return {
+        success: false,
+        message:
+          "403 Forbidden: You can only create templates for your company.",
+      };
+    }
+
+    // Check company template limits
+    const company = await prisma.company.findUnique({
+      where: { id: templateData.companyId },
+      select: { allowedTemplates: true, createdTemplates: true },
+    });
+
+    if (!company) {
+      return {
+        success: false,
+        message: "Company not found.",
+      };
+    }
+
+    if (company.createdTemplates >= company.allowedTemplates) {
+      return {
+        success: false,
+        message: "Template limit reached for this company.",
+      };
+    }
+
+    // Create the template
+    const template = await prisma.template.create({
+      data: {
+        name: templateData.name,
+        templateContent: templateData.templateContent,
+        companyId: templateData.companyId,
+      },
+    });
+
+    // Increment the company's created templates count
+    await prisma.company.update({
+      where: { id: templateData.companyId },
+      data: { createdTemplates: { increment: 1 } },
+    });
+
+    // Invalidate the templates query cache
+    const queryClient = getQueryClient();
+    queryClient.invalidateQueries({ queryKey: ["templates"] });
+
+    return {
+      success: true,
+      message: "Template created successfully.",
+      data: template,
+    };
+  } catch (error: unknown) {
+    return handleError(error);
+  }
+};
+
+export const editTemplate = async (
+  templateId: string,
+  templateData: EditTemplateData,
+  sessionUser: User,
+) => {
+  // Check permissions
+  if (sessionUser.role === "USER") {
+    return {
+      success: false,
+      message: "403 Forbidden: You do not have permission to edit templates.",
+    };
+  }
+
+  try {
+    // Get the current template to check ownership and company
+    const currentTemplate = await prisma.template.findUnique({
+      where: { id: templateId },
+      select: { companyId: true },
+    });
+
+    if (!currentTemplate) {
+      return {
+        success: false,
+        message: "Template not found.",
+      };
+    }
+
+    // If admin, verify they're editing a template from their company
+    if (
+      sessionUser.role === "ADMIN" &&
+      currentTemplate.companyId !== sessionUser.company?.id
+    ) {
+      return {
+        success: false,
+        message:
+          "403 Forbidden: You can only edit templates from your company.",
+      };
+    }
+
+    // If admin, ensure they can't change the company
+    if (sessionUser.role === "ADMIN" && templateData.companyId) {
+      delete templateData.companyId;
+    }
+
+    // If superadmin is changing company, verify the new company exists
+    if (
+      sessionUser.role === "SUPERADMIN" &&
+      templateData.companyId &&
+      templateData.companyId !== currentTemplate.companyId
+    ) {
+      const newCompany = await prisma.company.findUnique({
+        where: { id: templateData.companyId },
+        select: { allowedTemplates: true, createdTemplates: true },
+      });
+
+      if (!newCompany) {
+        return {
+          success: false,
+          message: "New company not found.",
+        };
+      }
+
+      // Check if new company has room for another template
+      if (newCompany.createdTemplates >= newCompany.allowedTemplates) {
+        return {
+          success: false,
+          message: "Template limit reached for the target company.",
+        };
+      }
+
+      // Update template counts for both companies
+      await prisma.$transaction([
+        // Decrement old company's count
+        prisma.company.update({
+          where: { id: currentTemplate.companyId },
+          data: { createdTemplates: { decrement: 1 } },
+        }),
+        // Increment new company's count
+        prisma.company.update({
+          where: { id: templateData.companyId },
+          data: { createdTemplates: { increment: 1 } },
+        }),
+      ]);
+    }
+
+    // Update the template
+    const template = await prisma.template.update({
+      where: { id: templateId },
+      data: {
+        name: templateData.name,
+        ...(templateData.companyId && { companyId: templateData.companyId }),
+        updatedAt: new Date(),
+      },
+    });
+
+    // Invalidate the templates query cache
+    const queryClient = getQueryClient();
+    queryClient.invalidateQueries({ queryKey: ["templates"] });
+
+    return {
+      success: true,
+      message: "Template updated successfully.",
+      data: template,
+    };
+  } catch (error: unknown) {
+    return handleError(error);
+  }
+};
+
+export const deleteTemplate = async (templateId: string, sessionUser: User) => {
+  // Check permissions
+  if (sessionUser.role !== "SUPERADMIN") {
+    return {
+      success: false,
+      message: "403 Forbidden: Only Super Admins can delete templates.",
+    };
+  }
+
+  try {
+    // Get the template to check company association
+    const template = await prisma.template.findUnique({
+      where: { id: templateId },
+      select: { companyId: true },
+    });
+
+    if (!template) {
+      return {
+        success: false,
+        message: "Template not found.",
+      };
+    }
+
+    // Delete the template
+    await prisma.template.delete({
+      where: { id: templateId },
+    });
+
+    // Decrement the company's created templates count
+    await prisma.company.update({
+      where: { id: template.companyId },
+      data: { createdTemplates: { decrement: 1 } },
+    });
+
+    // Invalidate the templates query cache
+    const queryClient = getQueryClient();
+    queryClient.invalidateQueries({ queryKey: ["templates"] });
+
+    return {
+      success: true,
+      message: "Template deleted successfully.",
+    };
+  } catch (error: unknown) {
+    return handleError(error);
+  }
+};

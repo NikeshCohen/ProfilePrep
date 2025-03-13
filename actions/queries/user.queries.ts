@@ -1,7 +1,9 @@
 "use client";
 
+import { fetchAllTemplates } from "@/actions/admin.actions";
 import { getDocContent, getUserDocs } from "@/actions/user.actions";
 import { useQuery } from "@tanstack/react-query";
+import { User } from "next-auth";
 
 export const useUserDocsQuery = (userId: string) => {
   return useQuery({
@@ -17,5 +19,13 @@ export const useDocContentQuery = (docId: string, enabled = false) => {
     queryFn: () => getDocContent(docId),
     enabled: enabled && !!docId,
     staleTime: Infinity,
+  });
+};
+
+export const useTemplatesQuery = (user: User) => {
+  return useQuery({
+    queryKey: ["templates", user.company?.id],
+    queryFn: () => fetchAllTemplates(user),
+    enabled: !!user.company,
   });
 };

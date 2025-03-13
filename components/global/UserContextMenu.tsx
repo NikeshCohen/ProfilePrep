@@ -1,19 +1,17 @@
-"use client";
+import React from "react";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-import { handleLogout } from "@/actions/auth.actions";
 import {
   AppWindow,
-  Briefcase,
+  BookDashed,
+  Building2,
   FileText,
   Files,
-  LogOut,
   MapPin,
   UsersIcon,
 } from "lucide-react";
-import type { User } from "next-auth";
+import { User } from "next-auth";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -28,15 +26,6 @@ interface UserContextMenuProps {
 }
 
 function UserContextMenu({ sessionUser }: UserContextMenuProps) {
-  // initialise router hook
-  const router = useRouter();
-
-  // define async click handler to call logout then refresh router
-  async function handleClick() {
-    await handleLogout();
-    router.refresh();
-  }
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none">
@@ -50,56 +39,51 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
-          <Link href="/app" className="flex items-center">
-            <AppWindow className="mr-2 h-4 w-4" />
-            <span>App</span>
+          <Link href="/app" className="flex">
+            <AppWindow className="mr-2" /> <span>App</span>
           </Link>
         </DropdownMenuItem>
 
-        {(sessionUser.role === "ADMIN" ||
-          sessionUser.role === "SUPERADMIN") && (
-          <DropdownMenuItem asChild>
-            <Link href="/app/users" className="flex items-center">
-              <UsersIcon className="mr-2 h-4 w-4" />
-              <span>Users</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-
         <DropdownMenuItem asChild>
-          <Link href="/app/cvs" className="flex items-center">
-            <FileText className="mr-2 h-4 w-4" />
-            <span>My CVs</span>
+          <Link href="/app/cvs" className="flex">
+            <FileText className="mr-2" /> My CVs
           </Link>
         </DropdownMenuItem>
 
         {sessionUser.role === "SUPERADMIN" && (
-          <>
-            <DropdownMenuItem asChild>
-              <Link href="/app/cvs/all" className="flex items-center">
-                <Files className="mr-2 h-4 w-4" />
-                <span>All CVs</span>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/app/companies" className="flex items-center">
-                <Briefcase className="mr-2 h-4 w-4" />
-                <span>Companies</span>
-              </Link>
-            </DropdownMenuItem>
-          </>
+          <DropdownMenuItem asChild>
+            <Link href="/app/cvs/all" className="flex">
+              <Files className="mr-2" /> All CVs
+            </Link>
+          </DropdownMenuItem>
         )}
-
+        {(sessionUser.role === "ADMIN" ||
+          sessionUser.role === "SUPERADMIN") && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/users" className="flex">
+              <UsersIcon className="mr-2" /> Users
+            </Link>
+          </DropdownMenuItem>
+        )}
+        {sessionUser.role === "SUPERADMIN" && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/companies" className="flex">
+              <Building2 className="mr-2" /> Companies
+            </Link>
+          </DropdownMenuItem>
+        )}
+        {(sessionUser.role === "ADMIN" ||
+          sessionUser.role === "SUPERADMIN") && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/templates" className="flex">
+              <BookDashed className="mr-2" /> Templates
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem asChild>
-          <Link href="/roadmap" className="flex items-center">
-            <MapPin className="mr-2 h-4 w-4" />
-            <span>Roadmap</span>
+          <Link href="/roadmap" className="flex">
+            <MapPin className="mr-2" /> Roadmap
           </Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem onClick={handleClick} className="flex items-center">
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -15,7 +15,17 @@ export const prompt = `You are an AI that formats and generates candidate CVs ba
 - **Document Title:** The title of the CV
 - **Candidate Information:** Basic details (name, location, right-to-work status, salary expectations)
 
-### **Output Format Example:**
+### **Final Notes:**
+- **Replace all gendered pronouns (he/she, him/her) with gender-neutral alternatives (they, them, the candidate)**
+- **Avoid gendered terms like "chairman" (use "chairperson") or "mankind" (use "humanity")**
+- **Ensure readability while preserving valuable content**
+- **Fix formatting errors without altering the CV's meaning**
+- **Provide a polished, professional output in Markdown format**
+`;
+
+/* -----------------------------------------------------------------------------  */
+
+export const baseTemplate = `### **Output Format Example:**
 \`\`\`markdown
 # [Document Title]
 
@@ -72,13 +82,39 @@ export const prompt = `You are an AI that formats and generates candidate CVs ba
 ## Projects
 **[Project Name]** | [view site](#)
 - [Project description, formatted properly for clarity]
-\`\`\`
+\`\`\``;
 
-### **Final Notes:**
-- **Replace all gendered pronouns (he/she, him/her) with gender-neutral alternatives (they, them, the candidate)**
-- **Avoid gendered terms like "chairman" (use "chairperson") or "mankind" (use "humanity")**
-- **Ensure readability while preserving valuable content**
-- **Fix formatting errors without altering the CV's meaning**
-- **Provide a polished, professional output in Markdown format**
+/* -----------------------------------------------------------------------------  */
 
-Now, generate the cleaned-up Markdown CV using the provided input.`;
+export const templateCreationPrompt = `You are an AI that analyzes documents and creates reusable templates. Your task is to examine the provided document content and create a generalized template structure that can be used for similar documents in the future.
+
+### **Instructions:**
+1. **DO NOT simply parameterize the existing content - create a generic structure**
+2. **Analyze the document to understand its purpose and core sections**
+3. **Create a template that reflects the document type, not the specific instance**
+4. **Use the provided content only as a reference for understanding document structure**
+5. **Design sections and placeholders that would work for any similar document**
+6. **Focus on creating logical section groupings and hierarchy**
+7. **Include flexible sections that could accommodate varying content**
+8. **Ensure the template is generic enough to be used for different scenarios**
+9. **Add clear instructions for each section about what type of content belongs there**
+
+### **Template Guidelines:**
+- Create generic section headers that work for any similar document
+- Use descriptive placeholders that explain the type of content needed
+- Structure should be flexible enough to accommodate different content lengths
+- Include optional sections that might not be needed in every case
+- Add clear instructions using <!-- Instructions: What kind of content goes here -->
+- Consider different possible variations of the document type
+- Focus on the purpose of each section rather than specific content
+
+### **Output Format:**
+The template should be in clean Markdown format with:
+- Generic, purpose-driven section headers
+- Clear placeholder descriptions, not just variable names
+- Flexible content areas
+- Detailed section instructions
+- Examples of the types of content (not the actual content)
+- Notes about optional or conditional sections
+
+Please analyze the document structure and create a generalized template that could be used for any similar document, not just a parameterized version of the provided content.`;

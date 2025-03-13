@@ -38,6 +38,7 @@ type CompanyWithDetails = Prisma.CompanyGetPayload<{
       select: {
         users: true;
         GeneratedDocs: true;
+        templates: true;
       };
     };
     users: {
@@ -67,9 +68,10 @@ const CompanyTable = ({ sessionUser }: { sessionUser: User }) => {
           <TableRow>
             <TableHead>Company Name</TableHead>
             <TableHead>Users</TableHead>
-            <TableHead>Documents Per User</TableHead>
-            <TableHead>Total Allowed Docs</TableHead>
+            <TableHead>Docs Per User</TableHead>
+            <TableHead>Total Allowed Gens</TableHead>
             <TableHead>Total Generations</TableHead>
+            <TableHead>Templates</TableHead>
             <TableHead>Created</TableHead>
             <TableHead className="w-[50px]"></TableHead>
           </TableRow>
@@ -99,6 +101,11 @@ const CompanyTable = ({ sessionUser }: { sessionUser: User }) => {
                     {company._count.GeneratedDocs === 1
                       ? "generation"
                       : "generations"}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <Badge variant="outline">
+                    {company._count.templates}/{company.allowedTemplates}
                   </Badge>
                 </TableCell>
                 <TableCell>
@@ -136,6 +143,8 @@ const CompanyContextMenu = ({
       id: companyData.id,
       name: companyData.name,
       allowedDocsPerUsers: companyData.allowedDocsPerUsers,
+      allowedTemplates: companyData.allowedTemplates,
+      createdTemplates: companyData.createdTemplates,
     }),
     [companyData],
   );

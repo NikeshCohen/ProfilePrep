@@ -39,6 +39,11 @@ export const NewCompanyDataSchema = z.object({
     .min(1, "Must allow at least 1 document per user")
     .max(100, "Cannot allow more than 100 documents per user")
     .default(5),
+  allowedTemplates: z
+    .number()
+    .min(1, "Must allow at least 1 template")
+    .max(20, "Cannot allow more than 20 templates")
+    .default(3),
 });
 
 // Define a type that can be either a new company or an existing company
@@ -70,6 +75,7 @@ export default function CompanyManipulations({
     defaultValues: {
       name: companyToEdit?.name || "",
       allowedDocsPerUsers: companyToEdit?.allowedDocsPerUsers || 5,
+      allowedTemplates: companyToEdit?.allowedTemplates || 2,
     },
   });
 
@@ -158,6 +164,28 @@ export default function CompanyManipulations({
                   <FormControl>
                     <Input
                       placeholder="Enter number of allowed documents per user"
+                      {...field}
+                      value={field.value || ""}
+                      onChange={(e) => {
+                        const value = e.target.value;
+                        field.onChange(value === "" ? "" : parseInt(value));
+                      }}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="allowedTemplates"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Templates Allowed</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Enter number of allowed templates"
                       {...field}
                       value={field.value || ""}
                       onChange={(e) => {
