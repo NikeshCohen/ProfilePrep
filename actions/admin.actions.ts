@@ -405,13 +405,13 @@ export async function getAllUserDocs(sessionUser: User) {
   }
 }
 
-export async function fetchAllTemplates(user: User) {
+export async function fetchAllTemplates(sessionUser: User) {
   try {
     // If admin or user, fetch only company templates
-    if (user.role === "ADMIN" || user.role === "USER") {
+    if (sessionUser.role === "ADMIN" || sessionUser.role === "USER") {
       const templates = await prisma.template.findMany({
         where: {
-          companyId: user.company?.id,
+          companyId: sessionUser.company?.id,
         },
         select: {
           id: true,
@@ -454,6 +454,35 @@ export async function fetchAllTemplates(user: User) {
     });
 
     return { success: true, templates };
+  } catch (error) {
+    console.error("Failed to fetch templates:", error);
+    return { success: false, error: "Failed to fetch templates" };
+  }
+}
+
+export async function checkTemplateLimit(companyId: string) {
+  try {
+    const company = await prisma.company.findUnique({
+      where: {
+        id: companyId,
+      },
+      select: {
+        allowedTemplates: true,
+        createdTemplates: true,
+      },
+    });
+
+    if (!company) {
+      return {
+        success: false,
+        error: "Company not found",
+      };
+    }
+
+    return {
+      success: true,
+      limitReached: company.createdTemplates >= company.allowedTemplates,
+    };
   } catch (error) {
     console.error("Failed to fetch templates:", error);
     return { success: false, error: "Failed to fetch templates" };
