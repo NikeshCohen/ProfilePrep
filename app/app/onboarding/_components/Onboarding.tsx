@@ -11,18 +11,12 @@ const ClientConfetti = dynamic(() => import("./OnboardingConfetti"), {
 
 export function OnboardingBackground() {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center">
       <ClientConfetti />
-      <h1 className="space-y-1 mb-6 font-bold text-4xl sm:text-5xl md:text-6xl text-center tracking-tighter">
+      <h1 className="mb-6 space-y-1 text-center text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
         Welcome to Profile
         <span className="font-bold text-primary">Prep</span>
       </h1>
-
-      <p className="mx-auto mb-4 pb-2.5 max-w-[700px] text-muted-foreground text-center">
-        Welcome to your journey of interview preparation! ProfilePrep helps you
-        practice, track progress, and master your interview skills. Let&apos;s
-        get started by setting up your personalized experience.
-      </p>
 
       <Button effect="shine" asChild>
         <Link href="/app">Continue To App</Link>

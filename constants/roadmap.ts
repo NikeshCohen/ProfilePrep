@@ -26,9 +26,16 @@ export const roadmap = [
   },
   {
     id: 5,
-    date: "March 15, 2025",
+    date: "March 5, 2025",
     title: "CV History & Downloads",
     description:
       "Access and download your previously generated CVs with version history.",
+  },
+  {
+    id: 6,
+    date: "March 13, 2025",
+    title: "CV Templates System",
+    description:
+      "Implementation of customizable CV templates and template management for companies.",
   },
 ];
