@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { handleLogout as logout } from "@/actions/auth.actions";
 import {
   AppWindow,
+  BookDashed,
   Briefcase,
   FileText,
   Files,
@@ -29,10 +30,13 @@ interface UserContextMenuProps {
 
 function UserContextMenu({ sessionUser }: UserContextMenuProps) {
   const router = useRouter();
+  const pathname = usePathname();
 
   async function handleLogout() {
     await logout();
-    router.push("/login");
+    if (pathname.includes("/app")) {
+      router.push("/login");
+    }
     router.refresh();
   }
 
@@ -87,6 +91,16 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
               </Link>
             </DropdownMenuItem>
           </>
+        )}
+
+        {(sessionUser.role === "ADMIN" ||
+          sessionUser.role === "SUPERADMIN") && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/templates" className="flex items-center">
+              <BookDashed className="mr-2 w-4 h-4" />
+              <span>Templates</span>
+            </Link>
+          </DropdownMenuItem>
         )}
 
         <DropdownMenuItem asChild>
