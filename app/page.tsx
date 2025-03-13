@@ -41,7 +41,7 @@ function Hero() {
     <section className="flex justify-center items-center py-24 md:py-48 min-h-[80vh]">
       <div className="mt-16 px-4 md:px-6">
         <div className="flex flex-col items-center text-center">
-          <Link href="/app">
+          <Link href="/login">
             <Badge className="bg-[linear-gradient(110deg,#000103,45%,#486185,55%,#000103)] bg-[length:200%_100%] dark:bg-[linear-gradient(110deg,hsl(217,91%,60%),45%,hsl(217,91%,75%),55%,hsl(217,91%,60%))] dark:bg-[length:200%_100%] mb-8 py-2 border border-primary/20 font-bold text-white animate-shimmer dark:text-accent-foreground">
               {content.hero.badge}
             </Badge>
@@ -230,7 +230,7 @@ function Cta() {
             className="bg-white hover:bg-white text-primary"
             asChild
           >
-            <Link href="/app">{content.finalCta.cta}</Link>
+            <Link href="/login">{content.finalCta.cta}</Link>
           </Button>
         </div>
       </section>

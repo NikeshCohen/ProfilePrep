@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-import { InfoPanel } from "@/app/app/_components/InfoPanel";
+import { InfoPanel } from "@/components/global/InfoPanel";
 
 export function OnboardingClient() {
   const [isInfoPanelOpen, setIsInfoPanelOpen] = useState(true);

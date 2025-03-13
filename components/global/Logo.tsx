@@ -51,17 +51,21 @@ interface LogoProps {
 }
 
 function Logo({ className, size = "lg", circleSize = 10 }: LogoProps) {
+  // Convert circleSize to rem (1 unit = 0.25rem in Tailwind)
+  const circleSizeInRem = circleSize * 0.25 + "rem";
+
   return (
     <Link
       href="/"
-      className={clsx("relative flex items-center justify-center", className)}
+      className={clsx("relative flex justify-center items-center", className)}
     >
       <div
-        className={clsx(
-          `absolute rounded-full bg-primary/20`,
-          `h-${circleSize} w-${circleSize}`,
-        )}
-      ></div>
+        className="absolute bg-primary/20 rounded-full"
+        style={{
+          width: circleSizeInRem,
+          height: circleSizeInRem,
+        }}
+      />
       <h1 className={clsx("relative font-bold tracking-wide", `text-${size}`)}>
         <span>Profile</span>
         <span className="text-primary">Prep</span>

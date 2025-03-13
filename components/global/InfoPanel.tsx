@@ -69,8 +69,8 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               variants={itemVariants}
               className="flex items-center gap-2"
             >
-              <Sparkles className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">
+              <Sparkles className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-lg">
                 Welcome to Profile<span className="text-primary">Prep</span>
               </h3>
             </motion.div>
@@ -96,8 +96,8 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               variants={itemVariants}
               className="flex items-center gap-2"
             >
-              <FileText className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">Upload Quality Matters</h3>
+              <FileText className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-lg">Upload Quality Matters</h3>
             </motion.div>
             <motion.p variants={itemVariants} className="text-muted-foreground">
               The quality of your PDF upload directly impacts the AI&apos;s
@@ -105,13 +105,13 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
             </motion.p>
             <motion.div
               variants={itemVariants}
-              className="rounded-md border bg-muted/50 p-3"
+              className="bg-muted/50 p-3 border rounded-md"
             >
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="flex cursor-help items-start gap-2">
-                      <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
+                    <div className="flex items-start gap-2 cursor-help">
+                      <AlertCircle className="mt-0.5 w-5 h-5 text-amber-500 shrink-0" />
                       <p className="text-sm">
                         <span className="font-medium">Pro Tip:</span> Use
                         text-based PDFs rather than scanned documents for best
@@ -142,8 +142,8 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               variants={itemVariants}
               className="flex items-center gap-2"
             >
-              <MessageSquare className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">
+              <MessageSquare className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-lg">
                 Detailed Notes Improve Results
               </h3>
             </motion.div>
@@ -152,35 +152,35 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               relevant content.
             </motion.p>
             <motion.div variants={itemVariants} className="space-y-2">
-              <p className="text-sm font-medium">Note Quality Indicators:</p>
-              <div className="grid grid-cols-2 gap-2">
+              <p className="font-medium text-sm">Note Quality Indicators:</p>
+              <div className="gap-2 grid grid-cols-2">
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-500"></span>
+                  <span className="bg-red-500 rounded-full w-3 h-3"></span>
                   <span className="text-xs">Poor (&lt;200 chars)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-orange-500"></span>
+                  <span className="bg-orange-500 rounded-full w-3 h-3"></span>
                   <span className="text-xs">Limited (&lt;400 chars)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-yellow-500"></span>
+                  <span className="bg-yellow-500 rounded-full w-3 h-3"></span>
                   <span className="text-xs">Good (&lt;800 chars)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="h-3 w-3 rounded-full bg-green-500"></span>
+                  <span className="bg-green-500 rounded-full w-3 h-3"></span>
                   <span className="text-xs">Excellent (800+ chars)</span>
                 </div>
               </div>
             </motion.div>
             <motion.div
               variants={itemVariants}
-              className="rounded-md border bg-muted/50 p-3"
+              className="bg-muted/50 p-3 border rounded-md"
             >
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="flex cursor-help items-start gap-2">
-                      <AlertCircle className="mt-0.5 h-5 w-5 shrink-0 text-amber-500" />
+                    <div className="flex items-start gap-2 cursor-help">
+                      <AlertCircle className="mt-0.5 w-5 h-5 text-amber-500 shrink-0" />
                       <p className="text-sm">
                         <span className="font-medium">Pro Tip:</span> Include
                         specific skills, achievements, and context that may not
@@ -212,32 +212,32 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
               variants={itemVariants}
               className="flex items-center gap-2"
             >
-              <AlertCircle className="h-5 w-5 text-primary" />
-              <h3 className="text-lg font-semibold">Important Disclaimer</h3>
+              <AlertCircle className="w-5 h-5 text-primary" />
+              <h3 className="font-semibold text-lg">Important Disclaimer</h3>
             </motion.div>
             <motion.p variants={itemVariants} className="text-muted-foreground">
               While our AI is powerful, it&apos;s important to remember:
             </motion.p>
             <motion.ul
               variants={itemVariants}
-              className="space-y-2 text-sm text-muted-foreground"
+              className="space-y-2 text-muted-foreground text-sm"
             >
               <li className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                <span className="bg-primary mt-1.5 rounded-full w-1.5 h-1.5"></span>
                 <span>
                   Always review AI-generated content for accuracy before sharing
                   with clients.
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                <span className="bg-primary mt-1.5 rounded-full w-1.5 h-1.5"></span>
                 <span>
                   The quality of the output is directly related to the quality
                   of your input.
                 </span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary"></span>
+                <span className="bg-primary mt-1.5 rounded-full w-1.5 h-1.5"></span>
                 <span>
                   AI may occasionally misinterpret information or generate
                   content that needs adjustment.
@@ -246,9 +246,9 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
             </motion.ul>
             <motion.div
               variants={itemVariants}
-              className="rounded-md border bg-primary/10 p-3"
+              className="bg-primary/10 p-3 border rounded-md"
             >
-              <p className="text-sm font-medium">
+              <p className="font-medium text-sm">
                 By using Profile<span className="text-primary">Prep</span>, you
                 acknowledge that you will verify all AI-generated content before
                 professional use.
@@ -274,9 +274,9 @@ export function InfoPanel({ isOpen, setIsOpen }: InfoPanelProps) {
             variant="ghost"
             size="icon"
             onClick={() => setIsOpen(false)}
-            className="absolute right-4 top-4"
+            className="top-4 right-4 absolute"
           >
-            <X className="h-4 w-4" />
+            <X className="w-4 h-4" />
           </Button>
         </DialogHeader>
 

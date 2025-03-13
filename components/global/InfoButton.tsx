@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 
-import { InfoPanel } from "@/app/app/_components/InfoPanel";
 import { motion } from "framer-motion";
 
+import { InfoPanel } from "@/components/global/InfoPanel";
 import { CircleHelpIcon } from "@/components/icons/CircleHelpIcon";
 import { Button } from "@/components/ui/button";
 
@@ -19,11 +19,11 @@ export default function InfoButton() {
           size="icon"
           onClick={() => setIsOpen(true)}
           aria-label="AI Information"
-          className="relative h-9 w-9 rounded-full bg-input/50"
+          className="relative bg-input/50 rounded-full w-9 h-9"
         >
           <CircleHelpIcon size={16} />
           <motion.span
-            className="absolute right-0.5 top-0 h-2 w-2 rounded-full bg-primary"
+            className="top-0 right-0.5 absolute bg-primary rounded-full w-2 h-2"
             initial={{ scale: 0 }}
             animate={{ scale: [0, 1.2, 1] }}
             transition={{ delay: 1, duration: 0.5 }}

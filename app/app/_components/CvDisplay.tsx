@@ -77,13 +77,13 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
       />
 
       <motion.h1
-        className="text-center text-3xl font-bold"
+        className="font-bold text-3xl text-center"
         variants={itemVariants}
       >
         We&apos;ve Generated Your Candidate&apos;s CV Content!
       </motion.h1>
       <motion.p
-        className="mb-8 mt-2 text-center text-sm font-thin tracking-wide text-muted-foreground"
+        className="mt-2 mb-8 font-thin text-muted-foreground text-sm text-center tracking-wide"
         variants={itemVariants}
       >
         Please verify the accuracy of the candidate&apos;s information.
@@ -98,16 +98,12 @@ export function CVDisplay({ markdown, docName, handleReset }: CVDisplayProps) {
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
           >
-            <Button
-              onClick={handleDownload}
-              disabled={isGenerating}
-              className="relative overflow-hidden"
-            >
+            <Button onClick={handleDownload} disabled={isGenerating}>
               {isGenerating ? (
                 "Generating PDF..."
               ) : (
                 <>
-                  <Download className="mr-2 h-4 w-4" />
+                  <Download className="mr-2 w-4 h-4" />
                   <span>Download CV</span>
                 </>
               )}

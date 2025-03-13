@@ -131,6 +131,8 @@ export async function createGeneratedDoc({
       },
     });
 
+    console.log(newDoc);
+
     return { success: true, doc: newDoc };
   } catch (error) {
     console.error("Failed to create document:", error);
