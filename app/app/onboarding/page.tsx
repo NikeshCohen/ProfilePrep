@@ -1,4 +1,10 @@
+import { Metadata } from "next";
+
 import { OnboardingClient } from "@/app/app/onboarding/_components/OnboardingClient";
+
+export const metadata: Metadata = {
+  title: "Onboarding",
+};
 
 export default function OnboardingPage() {
   return (

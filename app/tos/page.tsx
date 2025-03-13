@@ -1,29 +1,33 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import { siteConfig } from "@/constants/webcontent";
 
 import { Separator } from "@/components/ui/separator";
 
 export const metadata: Metadata = {
-  title: "Terms of Service",
+  title: "Terms of Service & Privacy Policy",
   description: "Terms of Service and Privacy Policy for ProfilePrep.",
 };
 
 export default function TermsOfService() {
   return (
-    <section className="container mx-auto max-w-4xl px-4 py-8">
+    <section className="container mx-auto max-w-4xl px-4 py-12">
       <div className="max-w-none">
-        <h1 className="mb-8 text-center text-4xl font-extrabold">
-          Terms of Service & Privacy Policy
+        <h1 className="mb-12 mt-10 text-center text-4xl font-extrabold">
+          Legal <span className="text-primary">Documents</span>
         </h1>
 
-        <div className="mb-12">
-          <h2 className="mb-6 text-2xl font-bold">1. Terms of Service</h2>
+        {/* Terms of Service Section */}
+        <div className="mb-8 p-8 shadow-sm" id="terms-of-service">
+          <div className="mb-6 flex items-center">
+            <div className="mr-4 h-10 w-1.5 rounded-full bg-primary" />
+            <h2 className="text-3xl font-bold">Terms of Service</h2>
+          </div>
 
           <div className="space-y-8">
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                1.1 Acceptance of Terms
+                1.1 <span className="text-primary">Acceptance</span> of Terms
               </h3>
               <p className="text-muted-foreground">
                 By using ProfilePrep, you agree to these Terms of Service. If
@@ -33,7 +37,7 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                1.2 Use of the Service
+                1.2 <span className="text-primary">Use</span> of the Service
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>You must be at least 18 years old to use this service.</li>
@@ -49,7 +53,8 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                1.3 Account & Access Control
+                1.3 <span className="text-primary">Account</span> & Access
+                Control
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
@@ -65,7 +70,7 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                1.4 Changes to the Service
+                1.4 <span className="text-primary">Changes</span> to the Service
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
@@ -80,7 +85,8 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                1.5 Limitation of Liability
+                1.5 <span className="text-primary">Limitation</span> of
+                Liability
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
@@ -96,15 +102,19 @@ export default function TermsOfService() {
           </div>
         </div>
 
-        <Separator className="mb-8 bg-neutral-300 dark:bg-neutral-600" />
+        <Separator />
 
-        <div className="mb-12">
-          <h2 className="mb-6 text-2xl font-bold">2. Privacy Policy</h2>
+        {/* Privacy Policy Section */}
+        <div className="mb-8 mt-4 p-8 shadow-sm" id="privacy-policy">
+          <div className="mb-6 flex items-center">
+            <div className="mr-4 h-10 w-1.5 rounded-full bg-primary" />
+            <h2 className="text-3xl font-bold">Privacy Policy</h2>
+          </div>
 
           <div className="space-y-8">
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                2.1 Information We Collect
+                2.1 Information We <span className="text-primary">Collect</span>
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
@@ -120,7 +130,7 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                2.2 How We Use Your Data
+                2.2 How We <span className="text-primary">Use</span> Your Data
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>To provide and improve our services.</li>
@@ -133,7 +143,8 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                2.3 Data Sharing & Third Parties
+                2.3 Data <span className="text-primary">Sharing</span> & Third
+                Parties
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>We do not sell user data.</li>
@@ -149,7 +160,9 @@ export default function TermsOfService() {
             </div>
 
             <div>
-              <h3 className="mb-4 text-lg font-semibold">2.4 Data Retention</h3>
+              <h3 className="mb-4 text-lg font-semibold">
+                2.4 Data <span className="text-primary">Retention</span>
+              </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
                   We store user data as long as necessary for service operation.
@@ -163,7 +176,7 @@ export default function TermsOfService() {
 
             <div>
               <h3 className="mb-4 text-lg font-semibold">
-                2.5 Security Measures
+                2.5 <span className="text-primary">Security</span> Measures
               </h3>
               <ul className="list-disc space-y-2 pl-6 text-muted-foreground">
                 <li>
@@ -179,16 +192,20 @@ export default function TermsOfService() {
           </div>
         </div>
 
-        <Separator className="mb-8 bg-neutral-300 dark:bg-neutral-600" />
+        <Separator />
 
-        <div className="mb-12">
-          <h2 className="mb-6 text-2xl font-bold">3. Contact Us</h2>
+        {/* Contact Section */}
+        <div className="mt-4 p-8 shadow-sm">
+          <div className="mb-6 flex items-center">
+            <div className="mr-4 h-10 w-1.5 rounded-full bg-primary" />
+            <h2 className="text-3xl font-bold">Contact Us</h2>
+          </div>
           <p className="text-muted-foreground">
             If you have any questions about these terms or our privacy
             practices, contact us at{" "}
             <a
               href={`mailto:${siteConfig.supportEmail}`}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-primary hover:underline"
             >
               {siteConfig.supportEmail}
             </a>

@@ -29,7 +29,6 @@ const eslintConfig = [
         },
       ],
     },
-    ignores: ["**/.next/**"],
   },
 ];
 
