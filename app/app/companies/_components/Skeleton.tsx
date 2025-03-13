@@ -20,6 +20,7 @@ function Skeleton() {
             <TableHead>Documents Per User</TableHead>
             <TableHead>Total Allowed Docs</TableHead>
             <TableHead>Total Generations</TableHead>
+            <TableHead>Templates</TableHead>
             <TableHead>Created</TableHead>
             <TableHead className="w-[50px]"></TableHead>
           </TableRow>
@@ -38,6 +39,12 @@ function Skeleton() {
               </TableCell>
               <TableCell>
                 <div className="h-2 w-32 animate-pulse rounded bg-neutral-500"></div>
+              </TableCell>
+              <TableCell>
+                <div className="h-2 w-8 animate-pulse rounded bg-neutral-500"></div>
+              </TableCell>
+              <TableCell>
+                <div className="h-2 w-8 animate-pulse rounded bg-neutral-500"></div>
               </TableCell>
               <TableCell>
                 <div className="h-2 w-8 animate-pulse rounded bg-neutral-500"></div>

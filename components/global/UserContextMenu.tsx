@@ -4,7 +4,8 @@ import Link from "next/link";
 
 import {
   AppWindow,
-  Briefcase,
+  BookDashed,
+  Building2,
   FileText,
   Files,
   MapPin,
@@ -42,6 +43,20 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
             <AppWindow className="mr-2" /> <span>App</span>
           </Link>
         </DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
+          <Link href="/app/cvs" className="flex">
+            <FileText className="mr-2" /> My CVs
+          </Link>
+        </DropdownMenuItem>
+
+        {sessionUser.role === "SUPERADMIN" && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/cvs/all" className="flex">
+              <Files className="mr-2" /> All CVs
+            </Link>
+          </DropdownMenuItem>
+        )}
         {(sessionUser.role === "ADMIN" ||
           sessionUser.role === "SUPERADMIN") && (
           <DropdownMenuItem asChild>
@@ -50,26 +65,21 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
             </Link>
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem asChild>
-          <Link href="/app/cvs" className="flex">
-            <FileText className="mr-2" /> My CVs
-          </Link>
-        </DropdownMenuItem>
         {sessionUser.role === "SUPERADMIN" && (
-          <>
-            <DropdownMenuItem asChild>
-              <Link href="/app/cvs/all" className="flex">
-                <Files className="mr-2" /> All CVs
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/app/companies" className="flex">
-                <Briefcase className="mr-2" /> Companies
-              </Link>
-            </DropdownMenuItem>
-          </>
+          <DropdownMenuItem asChild>
+            <Link href="/app/companies" className="flex">
+              <Building2 className="mr-2" /> Companies
+            </Link>
+          </DropdownMenuItem>
         )}
-
+        {(sessionUser.role === "ADMIN" ||
+          sessionUser.role === "SUPERADMIN") && (
+          <DropdownMenuItem asChild>
+            <Link href="/app/templates" className="flex">
+              <BookDashed className="mr-2" /> Templates
+            </Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem asChild>
           <Link href="/roadmap" className="flex">
             <MapPin className="mr-2" /> Roadmap
