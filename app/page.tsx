@@ -41,9 +41,11 @@ function Hero() {
     <section className="flex justify-center items-center py-24 md:py-48 min-h-[80vh]">
       <div className="mt-16 px-4 md:px-6">
         <div className="flex flex-col items-center text-center">
-          <Badge className="bg-[linear-gradient(110deg,#000103,45%,#486185,55%,#000103)] bg-[length:200%_100%] dark:bg-[linear-gradient(110deg,hsl(217,91%,60%),45%,hsl(217,91%,75%),55%,hsl(217,91%,60%))] dark:bg-[length:200%_100%] mb-8 py-2 border border-primary/20 font-bold text-white animate-shimmer dark:text-accent-foreground">
-            {content.hero.badge}
-          </Badge>
+          <Link href="/app">
+            <Badge className="bg-[linear-gradient(110deg,#000103,45%,#486185,55%,#000103)] bg-[length:200%_100%] dark:bg-[linear-gradient(110deg,hsl(217,91%,60%),45%,hsl(217,91%,75%),55%,hsl(217,91%,60%))] dark:bg-[length:200%_100%] mb-8 py-2 border border-primary/20 font-bold text-white animate-shimmer dark:text-accent-foreground">
+              {content.hero.badge}
+            </Badge>
+          </Link>
 
           <div className="mt-2">
             <h1 className="space-y-1 mb-6 font-bold text-4xl sm:text-5xl md:text-6xl tracking-tighter">
