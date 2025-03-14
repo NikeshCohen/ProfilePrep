@@ -78,7 +78,7 @@ export const generateDocument = async (
   logTokenUsage(response.usage, "Document Generation");
 
   incrementUserGenerations(user.id!);
-  createGeneratedDoc({
+  await createGeneratedDoc({
     documentContent: candidateInfo,
     rawContent: cleanedText,
     userId: user.id!,
