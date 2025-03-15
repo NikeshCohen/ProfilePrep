@@ -7,4 +7,5 @@ export type CandidateData = {
   notes: string;
   templateId: string;
   templateContent?: string;
+  jobDescription?: string;
 };

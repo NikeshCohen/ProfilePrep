@@ -1,9 +1,12 @@
+"use server";
+
 import React, { Suspense } from "react";
 
 import Link from "next/link";
 
 import Logo from "@/components/global/Logo";
 import UserContextMenu from "@/components/global/UserContextMenu";
+import { UserLinks } from "@/components/global/UserLinks";
 import { Button } from "@/components/ui/button";
 
 import getSession from "@/lib/getSession";
@@ -25,7 +28,14 @@ async function HeaderContent() {
         <Logo />
 
         {session?.user ? (
-          <UserContextMenu sessionUser={session.user} />
+          <>
+            <nav className="hidden md:block">
+              <ul className="flex items-center space-x-4">
+                <UserLinks role={session.user.role} />
+              </ul>
+            </nav>
+            <UserContextMenu sessionUser={session.user} />
+          </>
         ) : (
           <Button effect="shine" asChild>
             <Link href="/login">Login</Link>

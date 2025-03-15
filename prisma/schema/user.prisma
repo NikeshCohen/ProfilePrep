@@ -1,19 +1,22 @@
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  companyId     String?
-  accounts      Account[]
-  sessions      Session[]
-  GeneratedDocs GeneratedDocs[]
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-  createdDocs   Int             @default(0)
-  allowedDocs   Int             @default(5)
-  company       Company?        @relation(fields: [companyId], references: [id])
-  role          UserRole        @default(USER)
+  id               String            @id @default(cuid())
+  name             String?
+  email            String            @unique
+  emailVerified    DateTime?
+  image            String?
+  companyId        String?
+  accounts         Account[]
+  sessions         Session[]
+  GeneratedDocs    GeneratedDocs[]
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  createdDocs      Int               @default(0)
+  allowedDocs      Int               @default(5)
+  company          Company?          @relation(fields: [companyId], references: [id])
+  role             UserRole          @default(USER)
+  candidateProfile CandidateProfile?
+  applications     JobApplication[]
+  jobListings      JobListing[]
 
   @@map("users")
 }
@@ -41,17 +44,20 @@ model Account {
 }
 
 model GeneratedDocs {
-  id                String   @id @default(cuid())
-  content           String   @db.Text
-  createdAt         DateTime @default(now())
+  id                String           @id @default(cuid())
+  content           String           @db.Text
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
   createdBy         String
-  candidateName     String
-  companyId         String
+  companyId         String?
   documentTitle     String
   location          String
   rightToWork       String
   salaryExpectation String
-  notes             String   @db.Text
+  notes             String           @db.Text
+  isTailoredForJob  Boolean          @default(false)
+  jobDescription    String?          @db.Text
+  jobApplications   JobApplication[]
 
   user    User     @relation(fields: [createdBy], references: [id])
   company Company? @relation(fields: [companyId], references: [id])
@@ -63,4 +69,36 @@ enum UserRole {
   USER
   ADMIN
   SUPERADMIN
+  CANDIDATE
+}
+
+model CandidateProfile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  masterCVContent   String   @db.Text
+  masterCVUploaded  Boolean  @default(false)
+  skills            String[]
+  yearsOfExperience Int?
+  industry          String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("candidate_profiles")
+}
+
+model JobApplication {
+  id           String            @id @default(cuid())
+  jobListingId String
+  jobListing   JobListing        @relation(fields: [jobListingId], references: [id])
+  candidateId  String
+  candidate    User              @relation(fields: [candidateId], references: [id])
+  tailoredCVId String?
+  tailoredCV   GeneratedDocs?    @relation(fields: [tailoredCVId], references: [id])
+  status       ApplicationStatus @default(SUBMITTED)
+  notes        String?           @db.Text
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@map("job_applications")
 }

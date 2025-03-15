@@ -115,3 +115,79 @@ export const generateTemplate = async (textContent: string) => {
 
   return cleanedText;
 };
+
+export async function generateTailoredCV(
+  candidateData: CandidateData,
+): Promise<string> {
+  try {
+    const masterCV = candidateData.notes;
+    const jobDescription = candidateData.jobDescription;
+
+    // Ensure required data is present
+    if (!masterCV || !jobDescription) {
+      throw new Error("Both master CV and job description are required");
+    }
+
+    // Create prompt for tailored CV generation
+    const prompt = `
+You are an AI that creates tailored CVs based on a master CV and job description.
+
+### MASTER CV:
+${masterCV}
+
+### JOB DESCRIPTION:
+${jobDescription}
+
+### INSTRUCTIONS:
+1. Analyze the job description to identify key requirements, skills, and qualifications.
+2. Extract relevant experience, skills, and achievements from the master CV that align with the job description.
+3. Create a tailored CV that highlights the candidate's most relevant qualifications for this specific role.
+4. Format the CV in a clean, professional Markdown format.
+5. Prioritize the most relevant information based on the job requirements.
+6. IMPORTANT: Do NOT invent or add any information that is not present in the master CV.
+7. Optimize the content for ATS (Applicant Tracking Systems) by incorporating relevant keywords from the job description.
+8. Keep the CV concise and focused, ideally 1-2 pages in length.
+9. Use bullet points for clarity and readability.
+10. Ensure the tailored CV contains ONLY factual information from the master CV.
+
+Please provide the tailored CV in clean Markdown format.
+`;
+
+    const openaiApiKey = process.env.OPENAI_API_KEY;
+    if (!openaiApiKey) {
+      throw new Error("OpenAI API key is not configured");
+    }
+
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${openaiApiKey}`,
+      },
+      body: JSON.stringify({
+        model: "gpt-4",
+        messages: [
+          {
+            role: "system",
+            content: prompt,
+          },
+        ],
+        temperature: 0.7,
+        max_tokens: 4000,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(`OpenAI API error: ${JSON.stringify(errorData)}`);
+    }
+
+    const data = await response.json();
+    return data.choices[0].message.content;
+  } catch (error: unknown) {
+    console.error("Error generating tailored CV:", error);
+    throw new Error(
+      `Failed to generate tailored CV: ${error instanceof Error ? error.message : "Unknown error"}`,
+    );
+  }
+}

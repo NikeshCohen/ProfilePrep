@@ -1,5 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
 import { NewCompanyData } from "@/app/app/companies/_components/CompanyManipulations";
 import { NewUserData } from "@/app/app/users/_components/UserManipulations";
 import prisma from "@/prisma/prisma";
@@ -7,6 +10,7 @@ import { User } from "next-auth";
 
 import { handleError } from "@/lib/apiUtils";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { requireAuth } from "@/lib/utils";
 
 interface CreateTemplateData {
   name: string;
@@ -56,31 +60,70 @@ export const fetchAllUsers = async (user: {
   });
 };
 
-export const createUser = async (userData: NewUserData) => {
+export async function createUser(formData: FormData) {
+  const { user } = await requireAuth("/app/users");
+
+  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+    throw new Error("Unauthorized access to user creation");
+  }
+
+  const email = formData.get("email") as string;
+  const name = formData.get("name") as string;
+  const password = formData.get("password") as string;
+  const role = formData.get("role") as string;
+  const companyId = formData.get("companyId") as string;
+
+  // Validate required fields
+  if (!email || !name || !password || !role) {
+    throw new Error("Missing required fields");
+  }
+
   try {
-    const user = await prisma.user.create({
+    // Check if user already exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      throw new Error("User with this email already exists");
+    }
+
+    // Create new user
+    const newUser = await prisma.user.create({
       data: {
-        name: userData.name,
-        email: userData.email,
-        role:
-          userData.role === "user"
-            ? "USER"
-            : userData.role === "admin"
-              ? "ADMIN"
-              : "SUPERADMIN",
-        ...(userData.companyId && { companyId: userData.companyId }),
+        email,
+        name,
+        role: role as "USER" | "ADMIN" | "SUPERADMIN" | "CANDIDATE",
+        companyId: companyId || null,
       },
     });
 
-    return {
-      success: true,
-      message: "User created successfully.",
-      data: user,
-    };
+    // Create candidate profile if role is CANDIDATE
+    if (role === "CANDIDATE") {
+      await prisma.candidateProfile.create({
+        data: {
+          userId: newUser.id,
+          masterCVUploaded: false,
+          masterCVContent: "",
+          skills: [],
+        },
+      });
+    }
+
+    revalidatePath("/app/users");
+    redirect("/app/users");
   } catch (error: unknown) {
-    return handleError(error);
+    console.error("Error creating user:", error);
+    return {
+      success: false,
+      message:
+        error instanceof Error
+          ? error.message
+          : "User could not be created! An unknown error occurred.",
+      // data: user,
+    };
   }
-};
+}
 
 export const editUser = async (
   userId: string,
@@ -377,7 +420,7 @@ export async function getAllUserDocs(sessionUser: User) {
       select: {
         id: true,
         createdAt: true,
-        candidateName: true,
+        // candidateName: true,
         location: true,
         notes: true,
         user: {

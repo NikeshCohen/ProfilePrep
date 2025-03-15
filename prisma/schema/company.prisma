@@ -4,6 +4,7 @@ model Company {
   users               User[]
   GeneratedDocs       GeneratedDocs[]
   templates           Template[]
+  jobListings         JobListing[]
   createdAt           DateTime        @default(now())
   updatedAt           DateTime        @updatedAt
   allowedDocsPerUsers Int             @default(5)
@@ -23,4 +24,42 @@ model Template {
   updatedAt       DateTime @updatedAt
 
   @@map("templates")
+}
+
+model JobListing {
+  id           String           @id @default(cuid())
+  title        String
+  description  String           @db.Text
+  skills       String[]
+  location     String?
+  salaryRange  String?
+  companyId    String?
+  company      Company?         @relation(fields: [companyId], references: [id])
+  status       JobStatus        @default(OPEN)
+  createdBy    String
+  creator      User             @relation(fields: [createdBy], references: [id])
+  applications JobApplication[]
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  customStatus String?
+
+  @@map("job_listings")
+}
+
+enum JobStatus {
+  OPEN
+  FILLED
+  CLOSED
+  EXTERNAL_FILL
+  CUSTOM
+}
+
+enum ApplicationStatus {
+  SUBMITTED
+  REVIEWING
+  INTERVIEW
+  OFFER
+  HIRED
+  REJECTED
+  WITHDRAWN
 }

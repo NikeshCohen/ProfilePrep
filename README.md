@@ -9,11 +9,15 @@ ProfilePrep is an AI-powered platform designed to help recruiters transform stan
 - [ProfilePrep](#profileprep)
   - [Introduction](#introduction)
     - [Why ProfilePrep?](#why-profileprep)
+  - [Architecture](#architecture)
   - [Getting Started](#getting-started)
     - [System Requirements](#system-requirements)
     - [Installation](#installation)
     - [Database Configuration](#database-configuration)
     - [Running the Application](#running-the-application)
+  - [Usage](#usage)
+    - [Recruiter Portal](#recruiter-portal)
+    - [Candidate Portal](#candidate-portal)
   - [Core Features](#core-features)
     - [CV Generation](#cv-generation)
       - [How It Works](#how-it-works)
@@ -63,8 +67,11 @@ ProfilePrep is an AI-powered platform designed to help recruiters transform stan
       - [Advanced Matching Features](#advanced-matching-features)
       - [Technical Implementation](#technical-implementation)
         - [Implementation Timeline #3](#implementation-timeline-3)
+    - [Short-term Goals](#short-term-goals)
+    - [Long-term Vision](#long-term-vision)
   - [Contributing](#contributing)
   - [License - Pending Decision](#license---pending-decision)
+  - [Support](#support)
 
 ---
 
@@ -78,6 +85,18 @@ At ProfilePrep, we believe your candidate's profile should stand out in a compet
 - **Accelerates Placements**: Helps recruiters present candidates faster and more effectively
 
 The world doesn't need more generic CVs; it needs profiles that tell a story, showcase value, and make an impact.
+
+---
+
+## Architecture
+
+The application is built using:
+
+- Next.js for the frontend and API routes
+- MongoDB for data storage
+- AI services for profile optimization
+- Authentication via NextAuth
+- Tailwind CSS for styling
 
 ---
 
@@ -131,6 +150,26 @@ For production:
 npm run build
 npm start
 ```
+
+---
+
+## Usage
+
+### Recruiter Portal
+
+1. Log in to your recruiter account
+2. Upload candidate CVs individually or in batch
+3. Use AI tools to optimize profiles
+4. Manage and track candidate profiles
+5. Export refined profiles in various formats
+
+### Candidate Portal
+
+1. Create or log in to your candidate account
+2. Upload your CV or create one using our builder
+3. Receive AI-powered optimization suggestions
+4. Browse and apply to matching job positions
+5. Track your applications and profile performance
 
 ---
 
@@ -399,6 +438,22 @@ The advanced matching system will utilise:
 
 The Advanced Matching Algorithm is scheduled for release in Q2 2025, following the successful deployment and adoption of the basic job matching functionality.
 
+### Short-term Goals
+
+- Enhanced AI matching algorithms
+- Advanced analytics dashboard
+- Integrated video interview platform
+- Automated skill assessment tools
+- Multi-language support
+
+### Long-term Vision
+
+- Blockchain-verified credentials
+- AI-powered career path recommendations
+- Integration with major job boards
+- Mobile application development
+- Enterprise-level features and customisation
+
 ## Contributing
 
 We welcome contributions to ProfilePrep! Here's how you can help:
@@ -416,5 +471,11 @@ Please follow our coding standards and include appropriate tests with your contr
 ## License - Pending Decision
 
 ProfilePrep will be released under an open-source license. The exact license is still being decided, but it will allow for contributions and use while ensuring protection against misuse or unauthorised redistribution.
+
+---
+
+## Support
+
+For support, please email [placeholder@example.com] or create an issue in our GitHub repository.
 
 ---
