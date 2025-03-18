@@ -62,7 +62,7 @@ const CompanyTable = ({ sessionUser }: { sessionUser: User }) => {
   if (!companies) return <NoDataFallback />;
 
   return (
-    <div className="rounded-md border bg-background/30">
+    <div className="bg-background/30 border rounded-md">
       <Table>
         <TableHeader>
           <TableRow>
@@ -162,9 +162,9 @@ const CompanyContextMenu = ({
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="h-8 w-8 p-0">
+          <Button variant="ghost" className="p-0 w-8 h-8">
             <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="h-4 w-4" />
+            <MoreHorizontal className="w-4 h-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -173,7 +173,7 @@ const CompanyContextMenu = ({
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={handleDeleteClick}
-            className="text-destructive focus:text-destructive"
+            className="text-destructive hover:text-destructive focus:text-destructive"
           >
             Delete
           </DropdownMenuItem>

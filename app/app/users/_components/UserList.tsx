@@ -157,7 +157,7 @@ const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={handleDeleteClick}
-            className="text-destructive"
+            className="text-destructive hover:text-destructive focus:text-destructive"
           >
             Delete
           </DropdownMenuItem>

@@ -80,7 +80,7 @@ export const baseTemplate = `### **Output Format Example:**
 - [Skill 4]
 
 ## Projects
-**[Project Name]** | [view site](#)
+**[Project Name (if exists)]**
 - [Project description, formatted properly for clarity]
 \`\`\``;
 

@@ -124,7 +124,7 @@ const DocContextMenu = ({ docId, notes }: DocContextMenuProps) => {
           </DropdownMenuItem>
           <DropdownMenuItem
             onSelect={() => setIsDeleteOpen(true)}
-            className="text-destructive"
+            className="text-destructive hover:text-destructive focus:text-destructive"
           >
             Delete
           </DropdownMenuItem>
