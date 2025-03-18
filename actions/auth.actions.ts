@@ -16,6 +16,19 @@ export async function googleAuthentication(redirectUrl: string) {
   }
 }
 
+export async function linkedinAuthentication(redirectUrl: string) {
+  try {
+    await signIn("linkedin", {
+      redirectTo: redirectUrl,
+    });
+  } catch (error) {
+    if (error instanceof AuthError) {
+      return "LinkedIn Login Error";
+    }
+    throw error;
+  }
+}
+
 export async function handleLogout() {
   await signOut({ redirect: false });
 }

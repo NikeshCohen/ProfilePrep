@@ -3,6 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import GoogleButton from "@/app/login/_components/GoogleButton";
+import LinkedInButton from "@/app/login/_components/LinkedInButton";
 import { siteConfig } from "@/constants/webcontent";
 
 import Logo from "@/components/global/Logo";
@@ -49,8 +50,10 @@ export default async function LoginPage({ searchParams }: PageProps) {
           </CardHeader>
 
           <CardContent className="relative space-y-6 pt-2 pb-8">
-            <GoogleButton redirectUrl={redirectUrl ?? "/app"} />
-
+            <div className="space-y-4">
+              <GoogleButton redirectUrl={redirectUrl ?? "/app"} />
+              <LinkedInButton redirectUrl={redirectUrl ?? "/app"} />
+            </div>
             {/* <div className="flex items-center gap-3 px-2">
               <Separator className="flex-1" />
               <span className="text-muted-foreground text-xs">
