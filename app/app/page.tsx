@@ -13,7 +13,13 @@ async function page() {
   const { user } = await requireAuth("/dashboard");
 
   // NOTE: rely on checks like the one below to ensure routes are protected effectively
-  return <>{user.role === "USER" && <GenerateContent />}</>;
+  return (
+    <>
+      {user.role === "USER" ||
+        user.role === "ADMIN" ||
+        (user.role === "SUPERADMIN" && <GenerateContent />)}
+    </>
+  );
 }
 
 export default page;

@@ -4,17 +4,9 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import { handleLogout as logout } from "@/actions/auth.actions";
-import {
-  AppWindow,
-  BookDashed,
-  Briefcase,
-  FileText,
-  Files,
-  LogOut,
-  MapPin,
-  UsersIcon,
-} from "lucide-react";
+import { Folder, LogOut, MapPin } from "lucide-react";
 import type { User } from "next-auth";
+import { RiRobot3Line } from "react-icons/ri";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -54,55 +46,20 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
           <Link href="/app" className="flex items-center">
-            <AppWindow className="mr-2 h-4 w-4" />
+            <RiRobot3Line className="mr-2 h-4 w-4" />
             <span>App</span>
           </Link>
         </DropdownMenuItem>
 
-        {(sessionUser.role === "ADMIN" ||
-          sessionUser.role === "SUPERADMIN") && (
-          <DropdownMenuItem asChild>
-            <Link href="/dashboard/users" className="flex items-center">
-              <UsersIcon className="mr-2 h-4 w-4" />
-              <span>Users</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-
         <DropdownMenuItem asChild>
-          <Link href="/dashboard/cvs" className="flex items-center">
-            <FileText className="mr-2 h-4 w-4" />
-            <span>My CVs</span>
+          <Link href="/dashboard" className="flex items-center">
+            <Folder className="mr-2 h-4 w-4" />
+            <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
 
-        {sessionUser.role === "SUPERADMIN" && (
-          <>
-            <DropdownMenuItem asChild>
-              <Link href="/dashboard/cvs/all" className="flex items-center">
-                <Files className="mr-2 h-4 w-4" />
-                <span>All CVs</span>
-              </Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild>
-              <Link href="/dashboard/companies" className="flex items-center">
-                <Briefcase className="mr-2 h-4 w-4" />
-                <span>Companies</span>
-              </Link>
-            </DropdownMenuItem>
-          </>
-        )}
-
-        {(sessionUser.role === "ADMIN" ||
-          sessionUser.role === "SUPERADMIN") && (
-          <DropdownMenuItem asChild>
-            <Link href="/dashboard/templates" className="flex items-center">
-              <BookDashed className="mr-2 h-4 w-4" />
-              <span>Templates</span>
-            </Link>
-          </DropdownMenuItem>
-        )}
-
+        {/* TODO: '/roadmap' is not a protected route so a decision needs to be made on
+        whether it is visible to the general public or ONLY to users of this application */}
         <DropdownMenuItem asChild>
           <Link href="/roadmap" className="flex items-center">
             <MapPin className="mr-2 h-4 w-4" />
