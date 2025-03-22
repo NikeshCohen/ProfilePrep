@@ -54,7 +54,7 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
       <DropdownMenuContent>
         <DropdownMenuItem asChild>
           <Link href="/app" className="flex items-center">
-            <AppWindow className="mr-2 w-4 h-4" />
+            <AppWindow className="mr-2 h-4 w-4" />
             <span>App</span>
           </Link>
         </DropdownMenuItem>
@@ -62,16 +62,16 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         {(sessionUser.role === "ADMIN" ||
           sessionUser.role === "SUPERADMIN") && (
           <DropdownMenuItem asChild>
-            <Link href="/app/users" className="flex items-center">
-              <UsersIcon className="mr-2 w-4 h-4" />
+            <Link href="/dashboard/users" className="flex items-center">
+              <UsersIcon className="mr-2 h-4 w-4" />
               <span>Users</span>
             </Link>
           </DropdownMenuItem>
         )}
 
         <DropdownMenuItem asChild>
-          <Link href="/app/cvs" className="flex items-center">
-            <FileText className="mr-2 w-4 h-4" />
+          <Link href="/dashboard/cvs" className="flex items-center">
+            <FileText className="mr-2 h-4 w-4" />
             <span>My CVs</span>
           </Link>
         </DropdownMenuItem>
@@ -79,14 +79,14 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         {sessionUser.role === "SUPERADMIN" && (
           <>
             <DropdownMenuItem asChild>
-              <Link href="/app/cvs/all" className="flex items-center">
-                <Files className="mr-2 w-4 h-4" />
+              <Link href="/dashboard/cvs/all" className="flex items-center">
+                <Files className="mr-2 h-4 w-4" />
                 <span>All CVs</span>
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/app/companies" className="flex items-center">
-                <Briefcase className="mr-2 w-4 h-4" />
+              <Link href="/dashboard/companies" className="flex items-center">
+                <Briefcase className="mr-2 h-4 w-4" />
                 <span>Companies</span>
               </Link>
             </DropdownMenuItem>
@@ -96,8 +96,8 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         {(sessionUser.role === "ADMIN" ||
           sessionUser.role === "SUPERADMIN") && (
           <DropdownMenuItem asChild>
-            <Link href="/app/templates" className="flex items-center">
-              <BookDashed className="mr-2 w-4 h-4" />
+            <Link href="/dashboard/templates" className="flex items-center">
+              <BookDashed className="mr-2 h-4 w-4" />
               <span>Templates</span>
             </Link>
           </DropdownMenuItem>
@@ -105,13 +105,13 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
 
         <DropdownMenuItem asChild>
           <Link href="/roadmap" className="flex items-center">
-            <MapPin className="mr-2 w-4 h-4" />
+            <MapPin className="mr-2 h-4 w-4" />
             <span>Roadmap</span>
           </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem onClick={handleLogout} className="flex items-center">
-          <LogOut className="mr-2 w-4 h-4" />
+          <LogOut className="mr-2 h-4 w-4" />
           <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

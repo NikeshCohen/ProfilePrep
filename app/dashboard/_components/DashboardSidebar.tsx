@@ -5,16 +5,7 @@ import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import {
-  BarChart3,
-  BookDashed,
-  Briefcase,
-  FileText,
-  Files,
-  LayoutDashboard,
-  Settings,
-  Users,
-} from "lucide-react";
+import { sidebarItems } from "@/constants/navigation";
 import type { User } from "next-auth";
 
 import Logo from "@/components/global/Logo";
@@ -26,66 +17,10 @@ interface SidebarProps {
   user: User;
 }
 
-interface SidebarItem {
-  title: string;
-  href: string;
-  icon: React.ReactNode;
-  adminOnly?: boolean;
-  superAdminOnly?: boolean;
-}
-
 export function DashboardSidebar({ user }: SidebarProps) {
   const pathname = usePathname();
   const isSuperAdmin = user.role === "SUPERADMIN";
   const isAdmin = user.role === "ADMIN" || isSuperAdmin;
-
-  const sidebarItems: SidebarItem[] = [
-    {
-      title: "Dashboard",
-      href: "/app/dashboard",
-      icon: <LayoutDashboard className="h-5 w-5" />,
-    },
-    {
-      title: "Analytics",
-      href: "/app/dashboard/analytics",
-      icon: <BarChart3 className="h-5 w-5" />,
-      adminOnly: true,
-    },
-    {
-      title: "Users",
-      href: "/app/users",
-      icon: <Users className="h-5 w-5" />,
-      adminOnly: true,
-    },
-    {
-      title: "Companies",
-      href: "/app/companies",
-      icon: <Briefcase className="h-5 w-5" />,
-      superAdminOnly: true,
-    },
-    {
-      title: "Templates",
-      href: "/app/templates",
-      icon: <BookDashed className="h-5 w-5" />,
-      adminOnly: true,
-    },
-    {
-      title: "My CVs",
-      href: "/app/cvs",
-      icon: <FileText className="h-5 w-5" />,
-    },
-    {
-      title: "All CVs",
-      href: "/app/cvs/all",
-      icon: <Files className="h-5 w-5" />,
-      superAdminOnly: true,
-    },
-    {
-      title: "Settings",
-      href: "/app/settings",
-      icon: <Settings className="h-5 w-5" />,
-    },
-  ];
 
   // filter items based on user role
   const filteredItems = sidebarItems.filter((item) => {

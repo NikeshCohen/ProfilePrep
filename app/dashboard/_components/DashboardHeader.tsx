@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { DashboardSidebar } from "@/app/dashboard/_components/DashboardSidebar";
+import { dashboardNavItems } from "@/constants/navigation";
 import { Menu } from "lucide-react";
 import type { User } from "next-auth";
 
-import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import UserContextMenu from "@/components/global/UserContextMenu";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,35 +33,11 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
   const isSuperAdmin = user.role === "SUPERADMIN";
   const isAdmin = user.role === "ADMIN" || isSuperAdmin;
 
-  const navItems = [
-    {
-      label: "App",
-      href: "/app",
-    },
-    {
-      label: "Users",
-      href: "/app/users",
-      adminOnly: true,
-    },
-    {
-      label: "Companies",
-      href: "/app/companies",
-      adminOnly: true,
-      superAdminOnly: true,
-    },
-    {
-      label: "My CVs",
-      href: "/app/cvs",
-    },
-    {
-      label: "All CVs",
-      href: "/app/cvs/all",
-      superAdminOnly: true,
-    },
-  ].filter((item) => {
+  // filter items based on user role
+  const filteredItems = dashboardNavItems.filter((item) => {
     if (item.superAdminOnly && !isSuperAdmin) return false;
     if (item.adminOnly && !isAdmin) return false;
-    if (item.label === "Users" && !isAdmin) return false;
+
     return true;
   });
 
@@ -102,7 +79,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
         )}
 
         <div className="hidden md:flex md:items-center md:gap-6 md:pl-6">
-          {navItems.map((item, index) => (
+          {filteredItems.map((item, index) => (
             <Link
               key={index}
               href={item.href}
@@ -113,7 +90,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
                   : "text-muted-foreground",
               )}
             >
-              {item.label}
+              {item.title}
             </Link>
           ))}
         </div>

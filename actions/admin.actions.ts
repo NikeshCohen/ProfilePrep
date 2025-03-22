@@ -1,7 +1,7 @@
 "use server";
 
-import { NewCompanyData } from "@/app/app/companies/_components/CompanyManipulations";
-import { NewUserData } from "@/app/app/users/_components/UserManipulations";
+import { NewCompanyData } from "@/app/dashboard/companies/_components/CompanyManipulations";
+import { NewUserData } from "@/app/dashboard/users/_components/UserManipulations";
 import prisma from "@/prisma/prisma";
 import { User } from "next-auth";
 

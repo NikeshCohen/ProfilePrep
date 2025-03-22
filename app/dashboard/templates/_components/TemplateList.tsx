@@ -3,10 +3,10 @@
 import { useCallback, useState } from "react";
 
 import { useTemplatesQuery } from "@/actions/queries/user.queries";
-import DeleteTemplate from "@/app/app/templates/_components/DeleteTemplate";
-import EditTemplate from "@/app/app/templates/_components/EditTemplate";
-import Skeleton from "@/app/app/templates/_components/Skeleton";
-import ViewTemplate from "@/app/app/templates/_components/ViewTemplate";
+import DeleteTemplate from "@/app/dashboard/templates/_components/DeleteTemplate";
+import EditTemplate from "@/app/dashboard/templates/_components/EditTemplate";
+import Skeleton from "@/app/dashboard/templates/_components/Skeleton";
+import ViewTemplate from "@/app/dashboard/templates/_components/ViewTemplate";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
 import { User } from "next-auth";

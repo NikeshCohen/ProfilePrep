@@ -136,5 +136,5 @@ export const content = {
 };
 
 export const siteConfig = {
-  supportEmail: "placeholder@example.com",
+  supportEmail: "info.profileprep@gmail.com",
 };
