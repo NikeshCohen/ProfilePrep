@@ -1,10 +1,10 @@
-import React from "react";
-
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import CompanyList from "@/app/app/companies/_components/CompanyList";
 import CreateCompany from "@/app/app/companies/_components/CompanyManipulations";
+
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 
 import { requireAuth } from "@/lib/utils";
 
@@ -20,19 +20,17 @@ async function page() {
   }
 
   return (
-    <section className="layout min-h-[93vh] pt-32">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-wider">
-          Company Management
-        </h1>
-
-        <div>
+    <DashboardLayout user={user}>
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold tracking-tight">
+            Company Management
+          </h1>
           <CreateCompany sessionUser={user} />
         </div>
+        <CompanyList sessionUser={user} />
       </div>
-
-      <CompanyList sessionUser={user} />
-    </section>
+    </DashboardLayout>
   );
 }
 

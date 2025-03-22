@@ -1,8 +1,8 @@
-import React from "react";
-
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import GeneratedDocsList from "@/app/app/cvs/_components/DocList";
+
+import { DashboardLayout } from "@/components/dashboard/DashboardLayout";
 
 import { requireAuth } from "@/lib/utils";
 
@@ -14,15 +14,14 @@ async function page() {
   const { user } = await requireAuth("/app/cvs");
 
   return (
-    <section className="layout min-h-[93vh] pt-32">
-      <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-wider">
+    <DashboardLayout user={user}>
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold tracking-tight">
           Previously Generated Documents
         </h1>
+        <GeneratedDocsList userId={user.id!} />
       </div>
-
-      <GeneratedDocsList userId={user.id!} />
-    </section>
+    </DashboardLayout>
   );
 }
 
