@@ -3,9 +3,9 @@
 import { useCallback, useMemo, useState } from "react";
 
 import { useUsersQuery } from "@/actions/queries/admin.queries";
-import DeleteUser from "@/app/app/users/_components/DeleteUser";
-import Skeleton from "@/app/app/users/_components/Skeleton";
-import UserManipulations from "@/app/app/users/_components/UserManipulations";
+import DeleteUser from "@/app/dashboard/users/_components/DeleteUser";
+import Skeleton from "@/app/dashboard/users/_components/Skeleton";
+import UserManipulations from "@/app/dashboard/users/_components/UserManipulations";
 import { formatDistanceToNow } from "date-fns";
 import { MoreHorizontal } from "lucide-react";
 import { User } from "next-auth";
@@ -45,7 +45,7 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
   if (!users) return <NoDataFallback />;
 
   return (
-    <div className="bg-background/30 border rounded-md">
+    <div className="rounded-md border bg-background/30">
       <Table>
         <TableHeader>
           <TableRow>
@@ -62,7 +62,7 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
             <TableRow key={user.id}>
               <TableCell className="font-medium">
                 <div className="flex items-center gap-3">
-                  <Avatar className="w-8 h-8">
+                  <Avatar className="h-8 w-8">
                     <AvatarImage
                       src={user.image || "/user.jpg"}
                       alt={user.name || user.email.split("@")[0]}
@@ -146,9 +146,9 @@ const UserContextMenu = ({ userData, sessionUser }: UserContextMenuProps) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="p-0 w-8 h-8">
+          <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="w-4 h-4" />
+            <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">

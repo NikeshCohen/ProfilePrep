@@ -31,7 +31,7 @@ export function NoDataFallback() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
       >
-        <p className="max-h-36 whitespace-pre-wrap text-center">
+        <p className="max-h-36 whitespace-pre-wrap text-center text-muted-foreground">
           It seems there is no data to display at the moment.
         </p>
       </motion.div>

@@ -76,7 +76,7 @@ body {
 
 @layer components {
   .layout {
-    @apply mr-auto ml-auto max-w-7xl;
+    @apply ml-auto mr-auto max-w-7xl;
   }
 }
 
@@ -111,4 +111,9 @@ body {
 
 .markdown > * {
   all: revert;
+}
+
+.progress-bar-fill {
+  width: 0%;
+  transition: width 0.3s ease-in-out;
 }

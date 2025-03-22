@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 import GenerateContent from "@/app/app/_components/GenerateContent";
 
@@ -11,11 +9,15 @@ export const metadata: Metadata = {
 };
 
 async function page() {
-  await requireAuth("/app");
+  // NOTE: auth.js v5 removed database functionality and support from next-auth in the middleware
+  const { user } = await requireAuth("/dashboard");
 
+  // NOTE: rely on checks like the one below to ensure routes are protected effectively
   return (
     <>
-      <GenerateContent />
+      {user.role === "USER" ||
+        user.role === "ADMIN" ||
+        (user.role === "SUPERADMIN" && <GenerateContent />)}
     </>
   );
 }
