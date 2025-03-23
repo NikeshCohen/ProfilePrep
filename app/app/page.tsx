@@ -9,17 +9,9 @@ export const metadata: Metadata = {
 };
 
 async function page() {
-  // NOTE: auth.js v5 removed database functionality and support from next-auth in the middleware
-  const { user } = await requireAuth("/dashboard");
+  await requireAuth("/app");
 
-  // NOTE: rely on checks like the one below to ensure routes are protected effectively
-  return (
-    <>
-      {user.role === "USER" ||
-        user.role === "ADMIN" ||
-        (user.role === "SUPERADMIN" && <GenerateContent />)}
-    </>
-  );
+  return <GenerateContent />;
 }
 
 export default page;
