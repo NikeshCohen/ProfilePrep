@@ -8,3 +8,11 @@ export type CandidateData = {
   templateId: string;
   templateContent?: string;
 };
+
+export interface NavigationItem {
+  title: string;
+  href: string;
+  icon?: React.ReactNode;
+  adminOnly?: boolean;
+  superAdminOnly?: boolean;
+}

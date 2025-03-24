@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: "%s / ProfilePrep - Streamlined CV Formatting for Recruiters",
+    template: "%s | ProfilePrep - Streamlined CV Formatting for Recruiters",
     absolute: "ProfilePrep - Streamlined CV Formatting for Recruiters",
   },
   description:
