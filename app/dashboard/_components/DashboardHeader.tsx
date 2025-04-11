@@ -78,23 +78,6 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
           </Sheet>
         )}
 
-        <div className="hidden md:flex md:items-center md:gap-6 md:pl-6">
-          {filteredItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className={cn(
-                "flex items-center text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.href
-                  ? "text-primary"
-                  : "text-muted-foreground",
-              )}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-
         <div className="ml-auto mr-5 flex items-center gap-2">
           <UserContextMenu sessionUser={user} />
         </div>
