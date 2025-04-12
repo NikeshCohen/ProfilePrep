@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { DashboardSidebar } from "@/app/dashboard/_components/DashboardSidebar";
@@ -19,27 +18,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-import { cn } from "@/lib/utils";
-
 interface DashboardHeaderProps {
   user: User;
 }
 
 export function DashboardHeader({ user }: DashboardHeaderProps) {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
-  const isSuperAdmin = user.role === "SUPERADMIN";
-  const isAdmin = user.role === "ADMIN" || isSuperAdmin;
-
-  // filter items based on user role
-  const filteredItems = dashboardNavItems.filter((item) => {
-    if (item.superAdminOnly && !isSuperAdmin) return false;
-    if (item.adminOnly && !isAdmin) return false;
-
-    return true;
-  });
 
   useEffect(() => {
     const handleResize = () => {
