@@ -40,6 +40,29 @@ export const metadata: Metadata = {
     "Talent Acquisition",
   ],
   icons: [{ rel: "icon", url: "/icon.png" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://profileprep.xyz",
+    siteName: "ProfilePrep",
+    title: "ProfilePrep - Streamlined CV Formatting for Recruiters",
+    description:
+      "ProfilePrep helps recruiters refine and format candidate CVs before sending them to clients. Streamline the process, tailor resumes for specific roles, and present candidates professionally.",
+    images: [
+      {
+        url: "/og_image.png",
+        alt: "ProfilePrep - Streamlined CV Formatting for Recruiters",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Startacus – The Ultimate Full-Stack Starter Kit",
+    description:
+      "ProfilePrep helps recruiters refine and format candidate CVs before sending them to clients. Streamline the process, tailor resumes for specific roles, and present candidates professionally.",
+    creator: "@nikeshcohen",
+    images: ["/og_image.png"],
+  },
 };
 
 export default function RootLayout({
