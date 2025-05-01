@@ -2,10 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { usePathname } from "next/navigation";
-
 import { DashboardSidebar } from "@/app/dashboard/_components/DashboardSidebar";
-import { dashboardNavItems } from "@/constants/navigation";
 import { Menu } from "lucide-react";
 import type { User } from "next-auth";
 
