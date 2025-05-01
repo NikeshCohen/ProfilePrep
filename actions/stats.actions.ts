@@ -2,27 +2,18 @@
 
 import prisma from "@/prisma/prisma";
 
-export async function getDashboardStats(userId?: string) {
+export async function getTotalUsers() {
   const totalUsers = await prisma.user.count();
+  return totalUsers;
+}
+
+export async function getTotalDocs() {
   const totalDocs = await prisma.generatedDocs.count();
-  const totalCompanies = await prisma.company.count();
-  const totalTemplates = await prisma.template.count();
+  return totalDocs;
+}
 
-  // total allowed docs across all users
-  const totalAllowedDocs = await prisma.user.aggregate({
-    _sum: {
-      allowedDocs: true,
-    },
-  });
-
-  // total allowed templates across all companies
-  const totalAllowedTemplates = await prisma.company.aggregate({
-    _sum: {
-      allowedTemplates: true,
-    },
-  });
-
-  // documents created in the last 30 days (for all users)
+export async function getDocsWithTrend(userId?: string) {
+  // documents created in the last 30 days
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
@@ -65,22 +56,27 @@ export async function getDashboardStats(userId?: string) {
     );
   }
 
+  return {
+    totalDocs: await getTotalDocs(),
+    recentDocs,
+    docsTrend,
+  };
+}
+
+export async function getAvgDocsPerUser() {
+  const totalUsers = await getTotalUsers();
+  const totalDocs = await getTotalDocs();
+
   // average docs per user
   const avgDocsPerUser =
     totalUsers > 0 ? Math.round((totalDocs / totalUsers) * 10) / 10 : 0;
 
-  return {
-    totalUsers,
-    totalDocs,
-    totalCompanies,
-    totalTemplates,
-    recentDocs,
-    docsTrend,
-    avgDocsPerUser,
-    // denominator being '0' would result in an undefined output
-    totalAllowedDocs: totalAllowedDocs._sum.allowedDocs || 1,
-    totalAllowedTemplates: totalAllowedTemplates._sum.allowedTemplates || 1,
-  };
+  return avgDocsPerUser;
+}
+
+export async function getTotalCompanies() {
+  const totalCompanies = await prisma.company.count();
+  return totalCompanies;
 }
 
 export async function getRecentActivity(userId?: string) {
