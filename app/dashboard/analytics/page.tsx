@@ -32,15 +32,15 @@ export default async function AnalyticsPage() {
 
       <div className="grid gap-6 md:grid-cols-2">
         <Suspense fallback={<TopCompaniesSkeleton />}>
-          <TopCompanies />
+          <TopCompanies user={user} />
         </Suspense>
 
         <Suspense fallback={<ActiveUsersSkeleton />}>
-          <ActiveUsers />
+          <ActiveUsers user={user} />
         </Suspense>
 
         <Suspense fallback={<TemplateUsageSkeleton />}>
-          <TemplateUsage />
+          <TemplateUsage user={user} />
         </Suspense>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { getRecentActivity } from "@/actions/stats.actions";
 import { FileText } from "lucide-react";
+import type { User } from "next-auth";
 
 import {
   Card,
@@ -10,18 +11,22 @@ import {
 } from "@/components/ui/card";
 
 interface RecentActivityProps {
+  user: User;
   userId?: string;
 }
 
-export async function RecentActivity({ userId }: RecentActivityProps) {
-  const recentActivity = await getRecentActivity(userId);
+export async function RecentActivity({ user, userId }: RecentActivityProps) {
+  const recentActivity = await getRecentActivity(user, userId);
+  const isSuperAdmin = user.role === "SUPERADMIN";
 
   return (
     <Card className="bg-card/40">
       <CardHeader>
         <CardTitle>Recent Activity</CardTitle>
         <CardDescription>
-          The latest document generations across the platform
+          {isSuperAdmin
+            ? "The latest document generations across the platform"
+            : "The latest document generations across your company"}
         </CardDescription>
       </CardHeader>
       <CardContent>

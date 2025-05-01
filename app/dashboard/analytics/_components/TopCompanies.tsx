@@ -1,4 +1,5 @@
 import { getTopCompanies } from "@/actions/analytics.actions";
+import type { User } from "next-auth";
 
 import { ProgressBar } from "@/components/global/ProgressBar";
 import {
@@ -9,15 +10,26 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export async function TopCompanies() {
-  const topCompanies = await getTopCompanies();
+interface TopCompaniesProps {
+  user: User;
+}
+
+export async function TopCompanies({ user }: TopCompaniesProps) {
+  const topCompanies = await getTopCompanies(user);
+  const isSuperAdmin = user.role === "SUPERADMIN";
 
   return (
     <Card className="bg-card/40">
       <CardHeader>
-        <CardTitle>Top Companies by Document Generation</CardTitle>
+        <CardTitle>
+          {isSuperAdmin
+            ? "Top Companies by Document Generation"
+            : "Top Users by Document Generation"}
+        </CardTitle>
         <CardDescription>
-          Companies with the highest document generation volume
+          {isSuperAdmin
+            ? "Companies with the highest document generation volume"
+            : "Users in your company with the highest document generation volume"}
         </CardDescription>
       </CardHeader>
       <CardContent>

@@ -30,16 +30,16 @@ export default async function DashboardPage() {
       {(user.role === "ADMIN" || user.role === "SUPERADMIN") && (
         <>
           <Suspense fallback={<StatsSkeleton />}>
-            <DashboardStats userId={undefined} />
+            <DashboardStats user={user} userId={undefined} />
           </Suspense>
 
           <div className="grid gap-4 md:grid-cols-2">
             <Suspense fallback={<ActivitySkeleton />}>
-              <RecentActivity userId={undefined} />
+              <RecentActivity user={user} userId={undefined} />
             </Suspense>
 
             <Suspense fallback={<StatusSkeleton />}>
-              <SystemStatus />
+              <SystemStatus user={user} />
             </Suspense>
           </div>
         </>

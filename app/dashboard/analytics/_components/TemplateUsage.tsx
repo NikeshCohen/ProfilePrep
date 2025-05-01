@@ -1,4 +1,5 @@
 import { getTemplateUsage } from "@/actions/analytics.actions";
+import type { User } from "next-auth";
 
 import {
   Card,
@@ -8,15 +9,22 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export async function TemplateUsage() {
-  const templateUsage = await getTemplateUsage();
+interface TemplateUsageProps {
+  user: User;
+}
+
+export async function TemplateUsage({ user }: TemplateUsageProps) {
+  const templateUsage = await getTemplateUsage(user);
+  const isSuperAdmin = user.role === "SUPERADMIN";
 
   return (
     <Card className="bg-card/40 md:col-span-2">
       <CardHeader>
         <CardTitle>Template Usage</CardTitle>
         <CardDescription>
-          Overview of template usage across the platform
+          {isSuperAdmin
+            ? "Overview of template usage across the platform"
+            : "Overview of template usage in your company"}
         </CardDescription>
       </CardHeader>
       <CardContent>

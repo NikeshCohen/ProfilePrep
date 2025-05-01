@@ -1,39 +1,72 @@
 "use server";
 
+import { isSuperAdmin } from "@/app/dashboard/_components/statistics/DashboardStats";
 import prisma from "@/prisma/prisma";
+import type { User } from "next-auth";
 
-export async function getTotalUsers() {
-  const totalUsers = await prisma.user.count();
-  return totalUsers;
+function getCompanyFilter(user: User) {
+  // no company filter - see all data (superadmins)
+  if (isSuperAdmin(user)) {
+    return {};
+  }
+
+  // filter by their company (admins)
+  return {
+    companyId: user.company?.id,
+  };
 }
 
-export async function getTotalDocs() {
-  const totalDocs = await prisma.generatedDocs.count();
-  return totalDocs;
+export async function getTotalUsers(user: User) {
+  // count all users (superadmins)
+  if (isSuperAdmin(user)) {
+    return await prisma.user.count();
+  }
+
+  // count only users in their company (admins)
+  return await prisma.user.count({
+    where: {
+      companyId: user.company?.id,
+    },
+  });
 }
 
-export async function getDocsWithTrend(userId?: string) {
+export async function getTotalDocs(user: User) {
+  // count all docs (superadmins)
+  if (isSuperAdmin(user)) {
+    return await prisma.generatedDocs.count();
+  }
+
+  // count only docs from their company (admins)
+  return await prisma.generatedDocs.count({
+    where: {
+      companyId: user.company?.id,
+    },
+  });
+}
+
+export async function getDocsWithTrend(user: User, userId?: string) {
   // documents created in the last 30 days
   const thirtyDaysAgo = new Date();
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
 
-  const recentDocs = userId
-    ? await prisma.generatedDocs.count({
-        where: {
-          createdAt: {
-            gte: thirtyDaysAgo,
-          },
-          // filter by user if user id is passed
-          createdBy: userId,
-        },
-      })
-    : await prisma.generatedDocs.count({
-        where: {
-          createdAt: {
-            gte: thirtyDaysAgo,
-          },
-        },
-      });
+  // base filter - filter by specific user if provided
+  const userFilter = userId ? { createdBy: userId } : {};
+
+  // company filter based on user role
+  const companyFilter = getCompanyFilter(user);
+
+  // combine filters
+  const whereFilter = {
+    ...userFilter,
+    ...companyFilter,
+    createdAt: {
+      gte: thirtyDaysAgo,
+    },
+  };
+
+  const recentDocs = await prisma.generatedDocs.count({
+    where: whereFilter,
+  });
 
   // previous 30 days docs for trend calculation
   const sixtyDaysAgo = new Date();
@@ -41,6 +74,8 @@ export async function getDocsWithTrend(userId?: string) {
 
   const previousPeriodDocs = await prisma.generatedDocs.count({
     where: {
+      ...userFilter,
+      ...companyFilter,
       createdAt: {
         gte: sixtyDaysAgo,
         lt: thirtyDaysAgo,
@@ -57,15 +92,15 @@ export async function getDocsWithTrend(userId?: string) {
   }
 
   return {
-    totalDocs: await getTotalDocs(),
+    totalDocs: await getTotalDocs(user),
     recentDocs,
     docsTrend,
   };
 }
 
-export async function getAvgDocsPerUser() {
-  const totalUsers = await getTotalUsers();
-  const totalDocs = await getTotalDocs();
+export async function getAvgDocsPerUser(user: User) {
+  const totalUsers = await getTotalUsers(user);
+  const totalDocs = await getTotalDocs(user);
 
   // average docs per user
   const avgDocsPerUser =
@@ -74,67 +109,111 @@ export async function getAvgDocsPerUser() {
   return avgDocsPerUser;
 }
 
-export async function getTotalCompanies() {
-  const totalCompanies = await prisma.company.count();
-  return totalCompanies;
+export async function getTotalCompanies(user: User) {
+  // all companies (superadmins)
+  if (isSuperAdmin(user)) {
+    return await prisma.company.count();
+  }
+
+  // return their own company count (admins)
+  return 1;
 }
 
-export async function getRecentActivity(userId?: string) {
-  return userId
-    ? await prisma.generatedDocs.findMany({
-        where: { createdBy: userId },
-        take: 5,
-        orderBy: {
-          createdAt: "desc",
+export async function getRecentActivity(user: User, userId?: string) {
+  // base filter - filter by specific user if provided
+  const userFilter = userId ? { createdBy: userId } : {};
+
+  // company filter based on user role
+  const companyFilter = getCompanyFilter(user);
+
+  return await prisma.generatedDocs.findMany({
+    where: {
+      ...userFilter,
+      ...companyFilter,
+    },
+    take: 5,
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          email: true,
         },
-        include: {
-          user: {
-            select: {
-              name: true,
-              email: true,
-            },
-          },
-        },
-      })
-    : await prisma.generatedDocs.findMany({
-        take: 5,
-        orderBy: {
-          createdAt: "desc",
-        },
-        include: {
-          user: {
-            select: {
-              name: true,
-              email: true,
-            },
-          },
-        },
-      });
+      },
+    },
+  });
 }
 
-export async function getSystemStats() {
-  const totalDocs = await prisma.generatedDocs.count();
-  const totalTemplates = await prisma.template.count();
+export async function getSystemStats(user: User) {
+  // role-based filtering
+  const totalDocs = await getTotalDocs(user);
 
-  // total allowed docs across all users
-  const totalAllowedDocs = await prisma.user.aggregate({
-    _sum: {
-      allowedDocs: true,
-    },
-  });
+  // filter by company (admins)
+  let totalTemplates;
+  let totalAllowedTemplates;
 
-  // total allowed templates across all companies
-  const totalAllowedTemplates = await prisma.company.aggregate({
-    _sum: {
-      allowedTemplates: true,
-    },
-  });
+  if (isSuperAdmin(user)) {
+    // all templates (superadmins)
+    totalTemplates = await prisma.template.count();
+
+    // sum of allowed templates across all companies
+    const allowedTemplatesAgg = await prisma.company.aggregate({
+      _sum: {
+        allowedTemplates: true,
+      },
+    });
+    totalAllowedTemplates = allowedTemplatesAgg._sum.allowedTemplates || 1;
+  } else {
+    // only their company's templates (admins)
+    totalTemplates = await prisma.template.count({
+      where: {
+        companyId: user.company?.id,
+      },
+    });
+
+    // allowed templates for this company
+    const company = await prisma.company.findUnique({
+      where: {
+        id: user.company?.id,
+      },
+      select: {
+        allowedTemplates: true,
+      },
+    });
+    totalAllowedTemplates = company?.allowedTemplates || 1;
+  }
+
+  // filter by company (admins)
+  let totalAllowedDocs;
+
+  if (isSuperAdmin(user)) {
+    // sum of allowed docs across all users (superadmins)
+    const allowedDocsAgg = await prisma.user.aggregate({
+      _sum: {
+        allowedDocs: true,
+      },
+    });
+    totalAllowedDocs = allowedDocsAgg._sum.allowedDocs || 1;
+  } else {
+    // sum of allowed docs for users in this company (admins)
+    const allowedDocsAgg = await prisma.user.aggregate({
+      where: {
+        companyId: user.company?.id,
+      },
+      _sum: {
+        allowedDocs: true,
+      },
+    });
+    totalAllowedDocs = allowedDocsAgg._sum.allowedDocs || 1;
+  }
 
   return {
     totalDocs,
     totalTemplates,
-    totalAllowedDocs: totalAllowedDocs._sum.allowedDocs || 1,
-    totalAllowedTemplates: totalAllowedTemplates._sum.allowedTemplates || 1,
+    totalAllowedDocs,
+    totalAllowedTemplates,
   };
 }
 

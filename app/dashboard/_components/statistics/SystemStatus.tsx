@@ -1,4 +1,5 @@
 import { getSystemStats } from "@/actions/stats.actions";
+import type { User } from "next-auth";
 
 import { ProgressBar } from "@/components/global/ProgressBar";
 import {
@@ -9,20 +10,31 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export async function SystemStatus() {
-  const stats = await getSystemStats();
+interface SystemStatusProps {
+  user: User;
+}
+
+export async function SystemStatus({ user }: SystemStatusProps) {
+  const stats = await getSystemStats(user);
+  const isSuperAdmin = user.role === "SUPERADMIN";
 
   return (
     <Card className="bg-card/40">
       <CardHeader>
         <CardTitle>System Status</CardTitle>
-        <CardDescription>Current system performance and limits</CardDescription>
+        <CardDescription>
+          {isSuperAdmin
+            ? "Current system performance and limits"
+            : "Current company performance and limits"}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
-              <span>Document Storage</span>
+              <span>
+                {isSuperAdmin ? "Document Storage" : "Company Documents"}
+              </span>
               <span className="font-medium">{stats.totalDocs} documents</span>
             </div>
             <ProgressBar
@@ -34,7 +46,9 @@ export async function SystemStatus() {
 
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
-              <span>Template Usage</span>
+              <span>
+                {isSuperAdmin ? "Template Usage" : "Company Templates"}
+              </span>
               <span className="font-medium">
                 {stats.totalTemplates} templates
               </span>
