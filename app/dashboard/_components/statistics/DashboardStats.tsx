@@ -53,6 +53,8 @@ async function TotalUsersCard({ user }: { user: User }) {
       title={title}
       value={totalUsers}
       icon={<Users className="h-5 w-5" />}
+      // show a message if no users
+      description={totalUsers === 0 ? "No users registered yet" : undefined}
     />
   );
 }
@@ -67,16 +69,26 @@ async function DocumentsCard({
   const docsData = await getDocsWithTrend(user, userId);
   const title = isSuperAdmin(user) ? "Total Documents" : "Company Documents";
 
+  // show a message if no documents
+  const description =
+    docsData.totalDocs === 0
+      ? "No documents generated yet"
+      : `${docsData.recentDocs} created in the last 30 days`;
+
   return (
     <StatisticsCard
       title={title}
       value={docsData.totalDocs}
-      description={`${docsData.recentDocs} created in the last 30 days`}
+      description={description}
       icon={<FileText className="h-5 w-5" />}
-      trend={{
-        value: docsData.docsTrend,
-        isPositive: docsData.docsTrend >= 0,
-      }}
+      trend={
+        docsData.totalDocs > 0
+          ? {
+              value: docsData.docsTrend,
+              isPositive: docsData.docsTrend >= 0,
+            }
+          : undefined
+      }
     />
   );
 }
@@ -87,11 +99,16 @@ async function AvgDocsCard({ user }: { user: User }) {
     ? "Avg. Docs per User"
     : "Avg. Docs per User";
 
+  // show a message if average is 0
+  const description =
+    avgDocsPerUser === 0 ? "No documents generated yet" : undefined;
+
   return (
     <StatisticsCard
       title={title}
       value={avgDocsPerUser}
       icon={<BarChart3 className="h-5 w-5" />}
+      description={description}
     />
   );
 }
@@ -100,11 +117,17 @@ async function CompaniesCard({ user }: { user: User }) {
   const totalCompanies = await getTotalCompanies(user);
   const title = isSuperAdmin(user) ? "Companies" : "Your Company";
 
+  const description =
+    isSuperAdmin(user) && totalCompanies === 0
+      ? "No companies registered yet"
+      : undefined;
+
   return (
     <StatisticsCard
       title={title}
       value={totalCompanies}
       icon={<Briefcase className="h-5 w-5" />}
+      description={description}
     />
   );
 }
