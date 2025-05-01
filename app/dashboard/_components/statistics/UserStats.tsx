@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { getUserStats } from "@/actions/stats.actions";
-import { StatisticsCard } from "@/app/dashboard/_components/StatisticsCard";
+import { StatisticsCard } from "@/app/dashboard/_components/statistics/StatisticsCard";
 import { Briefcase, FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";

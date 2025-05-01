@@ -1,4 +1,4 @@
-import { DashboardLayout } from "@/app/dashboard/_components/DashboardLayout";
+import { DashboardLayout } from "@/app/dashboard/_components/layout/DashboardLayout";
 import { ErrorBoundary } from "react-error-boundary";
 
 import FallBack from "@/components/global/Fallback";

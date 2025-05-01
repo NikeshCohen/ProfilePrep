@@ -8,10 +8,10 @@ import {
   StatusSkeleton,
   UserStatsSkeleton,
 } from "@/app/dashboard/_components/DashboardLoading";
-import { DashboardStats } from "@/app/dashboard/_components/DashboardStats";
-import { RecentActivity } from "@/app/dashboard/_components/RecentActivity";
-import { SystemStatus } from "@/app/dashboard/_components/SystemStatus";
-import { UserStats } from "@/app/dashboard/_components/UserStats";
+import { DashboardStats } from "@/app/dashboard/_components/statistics/DashboardStats";
+import { RecentActivity } from "@/app/dashboard/_components/statistics/RecentActivity";
+import { SystemStatus } from "@/app/dashboard/_components/statistics/SystemStatus";
+import { UserStats } from "@/app/dashboard/_components/statistics/UserStats";
 
 import { requireAuth } from "@/lib/utils";
 

@@ -2,8 +2,8 @@
 
 import { type ReactNode, useEffect, useState } from "react";
 
-import { DashboardHeader } from "@/app/dashboard/_components/DashboardHeader";
-import { DashboardSidebar } from "@/app/dashboard/_components/DashboardSidebar";
+import { DashboardHeader } from "@/app/dashboard/_components/layout/DashboardHeader";
+import { DashboardSidebar } from "@/app/dashboard/_components/layout/DashboardSidebar";
 import type { User } from "next-auth";
 
 import Background from "@/components/global/Background";

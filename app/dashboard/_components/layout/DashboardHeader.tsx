@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { DashboardSidebar } from "@/app/dashboard/_components/DashboardSidebar";
+import { DashboardSidebar } from "@/app/dashboard/_components/layout/DashboardSidebar";
 import { Menu } from "lucide-react";
 import type { User } from "next-auth";
 

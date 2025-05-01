@@ -7,7 +7,7 @@ import {
   getTotalUsers,
 } from "@/actions/stats.actions";
 import { StatCardSkeleton } from "@/app/dashboard/_components/DashboardLoading";
-import { StatisticsCard } from "@/app/dashboard/_components/StatisticsCard";
+import { StatisticsCard } from "@/app/dashboard/_components/statistics/StatisticsCard";
 import { BarChart3, Briefcase, FileText, Users } from "lucide-react";
 
 interface DashboardStatsProps {
