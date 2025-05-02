@@ -1,9 +1,11 @@
-import { getTopCompanies } from "@/actions/analytics.actions";
-import { AlertCircle } from "lucide-react";
+"use client";
+
+import { useTopCompaniesQuery } from "@/actions/queries/analytics.queries";
+import { TopCompaniesSkeleton } from "@/app/dashboard/analytics/_components/AnalyticsSkeletons";
 import type { User } from "next-auth";
 
+import { EmptyState } from "@/components/global/EmptyState";
 import { ProgressBar } from "@/components/global/ProgressBar";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -12,30 +14,46 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { isSuperAdmin } from "@/lib/roleUtils";
+
 interface TopCompaniesProps {
   user: User;
 }
 
-export async function TopCompanies({ user }: TopCompaniesProps) {
-  const topCompanies = await getTopCompanies(user);
-  const isSuperAdmin = user.role === "SUPERADMIN";
+export function TopCompanies({ user }: TopCompaniesProps) {
+  const { data: topCompanies, isLoading, error } = useTopCompaniesQuery(user);
+  // const isSuperAdmin = user.role === "SUPERADMIN";
+  const isSuperAdminUser = isSuperAdmin(user);
+
+  if (isLoading) {
+    return <TopCompaniesSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <EmptyState
+        message="Failed to load top companies data"
+        variant="destructive"
+      />
+    );
+  }
 
   return (
     <Card className="bg-card/40">
       <CardHeader>
         <CardTitle>
-          {isSuperAdmin
+          {isSuperAdminUser
             ? "Top Companies by Document Generation"
             : "Top Users by Document Generation"}
         </CardTitle>
         <CardDescription>
-          {isSuperAdmin
+          {isSuperAdminUser
             ? "Companies with the highest document generation volume"
             : "Users in your company with the highest document generation volume"}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {topCompanies.length > 0 ? (
+        {topCompanies && topCompanies.length > 0 ? (
           <div className="space-y-4">
             {topCompanies.map((company, index) => (
               <div key={index} className="space-y-2">
@@ -51,14 +69,13 @@ export async function TopCompanies({ user }: TopCompaniesProps) {
             ))}
           </div>
         ) : (
-          <Alert variant="default" className="border-muted bg-muted/50">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {isSuperAdmin
+          <EmptyState
+            message={
+              isSuperAdminUser
                 ? "No companies have generated documents yet."
-                : "No users in your company have generated documents yet."}
-            </AlertDescription>
-          </Alert>
+                : "No users in your company have generated documents yet."
+            }
+          />
         )}
       </CardContent>
     </Card>

@@ -1,20 +1,9 @@
 "use server";
 
-import { isSuperAdmin } from "@/app/dashboard/_components/statistics/DashboardStats";
 import prisma from "@/prisma/prisma";
 import type { User } from "next-auth";
 
-function getCompanyFilter(user: User) {
-  // no company filter - see all data (superadmins)
-  if (isSuperAdmin(user)) {
-    return {};
-  }
-
-  // filter by their company (admins)
-  return {
-    companyId: user.company?.id,
-  };
-}
+import { getCompanyFilter, isSuperAdmin } from "@/lib/roleUtils";
 
 export async function getTotalUsers(user: User) {
   // count all users (superadmins)

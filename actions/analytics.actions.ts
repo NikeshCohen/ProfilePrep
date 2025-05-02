@@ -1,8 +1,9 @@
 "use server";
 
-import { isSuperAdmin } from "@/app/dashboard/_components/statistics/DashboardStats";
 import prisma from "@/prisma/prisma";
 import type { User } from "next-auth";
+
+import { isSuperAdmin } from "@/lib/roleUtils";
 
 export async function getTopCompanies(user: User) {
   // monthly document generation counts for the last 6 months

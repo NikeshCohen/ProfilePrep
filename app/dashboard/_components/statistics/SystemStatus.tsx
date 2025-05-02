@@ -1,9 +1,11 @@
-import { getSystemStats } from "@/actions/stats.actions";
-import { AlertCircle } from "lucide-react";
+"use client";
+
+import { useSystemStatsQuery } from "@/actions/queries/stats.queries";
+import { StatusSkeleton } from "@/app/dashboard/_components/statistics/StatisticsSkeletons";
 import type { User } from "next-auth";
 
+import { EmptyState } from "@/components/global/EmptyState";
 import { ProgressBar } from "@/components/global/ProgressBar";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -12,21 +14,38 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { isSuperAdmin } from "@/lib/roleUtils";
+
 interface SystemStatusProps {
   user: User;
 }
 
-export async function SystemStatus({ user }: SystemStatusProps) {
-  const stats = await getSystemStats(user);
-  const isSuperAdmin = user.role === "SUPERADMIN";
-  const hasData = stats.totalDocs > 0 || stats.totalTemplates > 0;
+export function SystemStatus({ user }: SystemStatusProps) {
+  const { data: stats, isLoading, error } = useSystemStatsQuery(user);
+  // const isSuperAdmin = user.role === "SUPERADMIN";
+  const isSuperAdminUser = isSuperAdmin(user);
+
+  if (isLoading) {
+    return <StatusSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <EmptyState
+        message="Failed to load system status"
+        variant="destructive"
+      />
+    );
+  }
+
+  const hasData = stats && (stats.totalDocs > 0 || stats.totalTemplates > 0);
 
   return (
     <Card className="bg-card/40">
       <CardHeader>
         <CardTitle>System Status</CardTitle>
         <CardDescription>
-          {isSuperAdmin
+          {isSuperAdminUser
             ? "Current system performance and limits"
             : "Current company performance and limits"}
         </CardDescription>
@@ -37,7 +56,7 @@ export async function SystemStatus({ user }: SystemStatusProps) {
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <span>
-                  {isSuperAdmin ? "Document Storage" : "Company Documents"}
+                  {isSuperAdminUser ? "Document Storage" : "Company Documents"}
                 </span>
                 <span className="font-medium">{stats.totalDocs} documents</span>
               </div>
@@ -51,7 +70,7 @@ export async function SystemStatus({ user }: SystemStatusProps) {
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
                 <span>
-                  {isSuperAdmin ? "Template Usage" : "Company Templates"}
+                  {isSuperAdminUser ? "Template Usage" : "Company Templates"}
                 </span>
                 <span className="font-medium">
                   {stats.totalTemplates} templates
@@ -75,14 +94,13 @@ export async function SystemStatus({ user }: SystemStatusProps) {
             </div>
           </div>
         ) : (
-          <Alert variant="default" className="border-muted bg-muted/50">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {isSuperAdmin
+          <EmptyState
+            message={
+              isSuperAdminUser
                 ? "No documents or templates have been created yet across the platform."
-                : "No documents or templates have been created yet in your company."}
-            </AlertDescription>
-          </Alert>
+                : "No documents or templates have been created yet in your company."
+            }
+          />
         )}
       </CardContent>
     </Card>

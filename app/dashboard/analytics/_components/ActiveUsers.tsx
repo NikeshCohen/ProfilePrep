@@ -1,9 +1,11 @@
-import { getActiveUsers } from "@/actions/analytics.actions";
-import { AlertCircle } from "lucide-react";
+"use client";
+
+import { useActiveUsersQuery } from "@/actions/queries/analytics.queries";
+import { ActiveUsersSkeleton } from "@/app/dashboard/analytics/_components/AnalyticsSkeletons";
 import type { User } from "next-auth";
 
+import { EmptyState } from "@/components/global/EmptyState";
 import { ProgressBar } from "@/components/global/ProgressBar";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -12,26 +14,42 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { isSuperAdmin } from "@/lib/roleUtils";
+
 interface ActiveUsersProps {
   user: User;
 }
 
-export async function ActiveUsers({ user }: ActiveUsersProps) {
-  const activeUsers = await getActiveUsers(user);
-  const isSuperAdmin = user.role === "SUPERADMIN";
+export function ActiveUsers({ user }: ActiveUsersProps) {
+  const { data: activeUsers, isLoading, error } = useActiveUsersQuery(user);
+  // const isSuperAdmin = user.role === "SUPERADMIN";
+  const isSuperAdminUser = isSuperAdmin(user);
+
+  if (isLoading) {
+    return <ActiveUsersSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <EmptyState
+        message="Failed to load active users data"
+        variant="destructive"
+      />
+    );
+  }
 
   return (
     <Card className="bg-card/40">
       <CardHeader>
         <CardTitle>Most Active Users</CardTitle>
         <CardDescription>
-          {isSuperAdmin
+          {isSuperAdminUser
             ? "Users who have generated the most documents across the platform"
             : "Users who have generated the most documents in your company"}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {activeUsers.length > 0 ? (
+        {activeUsers && activeUsers.length > 0 ? (
           <div className="space-y-4">
             {activeUsers.map((activeUser) => (
               <div key={activeUser.id} className="space-y-2">
@@ -51,14 +69,13 @@ export async function ActiveUsers({ user }: ActiveUsersProps) {
             ))}
           </div>
         ) : (
-          <Alert variant="default" className="border-muted bg-muted/50">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {isSuperAdmin
+          <EmptyState
+            message={
+              isSuperAdminUser
                 ? "No users have generated documents yet."
-                : "No users in your company have generated documents yet."}
-            </AlertDescription>
-          </Alert>
+                : "No users in your company have generated documents yet."
+            }
+          />
         )}
       </CardContent>
     </Card>
