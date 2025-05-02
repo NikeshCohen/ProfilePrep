@@ -3,16 +3,16 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
-import { requireAuth } from "@/lib/utils";
-
 import { ActiveUsers } from "@/app/dashboard/analytics/_components/ActiveUsers";
 import {
   ActiveUsersSkeleton,
   TemplateUsageSkeleton,
   TopCompaniesSkeleton,
-} from "@/app/dashboard/analytics/_components/AnalyticsLoading";
+} from "@/app/dashboard/analytics/_components/AnalyticsSkeletons";
 import { TemplateUsage } from "@/app/dashboard/analytics/_components/TemplateUsage";
 import { TopCompanies } from "@/app/dashboard/analytics/_components/TopCompanies";
+
+import { requireAuth } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Analytics",

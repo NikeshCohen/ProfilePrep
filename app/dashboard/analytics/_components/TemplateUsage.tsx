@@ -1,8 +1,10 @@
-import { getTemplateUsage } from "@/actions/analytics.actions";
-import { AlertCircle } from "lucide-react";
+"use client";
+
+import { useTemplateUsageQuery } from "@/actions/queries/analytics.queries";
+import { TemplateUsageSkeleton } from "@/app/dashboard/analytics/_components/AnalyticsSkeletons";
 import type { User } from "next-auth";
 
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { EmptyState } from "@/components/global/EmptyState";
 import {
   Card,
   CardContent,
@@ -11,26 +13,42 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { isSuperAdmin } from "@/lib/roleUtils";
+
 interface TemplateUsageProps {
   user: User;
 }
 
-export async function TemplateUsage({ user }: TemplateUsageProps) {
-  const templateUsage = await getTemplateUsage(user);
-  const isSuperAdmin = user.role === "SUPERADMIN";
+export function TemplateUsage({ user }: TemplateUsageProps) {
+  const { data: templateUsage, isLoading, error } = useTemplateUsageQuery(user);
+  // const isSuperAdmin = user.role === "SUPERADMIN";
+  const isSuperAdminUser = isSuperAdmin(user);
+
+  if (isLoading) {
+    return <TemplateUsageSkeleton />;
+  }
+
+  if (error) {
+    return (
+      <EmptyState
+        message="Failed to load template usage data"
+        variant="destructive"
+      />
+    );
+  }
 
   return (
     <Card className="bg-card/40 md:col-span-2">
       <CardHeader>
         <CardTitle>Template Usage</CardTitle>
         <CardDescription>
-          {isSuperAdmin
+          {isSuperAdminUser
             ? "Overview of template usage across the platform"
             : "Overview of template usage in your company"}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {templateUsage.length > 0 ? (
+        {templateUsage && templateUsage.length > 0 ? (
           <div className="rounded-md border">
             <table className="w-full text-sm">
               <thead>
@@ -58,14 +76,13 @@ export async function TemplateUsage({ user }: TemplateUsageProps) {
             </table>
           </div>
         ) : (
-          <Alert variant="default" className="border-muted bg-muted/50">
-            <AlertCircle className="h-4 w-4" />
-            <AlertDescription>
-              {isSuperAdmin
+          <EmptyState
+            message={
+              isSuperAdminUser
                 ? "No templates have been created yet across the platform."
-                : "No templates have been created yet in your company."}
-            </AlertDescription>
-          </Alert>
+                : "No templates have been created yet in your company."
+            }
+          />
         )}
       </CardContent>
     </Card>

@@ -94,7 +94,3 @@ export function UserStatsSkeleton() {
     </div>
   );
 }
-
-export function UserDashboardLoading() {
-  return <UserStatsSkeleton />;
-}

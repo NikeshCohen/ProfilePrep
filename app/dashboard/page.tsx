@@ -2,14 +2,14 @@ import { Suspense } from "react";
 
 import type { Metadata } from "next";
 
+import { DashboardStats } from "@/app/dashboard/_components/statistics/DashboardStats";
+import { RecentActivity } from "@/app/dashboard/_components/statistics/RecentActivity";
 import {
   ActivitySkeleton,
   StatsSkeleton,
   StatusSkeleton,
   UserStatsSkeleton,
-} from "@/app/dashboard/_components/DashboardLoading";
-import { DashboardStats } from "@/app/dashboard/_components/statistics/DashboardStats";
-import { RecentActivity } from "@/app/dashboard/_components/statistics/RecentActivity";
+} from "@/app/dashboard/_components/statistics/StatisticsSkeletons";
 import { SystemStatus } from "@/app/dashboard/_components/statistics/SystemStatus";
 import { UserStats } from "@/app/dashboard/_components/statistics/UserStats";
 

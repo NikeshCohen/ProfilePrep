@@ -1,35 +1,45 @@
+"use client";
+
 import Link from "next/link";
 
-import { getUserStats } from "@/actions/stats.actions";
+import { useUserStatsQuery } from "@/actions/queries/stats.queries";
 import { StatisticsCard } from "@/app/dashboard/_components/statistics/StatisticsCard";
+import { UserStatsSkeleton } from "@/app/dashboard/_components/statistics/StatisticsSkeletons";
 import { Briefcase, FileText } from "lucide-react";
 
+import { EmptyState } from "@/components/global/EmptyState";
 import { Button } from "@/components/ui/button";
 
 interface UserStatsProps {
   userId?: string;
 }
 
-export async function UserStats({ userId }: UserStatsProps) {
-  if (!userId) {
-    // fallback ui or empty state
-    return (
-      <div className="space-y-4">
-        <div className="p-4 text-center">
-          <p>User information not available</p>
-        </div>
-      </div>
-    );
+export function UserStats({ userId }: UserStatsProps) {
+  const { data: stats, isLoading, error } = useUserStatsQuery(userId);
+
+  if (isLoading) {
+    return <UserStatsSkeleton />;
   }
 
-  const stats = await getUserStats(userId);
+  if (error || !userId) {
+    return (
+      <EmptyState
+        message={
+          !userId
+            ? "User information not available"
+            : "Failed to load user statistics"
+        }
+        variant={error ? "destructive" : "default"}
+      />
+    );
+  }
 
   return (
     <div className="space-y-4">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-2">
         <StatisticsCard
           title="Your Documents"
-          value={stats.recentDocs}
+          value={stats?.recentDocs ?? 0}
           description="Documents created in the last 30 days"
           icon={<FileText className="h-5 w-5" />}
         />
