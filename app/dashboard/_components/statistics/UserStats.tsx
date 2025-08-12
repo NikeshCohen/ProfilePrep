@@ -14,6 +14,8 @@ interface UserStatsProps {
   userId?: string;
 }
 
+// NOTE: comp and its skeleton no longer used but kept for future refactor reference
+
 export function UserStats({ userId }: UserStatsProps) {
   const { data: stats, isLoading, error } = useUserStatsQuery(userId);
 

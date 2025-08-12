@@ -71,6 +71,31 @@ export async function getUserDocs(userId: string) {
   }
 }
 
+export async function getRecruiterDocuments(userId: string) {
+  try {
+    const documents = await prisma.generatedDocs.findMany({
+      where: {
+        createdBy: userId,
+      },
+      include: {
+        company: {
+          select: {
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return { success: true, documents };
+  } catch (error) {
+    console.error("Failed to fetch recruiter documents:", error);
+    return { success: false, error: "Failed to fetch documents" };
+  }
+}
+
 export async function deleteDoc(docId: string) {
   try {
     await prisma.generatedDocs.delete({
@@ -137,5 +162,42 @@ export async function createGeneratedDoc({
   } catch (error) {
     console.error("Failed to create document:", error);
     return { success: false, error: "Failed to create document" };
+  }
+}
+
+export async function createTestAccount(email: string) {
+  try {
+    const testUser = await prisma.user.create({
+      data: {
+        email,
+        name: "Test Account",
+        userType: "TESTER",
+        isTestAccount: true,
+        role: "USER",
+        allowedDocs: 999,
+      },
+    });
+
+    return { success: true, user: testUser };
+  } catch (error) {
+    console.error("Failed to create test account:", error);
+    return { success: false, error: "Failed to create test account" };
+  }
+}
+
+export async function updateUserType(
+  userId: string,
+  userType: "RECRUITER" | "CANDIDATE" | "TESTER",
+) {
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: { userType },
+    });
+
+    return { success: true, user: updatedUser };
+  } catch (error) {
+    console.error("Failed to update user type:", error);
+    return { success: false, error: "Failed to update user type" };
   }
 }

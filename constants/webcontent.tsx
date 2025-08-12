@@ -1,47 +1,49 @@
-import { Clock, FileCheck, Target, Users } from "lucide-react";
+import { Award, Clock, Search, TrendingUp } from "lucide-react";
 
 export const content = {
   hero: {
-    badge: "FREE TRIAL - FIRST 5 CVS ON US!",
-    title: "From Raw CV to Client-Ready in",
-    subtitle: "Seconds",
+    badge: "DUAL-PURPOSE PLATFORM - FOR RECRUITERS & CANDIDATES!",
+    title: "CV Success Made Simple",
+    subtitle: "For Everyone",
     description: (
       <>
-        <b>Stop wasting hours</b> on manual formatting!
+        <b>Recruiters:</b> Transform messy CVs into client-ready documents in
+        seconds.
         <br />
-        Our tool transforms messy candidate CVs into polished documents
-        <b> instantly</b>.
+        <b>Candidates:</b> Get AI-powered feedback and ATS scoring for your CV.
+        <br />
+        One platform, two powerful solutions.
       </>
     ),
     cta: "Get Started",
   },
   features: {
-    title: "Format CVs at Lightning Speed",
-    titleHighlight: "Save Hours Each Day",
+    title: "Powerful Features for",
+    titleHighlight: "Recruiters & Candidates",
     items: [
       {
         icon: Clock,
-        title: "Instant Formatting",
+        title: "Instant CV Formatting",
         description:
-          "Transform any CV into your company template in seconds, not hours.",
+          "Recruiters: Transform any CV into your company template in seconds.",
       },
       {
-        icon: FileCheck,
-        title: "Consistent Branding",
+        icon: Search,
+        title: "ATS Analysis",
         description:
-          "Every CV follows your exact formatting guidelines and company style.",
+          "Candidates: Get detailed ATS compatibility scores and optimization tips.",
       },
       {
-        icon: Users,
-        title: "Bulk Processing",
+        icon: TrendingUp,
+        title: "Progress Tracking",
         description:
-          "Format multiple CVs simultaneously - perfect for high-volume recruiting.",
+          "Candidates: Track your CV improvements over time with detailed analytics.",
       },
       {
-        icon: Target,
-        title: "Client-Ready Output",
+        icon: Award,
+        title: "Professional Output",
         description:
-          "Professional, clean documents ready to send to your clients immediately.",
+          "Both: Professional, polished documents ready for any application.",
       },
     ],
   },

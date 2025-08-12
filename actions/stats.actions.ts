@@ -11,10 +11,11 @@ export async function getTotalUsers(user: User) {
     return await prisma.user.count();
   }
 
-  // count only users in their company (admins)
+  // count only users in their company with the same user type (admins)
   return await prisma.user.count({
     where: {
       companyId: user.company?.id,
+      userType: user.userType, // Only count users of the same type (RECRUITER/CANDIDATE)
     },
   });
 }
@@ -25,10 +26,13 @@ export async function getTotalDocs(user: User) {
     return await prisma.generatedDocs.count();
   }
 
-  // count only docs from their company (admins)
+  // count only docs from their company for same user type (admins)
   return await prisma.generatedDocs.count({
     where: {
       companyId: user.company?.id,
+      user: {
+        userType: user.userType,
+      },
     },
   });
 }
@@ -44,10 +48,15 @@ export async function getDocsWithTrend(user: User, userId?: string) {
   // company filter based on user role
   const companyFilter = getCompanyFilter(user);
 
-  // combine filters
+  // combine filters with user type filter for admins
   const whereFilter = {
     ...userFilter,
     ...companyFilter,
+    ...(user.role === "ADMIN" && {
+      user: {
+        userType: user.userType,
+      },
+    }),
     createdAt: {
       gte: thirtyDaysAgo,
     },
@@ -65,6 +74,11 @@ export async function getDocsWithTrend(user: User, userId?: string) {
     where: {
       ...userFilter,
       ...companyFilter,
+      ...(user.role === "ADMIN" && {
+        user: {
+          userType: user.userType,
+        },
+      }),
       createdAt: {
         gte: sixtyDaysAgo,
         lt: thirtyDaysAgo,
@@ -104,7 +118,7 @@ export async function getTotalCompanies(user: User) {
     return await prisma.company.count();
   }
 
-  // return their own company count (admins)
+  // return their own company count (admins) - always 1 for admins
   return 1;
 }
 
@@ -119,6 +133,11 @@ export async function getRecentActivity(user: User, userId?: string) {
     where: {
       ...userFilter,
       ...companyFilter,
+      ...(user.role === "ADMIN" && {
+        user: {
+          userType: user.userType,
+        },
+      }),
     },
     take: 5,
     orderBy: {
@@ -186,10 +205,11 @@ export async function getSystemStats(user: User) {
     });
     totalAllowedDocs = allowedDocsAgg._sum.allowedDocs || 1;
   } else {
-    // sum of allowed docs for users in this company (admins)
+    // sum of allowed docs for users in this company with same user type (admins)
     const allowedDocsAgg = await prisma.user.aggregate({
       where: {
         companyId: user.company?.id,
+        userType: user.userType,
       },
       _sum: {
         allowedDocs: true,
@@ -228,5 +248,118 @@ export async function getUserStats(userId?: string) {
 
   return {
     recentDocs,
+  };
+}
+
+// Candidate-specific statistics functions
+export async function getCandidateStats(user: User) {
+  if (user.userType !== "CANDIDATE") {
+    return {
+      totalAnalyses: 0,
+      averageScore: 0,
+      bestScore: 0,
+      recentAnalyses: 0,
+    };
+  }
+
+  // Base filter for the user's analyses
+  const userFilter = { userId: user.id };
+
+  // Company filter for admin candidates
+  let companyFilter = {};
+  if (user.role === "ADMIN" && user.company?.id) {
+    companyFilter = {
+      user: {
+        companyId: user.company.id,
+        userType: "CANDIDATE",
+      },
+    };
+  }
+
+  const totalAnalyses = await prisma.cVAnalysis.count({
+    where: user.role === "ADMIN" ? companyFilter : userFilter,
+  });
+
+  // Get average score for the candidate or organization
+  const analysesWithScores = await prisma.cVAnalysis.findMany({
+    where: user.role === "ADMIN" ? companyFilter : userFilter,
+    select: {
+      overallScore: true,
+    },
+  });
+
+  const averageScore =
+    analysesWithScores.length > 0
+      ? Math.round(
+          analysesWithScores.reduce(
+            (sum, analysis) => sum + analysis.overallScore,
+            0,
+          ) / analysesWithScores.length,
+        )
+      : 0;
+
+  const bestScore =
+    analysesWithScores.length > 0
+      ? Math.max(...analysesWithScores.map((a) => a.overallScore))
+      : 0;
+
+  // Recent analyses (last 30 days)
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const recentAnalyses = await prisma.cVAnalysis.count({
+    where: {
+      ...(user.role === "ADMIN" ? companyFilter : userFilter),
+      createdAt: {
+        gte: thirtyDaysAgo,
+      },
+    },
+  });
+
+  return {
+    totalAnalyses,
+    averageScore,
+    bestScore,
+    recentAnalyses,
+  };
+}
+
+export async function getCandidateUserStats(userId: string) {
+  if (!userId) {
+    return {
+      totalAnalyses: 0,
+      bestScore: 0,
+      averageScore: 0,
+    };
+  }
+
+  const totalAnalyses = await prisma.cVAnalysis.count({
+    where: { userId },
+  });
+
+  const analysesWithScores = await prisma.cVAnalysis.findMany({
+    where: { userId },
+    select: { overallScore: true },
+  });
+
+  const bestScore =
+    analysesWithScores.length > 0
+      ? Math.max(...analysesWithScores.map((a) => a.overallScore))
+      : 0;
+
+  const averageScore =
+    analysesWithScores.length > 0
+      ? Math.round(
+          analysesWithScores.reduce(
+            (sum, analysis) => sum + analysis.overallScore,
+            0,
+          ) / analysesWithScores.length,
+        )
+      : 0;
+
+  return {
+    totalAnalyses,
+    bestScore,
+    averageScore,
   };
 }

@@ -21,14 +21,22 @@ export const metadata: Metadata = {
 export default async function AnalyticsPage() {
   const { user } = await requireAuth("/dashboard/analytics");
 
-  // only admin and superadmin can access analytics
-  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+  // Only SuperAdmins can access this page - company admins should use their specific routes
+  if (user.role !== "SUPERADMIN") {
+    // Redirect company admins to their specific analytics pages
+    if (user.role === "ADMIN") {
+      if (user.userType === "RECRUITER") {
+        redirect("/recruiter/analytics");
+      } else if (user.userType === "CANDIDATE") {
+        redirect("/portal/organization/analytics");
+      }
+    }
     redirect("/app");
   }
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Global Analytics</h1>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Suspense fallback={<TopCompaniesSkeleton />}>

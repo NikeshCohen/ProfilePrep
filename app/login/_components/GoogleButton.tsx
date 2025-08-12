@@ -18,7 +18,7 @@ function GoogleButton({ redirectUrl }: { redirectUrl: string }) {
     <form action={disPatchGoogle}>
       <Button
         type="submit"
-        className="flex justify-center items-center gap-1 w-full text-white"
+        className="flex w-full items-center justify-center gap-1 text-white"
         disabled={isLoading}
       >
         <Image
@@ -26,7 +26,7 @@ function GoogleButton({ redirectUrl }: { redirectUrl: string }) {
           width={20}
           height={20}
           alt="Google logo"
-          className="group-hover:scale-110 transition-transform"
+          className="transition-transform group-hover:scale-110"
         />
         <span className="font-medium">Continue with Google</span>
       </Button>

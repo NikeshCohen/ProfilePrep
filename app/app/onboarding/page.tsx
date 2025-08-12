@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function OnboardingPage() {
   return (
-    <section className="flex place-content-center place-items-center min-h-[93vh] layout">
+    <section className="layout flex min-h-[93vh] place-content-center place-items-center">
       <Suspense>
         <OnboardingBackground />
         <OnboardingClient />

@@ -57,10 +57,10 @@ function Logo({ className, size = "lg", circleSize = 10 }: LogoProps) {
   return (
     <Link
       href="/"
-      className={clsx("relative flex justify-center items-center", className)}
+      className={clsx("relative flex items-center justify-center", className)}
     >
       <div
-        className="absolute bg-primary/20 rounded-full"
+        className="absolute rounded-full bg-primary/20"
         style={{
           width: circleSizeInRem,
           height: circleSizeInRem,

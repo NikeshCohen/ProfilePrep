@@ -13,7 +13,14 @@ export const metadata: Metadata = {
 async function page() {
   const { user } = await requireAuth("/dashboard/templates");
 
-  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+  // Only SuperAdmins can access this page - company admins should use their specific routes
+  if (user.role !== "SUPERADMIN") {
+    // Redirect company admins to their specific template management pages
+    if (user.role === "ADMIN") {
+      if (user.userType === "RECRUITER") {
+        redirect("/recruiter/templates");
+      }
+    }
     redirect("/app");
   }
 
@@ -21,11 +28,7 @@ async function page() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">
-          {" "}
-          Templates (
-          {(user.role === "SUPERADMIN" && "All Companies") ||
-            user.company?.name}
-          )
+          Global Template Management
         </h1>
 
         <CreateTemplate sessionUser={user} />

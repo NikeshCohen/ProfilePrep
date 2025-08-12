@@ -5,7 +5,7 @@ import type React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { sidebarItems } from "@/constants/navigation";
+import { candidateSidebarItems, sidebarItems } from "@/constants/navigation";
 import type { User } from "next-auth";
 
 import Logo from "@/components/global/Logo";
@@ -21,11 +21,18 @@ export function DashboardSidebar({ user }: SidebarProps) {
   const pathname = usePathname();
   const isSuperAdmin = user.role === "SUPERADMIN";
   const isAdmin = user.role === "ADMIN" || isSuperAdmin;
+  const isCandidate = user.userType === "CANDIDATE";
+  const isTester = user.userType === "TESTER";
 
-  // filter items based on user role
-  const filteredItems = sidebarItems.filter((item) => {
+  // Choose the appropriate navigation items based on user type
+  const navigationItems = isCandidate ? candidateSidebarItems : sidebarItems;
+
+  // filter items based on user role and type
+  const filteredItems = navigationItems.filter((item) => {
     if (item.superAdminOnly && !isSuperAdmin) return false;
     if (item.adminOnly && !isAdmin) return false;
+    if (item.recruiterOnly && isCandidate && !isTester) return false;
+    if (item.candidateOnly && !isCandidate && !isTester) return false;
     return true;
   });
 

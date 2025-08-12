@@ -6,6 +6,7 @@ import { DashboardSidebar } from "@/app/dashboard/_components/layout/DashboardSi
 import { Menu } from "lucide-react";
 import type { User } from "next-auth";
 
+import { RoleSwitcher } from "@/components/global/RoleSwitcher";
 import UserContextMenu from "@/components/global/UserContextMenu";
 import { Button } from "@/components/ui/button";
 import {
@@ -61,6 +62,7 @@ export function DashboardHeader({ user }: DashboardHeaderProps) {
         )}
 
         <div className="ml-auto mr-5 flex items-center gap-2">
+          <RoleSwitcher />
           <UserContextMenu sessionUser={user} />
         </div>
       </div>

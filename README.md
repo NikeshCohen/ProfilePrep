@@ -1,201 +1,1012 @@
-# ProfilePrep
+# ProfilePrep - AI-Powered CV Processing Platform
 
-## Introduction
+## Table of Contents
 
-ProfilePrep is an AI-powered platform designed to help recruiters transform standard CVs into compelling professional profiles. Our platform streamlines the profile optimisation process, allowing recruiters to focus on making connections rather than formatting documents.
-
-<!-- TOC -->
-
-- [ProfilePrep](#profileprep)
-
-  - [Introduction](#introduction)
-    - [Why ProfilePrep?](#why-profileprep)
-  - [Getting Started](#getting-started)
-    - [System Requirements](#system-requirements)
-    - [Installation](#installation)
-    - [Database Configuration](#database-configuration)
-    - [Running the Application](#running-the-application)
-  - [Core Features](#core-features)
-    - [CV Generation](#cv-generation)
-      - [How It Works](#how-it-works)
-      - [Key Benefits](#key-benefits)
-    - [CV Management](#cv-management)
-    - [Template System](#template-system)
-    - [User Management](#user-management)
-    - [Company Administration](#company-administration)
-  - [User Roles \& Permissions](#user-roles--permissions)
-    - [USER](#user)
-    - [ADMIN](#admin)
-    - [SUPERADMIN](#superadmin)
-  - [Troubleshooting](#troubleshooting--faqs)
-    - [Common Issues](#common-issues)
-      - [The CV generation takes too long or times out](#the-cv-generation-takes-too-long-or-times-out)
-      - [The generated CV is missing information from the original](#the-generated-cv-is-missing-information-from-the-original)
-      - [Template changes aren't reflected in generated CVs](#template-changes-arent-reflected-in-generated-cvs)
-  - [Future Enhancements](#future-enhancements)
-    - [1. Candidate Portal](#1-candidate-portal)
-      - [Features for Candidates](#features-for-candidates)
-      - [Integration with Recruiter Workflow](#integration-with-recruiter-workflow)
-        - [Implementation Timeline #1](#implementation-timeline-1)
-    - [2. Job Matching](#2-job-matching)
-      - [Initial Job Matching Features](#initial-job-matching-features)
-        - [Implementation Timeline #2](#implementation-timeline-2)
-    - [3. Advanced Matching Algorithm](#3-advanced-matching-algorithm)
-      - [Advanced Matching Features](#advanced-matching-features)
-      - [Technical Implementation](#technical-implementation)
-        - [Implementation Timeline #3](#implementation-timeline-3)
-  - [Contributing](#contributing)
-  - [License - Pending Decision](#license---pending-decision)
+- [Introduction](#introduction)
+- [Getting Started](#getting-started)
+- [Core Architecture](#core-architecture)
+- [User Systems & Permissions](#user-systems--permissions)
+- [Feature Documentation](#feature-documentation)
+- [Database & Data Models](#database--data-models)
+- [AI Integration](#ai-integration)
+- [Development Guide](#development-guide)
+- [API Documentation](#api-documentation)
+- [Deployment](#deployment)
+- [Testing](#testing)
+- [Troubleshooting](#troubleshooting)
 
 ---
 
-### Why ProfilePrep?
+## Introduction
 
-At ProfilePrep, we believe your candidate's profile should stand out in a competitive job market. Our application:
+ProfilePrep is a dual-platform AI-powered application that serves two distinct user bases:
 
-- **Saves Time**: Eliminates hours spent on manual CV formatting
-- **Improves Consistency**: Ensures all candidate profiles follow company standards
-- **Enhances Presentation**: Transforms ordinary CVs into polished, professional documents
-- **Accelerates Placements**: Helps recruiters present candidates faster and more effectively
+**For Recruiters**: Transform standard CVs into compelling professional profiles with AI-powered document generation, template management, and client-ready outputs.
 
-The world doesn't need more generic CVs; it needs profiles that tell a story, showcase value, and make an impact.
+**For Candidates**: Analyze CVs against job descriptions to receive detailed feedback, ATS compatibility scores, and actionable improvement recommendations.
+
+### Key Features
+
+- **Dual User Experience**: Complete parallel systems for recruiters and candidates
+- **AI-Powered Processing**: Google Gemini integration for CV generation and analysis
+- **Role-Based Access Control**: Comprehensive permissions system with company/organization scoping
+- **Real-Time Analytics**: Live dashboards with performance metrics
+- **Template System**: Customizable CV templates for consistent branding
+- **Document Management**: Full lifecycle management of generated CVs and analyses
 
 ---
 
 ## Getting Started
 
-### System Requirements
+### Prerequisites
 
-- Node.js 18.x or later
-- npm
+- Node.js 18+ and npm
+- PostgreSQL database (or Supabase account)
+- Google Gemini API key
 
-### Installation
+### Quick Installation
 
-1. Clone the repository:
+1. **Clone and Install**:
 
-   ```zsh
-   git clone https://github.com/NikeshCohen/ProfilePrep.git
+   ```bash
+   git clone <repository-url>
    cd ProfilePrep
-   ```
-
-2. Install dependencies:
-
-   ```zsh
    npm install
    ```
 
-3. Set up environment variables:
+2. **Environment Setup**:
 
-   - Duplicate `.env.local.example` to create a `.env.local` file and insert your credentials.
+   ```bash
+   cp .env.example .env
+   ```
 
-### Database Configuration
+   Configure your `.env` file:
 
-Initialise the database with Prisma:
+   ```env
+   # Database
+   DATABASE_URL="postgresql://user:password@host:port/database?pgbouncer=true"
+   DIRECT_URL="postgresql://user:password@host:port/database"
+
+   # Google AI
+   GOOGLE_GENERATIVE_AI_API_KEY=your_google_ai_key
+
+   # Authentication
+   AUTH_SECRET=your_auth_secret # Generate with: openssl rand -base64 32
+
+   # OAuth (Optional - for production)
+   AUTH_GOOGLE_ID=your_google_oauth_id
+   AUTH_GOOGLE_SECRET=your_google_oauth_secret
+   AUTH_LINKEDIN_ID=your_linkedin_oauth_id
+   AUTH_LINKEDIN_SECRET=your_linkedin_oauth_secret
+   ```
+
+3. **Database Setup**:
+
+   ```bash
+   npm run db:migrate
+   npm run db:seed  # Includes demo data for development
+   ```
+
+4. **Start Development**:
+
+   ```bash
+   npm run dev
+   ```
+
+5. **Access Demo Accounts** (Development Only):
+   - Visit `http://localhost:3000/login`
+   - Use demo accounts provided below
+
+### Demo Account System
+
+**⚠️ IMPORTANT: Demo accounts are ONLY available in development mode (`NODE_ENV=development`)**
+
+#### Available Demo Accounts
+
+**Recruiter Accounts:**
+
+- **`demo@profileprep.com`** / `Demo2024!` - Basic recruiter (USER + RECRUITER)
+- **`admin.demo@profileprep.com`** / `Admin2024!` - Admin recruiter (ADMIN + RECRUITER)
+
+**Candidate Accounts:**
+
+- **`candidate.demo@profileprep.com`** / `Candidate2024!` - Basic candidate (USER + CANDIDATE)
+- **`admin.candidate.demo@profileprep.com`** / `AdminCandidate2024!` - Admin candidate (ADMIN + CANDIDATE)
+
+**System Admin:**
+
+- **`superadmin.demo@profileprep.com`** / `SuperAdmin2024!` - System-wide access
+
+#### Role Switching System
+
+- **Availability**: Only for test accounts (`isTestAccount: true`) in development mode
+- **Functionality**: Complete session switching between demo accounts
+- **Security**: Completely disabled in production builds
+
+---
+
+## Core Architecture
+
+### Technology Stack
+
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Styling**: Tailwind CSS, shadcn/ui components
+- **Backend**: Next.js App Router, Server Actions
+- **Database**: PostgreSQL with Prisma ORM
+- **Authentication**: NextAuth.js v5 (OAuth + Credentials)
+- **AI**: Google Gemini API (2.0-flash-001 model)
+- **State Management**: TanStack Query for client-side data
+- **File Processing**: PDF parsing and text extraction
+- **Deployment**: Vercel (recommended)
+
+### Project Structure
 
 ```zsh
-npx prisma generate
-npx prisma db push
+ProfilePrep/
+├── app/                           # Next.js App Router
+│   ├── api/                       # API routes
+│   │   ├── auth/[...nextauth]/    # NextAuth.js endpoint
+│   │   ├── cv/analyze/            # CV analysis API
+│   │   └── user/                  # User management APIs
+│   ├── app/                       # Main CV processing interface
+│   ├── portal/                    # Candidate dashboard & features
+│   ├── recruiter/                 # Recruiter dashboard & features
+│   ├── dashboard/                 # Admin dashboard (recruiters)
+│   └── login/                     # Authentication pages
+├── actions/                       # Server actions by domain
+│   ├── cv.actions.ts             # CV analysis & generation
+│   ├── user.actions.ts           # User management
+│   ├── admin.actions.ts          # Admin operations
+│   └── queries/                   # TanStack Query hooks
+├── components/                    # Reusable UI components
+│   ├── ui/                       # shadcn/ui components
+│   ├── shared/                   # Custom reusable components
+│   └── global/                   # App-wide components
+├── prisma/                       # Database schema & migrations
+│   ├── schema/                   # Modular schema files
+│   └── migrations/               # Database migrations
+├── lib/                          # Utilities & configuration
+│   ├── utils.ts                  # General utilities
+│   ├── roleUtils.ts              # Role-based access helpers
+│   └── redirectUtils.ts          # Navigation utilities
+└── types/                        # TypeScript type definitions
 ```
 
-### Running the Application
+### Code Organization Patterns
 
-For development:
+1. **Server Actions**: Domain-specific actions in `actions/[domain].actions.ts`
+2. **Client Queries**: TanStack Query hooks in `actions/queries/[domain].queries.ts`
+3. **Page Components**: Server components in `app/[route]/page.tsx`
+4. **Sub-components**: Client components in `app/[route]/_components/`
+5. **Modular Database Schema**: Separate schema files in `prisma/schema/`
 
-```zsh
-npm run dev
+---
+
+## User Systems & Permissions
+
+ProfilePrep implements a comprehensive dual-user system with parallel organizational structures.
+
+### User Types
+
+- **RECRUITER**: Users who generate professional CV documents for clients
+- **CANDIDATE**: Job seekers who analyze and optimize their CVs
+- **TESTER**: Demo/testing accounts with role switching capabilities
+
+### Role Hierarchy
+
+- **USER**: Basic permissions within their user type and organization
+- **ADMIN**: Organization-level administrative permissions
+- **SUPERADMIN**: System-wide access across all organizations
+
+### Company Types
+
+- **RECRUITER**: Recruitment agencies and recruiting companies
+- **CANDIDATE_ORG**: Candidate organizations (universities, career centers, etc.)
+
+### Permission Matrix
+
+| Feature              | Regular User | Admin             | Super Admin    |
+| -------------------- | ------------ | ----------------- | -------------- |
+| **Recruiters**       |              |                   |                |
+| Generate CVs         | ✅ (5/month) | ✅ (Unlimited)    | ✅ (Unlimited) |
+| View own documents   | ✅           | ✅                | ✅             |
+| Manage company users | ❌           | ✅ (Company)      | ✅ (All)       |
+| Create templates     | ❌           | ✅ (Company)      | ✅ (All)       |
+| View analytics       | ❌           | ✅ (Company)      | ✅ (System)    |
+| **Candidates**       |              |                   |                |
+| Analyze CVs          | ✅ (5/month) | ✅ (Unlimited)    | ✅ (Unlimited) |
+| View own analyses    | ✅           | ✅                | ✅             |
+| Manage org members   | ❌           | ✅ (Organization) | ✅ (All)       |
+| View org analytics   | ❌           | ✅ (Organization) | ✅ (System)    |
+
+### Page Access Control
+
+**Recruiter Pages:**
+
+- `/recruiter` - Recruiter dashboard (All recruiter roles)
+- `/recruiter/documents` - Document management (All recruiter roles)
+- `/recruiter/settings` - Profile settings (All recruiter roles)
+- `/dashboard/*` - Admin features (ADMIN+ recruiters only)
+
+**Candidate Pages:**
+
+- `/portal` - Candidate dashboard (All candidate roles)
+- `/portal/documents` - Document management (All candidate roles)
+- `/portal/analyses` - CV analysis history (All candidate roles)
+- `/portal/progress` - Career tracking (All candidate roles)
+- `/portal/settings` - Profile settings (All candidate roles)
+- `/portal/organization/*` - Admin features (ADMIN+ candidates only)
+
+**Shared Pages:**
+
+- `/app` - CV processing interface (All authenticated users)
+
+---
+
+## Feature Documentation
+
+### For Recruiters
+
+#### CV Document Generation
+
+**Location**: `/app` (recruiter mode)
+
+**Process Flow**:
+
+1. **Upload**: Upload candidate CVs (PDF or text format)
+2. **Extract**: AI automatically parses CV content
+3. **Enhance**: Add candidate details (name, location, salary, right to work)
+4. **Generate**: AI creates professional client-ready document
+5. **Customize**: Apply company templates if available
+6. **Export**: Download as PDF or copy formatted content
+
+**Key Components**:
+
+- `FileUpload.tsx` - Drag & drop CV upload with PDF parsing
+- `CandidateInfo.tsx` - Candidate details form
+- `GenerateContent.tsx` - AI-powered document generation
+- `CvDisplay.tsx` - Preview and download interface
+
+#### Document Management
+
+**Location**: `/recruiter/documents`
+
+**Features**:
+
+- Real-time document list with database queries
+- Document statistics and usage tracking
+- Search and filter capabilities
+- Download and sharing options
+- Company-scoped access (admin can see all company docs)
+
+#### Template System
+
+**Location**: `/dashboard/templates` (Admin only)
+
+**Capabilities**:
+
+- Create custom CV templates for company branding
+- Template preview and testing functionality
+- Version control and template management
+- Company-wide template sharing
+- Rich text editing with markdown support
+
+### For Candidates
+
+#### CV Analysis & Optimization
+
+**Location**: `/app` (candidate mode)
+
+**Analysis Process**:
+
+1. **Upload CV**: Submit current CV in PDF or text format
+2. **Job Context**: Enter job title and job description for targeted analysis
+3. **AI Analysis**: Receive comprehensive multi-dimensional scoring
+4. **Detailed Feedback**: Get actionable tips and recommendations
+5. **Progress Tracking**: Monitor improvements over time
+
+**Scoring Dimensions**:
+
+- **Overall Score** (0-100): Average across all categories
+- **ATS Compatibility**: Keyword matching and system readability
+- **Tone & Style**: Professional language and consistency
+- **Content Quality**: Impact statements and quantified achievements
+- **Structure & Format**: Organization and readability
+- **Skills Matching**: Technical skills alignment with job requirements
+- **Grammar & Formatting**: Language quality and consistency
+- **Keyword Density**: Industry-specific term optimization
+
+**Analysis Components**:
+
+- `AnalyzeContent.tsx` - CV upload and job description input
+- `CvDisplay.tsx` - Analysis results and scoring display
+- Detailed feedback system with actionable improvement tips
+
+#### Analysis History & Progress
+
+**Location**: `/portal/analyses`
+
+**Features**:
+
+- Complete analysis history with scoring trends
+- Comparison between different CV versions
+- Progress tracking over time
+- Export capabilities for career counseling
+
+#### Organization Management (Admin Candidates)
+
+**Location**: `/portal/organization/*`
+
+**Admin Capabilities**:
+
+- **Member Management**: Add, edit, remove organization members
+- **Usage Analytics**: Track member CV analysis performance
+- **Organization Analytics**: Aggregate statistics and reporting
+- **Member Oversight**: View all member analyses and progress
+
+### Admin Features
+
+#### User Management
+
+**Location**: `/dashboard/users` (Recruiters) / `/portal/organization/members` (Candidates)
+
+**Functionality**:
+
+- Add new organization members with role assignment
+- Configure document limits per user
+- Monitor user activity and usage
+- Role management (USER/ADMIN permissions)
+- Real-time member statistics
+
+#### Analytics & Reporting
+
+**Location**: `/dashboard/analytics` / `/portal/organization/analytics`
+
+**Metrics Provided**:
+
+- **Usage Statistics**: Documents generated/analyzed per period
+- **Performance Metrics**: Average scores and success rates
+- **User Engagement**: Active users and retention metrics
+- **System Health**: API usage and performance monitoring
+- **Trend Analysis**: Historical data and growth patterns
+
+#### Company/Organization Management
+
+**Location**: `/dashboard/companies` (SUPERADMIN only)
+
+**System Administration**:
+
+- Create and configure new companies/organizations
+- Set company-wide limits and permissions
+- Cross-organization analytics and reporting
+- System health monitoring and maintenance
+
+---
+
+## Database & Data Models
+
+### Core Models
+
+#### User Model
+
+```prisma
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  companyId     String?
+  createdDocs   Int       @default(0)
+  allowedDocs   Int       @default(5)
+  role          UserRole  @default(USER)      // USER, ADMIN, SUPERADMIN
+  userType      UserType  @default(RECRUITER) // RECRUITER, CANDIDATE, TESTER
+  isTestAccount Boolean   @default(false)     // Demo account flag
+  // Relations
+  company       Company?  @relation(fields: [companyId], references: [id])
+  GeneratedDocs GeneratedDocs[]
+  CVAnalyses    CVAnalysis[]
+}
 ```
 
-For production:
+#### Company Model
 
-```zsh
+```prisma
+model Company {
+  id                  String      @id @default(cuid())
+  name                String
+  companyType         CompanyType @default(RECRUITER) // RECRUITER, CANDIDATE_ORG
+  allowedDocsPerUsers Int         @default(5)
+  allowedTemplates    Int         @default(2)
+  // Relations
+  users               User[]
+  GeneratedDocs       GeneratedDocs[]
+  templates           Template[]
+}
+```
+
+#### Generated Documents (Recruiters)
+
+```prisma
+model GeneratedDocs {
+  id                String   @id @default(cuid())
+  content           String   @db.Text
+  candidateName     String
+  location          String
+  rightToWork       String
+  salaryExpectation String
+  notes             String   @db.Text
+  createdAt         DateTime @default(now())
+  // Relations
+  user              User     @relation(fields: [createdBy], references: [id])
+  company           Company? @relation(fields: [companyId], references: [id])
+}
+```
+
+#### CV Analysis (Candidates)
+
+```prisma
+model CVAnalysis {
+  id                String   @id @default(cuid())
+  fileName          String
+  fileContent       String   @db.Text
+  jobTitle          String
+  jobDescription    String   @db.Text
+  companyName       String?
+  // Scoring fields
+  overallScore      Int
+  atsScore          Int
+  toneScore         Int
+  contentScore      Int
+  structureScore    Int
+  skillsScore       Int
+  grammarScore      Int
+  keywordScore      Int
+  // Feedback (JSON)
+  atsFeedback       Json
+  toneFeedback      Json
+  contentFeedback   Json
+  structureFeedback Json
+  skillsFeedback    Json
+  grammarFeedback   Json
+  keywordFeedback   Json
+  // Relations
+  user              User     @relation(fields: [userId], references: [id])
+}
+```
+
+### Database Operations
+
+#### Company-Scoped Queries
+
+All data access is automatically scoped to the user's company/organization:
+
+```typescript
+// Example: Get company documents
+const documents = await prisma.generatedDocs.findMany({
+  where: {
+    companyId: user.companyId,
+    // Additional filters based on user role
+    ...(user.role === "USER" && { createdBy: user.id }),
+  },
+});
+```
+
+#### Role-Based Access
+
+```typescript
+// Example: Admin can see all company data, users see only their own
+const canViewAllCompanyData =
+  user.role === "ADMIN" || user.role === "SUPERADMIN";
+const baseWhere = canViewAllCompanyData
+  ? { companyId: user.companyId }
+  : { companyId: user.companyId, userId: user.id };
+```
+
+---
+
+## AI Integration
+
+### Google Gemini Implementation
+
+#### Model Configuration
+
+```typescript
+const selectedModel = google("gemini-2.0-flash-001");
+```
+
+#### CV Analysis Flow
+
+1. **Input Processing**: CV text and job description are sanitized and prepared
+2. **Prompt Engineering**: Structured prompts with specific formatting requirements
+3. **AI Analysis**: Multi-dimensional scoring across 7 categories
+4. **Response Parsing**: JSON response validation and error handling
+5. **Database Storage**: Structured storage of scores and feedback
+
+#### Analysis Prompt Structure
+
+```typescript
+const prepareInstructions = ({ jobTitle, jobDescription }) => `
+You are an expert in CV analysis and ATS evaluation.
+Analyze the CV across these categories with scores 0-100:
+
+- ATS Compatibility: keyword matching and system readability
+- Tone & Style: professional language consistency
+- Content Quality: impact statements and achievements
+- Structure: organization and hierarchy
+- Skills: technical alignment with job requirements  
+- Grammar: language quality and formatting
+- Keywords: industry-specific term optimization
+
+Return strict JSON format with 3-4 tips per category.
+`;
+```
+
+#### Response Format
+
+Each analysis returns structured feedback:
+
+```typescript
+interface CVFeedback {
+  overallScore: number;
+  ATS: {
+    score: number;
+    tips: Array<{
+      type: "good" | "improve";
+      tip: string;
+      explanation: string;
+    }>;
+  };
+  // ... additional categories
+}
+```
+
+#### Token Usage Tracking
+
+```typescript
+logTokenUsage(response.usage, "CV Analysis");
+```
+
+### Document Generation (Recruiters)
+
+#### Template System Integration
+
+- Custom company templates stored in database
+- AI applies templates during generation
+- Consistent branding across all outputs
+- Fallback to default template structure
+
+#### Content Enhancement Process
+
+1. **CV Parsing**: Extract key information from uploaded CV
+2. **Information Enrichment**: Add candidate details and company context
+3. **Professional Formatting**: Apply consistent formatting and structure
+4. **Content Optimization**: Enhance language for client presentation
+5. **Template Application**: Apply company-specific branding if available
+
+---
+
+## Development Guide
+
+### Adding New Features
+
+#### 1. Database Changes
+
+```bash
+# Update Prisma schema
+npm run db:format
+npm run db:migrate-cr  # Create migration
+npm run db:migrate     # Apply migration
+```
+
+#### 2. Server Actions
+
+Create domain-specific actions in `actions/[domain].actions.ts`:
+
+```typescript
+"use server";
+
+import { auth } from "@/auth";
+import prisma from "@/prisma/prisma";
+
+export async function newFeatureAction() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  // Implement feature logic with proper company scoping
+  const result = await prisma.model.create({
+    data: {
+      userId: session.user.id,
+      companyId: session.user.companyId,
+      // ... other fields
+    },
+  });
+
+  return { success: true, data: result };
+}
+```
+
+#### 3. Client Queries
+
+Create TanStack Query hooks in `actions/queries/[domain].queries.ts`:
+
+```typescript
+"use client";
+
+import { newFeatureAction } from "@/actions/domain.actions";
+import { useQuery } from "@tanstack/react-query";
+
+export function useNewFeature() {
+  return useQuery({
+    queryKey: ["newFeature"],
+    queryFn: () => newFeatureAction(),
+  });
+}
+```
+
+#### 4. Components
+
+Follow the established patterns:
+
+- Server components for data fetching
+- Client components for interactivity
+- Proper error handling and loading states
+- Company-scoped data access
+
+#### 5. Access Control
+
+Ensure proper role and userType checking:
+
+```typescript
+export default async function NewFeaturePage() {
+  const { user } = await requireAuth("/feature");
+
+  // Role-based feature access
+  const canAccessFeature = user.role === 'ADMIN' || user.role === 'SUPERADMIN';
+
+  if (!canAccessFeature) {
+    return <AccessDeniedCard />;
+  }
+
+  // Component logic...
+}
+```
+
+### Code Quality Standards
+
+#### TypeScript
+
+- Use strict typing throughout
+- Leverage `User` type from NextAuth
+- Define proper interfaces for all API responses
+- Avoid `any` types - create specific interfaces
+
+#### Component Architecture
+
+```typescript
+// Server component for data fetching
+export default async function ServerPage() {
+  const data = await fetchData();
+  return <ClientComponent data={data} />;
+}
+
+// Client component for interactivity
+"use client";
+export function ClientComponent({ data }) {
+  // Interactive logic here
+}
+```
+
+#### Error Handling
+
+```typescript
+// Consistent error handling pattern
+try {
+  const result = await action();
+  if (!result.success) {
+    return <ErrorCard message={result.error} />;
+  }
+  return <SuccessComponent data={result.data} />;
+} catch (error) {
+  return <ErrorCard message="Something went wrong" />;
+}
+```
+
+### Testing Approach
+
+#### Using Demo Accounts
+
+1. **Role Testing**: Use role switcher to test different permission levels
+2. **User Type Testing**: Switch between recruiter and candidate modes
+3. **Permission Verification**: Ensure access controls work correctly
+4. **Cross-Organization Testing**: Verify data isolation between companies
+
+#### Test Scenarios
+
+- Create test data with demo accounts
+- Verify role-based access restrictions
+- Test document limits and usage tracking
+- Validate AI integration with sample CVs
+- Check analytics and reporting accuracy
+
+---
+
+## API Documentation
+
+### Authentication Endpoints
+
+#### NextAuth.js Integration
+
+```json
+POST /api/auth/[...nextauth]
+```
+
+Handles all authentication flows including OAuth and demo account access.
+
+### CV Processing APIs
+
+#### CV Analysis Endpoint
+
+```json
+POST /api/cv/analyze
+Content-Type: multipart/form-data
+
+Body:
+- fileName: string (required)
+- fileContent: string (required)
+- jobTitle: string (required)
+- companyName: string (optional)
+- jobDescription: string (optional)
+
+Response:
+{
+  "success": true,
+  "id": "analysis_id",
+  "feedback": {
+    "overallScore": 85,
+    "ATS": { "score": 90, "tips": [...] },
+    // ... other categories
+  }
+}
+```
+
+#### User Role Management
+
+```json
+POST /api/user/switch-role
+Content-Type: application/json
+
+Body:
+{
+  "userType": "RECRUITER" | "CANDIDATE"
+}
+
+Response:
+{
+  "success": true,
+  "targetEmail": "demo@profileprep.com",
+  "redirectUrl": "/recruiter"
+}
+```
+
+### Server Actions
+
+#### CV Actions (`actions/cv.actions.ts`)
+
+- `createCVAnalysis()` - Process CV analysis
+- `getCVAnalysis(id)` - Retrieve specific analysis
+- `getUserCVAnalyses()` - Get user's analysis history
+
+#### User Actions (`actions/user.actions.ts`)
+
+- `getRecruiterDocuments()` - Fetch user documents
+- `updateUserLimits()` - Modify document limits
+- `switchUserRole()` - Handle role switching
+
+#### Admin Actions (`actions/admin.actions.ts`)
+
+- `getCompanyUsers()` - Manage company members
+- `createCompanyUser()` - Add new organization members
+- `updateUserPermissions()` - Modify user roles and limits
+
+### Query Hooks (`actions/queries/`)
+
+#### Usage Pattern
+
+```typescript
+"use client";
+import { useCompanyUsers } from "@/actions/queries/admin.queries";
+
+export function UserManagement() {
+  const { data: users, isLoading, error } = useCompanyUsers();
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <ErrorCard />;
+
+  return <UserList users={users} />;
+}
+```
+
+---
+
+## Deployment
+
+### Vercel Deployment (Recommended)
+
+#### Setup Steps
+
+1. **Repository Connection**:
+
+   - Connect GitHub repository to Vercel
+   - Configure automatic deployments
+
+2. **Environment Variables**:
+
+   ```env
+   # Production environment variables
+   DATABASE_URL=your_production_database_url
+   DIRECT_URL=your_direct_database_url
+   GOOGLE_GENERATIVE_AI_API_KEY=your_api_key
+   AUTH_SECRET=your_auth_secret_32_chars
+   AUTH_GOOGLE_ID=your_google_oauth_id
+   AUTH_GOOGLE_SECRET=your_google_oauth_secret
+   AUTH_LINKEDIN_ID=your_linkedin_oauth_id
+   AUTH_LINKEDIN_SECRET=your_linkedin_oauth_secret
+   NODE_ENV=production
+   ```
+
+3. **Database Configuration**:
+
+   ```bash
+   # Run migrations in production
+   npm run db:migrate-pr
+   ```
+
+4. **Domain Configuration**:
+   - Configure custom domain in Vercel dashboard
+   - Update OAuth redirect URLs for production domain
+
+#### Production Considerations
+
+- **Demo Account Security**: Demo accounts automatically disabled in production
+- **Database Connection Pooling**: Use connection pooler for PostgreSQL
+- **API Rate Limiting**: Implement rate limiting for AI API calls
+- **Error Monitoring**: Set up error tracking (Sentry recommended)
+- **Performance Monitoring**: Enable Vercel Analytics
+
+### Manual Deployment
+
+```bash
+# Build application
 npm run build
-npm start
+
+# Set production environment
+export NODE_ENV=production
+
+# Run database migrations
+npm run db:migrate-pr
+
+# Start production server
+npm run start
+```
+
+### Docker Deployment (Optional)
+
+```dockerfile
+FROM node:18-alpine
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+COPY . .
+RUN npm run build
+
+EXPOSE 3000
+CMD ["npm", "start"]
 ```
 
 ---
 
-## Core Features
+## Testing
 
-### CV Generation
+### Available Scripts
 
-ProfilePrep's core functionality allows recruiters to upload candidate CVs and transform them into polished, professional documents.
+```bash
+# Run all tests
+npm run test
 
-#### How It Works
+# Watch mode for development
+npm run test:watch
 
-1. **Upload**: Upload a candidate's CV via PDF
-2. **Extract**: Our system extracts the content
-3. **Enhance**: AI enhances the formatting and presentation
-4. **Review & Edit**: Review the generated CV and make adjustments if needed
-5. **Export**: Download the polished CV or share it directly
+# Run specific test
+npm run test -- UserManagement.test.ts
+```
 
-#### Key Benefits
+### Test Structure
 
-- Maintains original information while improving presentation
-- Ensures gender-neutral language throughout
-- Fixes formatting errors without altering the CV's meaning
-- Creates a consistent format across all candidate profiles
+```zsh
+__tests__/
+├── components/           # Component tests
+├── pages/               # Page integration tests
+├── api/                 # API endpoint tests
+└── utils/               # Utility function tests
+```
 
-### CV Management
+### Testing Patterns
 
-The CV management system allows users to:
+#### Component Testing
 
-- View all generated CVs
-- Filter and search through your CV library
-- Make notes on individual CVs
-- View, download, or share generated profiles
+```typescript
+import { render, screen } from '@testing-library/react';
+import { UserList } from '@/components/admin/UserList';
 
-### Template System
+describe('UserList', () => {
+  it('displays user information correctly', () => {
+    const mockUsers = [
+      { id: '1', name: 'John Doe', email: 'john@example.com' }
+    ];
 
-For companies with established CV formats, our template system allows:
+    render(<UserList users={mockUsers} />);
 
-- Creation of company-specific CV templates
-- Template management for different roles or departments
-- Consistent branding across all candidate profiles
-- Customisation options for special requirements
+    expect(screen.getByText('John Doe')).toBeInTheDocument();
+    expect(screen.getByText('john@example.com')).toBeInTheDocument();
+  });
+});
+```
 
-### User Management
+#### API Testing
 
-Admin users can:
+```typescript
+import { NextRequest } from "next/server";
 
-- Create and manage user accounts
-- Assign appropriate permissions (User, Admin)
-- Monitor user activity
-- Configure user-specific settings
+import { POST } from "@/app/api/cv/analyze/route";
 
-### Company Administration
+describe("/api/cv/analyze", () => {
+  it("should analyze CV and return feedback", async () => {
+    const formData = new FormData();
+    formData.append("fileName", "test-cv.pdf");
+    formData.append("fileContent", "CV content here...");
+    formData.append("jobTitle", "Software Engineer");
 
-For multi-user organisations, the company management features offer:
+    const request = new NextRequest("http://localhost:3000/api/cv/analyze", {
+      method: "POST",
+      body: formData,
+    });
 
-- Company profile management
-- User allocation and permissions within the company
-- Template sharing across the organisation
-- Usage reporting and analytics
+    const response = await POST(request);
+    const data = await response.json();
 
----
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+    expect(data.feedback).toBeDefined();
+  });
+});
+```
 
-## User Roles & Permissions
+### Demo Account Testing
 
-ProfilePrep implements a role-based access control system with three primary roles:
+#### Functional Checks
 
-### USER
+1. **Role Switching**: Verify role switcher works correctly
+2. **Permission Testing**: Test all access control restrictions
+3. **Data Isolation**: Ensure company data separation
+4. **Feature Completeness**: Verify all features work for each user type
+5. **Analytics Accuracy**: Validate dashboard statistics
 
-- Generate and manage their own CVs
-- Use company templates (if part of a company)
-- View their document history
+#### Testing Workflow
 
-### ADMIN
+```bash
+# Start development environment
+npm run dev
 
-- All USER permissions
-- Create and manage users within their company
-- View all company CVs and templates
-- Create and edit company templates
-
-### SUPERADMIN
-
-- All ADMIN permissions
-- Manage companies
-- Access system-wide settings
-- View analytics across all companies
+# Use demo accounts to test:
+# 1. Basic recruiter functionality
+# 2. Admin recruiter features
+# 3. Candidate analysis flow
+# 4. Organization management
+# 5. System admin capabilities
+```
 
 ---
 
@@ -203,114 +1014,198 @@ ProfilePrep implements a role-based access control system with three primary rol
 
 ### Common Issues
 
-#### The CV generation takes too long or times out
+#### Database Connection Errors
 
-**Solution:** Large or complex PDFs may take longer to process. Try breaking down the CV into smaller sections or uploading a simpler format.
+**Symptoms**: `PrismaClientKnownRequestError: Can't reach database server`
 
-#### The generated CV is missing information from the original
+**Solutions**:
 
-**Solution:** Our AI prioritises the most relevant information. If specific content is missing, add a note in the candidate information section highlighting what should be included.
+1. Verify `DATABASE_URL` and `DIRECT_URL` in `.env`
+2. Check PostgreSQL service is running
+3. For Supabase: Verify connection pooler settings
+4. Run migrations: `npm run db:migrate`
+5. Check firewall/network connectivity
 
-#### Template changes aren't reflected in generated CVs
+#### Authentication Issues
 
-**Solution:** New templates only apply to newly generated CVs. Regenerate the CV to apply the new template.
+**Symptoms**: `[next-auth][error][SIGNIN_OAUTH_ERROR]`
+
+**Solutions**:
+
+1. Verify `AUTH_SECRET` is set and 32+ characters
+2. Check OAuth provider credentials
+3. Ensure redirect URLs match in OAuth app settings
+4. Clear browser cookies and cache
+5. Verify NextAuth.js configuration in `auth.ts`
+
+#### AI Generation Failures
+
+**Symptoms**: `Failed to parse CV analysis response`
+
+**Solutions**:
+
+1. Verify `GOOGLE_GENERATIVE_AI_API_KEY` is correct
+2. Check Google AI API quota and billing
+3. Review API rate limits
+4. Examine raw AI response in logs
+5. Validate CV content length and format
+
+#### Role/Permission Issues
+
+**Symptoms**: Access denied or features not visible
+
+**Solutions**:
+
+1. Check user role and userType in database
+2. Verify company association
+3. Clear NextAuth.js session cache
+4. Ensure proper access control in page components
+5. Check demo account configuration
+
+#### File Upload Problems
+
+**Symptoms**: PDF parsing fails or empty content
+
+**Solutions**:
+
+1. Verify PDF is not password protected
+2. Check file size limits (recommended max 10MB)
+3. Test with plain text files first
+4. Validate PDF parsing library configuration
+5. Review file upload component error handling
+
+### Development Issues
+
+#### Build Failures
+
+```bash
+# Clear Next.js cache
+rm -rf .next
+
+# Clear node_modules and reinstall
+rm -rf node_modules package-lock.json
+npm install
+
+# Run type checking
+npm run typecheck
+```
+
+#### Database Schema Issues
+
+```bash
+# Reset database (development only)
+npx prisma migrate reset
+
+# Generate Prisma client
+npx prisma generate
+
+# Format schema files
+npm run db:format
+```
+
+#### Environment Configuration
+
+```bash
+# Verify all required environment variables
+node -e "
+const required = ['DATABASE_URL', 'GOOGLE_GENERATIVE_AI_API_KEY', 'AUTH_SECRET'];
+required.forEach(key => {
+  if (!process.env[key]) console.log('Missing:', key);
+});
+"
+```
+
+### Production Issues
+
+#### Performance Problems
+
+1. **Database Connection Pooling**: Ensure proper connection pooling configuration
+2. **API Rate Limiting**: Implement request throttling for AI APIs
+3. **Query Optimization**: Review slow database queries
+4. **Caching**: Implement appropriate caching strategies
+5. **Bundle Analysis**: Use `@next/bundle-analyzer` to optimize bundle size
+
+#### Security Concerns
+
+1. **Demo Account Leakage**: Ensure demo accounts are disabled in production
+2. **Data Isolation**: Verify company-scoped queries in all operations
+3. **Input Validation**: Validate all user inputs and file uploads
+4. **API Security**: Implement proper authentication for all API routes
+5. **Environment Security**: Secure environment variables and secrets
+
+#### Monitoring & Logging
+
+```bash
+# Enable detailed logging in production
+export NEXTAUTH_DEBUG=true
+export NODE_ENV=production
+
+# Monitor API responses and errors
+# Implement error tracking (Sentry, LogRocket, etc.)
+```
+
+### Getting Help
+
+#### Internal Resources
+
+1. Check existing code patterns in similar components
+2. Review database schema and relationships
+3. Examine server actions for proper implementation
+4. Look at TanStack Query usage patterns
+5. Study role-based access control implementation
+
+#### External Resources
+
+1. **Next.js Documentation**: [https://nextjs.org/docs](https://nextjs.org/docs)
+2. **NextAuth.js**: [https://authjs.dev/](https://authjs.dev/)
+3. **Prisma**: [https://www.prisma.io/docs](https://www.prisma.io/docs)
+4. **TanStack Query**: [https://tanstack.com/query/](https://tanstack.com/query/)
+5. **Tailwind CSS**: [https://tailwindcss.com/docs](https://tailwindcss.com/docs)
+
+#### Community Support
+
+1. Next.js Discord community
+2. NextAuth.js GitHub discussions
+3. Prisma community forums
+4. Stack Overflow with relevant tags
 
 ---
 
-## Future Enhancements
+## Development Scripts Reference
 
-ProfilePrep is continuously evolving to meet the needs of both recruiters and candidates. The following enhancements are proposed for development and scheduled for upcoming releases, pending confirmation.
+```bash
+# Development
+npm run dev              # Start development server with Turbopack
+npm run build            # Build for production
+npm run start            # Start production server
 
-### 1. Candidate Portal
+# Database Operations
+npm run db:migrate       # Run database migrations
+npm run db:migrate-cr    # Create new migration
+npm run db:migrate-pr    # Deploy migrations to production
+npm run db:seed          # Seed database with demo data
+npm run db:format        # Format Prisma schema files
 
-The Candidate Portal is designed to empower job seekers with the same AI-powered profile optimisation tools available to recruiters.
+# Code Quality
+npm run lint             # Run ESLint
+npm run typecheck        # Run TypeScript type checking
+npm run format           # Format code with Prettier
+npm run format:check     # Check formatting without changes
 
-#### Features for Candidates
+# Testing
+npm run test             # Run Jest tests
+npm run test:watch       # Run tests in watch mode
 
-- **Comprehensive CV Management**: Candidates can upload and maintain a "master CV" containing their complete professional history
-- **AI-Powered Tailoring**: Automatically customise CVs for specific job applications by analysing job descriptions
-- **ATS Optimisation**: Ensure applications pass Applicant Tracking Systems by incorporating relevant keywords and formatting
-- **Application Tracking**: Monitor the status of job applications within a centralised dashboard
-- **Multi-Version Management**: Maintain different versions of CVs tailored to different positions or industries
-
-#### Integration with Recruiter Workflow
-
-- Companies can invite candidates to join their organisational portal
-- Recruiters can review and provide feedback on candidate profiles
-- Seamless application process for company job listings
-- Customisable permission levels for candidate access and interactions
-
-##### Implementation Timeline #1
-
-The Candidate Portal is scheduled for release in Q1 2025 and will be available as both:
-
-- A standalone subscription for individual job seekers
-- An add-on feature for companies to extend to their candidates
-
-### 2. Job Matching
-
-Our upcoming job matching system will streamline the recruitment process by connecting the right candidates with the right opportunities.
-
-#### Initial Job Matching Features
-
-- **Job Listings Management**: Create, publish, and manage job postings directly within ProfilePrep
-- **Application Processing**: Track and manage candidate applications through customisable status workflows
-- **Basic Matching Algorithm**: Match candidates to jobs based on keyword analysis of CVs and job descriptions
-- **Application Analytics**: Gain insights into application metrics and candidate sources
-- **Custom Application Statuses**: Configure application tracking statuses to align with company recruitment processes
-
-##### Implementation Timeline #2
-
-The basic Job Matching functionality is planned for release, following the Candidate Portal, in Q2 2025.
-
-### 3. Advanced Matching Algorithm
-
-Following the initial job matching release, we will launch an advanced AI-powered matching system that goes beyond keyword matching to deliver truly intelligent recommendations.
-
-#### Advanced Matching Features
-
-- **Skills-Based Matching**: Granular matching based on explicit skills taxonomy and categorisation
-- **Weighted Criteria Matching**: Sophisticated algorithm that considers multiple factors including:
-  - Skills alignment (technical, soft skills, certifications)
-  - Experience level matching (years of experience, seniority)
-  - Education compatibility (degree requirements, specialised training)
-  - Location preferences (remote, hybrid, on-site with geographic considerations)
-- **Match Quality Scoring**: Percentage-based scoring system with detailed breakdown of match components
-- **Two-Way Recommendations**:
-  - For recruiters: Find best-fit candidates for specific job openings
-  - For candidates: Discover most suitable job opportunities based on profile
-- **Candidate Ranking**: Intelligent ranking of candidates for specific positions
-- **Gap Analysis**: Identify skill or experience gaps between candidates and job requirements
-
-#### Technical Implementation
-
-The advanced matching system will utilise:
-
-- Comprehensive skills taxonomy database
-- Machine learning algorithms to improve match quality over time
-- Natural language processing for deep context understanding
-- Customisable weighting system for different industries and roles
-
-##### Implementation Timeline #3
-
-The Advanced Matching Algorithm is scheduled for release in Q2 2025, following the successful deployment and adoption of the basic job matching functionality.
-
-## Contributing
-
-We welcome contributions to ProfilePrep! Here's how you can help:
-
-1. **Fork the repository**: Start by forking the repository to your GitHub account
-2. **Create a feature branch**: `git checkout -b feature/your-feature-name`
-3. **Make your changes**: Implement your feature or fix
-4. **Test thoroughly**: Ensure that the application builds and your changes work as expected
-5. **Submit a pull request**: Push to your fork and submit a pull request thoroughly explaining the changes you've made
-
-Please follow our coding standards and include appropriate tests with your contributions.
+# Utilities
+npm run postinstall      # Generate Prisma client (automatic after npm install)
+```
 
 ---
 
-## License - Pending Decision
+## License
 
-ProfilePrep will be released under an open-source license. The exact license is still being decided, but it will allow for contributions and use while ensuring protection against misuse or unauthorised redistribution.
+This project is proprietary software. All rights reserved.
 
 ---
+
+Last updated: 12 August 2025

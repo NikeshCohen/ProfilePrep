@@ -1,6 +1,6 @@
 {
   "name": "profileprep",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,6 +15,7 @@
     "db:migrate-cr": "npx prisma migrate dev --create-only",
     "db:migrate": "npx prisma migrate dev",
     "db:migrate-pr": "npx prisma migrate deploy",
+    "db:seed": "tsx prisma/seed.ts",
     "postinstall": "prisma generate",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -35,6 +36,7 @@
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-label": "^2.1.2",
+    "@radix-ui/react-progress": "^1.1.7",
     "@radix-ui/react-scroll-area": "^1.2.3",
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.2",
@@ -44,8 +46,10 @@
     "@tanstack/react-query": "^5.66.9",
     "@tanstack/react-query-devtools": "^5.66.9",
     "@tanstack/react-query-next-experimental": "^5.66.9",
+    "@types/bcryptjs": "^2.4.6",
     "@vercel/analytics": "^1.5.0",
     "ai": "^4.1.38",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -62,6 +66,7 @@
     "react": "^19.0.0",
     "react-confetti": "^6.2.2",
     "react-dom": "^19.0.0",
+    "react-dropzone": "^14.3.8",
     "react-error-boundary": "^5.0.0",
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.1",
@@ -88,6 +93,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-dropzone": "^4.2.2",
     "concurrently": "^9.1.2",
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
@@ -100,6 +106,7 @@
     "tailwindcss": "^3.4.1",
     "ts-jest": "^29.2.6",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.3",
     "typescript": "^5"
   }
 }

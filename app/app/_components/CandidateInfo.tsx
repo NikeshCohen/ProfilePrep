@@ -61,13 +61,13 @@ export function CandidateInfo({
 
   return (
     <motion.div
-      className="space-y-4 w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+      className="w-full max-w-sm space-y-4 sm:max-w-lg md:max-w-xl lg:max-w-2xl"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.h1
-        className="mb-4 font-bold text-primary text-3xl"
+        className="mb-4 text-3xl font-bold text-primary"
         variants={itemVariants}
       >
         Candidate Information
@@ -84,7 +84,7 @@ export function CandidateInfo({
               onChange={onInputChange}
             />
             <p
-              className="mt-2 text-muted-foreground text-xs"
+              className="mt-2 text-xs text-muted-foreground"
               role="region"
               aria-live="polite"
             >
@@ -138,7 +138,7 @@ export function CandidateInfo({
       {showNotes && (
         <>
           <motion.div variants={itemVariants}>
-            <Label htmlFor="template" className="block mb-2">
+            <Label htmlFor="template" className="mb-2 block">
               Template
             </Label>
             <TemplateSelect
@@ -164,7 +164,7 @@ export function CandidateInfo({
                 onChange={handleNotesChange}
                 minLength={200}
               />
-              <div className="flex justify-between items-center text-xs">
+              <div className="flex items-center justify-between text-xs">
                 <p className="text-muted-foreground">
                   Add additional information. Aim for 800 characters for best
                   results. Minimum 200 characters
@@ -254,12 +254,12 @@ function TemplateSelect({
       >
         <SelectTrigger className="bg-background/20">
           <SelectValue placeholder="Choose a template style" />
-          {isLoading && <LoaderIcon className="ml-2 w-4 h-4 animate-spin" />}
+          {isLoading && <LoaderIcon className="ml-2 h-4 w-4 animate-spin" />}
         </SelectTrigger>
         <SelectContent>
           {isLoading && sessionUser.company ? (
-            <div className="flex justify-center items-center py-2">
-              <p className="text-muted-foreground text-sm">
+            <div className="flex items-center justify-center py-2">
+              <p className="text-sm text-muted-foreground">
                 Loading templates...
               </p>
             </div>
@@ -280,7 +280,7 @@ function TemplateSelect({
         <Link
           href="https://cal.com/profileprep/quick-chat"
           target="_blank"
-          className="flex mt-2 text-primary hover:text-primary text-xs underline transition-colors"
+          className="mt-2 flex text-xs text-primary underline transition-colors hover:text-primary"
         >
           <span>Upgrade to use your own custom templates!</span>
         </Link>

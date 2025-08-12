@@ -22,6 +22,7 @@ interface EditTemplateData {
 export const fetchAllUsers = async (user: {
   role: string;
   companyId?: string;
+  userType?: string;
 }) => {
   // Check user role
   if (user.role === "USER") {
@@ -45,8 +46,12 @@ export const fetchAllUsers = async (user: {
     });
   }
 
-  // If the user is a superadmin, fetch all users
+  // If the user is a superadmin, fetch all users (or filter by user type if specified)
+  const whereClause = user.userType
+    ? { userType: user.userType as "RECRUITER" | "CANDIDATE" | "TESTER" }
+    : {};
   return await prisma.user.findMany({
+    where: whereClause,
     include: {
       company: true,
     },
@@ -196,7 +201,9 @@ export const deleteUser = async (userId: string, sessionUser: User) => {
   }
 };
 
-export const createCompany = async (companyData: NewCompanyData) => {
+export const createCompany = async (
+  companyData: NewCompanyData & { companyType?: string },
+) => {
   try {
     const company = await prisma.company.create({
       data: {
@@ -204,6 +211,9 @@ export const createCompany = async (companyData: NewCompanyData) => {
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
         allowedTemplates: companyData.allowedTemplates,
         createdTemplates: 0,
+        companyType:
+          (companyData.companyType as "RECRUITER" | "CANDIDATE_ORG") ||
+          "RECRUITER",
       },
     });
     return company;
@@ -214,7 +224,7 @@ export const createCompany = async (companyData: NewCompanyData) => {
 
 export const updateCompany = async (
   companyId: string,
-  companyData: NewCompanyData,
+  companyData: NewCompanyData & { companyType?: string },
   sessionUser: User,
 ) => {
   // Check permissions
@@ -259,6 +269,9 @@ export const updateCompany = async (
         name: companyData.name,
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
         allowedTemplates: companyData.allowedTemplates,
+        ...(companyData.companyType && {
+          companyType: companyData.companyType as "RECRUITER" | "CANDIDATE_ORG",
+        }),
       },
     });
 
@@ -331,14 +344,22 @@ export const deleteCompany = async (companyId: string, sessionUser: User) => {
   }
 };
 
-export const fetchAllCompanies = async (sessionUser: User) => {
+export const fetchAllCompanies = async (
+  sessionUser: User,
+  companyType?: string,
+) => {
   if (sessionUser.role !== "SUPERADMIN") {
     throw new Error(
       "403 Forbidden: You do not have permission to access this resource.",
     );
   }
 
+  const whereClause = companyType
+    ? { companyType: companyType as "RECRUITER" | "CANDIDATE_ORG" }
+    : {};
+
   return await prisma.company.findMany({
+    where: whereClause,
     include: {
       _count: {
         select: {
@@ -717,4 +738,124 @@ export const deleteTemplate = async (templateId: string, sessionUser: User) => {
   } catch (error: unknown) {
     return handleError(error);
   }
+};
+
+// Candidate organization actions
+export const getOrganizationMembers = async (user: User) => {
+  if (
+    (user.role !== "ADMIN" && user.role !== "SUPERADMIN") ||
+    user.userType !== "CANDIDATE"
+  ) {
+    throw new Error(
+      "Unauthorized: Insufficient permissions for candidate organization access",
+    );
+  }
+
+  if (!user.company?.id) {
+    throw new Error("User not associated with any organization");
+  }
+
+  return await prisma.user.findMany({
+    where: {
+      companyId: user.company.id,
+      userType: "CANDIDATE",
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      createdDocs: true,
+      allowedDocs: true,
+      createdAt: true,
+      role: true,
+      isTestAccount: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const getOrganizationAnalyses = async (user: User) => {
+  if (
+    (user.role !== "ADMIN" && user.role !== "SUPERADMIN") ||
+    user.userType !== "CANDIDATE"
+  ) {
+    throw new Error(
+      "Unauthorized: Insufficient permissions for candidate organization access",
+    );
+  }
+
+  if (!user.company?.id) {
+    return [];
+  }
+
+  return await prisma.cVAnalysis.findMany({
+    where: {
+      user: {
+        companyId: user.company.id,
+        userType: "CANDIDATE",
+      },
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const getOrganizationAnalytics = async (user: User) => {
+  if (
+    (user.role !== "ADMIN" && user.role !== "SUPERADMIN") ||
+    user.userType !== "CANDIDATE"
+  ) {
+    throw new Error(
+      "Unauthorized: Insufficient permissions for candidate organization access",
+    );
+  }
+
+  const [orgMembers, orgAnalyses] = await Promise.all([
+    getOrganizationMembers(user),
+    getOrganizationAnalyses(user),
+  ]);
+
+  const totalMembers = orgMembers.length;
+  const totalAnalyses = orgAnalyses.length;
+  const avgScore =
+    orgAnalyses.length > 0
+      ? Math.round(
+          orgAnalyses.reduce((sum, a) => sum + a.overallScore, 0) /
+            orgAnalyses.length,
+        )
+      : 0;
+  const totalUsed = orgMembers.reduce(
+    (sum, member) => sum + member.createdDocs,
+    0,
+  );
+  const totalAllowed = orgMembers.reduce(
+    (sum, member) => sum + member.allowedDocs,
+    0,
+  );
+  const usageRate =
+    totalAllowed > 0 ? Math.round((totalUsed / totalAllowed) * 100) : 0;
+
+  return {
+    members: orgMembers,
+    analyses: orgAnalyses,
+    stats: {
+      totalMembers,
+      totalAnalyses,
+      avgScore,
+      totalUsed,
+      totalAllowed,
+      usageRate,
+    },
+  };
 };

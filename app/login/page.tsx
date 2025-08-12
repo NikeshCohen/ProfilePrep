@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import GoogleButton from "@/app/login/_components/GoogleButton";
 import LinkedInButton from "@/app/login/_components/LinkedInButton";
+import TestAccountButton from "@/app/login/_components/TestAccountButton";
 import { siteConfig } from "@/constants/webcontent";
 
 import Logo from "@/components/global/Logo";
@@ -15,8 +16,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 import getSession from "@/lib/getSession";
+import { getDashboardRoute } from "@/lib/redirectUtils";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -32,7 +35,10 @@ export default async function LoginPage({ searchParams }: PageProps) {
   const params = await searchParams; // Need to await dynamic APIs in Next.js 15
   const redirectUrl = params.redirectUrl;
 
-  if (session) redirect("/app");
+  if (session && session.user?.id) {
+    const dashboardRoute = await getDashboardRoute(session.user.id);
+    redirect(redirectUrl || dashboardRoute);
+  }
 
   return (
     <section className="flex min-h-[93vh] w-full items-center justify-center p-4">
@@ -54,13 +60,20 @@ export default async function LoginPage({ searchParams }: PageProps) {
               <GoogleButton redirectUrl={redirectUrl ?? "/app"} />
               <LinkedInButton redirectUrl={redirectUrl ?? "/app"} />
             </div>
-            {/* <div className="flex items-center gap-3 px-2">
-              <Separator className="flex-1" />
-              <span className="text-muted-foreground text-xs">
-                Welcome, Profile<span className="text-primary">Prep</span>
-              </span>
-              <Separator className="flex-1" />
-            </div> */}
+
+            {process.env.NODE_ENV === "development" && (
+              <>
+                <div className="flex items-center gap-3 px-2">
+                  <Separator className="flex-1" />
+                  <span className="text-xs text-muted-foreground">
+                    Or try demo
+                  </span>
+                  <Separator className="flex-1" />
+                </div>
+
+                <TestAccountButton redirectUrl={redirectUrl ?? "/app"} />
+              </>
+            )}
 
             <div className="rounded-lg bg-primary/5 p-4">
               <p className="text-center text-sm text-muted-foreground">

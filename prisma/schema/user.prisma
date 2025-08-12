@@ -8,12 +8,15 @@ model User {
   accounts      Account[]
   sessions      Session[]
   GeneratedDocs GeneratedDocs[]
+  CVAnalyses    CVAnalysis[]
   createdAt     DateTime        @default(now())
   updatedAt     DateTime        @updatedAt
   createdDocs   Int             @default(0)
   allowedDocs   Int             @default(5)
   company       Company?        @relation(fields: [companyId], references: [id])
   role          UserRole        @default(USER)
+  userType      UserType        @default(RECRUITER)
+  isTestAccount Boolean         @default(false)
 
   @@map("users")
 }
@@ -63,4 +66,41 @@ enum UserRole {
   USER
   ADMIN
   SUPERADMIN
+}
+
+enum UserType {
+  RECRUITER
+  CANDIDATE
+  TESTER
+}
+
+model CVAnalysis {
+  id                String   @id @default(cuid())
+  userId            String
+  fileName          String
+  fileContent       String   @db.Text
+  companyName       String?
+  jobTitle          String
+  jobDescription    String   @db.Text
+  overallScore      Int
+  atsScore          Int
+  atsFeedback       Json
+  toneScore         Int
+  toneFeedback      Json
+  contentScore      Int
+  contentFeedback   Json
+  structureScore    Int
+  structureFeedback Json
+  skillsScore       Int
+  skillsFeedback    Json
+  grammarScore      Int
+  grammarFeedback   Json
+  keywordScore      Int
+  keywordFeedback   Json
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("cv_analyses")
 }
