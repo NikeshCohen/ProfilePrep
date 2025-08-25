@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { GuidancePanel } from "@/components/global/GuidancePanel";
 
 interface User {
-  userType: string;
+  userType: "CANDIDATE" | "RECRUITER";
   field?: string;
   specializations?: string[];
   careerStage?: string;

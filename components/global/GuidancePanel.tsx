@@ -1,9 +1,29 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import candidateGuidance from "@/data/guidance/candidate-guidance.json";
+import recruiterGuidance from "@/data/guidance/recruiter-guidance.json";
+import {
+  ChevronRight,
+  FileText,
+  HelpCircle,
+  Mail,
+  Sparkles,
+  Target,
+} from "lucide-react";
 import { motion } from "motion/react";
-import { HelpCircle, ChevronRight, Sparkles, Target, FileText, Mail } from "lucide-react";
+
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -12,23 +32,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/components/ui/tabs";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import candidateGuidance from "@/data/guidance/candidate-guidance.json";
-import recruiterGuidance from "@/data/guidance/recruiter-guidance.json";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface UserPreferences {
   userType: "CANDIDATE" | "RECRUITER";
@@ -47,15 +51,18 @@ interface User {
 interface FieldData {
   label: string;
   description?: string;
-  specializations: Record<string, {
-    label: string;
-    tips?: string[];
-    keywords?: string[];
-    sourcing?: string[];
-    screening?: string[];
-    interviewTips?: string[];
-    redFlags?: string[];
-  }>;
+  specializations: Record<
+    string,
+    {
+      label: string;
+      tips?: string[];
+      keywords?: string[];
+      sourcing?: string[];
+      screening?: string[];
+      interviewTips?: string[];
+      redFlags?: string[];
+    }
+  >;
 }
 
 interface CareerStageData {
@@ -83,19 +90,28 @@ export function GuidancePanel({ user }: { user: User }) {
     return null;
   }
 
-  const guidance = preferences.userType === "CANDIDATE" ? candidateGuidance : recruiterGuidance;
-  const fieldData = (guidance.fields as Record<string, FieldData>)[preferences.field];
-  
-  const selectedSpecs = preferences.specializations?.map(
-    (specKey) => ({
-      key: specKey,
-      data: fieldData?.specializations[specKey],
-    })
-  ).filter(spec => spec.data) || [];
+  const guidance =
+    preferences.userType === "CANDIDATE"
+      ? candidateGuidance
+      : recruiterGuidance;
+  const fieldData = (guidance.fields as Record<string, FieldData>)[
+    preferences.field
+  ];
 
-  const careerStageData = preferences.userType === "CANDIDATE" && preferences.careerStage
-    ? (candidateGuidance.careerStages as Record<string, CareerStageData>)[preferences.careerStage]
-    : null;
+  const selectedSpecs =
+    preferences.specializations
+      ?.map((specKey) => ({
+        key: specKey,
+        data: fieldData?.specializations[specKey],
+      }))
+      .filter((spec) => spec.data) || [];
+
+  const careerStageData =
+    preferences.userType === "CANDIDATE" && preferences.careerStage
+      ? (candidateGuidance.careerStages as Record<string, CareerStageData>)[
+          preferences.careerStage
+        ]
+      : null;
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -105,17 +121,17 @@ export function GuidancePanel({ user }: { user: User }) {
           animate={{ scale: 1, opacity: 1 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 400, 
+          transition={{
+            type: "spring",
+            stiffness: 400,
             damping: 17,
-            delay: 0.5
+            delay: 0.5,
           }}
         >
           <Button
             variant="outline"
             size="icon"
-            className="fixed bottom-6 right-6 h-12 w-12 rounded-full shadow-lg z-50 transition-colors duration-200"
+            className="fixed bottom-6 right-6 z-50 h-12 w-12 rounded-full shadow-lg transition-colors duration-200"
             title="Career Guidance"
           >
             <motion.div
@@ -127,7 +143,7 @@ export function GuidancePanel({ user }: { user: User }) {
           </Button>
         </motion.div>
       </SheetTrigger>
-      <SheetContent className="w-full sm:max-w-2xl overflow-y-auto">
+      <SheetContent className="w-full overflow-y-auto sm:max-w-2xl">
         <SheetHeader>
           <SheetTitle>Your Personalized Guidance</SheetTitle>
           <SheetDescription>
@@ -153,41 +169,51 @@ export function GuidancePanel({ user }: { user: User }) {
               <TabsTrigger value="quick-tips">Quick Tips</TabsTrigger>
               <TabsTrigger value="specialized">Specialized</TabsTrigger>
               <TabsTrigger value="tools">
-                {preferences.userType === "CANDIDATE" ? "AI Tools" : "Resources"}
+                {preferences.userType === "CANDIDATE"
+                  ? "AI Tools"
+                  : "Resources"}
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="quick-tips" className="space-y-4 mt-4">
+            <TabsContent value="quick-tips" className="mt-4 space-y-4">
               {preferences.userType === "CANDIDATE" ? (
                 <>
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">CV Optimization</CardTitle>
+                      <CardTitle className="text-base">
+                        CV Optimization
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {candidateGuidance.generalTips.cvOptimization.slice(0, 5).map((tip, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span>{tip}</span>
-                          </li>
-                        ))}
+                        {candidateGuidance.generalTips.cvOptimization
+                          .slice(0, 5)
+                          .map((tip, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                              <span>{tip}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
 
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">ATS Optimization</CardTitle>
+                      <CardTitle className="text-base">
+                        ATS Optimization
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {candidateGuidance.generalTips.atsOptimization.slice(0, 5).map((tip, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span>{tip}</span>
-                          </li>
-                        ))}
+                        {candidateGuidance.generalTips.atsOptimization
+                          .slice(0, 5)
+                          .map((tip, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                              <span>{tip}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
@@ -201,12 +227,14 @@ export function GuidancePanel({ user }: { user: User }) {
                       </CardHeader>
                       <CardContent>
                         <ul className="space-y-2 text-sm">
-                          {careerStageData.strategies?.slice(0, 5).map((strategy: string, idx: number) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <Sparkles className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                              <span>{strategy}</span>
-                            </li>
-                          ))}
+                          {careerStageData.strategies
+                            ?.slice(0, 5)
+                            .map((strategy: string, idx: number) => (
+                              <li key={idx} className="flex items-start gap-2">
+                                <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                                <span>{strategy}</span>
+                              </li>
+                            ))}
                         </ul>
                       </CardContent>
                     </Card>
@@ -216,32 +244,40 @@ export function GuidancePanel({ user }: { user: User }) {
                 <>
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">Sourcing Best Practices</CardTitle>
+                      <CardTitle className="text-base">
+                        Sourcing Best Practices
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {recruiterGuidance.generalGuidance.sourcing.bestPractices.slice(0, 5).map((tip, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <Target className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span>{tip}</span>
-                          </li>
-                        ))}
+                        {recruiterGuidance.generalGuidance.sourcing.bestPractices
+                          .slice(0, 5)
+                          .map((tip, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <Target className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                              <span>{tip}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
 
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">Screening Red Flags</CardTitle>
+                      <CardTitle className="text-base">
+                        Screening Red Flags
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {recruiterGuidance.generalGuidance.screening.redFlags.slice(0, 5).map((flag, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 shrink-0" />
-                            <span>{flag}</span>
-                          </li>
-                        ))}
+                        {recruiterGuidance.generalGuidance.screening.redFlags
+                          .slice(0, 5)
+                          .map((flag, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-orange-500" />
+                              <span>{flag}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
@@ -258,83 +294,122 @@ export function GuidancePanel({ user }: { user: User }) {
                       {preferences.userType === "CANDIDATE" ? (
                         <>
                           <div>
-                            <h4 className="font-medium mb-2 text-sm">Top Tips</h4>
+                            <h4 className="mb-2 text-sm font-medium">
+                              Top Tips
+                            </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
-                              {spec.data.tips?.slice(0, 3).map((tip: string, idx: number) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                                  <span>{tip}</span>
-                                </li>
-                              ))}
+                              {spec.data.tips
+                                ?.slice(0, 3)
+                                .map((tip: string, idx: number) => (
+                                  <li
+                                    key={idx}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                                    <span>{tip}</span>
+                                  </li>
+                                ))}
                             </ul>
                           </div>
-                          
+
                           <Separator />
-                          
+
                           <div>
-                            <h4 className="font-medium mb-2 text-sm">Key Keywords</h4>
+                            <h4 className="mb-2 text-sm font-medium">
+                              Key Keywords
+                            </h4>
                             <div className="flex flex-wrap gap-2">
-                              {spec.data.keywords?.slice(0, 10).map((keyword: string) => (
-                                <Badge key={keyword} variant="secondary">
-                                  {keyword}
-                                </Badge>
-                              ))}
+                              {spec.data.keywords
+                                ?.slice(0, 10)
+                                .map((keyword: string) => (
+                                  <Badge key={keyword} variant="secondary">
+                                    {keyword}
+                                  </Badge>
+                                ))}
                             </div>
                           </div>
-                          
+
                           <Separator />
-                          
+
                           <div>
-                            <h4 className="font-medium mb-2 text-sm">Interview Tips</h4>
+                            <h4 className="mb-2 text-sm font-medium">
+                              Interview Tips
+                            </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
-                              {spec.data.interviewTips?.slice(0, 3).map((tip: string, idx: number) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <Sparkles className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                                  <span>{tip}</span>
-                                </li>
-                              ))}
+                              {spec.data.interviewTips
+                                ?.slice(0, 3)
+                                .map((tip: string, idx: number) => (
+                                  <li
+                                    key={idx}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                                    <span>{tip}</span>
+                                  </li>
+                                ))}
                             </ul>
                           </div>
                         </>
                       ) : (
                         <>
                           <div>
-                            <h4 className="font-medium mb-2 text-sm">Sourcing Channels</h4>
+                            <h4 className="mb-2 text-sm font-medium">
+                              Sourcing Channels
+                            </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
-                              {spec.data.sourcing?.slice(0, 3).map((channel: string, idx: number) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <Target className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                                  <span>{channel}</span>
-                                </li>
-                              ))}
+                              {spec.data.sourcing
+                                ?.slice(0, 3)
+                                .map((channel: string, idx: number) => (
+                                  <li
+                                    key={idx}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <Target className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                                    <span>{channel}</span>
+                                  </li>
+                                ))}
                             </ul>
                           </div>
-                          
+
                           <Separator />
-                          
+
                           <div>
-                            <h4 className="font-medium mb-2 text-sm">Screening Tips</h4>
+                            <h4 className="mb-2 text-sm font-medium">
+                              Screening Tips
+                            </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
-                              {spec.data.screening?.slice(0, 3).map((tip: string, idx: number) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                                  <span>{tip}</span>
-                                </li>
-                              ))}
+                              {spec.data.screening
+                                ?.slice(0, 3)
+                                .map((tip: string, idx: number) => (
+                                  <li
+                                    key={idx}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                                    <span>{tip}</span>
+                                  </li>
+                                ))}
                             </ul>
                           </div>
-                          
+
                           <Separator />
-                          
+
                           <div>
-                            <h4 className="font-medium mb-2 text-sm">Red Flags</h4>
+                            <h4 className="mb-2 text-sm font-medium">
+                              Red Flags
+                            </h4>
                             <ul className="space-y-2 text-sm text-muted-foreground">
-                              {spec.data.redFlags?.slice(0, 3).map((flag: string, idx: number) => (
-                                <li key={idx} className="flex items-start gap-2">
-                                  <ChevronRight className="h-4 w-4 text-orange-500 mt-0.5 shrink-0" />
-                                  <span>{flag}</span>
-                                </li>
-                              ))}
+                              {spec.data.redFlags
+                                ?.slice(0, 3)
+                                .map((flag: string, idx: number) => (
+                                  <li
+                                    key={idx}
+                                    className="flex items-start gap-2"
+                                  >
+                                    <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-orange-500" />
+                                    <span>{flag}</span>
+                                  </li>
+                                ))}
                             </ul>
                           </div>
                         </>
@@ -345,12 +420,12 @@ export function GuidancePanel({ user }: { user: User }) {
               </Accordion>
             </TabsContent>
 
-            <TabsContent value="tools" className="space-y-4 mt-4">
+            <TabsContent value="tools" className="mt-4 space-y-4">
               {preferences.userType === "CANDIDATE" ? (
                 <>
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base flex items-center gap-2">
+                      <CardTitle className="flex items-center gap-2 text-base">
                         <FileText className="h-4 w-4" />
                         CV & Cover Letter Analyzer
                       </CardTitle>
@@ -360,12 +435,14 @@ export function GuidancePanel({ user }: { user: User }) {
                         {candidateGuidance.aiToolsInfo.cvAnalyzer.description}
                       </p>
                       <ul className="space-y-1 text-sm">
-                        {candidateGuidance.aiToolsInfo.cvAnalyzer.features.slice(0, 4).map((feature, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <ChevronRight className="h-3 w-3 text-primary" />
-                            {feature}
-                          </li>
-                        ))}
+                        {candidateGuidance.aiToolsInfo.cvAnalyzer.features
+                          .slice(0, 4)
+                          .map((feature, idx) => (
+                            <li key={idx} className="flex items-center gap-2">
+                              <ChevronRight className="h-3 w-3 text-primary" />
+                              {feature}
+                            </li>
+                          ))}
                       </ul>
                       <Badge variant="secondary" className="text-xs">
                         Pay-per-use pricing for affordability
@@ -375,37 +452,42 @@ export function GuidancePanel({ user }: { user: User }) {
 
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base flex items-center gap-2">
+                      <CardTitle className="flex items-center gap-2 text-base">
                         <Sparkles className="h-4 w-4" />
                         Interview Preparation
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
                       <p className="text-sm text-muted-foreground">
-                        {candidateGuidance.aiToolsInfo.interviewPrep.description}
+                        {
+                          candidateGuidance.aiToolsInfo.interviewPrep
+                            .description
+                        }
                       </p>
                       <ul className="space-y-1 text-sm">
-                        {candidateGuidance.aiToolsInfo.interviewPrep.features.slice(0, 4).map((feature, idx) => (
-                          <li key={idx} className="flex items-center gap-2">
-                            <ChevronRight className="h-3 w-3 text-primary" />
-                            {feature}
-                          </li>
-                        ))}
+                        {candidateGuidance.aiToolsInfo.interviewPrep.features
+                          .slice(0, 4)
+                          .map((feature, idx) => (
+                            <li key={idx} className="flex items-center gap-2">
+                              <ChevronRight className="h-3 w-3 text-primary" />
+                              {feature}
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
 
                   <Card className="border-primary/20 bg-primary/5">
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base flex items-center gap-2">
+                      <CardTitle className="flex items-center gap-2 text-base">
                         <Mail className="h-4 w-4" />
                         Stay Connected
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground">
-                        Join our newsletter for weekly insights, job opportunities, and
-                        success stories from our community.
+                        Join our newsletter for weekly insights, job
+                        opportunities, and success stories from our community.
                       </p>
                     </CardContent>
                   </Card>
@@ -414,48 +496,60 @@ export function GuidancePanel({ user }: { user: User }) {
                 <>
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">Sourcing Tools</CardTitle>
+                      <CardTitle className="text-base">
+                        Sourcing Tools
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {recruiterGuidance.generalGuidance.sourcing.tools.slice(0, 6).map((tool, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <Target className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span>{tool}</span>
-                          </li>
-                        ))}
+                        {recruiterGuidance.generalGuidance.sourcing.tools
+                          .slice(0, 6)
+                          .map((tool, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <Target className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                              <span>{tool}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
 
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">Key Metrics to Track</CardTitle>
+                      <CardTitle className="text-base">
+                        Key Metrics to Track
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {recruiterGuidance.generalGuidance.metrics.recruiting.slice(0, 6).map((metric, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <ChevronRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span>{metric}</span>
-                          </li>
-                        ))}
+                        {recruiterGuidance.generalGuidance.metrics.recruiting
+                          .slice(0, 6)
+                          .map((metric, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <ChevronRight className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                              <span>{metric}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>
 
                   <Card>
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-base">Diversity Strategies</CardTitle>
+                      <CardTitle className="text-base">
+                        Diversity Strategies
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2 text-sm">
-                        {recruiterGuidance.generalGuidance.diversity.strategies.slice(0, 5).map((strategy, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <Sparkles className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                            <span>{strategy}</span>
-                          </li>
-                        ))}
+                        {recruiterGuidance.generalGuidance.diversity.strategies
+                          .slice(0, 5)
+                          .map((strategy, idx) => (
+                            <li key={idx} className="flex items-start gap-2">
+                              <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                              <span>{strategy}</span>
+                            </li>
+                          ))}
                       </ul>
                     </CardContent>
                   </Card>

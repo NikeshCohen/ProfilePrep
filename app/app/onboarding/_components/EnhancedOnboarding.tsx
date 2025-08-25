@@ -19,7 +19,12 @@ import {
   Target,
   User,
 } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion, Variants } from "motion/react";
+import {
+  AnimatePresence,
+  Variants,
+  motion,
+  useReducedMotion,
+} from "motion/react";
 import { toast } from "react-hot-toast";
 
 import { Badge } from "@/components/ui/badge";
@@ -178,7 +183,16 @@ export default function EnhancedOnboarding({
       : recruiterGuidance;
   const fields = guidance?.fields || {};
   const selectedField = onboardingData.field
-    ? (fields as Record<string, { label: string; description: string; specializations: Record<string, unknown> }>)[onboardingData.field]
+    ? (
+        fields as Record<
+          string,
+          {
+            label: string;
+            description: string;
+            specializations: Record<string, unknown>;
+          }
+        >
+      )[onboardingData.field]
     : null;
 
   const userTypeOptions = [
@@ -461,7 +475,11 @@ export default function EnhancedOnboarding({
                     ([key, spec], index) => {
                       const isSelected =
                         onboardingData.specializations.includes(key);
-                      const specData = spec as { label: string; tips?: string[]; sourcing?: string[]; };
+                      const specData = spec as {
+                        label: string;
+                        tips?: string[];
+                        sourcing?: string[];
+                      };
 
                       return (
                         <motion.div

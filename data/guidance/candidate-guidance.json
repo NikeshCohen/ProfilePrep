@@ -13,7 +13,18 @@
             "Mention experience with CSS preprocessors and build tools",
             "Emphasize cross-browser compatibility testing experience"
           ],
-          "keywords": ["React", "Vue", "Angular", "JavaScript", "TypeScript", "CSS", "HTML", "Responsive Design", "Webpack", "Git"],
+          "keywords": [
+            "React",
+            "Vue",
+            "Angular",
+            "JavaScript",
+            "TypeScript",
+            "CSS",
+            "HTML",
+            "Responsive Design",
+            "Webpack",
+            "Git"
+          ],
           "interviewTips": [
             "Prepare to live-code UI components during technical interviews",
             "Review CSS flexbox and grid layouts thoroughly",
@@ -30,7 +41,18 @@
             "Mention cloud services experience (AWS, Azure, GCP)",
             "Show understanding of security best practices"
           ],
-          "keywords": ["Node.js", "Python", "Java", "API", "REST", "GraphQL", "Docker", "Kubernetes", "SQL", "MongoDB"],
+          "keywords": [
+            "Node.js",
+            "Python",
+            "Java",
+            "API",
+            "REST",
+            "GraphQL",
+            "Docker",
+            "Kubernetes",
+            "SQL",
+            "MongoDB"
+          ],
           "interviewTips": [
             "Review system design principles and scalability patterns",
             "Practice explaining database optimization strategies",
@@ -47,7 +69,17 @@
             "Include DevOps and deployment experience",
             "Demonstrate understanding of the complete software lifecycle"
           ],
-          "keywords": ["Full-Stack", "MEAN", "MERN", "DevOps", "CI/CD", "Agile", "Git", "Testing", "Deployment"],
+          "keywords": [
+            "Full-Stack",
+            "MEAN",
+            "MERN",
+            "DevOps",
+            "CI/CD",
+            "Agile",
+            "Git",
+            "Testing",
+            "Deployment"
+          ],
           "interviewTips": [
             "Prepare to discuss architecture decisions across the stack",
             "Review both frontend and backend technologies equally",
@@ -64,7 +96,17 @@
             "Mention performance optimization and battery efficiency",
             "Show understanding of mobile-specific UX patterns"
           ],
-          "keywords": ["iOS", "Android", "Swift", "Kotlin", "React Native", "Flutter", "Mobile", "App Store", "Play Store"],
+          "keywords": [
+            "iOS",
+            "Android",
+            "Swift",
+            "Kotlin",
+            "React Native",
+            "Flutter",
+            "Mobile",
+            "App Store",
+            "Play Store"
+          ],
           "interviewTips": [
             "Review platform-specific guidelines and best practices",
             "Prepare to discuss app performance and memory management",
@@ -81,7 +123,17 @@
             "Mention big data technologies and cloud platforms",
             "Highlight any published research or kaggle competition results"
           ],
-          "keywords": ["Python", "R", "Machine Learning", "SQL", "Tableau", "Power BI", "Statistics", "TensorFlow", "Pandas"],
+          "keywords": [
+            "Python",
+            "R",
+            "Machine Learning",
+            "SQL",
+            "Tableau",
+            "Power BI",
+            "Statistics",
+            "TensorFlow",
+            "Pandas"
+          ],
           "interviewTips": [
             "Review statistical concepts and hypothesis testing",
             "Practice explaining complex models to non-technical audiences",
@@ -98,7 +150,18 @@
             "Highlight experience with monitoring and logging tools",
             "Show understanding of security and compliance requirements"
           ],
-          "keywords": ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Jenkins", "Terraform", "CI/CD", "Linux", "Monitoring"],
+          "keywords": [
+            "AWS",
+            "Azure",
+            "GCP",
+            "Docker",
+            "Kubernetes",
+            "Jenkins",
+            "Terraform",
+            "CI/CD",
+            "Linux",
+            "Monitoring"
+          ],
           "interviewTips": [
             "Review cloud service offerings and pricing models",
             "Practice explaining infrastructure automation strategies",
@@ -121,7 +184,15 @@
             "Mention experience with financial software and ERP systems",
             "Show understanding of regulatory requirements"
           ],
-          "keywords": ["Financial Analysis", "Excel", "Financial Modeling", "Budgeting", "Forecasting", "SAP", "QuickBooks"],
+          "keywords": [
+            "Financial Analysis",
+            "Excel",
+            "Financial Modeling",
+            "Budgeting",
+            "Forecasting",
+            "SAP",
+            "QuickBooks"
+          ],
           "interviewTips": [
             "Review financial statements analysis thoroughly",
             "Practice case studies and financial modeling exercises",
@@ -138,7 +209,17 @@
             "Mention specific accounting software proficiency",
             "Highlight attention to detail and accuracy metrics"
           ],
-          "keywords": ["CPA", "GAAP", "IFRS", "Audit", "Tax", "Financial Reporting", "Compliance", "QuickBooks", "Xero"],
+          "keywords": [
+            "CPA",
+            "GAAP",
+            "IFRS",
+            "Audit",
+            "Tax",
+            "Financial Reporting",
+            "Compliance",
+            "QuickBooks",
+            "Xero"
+          ],
           "interviewTips": [
             "Review current accounting standards and recent changes",
             "Practice explaining complex accounting concepts simply",
@@ -155,7 +236,16 @@
             "Show ability to work under pressure and long hours",
             "Mention client relationship management experience"
           ],
-          "keywords": ["M&A", "IPO", "Valuation", "Due Diligence", "Financial Modeling", "DCF", "LBO", "Pitch Books"],
+          "keywords": [
+            "M&A",
+            "IPO",
+            "Valuation",
+            "Due Diligence",
+            "Financial Modeling",
+            "DCF",
+            "LBO",
+            "Pitch Books"
+          ],
           "interviewTips": [
             "Master valuation methods and financial modeling",
             "Stay updated on recent deals and market trends",
@@ -178,7 +268,16 @@
             "Show understanding of analytics and data-driven decisions",
             "Include certifications (Google Ads, HubSpot, etc.)"
           ],
-          "keywords": ["SEO", "SEM", "Google Analytics", "Social Media", "Content Marketing", "PPC", "Email Marketing", "CRM"],
+          "keywords": [
+            "SEO",
+            "SEM",
+            "Google Analytics",
+            "Social Media",
+            "Content Marketing",
+            "PPC",
+            "Email Marketing",
+            "CRM"
+          ],
           "interviewTips": [
             "Prepare campaign case studies with specific results",
             "Review latest digital marketing trends and tools",
@@ -195,7 +294,15 @@
             "Mention audience growth and engagement metrics",
             "Include experience with various content formats"
           ],
-          "keywords": ["Content Strategy", "Copywriting", "SEO", "Blog", "Social Media", "WordPress", "Content Calendar"],
+          "keywords": [
+            "Content Strategy",
+            "Copywriting",
+            "SEO",
+            "Blog",
+            "Social Media",
+            "WordPress",
+            "Content Calendar"
+          ],
           "interviewTips": [
             "Bring writing samples relevant to the company",
             "Prepare to complete a writing test",
@@ -212,7 +319,14 @@
             "Highlight cross-functional collaboration experience",
             "Mention experience with brand guidelines and consistency"
           ],
-          "keywords": ["Brand Strategy", "Market Research", "Consumer Insights", "Brand Guidelines", "Product Launch", "Positioning"],
+          "keywords": [
+            "Brand Strategy",
+            "Market Research",
+            "Consumer Insights",
+            "Brand Guidelines",
+            "Product Launch",
+            "Positioning"
+          ],
           "interviewTips": [
             "Research the company's brand thoroughly",
             "Prepare brand analysis of competitors",
@@ -235,7 +349,15 @@
             "Mention experience with healthcare technology/EMR systems",
             "Show commitment to continuing education"
           ],
-          "keywords": ["Patient Care", "Clinical Skills", "EMR", "HIPAA", "Medical Terminology", "CPR", "License"],
+          "keywords": [
+            "Patient Care",
+            "Clinical Skills",
+            "EMR",
+            "HIPAA",
+            "Medical Terminology",
+            "CPR",
+            "License"
+          ],
           "interviewTips": [
             "Review clinical scenarios and best practices",
             "Prepare to discuss patient care philosophy",
@@ -252,7 +374,14 @@
             "Show understanding of patient satisfaction metrics",
             "Mention experience with insurance and billing processes"
           ],
-          "keywords": ["Healthcare Management", "HIPAA", "Compliance", "Patient Satisfaction", "Healthcare IT", "Revenue Cycle"],
+          "keywords": [
+            "Healthcare Management",
+            "HIPAA",
+            "Compliance",
+            "Patient Satisfaction",
+            "Healthcare IT",
+            "Revenue Cycle"
+          ],
           "interviewTips": [
             "Review current healthcare policies and regulations",
             "Prepare examples of process improvements",
@@ -275,7 +404,14 @@
             "Mention experience with educational technology",
             "Include professional development and training"
           ],
-          "keywords": ["Curriculum", "Lesson Planning", "Classroom Management", "Assessment", "Differentiation", "EdTech"],
+          "keywords": [
+            "Curriculum",
+            "Lesson Planning",
+            "Classroom Management",
+            "Assessment",
+            "Differentiation",
+            "EdTech"
+          ],
           "interviewTips": [
             "Prepare a sample lesson plan",
             "Review current educational trends and methodologies",
@@ -292,7 +428,15 @@
             "Show ability to adapt content for different audiences",
             "Mention experience with needs assessment"
           ],
-          "keywords": ["Training", "L&D", "Instructional Design", "eLearning", "LMS", "Adult Learning", "Workshop Facilitation"],
+          "keywords": [
+            "Training",
+            "L&D",
+            "Instructional Design",
+            "eLearning",
+            "LMS",
+            "Adult Learning",
+            "Workshop Facilitation"
+          ],
           "interviewTips": [
             "Prepare to deliver a mini training session",
             "Review adult learning theories and principles",
@@ -315,7 +459,15 @@
             "Show ability to build relationships with C-level executives",
             "Mention experience with contract negotiation"
           ],
-          "keywords": ["B2B Sales", "Enterprise Sales", "Solution Selling", "CRM", "Pipeline Management", "Negotiation", "Salesforce"],
+          "keywords": [
+            "B2B Sales",
+            "Enterprise Sales",
+            "Solution Selling",
+            "CRM",
+            "Pipeline Management",
+            "Negotiation",
+            "Salesforce"
+          ],
           "interviewTips": [
             "Prepare specific examples of deals you've closed",
             "Review the company's products and target market",
@@ -332,7 +484,14 @@
             "Show experience with retail or direct-to-consumer sales",
             "Mention upselling and cross-selling achievements"
           ],
-          "keywords": ["Customer Service", "Retail Sales", "Upselling", "Customer Satisfaction", "POS Systems", "Product Knowledge"],
+          "keywords": [
+            "Customer Service",
+            "Retail Sales",
+            "Upselling",
+            "Customer Satisfaction",
+            "POS Systems",
+            "Product Knowledge"
+          ],
           "interviewTips": [
             "Demonstrate enthusiasm and product knowledge",
             "Prepare examples of exceptional customer service",
@@ -349,7 +508,14 @@
             "Emphasize problem-solving and relationship management",
             "Mention experience with renewals and upselling"
           ],
-          "keywords": ["Account Management", "Client Relations", "Retention", "Upselling", "Strategic Planning", "Customer Success"],
+          "keywords": [
+            "Account Management",
+            "Client Relations",
+            "Retention",
+            "Upselling",
+            "Strategic Planning",
+            "Customer Success"
+          ],
           "interviewTips": [
             "Prepare case studies of account growth",
             "Review customer success best practices",
@@ -372,7 +538,15 @@
             "Mention experience with employer branding",
             "Include diversity and inclusion initiatives"
           ],
-          "keywords": ["Recruitment", "Talent Acquisition", "ATS", "Sourcing", "Interviewing", "Employer Branding", "LinkedIn Recruiter"],
+          "keywords": [
+            "Recruitment",
+            "Talent Acquisition",
+            "ATS",
+            "Sourcing",
+            "Interviewing",
+            "Employer Branding",
+            "LinkedIn Recruiter"
+          ],
           "interviewTips": [
             "Review current recruitment trends and challenges",
             "Prepare examples of difficult positions you've filled",
@@ -389,7 +563,15 @@
             "Mention experience with employee relations and conflict resolution",
             "Include any HR certifications (SHRM, CIPD)"
           ],
-          "keywords": ["HRIS", "Employee Relations", "Compliance", "Benefits", "Performance Management", "SHRM", "Onboarding"],
+          "keywords": [
+            "HRIS",
+            "Employee Relations",
+            "Compliance",
+            "Benefits",
+            "Performance Management",
+            "SHRM",
+            "Onboarding"
+          ],
           "interviewTips": [
             "Review current employment law and regulations",
             "Prepare examples of HR initiatives you've led",
@@ -412,7 +594,15 @@
             "Mention cost reduction and efficiency improvements",
             "Include relevant certifications (APICS, Six Sigma)"
           ],
-          "keywords": ["Supply Chain", "Logistics", "Inventory Management", "ERP", "Procurement", "Six Sigma", "Lean"],
+          "keywords": [
+            "Supply Chain",
+            "Logistics",
+            "Inventory Management",
+            "ERP",
+            "Procurement",
+            "Six Sigma",
+            "Lean"
+          ],
           "interviewTips": [
             "Review supply chain metrics and KPIs",
             "Prepare examples of process improvements",
@@ -429,7 +619,16 @@
             "Highlight stakeholder management experience",
             "Show experience with project management tools"
           ],
-          "keywords": ["PMP", "Agile", "Scrum", "Project Planning", "Risk Management", "Stakeholder Management", "Jira", "MS Project"],
+          "keywords": [
+            "PMP",
+            "Agile",
+            "Scrum",
+            "Project Planning",
+            "Risk Management",
+            "Stakeholder Management",
+            "Jira",
+            "MS Project"
+          ],
           "interviewTips": [
             "Prepare detailed project case studies",
             "Review project management methodologies",
@@ -452,7 +651,15 @@
             "Show knowledge of regulatory compliance",
             "Mention any notable cases or transactions"
           ],
-          "keywords": ["Corporate Law", "Contracts", "Compliance", "M&A", "Securities", "Governance", "Due Diligence"],
+          "keywords": [
+            "Corporate Law",
+            "Contracts",
+            "Compliance",
+            "M&A",
+            "Securities",
+            "Governance",
+            "Due Diligence"
+          ],
           "interviewTips": [
             "Review recent legal developments in corporate law",
             "Prepare to discuss complex legal issues",
@@ -469,7 +676,16 @@
             "Mention experience with risk assessment and management",
             "Include relevant certifications"
           ],
-          "keywords": ["Compliance", "Risk Management", "Audit", "Regulatory", "Policy Development", "Ethics", "SOX", "GDPR"],
+          "keywords": [
+            "Compliance",
+            "Risk Management",
+            "Audit",
+            "Regulatory",
+            "Policy Development",
+            "Ethics",
+            "SOX",
+            "GDPR"
+          ],
           "interviewTips": [
             "Review current regulatory requirements",
             "Prepare examples of compliance programs you've developed",
@@ -492,7 +708,15 @@
             "Highlight collaborative work with teams and clients",
             "Mention awards or recognition received"
           ],
-          "keywords": ["Adobe Creative Suite", "Photoshop", "Illustrator", "InDesign", "Typography", "Branding", "UI/UX"],
+          "keywords": [
+            "Adobe Creative Suite",
+            "Photoshop",
+            "Illustrator",
+            "InDesign",
+            "Typography",
+            "Branding",
+            "UI/UX"
+          ],
           "interviewTips": [
             "Prepare a curated portfolio for the specific role",
             "Practice explaining your design process",
@@ -509,7 +733,15 @@
             "Show understanding of accessibility and usability principles",
             "Mention experience with design systems"
           ],
-          "keywords": ["User Research", "Wireframing", "Prototyping", "Figma", "Sketch", "Usability Testing", "Design Systems"],
+          "keywords": [
+            "User Research",
+            "Wireframing",
+            "Prototyping",
+            "Figma",
+            "Sketch",
+            "Usability Testing",
+            "Design Systems"
+          ],
           "interviewTips": [
             "Prepare detailed case studies of your projects",
             "Practice whiteboarding design solutions",

@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
+
 import { auth } from "@/auth";
 import prisma from "@/prisma/prisma";
 
 export async function GET() {
   try {
     const session = await auth();
-    
+
     if (!session?.user?.email) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -35,7 +36,7 @@ export async function GET() {
     console.error("Error fetching user profile:", error);
     return NextResponse.json(
       { error: "Failed to fetch user profile" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

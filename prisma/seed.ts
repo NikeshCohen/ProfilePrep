@@ -362,7 +362,7 @@ async function main() {
         specializations: [],
         careerStage: null,
         newsletterSubscribed: false,
-        guidancePreferences: null,
+        guidancePreferences: undefined,
         lastGuidanceAccess: null,
       },
     });

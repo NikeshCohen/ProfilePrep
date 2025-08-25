@@ -401,11 +401,14 @@ function AnalyzeContent() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="border-0 shadow-none bg-transparent">
+            <Card className="border-0 bg-transparent shadow-none">
               <CardHeader className="px-0 pb-6">
-                <CardTitle className="text-2xl font-bold tracking-tight">Target Job Information</CardTitle>
+                <CardTitle className="text-2xl font-bold tracking-tight">
+                  Target Job Information
+                </CardTitle>
                 <CardDescription className="text-muted-foreground">
-                  Provide job details for tailored CV analysis and recommendations
+                  Provide job details for tailored CV analysis and
+                  recommendations
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6 px-0">
@@ -451,11 +454,14 @@ function AnalyzeContent() {
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="border-0 shadow-none bg-transparent">
+            <Card className="border-0 bg-transparent shadow-none">
               <CardHeader className="px-0 pb-6">
-                <CardTitle className="text-2xl font-bold tracking-tight">Job Description</CardTitle>
+                <CardTitle className="text-2xl font-bold tracking-tight">
+                  Job Description
+                </CardTitle>
                 <CardDescription className="text-muted-foreground">
-                  Paste the job description for more accurate analysis and keyword matching
+                  Paste the job description for more accurate analysis and
+                  keyword matching
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6 px-0">

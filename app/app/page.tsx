@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 import AnalyzeContent from "@/app/app/_components/AnalyzeContent";
+import { AppWithGuidance } from "@/app/app/_components/AppWithGuidance";
 import GenerateContent from "@/app/app/_components/GenerateContent";
 import { OnboardingCheck } from "@/app/app/_components/OnboardingCheck";
-import { AppWithGuidance } from "@/app/app/_components/AppWithGuidance";
 
 import { requireAuth } from "@/lib/utils";
 
@@ -36,9 +36,7 @@ async function page() {
 
   return (
     <OnboardingCheck>
-      <AppWithGuidance>
-        {content()}
-      </AppWithGuidance>
+      <AppWithGuidance>{content()}</AppWithGuidance>
     </OnboardingCheck>
   );
 }

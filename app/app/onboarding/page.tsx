@@ -1,11 +1,12 @@
 import { Suspense } from "react";
+
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
+import EnhancedOnboarding from "@/app/app/onboarding/_components/EnhancedOnboarding";
+import { OnboardingClient } from "@/app/app/onboarding/_components/OnboardingClient";
 import { auth } from "@/auth";
 import prisma from "@/prisma/prisma";
-import { OnboardingClient } from "@/app/app/onboarding/_components/OnboardingClient";
-import EnhancedOnboarding from "@/app/app/onboarding/_components/EnhancedOnboarding";
 
 export const metadata: Metadata = {
   title: "Onboarding",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 
 export default async function OnboardingPage() {
   const session = await auth();
-  
+
   if (!session?.user?.email) {
     redirect("/api/auth/signin");
   }
@@ -51,7 +52,11 @@ export default async function OnboardingPage() {
     <section className="layout flex min-h-[93vh] place-content-center place-items-center">
       <Suspense>
         {shouldSkipToEnhanced ? (
-          <EnhancedOnboarding initialUserType={user.userType as "RECRUITER" | "CANDIDATE" | "TESTER"} />
+          <EnhancedOnboarding
+            initialUserType={
+              user.userType as "RECRUITER" | "CANDIDATE" | "TESTER"
+            }
+          />
         ) : (
           <OnboardingClient />
         )}
