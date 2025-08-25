@@ -3,6 +3,7 @@ import {
   BarChart3,
   BookDashed,
   Briefcase,
+  Compass,
   FileText,
   Files,
   LayoutDashboard,
@@ -44,6 +45,12 @@ export const sidebarItems: NavigationItem[] = [
     title: "Dashboard",
     href: "/recruiter",
     icon: <LayoutDashboard className="h-5 w-5" />,
+    recruiterOnly: true,
+  },
+  {
+    title: "Guidance",
+    href: "/recruiter/guidance",
+    icon: <Compass className="h-5 w-5" />,
     recruiterOnly: true,
   },
   {
@@ -100,6 +107,12 @@ export const candidateSidebarItems: NavigationItem[] = [
     title: "Dashboard",
     href: "/portal",
     icon: <LayoutDashboard className="h-5 w-5" />,
+    candidateOnly: true,
+  },
+  {
+    title: "Guidance",
+    href: "/portal/guidance",
+    icon: <Compass className="h-5 w-5" />,
     candidateOnly: true,
   },
   /* 

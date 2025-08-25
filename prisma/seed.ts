@@ -178,6 +178,18 @@ async function main() {
         allowedDocs: 1000,
         createdDocs: 0,
         companyId: demoCompany.id,
+        onboardingCompleted: true,
+        field: "Technology",
+        specializations: ["Software Engineering", "Cloud Computing"],
+        careerStage: "EXPERIENCED",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Technology",
+          specializations: ["Software Engineering", "Cloud Computing"],
+          careerStage: "EXPERIENCED",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     });
 
@@ -191,6 +203,18 @@ async function main() {
         allowedDocs: 1000,
         createdDocs: 0,
         companyId: demoCompany.id,
+        onboardingCompleted: true,
+        field: "Finance",
+        specializations: ["Investment Banking", "Risk Management"],
+        careerStage: "SENIOR",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Finance",
+          specializations: ["Investment Banking", "Risk Management"],
+          careerStage: "SENIOR",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     });
 
@@ -204,6 +228,18 @@ async function main() {
         allowedDocs: 9999,
         createdDocs: 0,
         companyId: demoCompany.id,
+        onboardingCompleted: true,
+        field: "Healthcare",
+        specializations: ["Medical Devices", "Pharmaceutical"],
+        careerStage: "EXECUTIVE",
+        newsletterSubscribed: false,
+        guidancePreferences: {
+          field: "Healthcare",
+          specializations: ["Medical Devices", "Pharmaceutical"],
+          careerStage: "EXECUTIVE",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     }));
 
@@ -221,6 +257,18 @@ async function main() {
         userType: "CANDIDATE",
         allowedDocs: 10,
         createdDocs: 0,
+        onboardingCompleted: true,
+        field: "Technology",
+        specializations: ["Software Engineering", "Data Science"],
+        careerStage: "MID_LEVEL",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Technology",
+          specializations: ["Software Engineering", "Data Science"],
+          careerStage: "MID_LEVEL",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     });
 
@@ -234,6 +282,18 @@ async function main() {
         allowedDocs: 10,
         createdDocs: 0,
         companyId: universityCareerCenter.id,
+        onboardingCompleted: true,
+        field: "Marketing",
+        specializations: ["Digital Marketing", "Content Marketing"],
+        careerStage: "ENTRY_LEVEL",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Marketing",
+          specializations: ["Digital Marketing", "Content Marketing"],
+          careerStage: "ENTRY_LEVEL",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     });
 
@@ -247,6 +307,18 @@ async function main() {
         allowedDocs: 100,
         createdDocs: 0,
         companyId: universityCareerCenter.id,
+        onboardingCompleted: true,
+        field: "Education",
+        specializations: ["Career Counseling", "Student Services"],
+        careerStage: "EXPERIENCED",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Education",
+          specializations: ["Career Counseling", "Student Services"],
+          careerStage: "EXPERIENCED",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     }));
 
@@ -260,6 +332,18 @@ async function main() {
         allowedDocs: 1000,
         createdDocs: 0,
         companyId: techBootcamp.id,
+        onboardingCompleted: true,
+        field: "Technology",
+        specializations: ["Full Stack Development", "DevOps"],
+        careerStage: "SENIOR",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Technology",
+          specializations: ["Full Stack Development", "DevOps"],
+          careerStage: "SENIOR",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     }));
 
@@ -273,6 +357,13 @@ async function main() {
         allowedDocs: 5,
         createdDocs: 0,
         companyId: techBootcamp.id,
+        onboardingCompleted: false,
+        field: null,
+        specializations: [],
+        careerStage: null,
+        newsletterSubscribed: false,
+        guidancePreferences: null,
+        lastGuidanceAccess: null,
       },
     });
 
@@ -286,6 +377,18 @@ async function main() {
         allowedDocs: 5,
         createdDocs: 0,
         companyId: techBootcamp.id,
+        onboardingCompleted: true,
+        field: "Technology",
+        specializations: ["Frontend Development", "UX/UI Design"],
+        careerStage: "ENTRY_LEVEL",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Technology",
+          specializations: ["Frontend Development", "UX/UI Design"],
+          careerStage: "ENTRY_LEVEL",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     });
 
@@ -299,6 +402,18 @@ async function main() {
         allowedDocs: 50,
         createdDocs: 0,
         companyId: techBootcamp.id,
+        onboardingCompleted: true,
+        field: "Technology",
+        specializations: ["Software Engineering", "Teaching"],
+        careerStage: "EXPERIENCED",
+        newsletterSubscribed: true,
+        guidancePreferences: {
+          field: "Technology",
+          specializations: ["Software Engineering", "Teaching"],
+          careerStage: "EXPERIENCED",
+          lastUpdated: new Date().toISOString(),
+        },
+        lastGuidanceAccess: new Date(),
       },
     }));
 

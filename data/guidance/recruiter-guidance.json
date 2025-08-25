@@ -1,0 +1,869 @@
+{
+  "fields": {
+    "technology": {
+      "label": "Technology",
+      "description": "Recruiting for software development, IT, and tech roles",
+      "specializations": {
+        "engineering": {
+          "label": "Software Engineering",
+          "sourcing": [
+            "GitHub: Look for active contributors and quality of code",
+            "Stack Overflow: Check reputation scores and contributions",
+            "Tech meetups and hackathons for passive candidates",
+            "University computer science programs for entry-level",
+            "Open source communities for specialized skills"
+          ],
+          "screening": [
+            "Verify technical skills with coding assessments",
+            "Look for evidence of continuous learning",
+            "Check for experience with your tech stack",
+            "Assess problem-solving approach, not just solutions",
+            "Evaluate communication skills for team collaboration"
+          ],
+          "redFlags": [
+            "No recent projects or learning initiatives",
+            "Unable to explain technical decisions",
+            "Overstating contributions to team projects",
+            "Poor code quality in portfolio projects",
+            "Lack of version control experience"
+          ],
+          "interviewTips": [
+            "Include technical team members in interviews",
+            "Use pair programming or live coding sessions",
+            "Ask about system design for senior roles",
+            "Discuss real problems your team has solved",
+            "Evaluate culture fit alongside technical skills"
+          ]
+        },
+        "data": {
+          "label": "Data & Analytics",
+          "sourcing": [
+            "Kaggle competitions and leaderboards",
+            "Data science bootcamp graduates",
+            "Academic conferences and research papers",
+            "LinkedIn groups focused on data science",
+            "Industry-specific data communities"
+          ],
+          "screening": [
+            "Look for portfolio projects with business impact",
+            "Verify statistical knowledge and methodology",
+            "Check for experience with your data stack",
+            "Assess ability to communicate insights to non-technical audiences",
+            "Evaluate domain knowledge for your industry"
+          ],
+          "redFlags": [
+            "Only academic projects without real-world application",
+            "Cannot explain model choices and trade-offs",
+            "Lack of data visualization skills",
+            "No experience with big data or cloud platforms",
+            "Unable to discuss business impact of work"
+          ],
+          "interviewTips": [
+            "Present a take-home data challenge",
+            "Ask candidates to explain complex concepts simply",
+            "Discuss ethical considerations in data use",
+            "Evaluate both technical and business acumen",
+            "Test SQL and programming skills separately"
+          ]
+        },
+        "product": {
+          "label": "Product & Design",
+          "sourcing": [
+            "Dribbble and Behance for designers",
+            "Product Hunt for product managers",
+            "Design conferences and workshops",
+            "UX/UI bootcamp partnerships",
+            "Company design blogs and case studies"
+          ],
+          "screening": [
+            "Review portfolio for process, not just outcomes",
+            "Look for user research and testing experience",
+            "Check for cross-functional collaboration examples",
+            "Assess understanding of business metrics",
+            "Evaluate design thinking methodology"
+          ],
+          "redFlags": [
+            "Portfolio shows only final designs without process",
+            "Cannot articulate design decisions",
+            "No experience with user research or testing",
+            "Lack of collaboration with developers",
+            "Overly focused on aesthetics over function"
+          ],
+          "interviewTips": [
+            "Conduct design critique sessions",
+            "Present real product challenges",
+            "Include stakeholders from different teams",
+            "Ask about failed projects and learnings",
+            "Evaluate presentation and communication skills"
+          ]
+        }
+      }
+    },
+    "finance": {
+      "label": "Finance & Banking",
+      "description": "Recruiting for financial services and banking roles",
+      "specializations": {
+        "investment": {
+          "label": "Investment Banking & Markets",
+          "sourcing": [
+            "Target top MBA programs and business schools",
+            "Alumni networks from target schools",
+            "Professional associations (CFA Institute, etc.)",
+            "Competitor firms for experienced hires",
+            "Internal referral programs"
+          ],
+          "screening": [
+            "Verify relevant licenses and certifications",
+            "Check deal experience and transaction values",
+            "Assess financial modeling capabilities",
+            "Evaluate client relationship skills",
+            "Look for evidence of long hours tolerance"
+          ],
+          "redFlags": [
+            "Gaps in employment during market upturns",
+            "Cannot discuss specific deals (within legal limits)",
+            "Poor attention to detail in application",
+            "Lack of relevant licenses for the role",
+            "No evidence of continuous learning"
+          ],
+          "interviewTips": [
+            "Use case studies and modeling tests",
+            "Assess mental math and analytical skills",
+            "Include team fit interviews",
+            "Discuss market knowledge and trends",
+            "Evaluate presentation skills"
+          ]
+        },
+        "accounting": {
+          "label": "Accounting & Audit",
+          "sourcing": [
+            "CPA firms for experienced professionals",
+            "Accounting program partnerships",
+            "Professional bodies (AICPA, IMA)",
+            "Industry-specific talent pools",
+            "Contract-to-hire conversions"
+          ],
+          "screening": [
+            "Verify CPA or relevant certifications",
+            "Check for specific industry experience",
+            "Assess knowledge of regulations and standards",
+            "Evaluate attention to detail",
+            "Look for technology skills (ERP, Excel)"
+          ],
+          "redFlags": [
+            "Unexplained gaps during busy seasons",
+            "Cannot provide references from recent roles",
+            "Lack of continuing education",
+            "Poor attention to detail in resume",
+            "No experience with relevant software"
+          ],
+          "interviewTips": [
+            "Include technical accounting questions",
+            "Present practical scenarios",
+            "Assess communication skills for client interaction",
+            "Evaluate ability to meet deadlines",
+            "Check for ethical standards understanding"
+          ]
+        }
+      }
+    },
+    "sales": {
+      "label": "Sales",
+      "description": "Recruiting for sales and business development roles",
+      "specializations": {
+        "enterprise": {
+          "label": "Enterprise Sales",
+          "sourcing": [
+            "Competitor sales teams",
+            "Industry trade shows and conferences",
+            "Sales leadership communities",
+            "Executive search for senior roles",
+            "Customer success teams for internal promotion"
+          ],
+          "screening": [
+            "Verify sales achievements with W2s or pay stubs",
+            "Check for consistent quota attainment",
+            "Assess industry and product knowledge",
+            "Evaluate pipeline management skills",
+            "Look for strategic account planning ability"
+          ],
+          "redFlags": [
+            "Cannot provide specific metrics",
+            "Frequent job changes without progression",
+            "No references from recent managers",
+            "Blames external factors for poor performance",
+            "Lack of curiosity about your product"
+          ],
+          "interviewTips": [
+            "Have them pitch your product",
+            "Role-play common sales scenarios",
+            "Discuss complex deal strategies",
+            "Include panel interviews with team members",
+            "Assess cultural fit with sales methodology"
+          ]
+        },
+        "inside": {
+          "label": "Inside Sales & SDR",
+          "sourcing": [
+            "Recent graduates with relevant internships",
+            "Customer service representatives",
+            "Sales bootcamp graduates",
+            "Internal referrals from current SDRs",
+            "Career changers with transferable skills"
+          ],
+          "screening": [
+            "Look for coachability and growth mindset",
+            "Check for activity metrics, not just results",
+            "Assess communication skills (written and verbal)",
+            "Evaluate resilience and persistence",
+            "Look for tech-savviness with sales tools"
+          ],
+          "redFlags": [
+            "Lack of preparation for interview",
+            "Cannot handle rejection scenarios",
+            "Poor written communication in emails",
+            "No questions about career progression",
+            "Unrealistic salary expectations"
+          ],
+          "interviewTips": [
+            "Include mock cold calls",
+            "Test email writing skills",
+            "Assess ability to handle objections",
+            "Evaluate time management skills",
+            "Check for team collaboration ability"
+          ]
+        }
+      }
+    },
+    "marketing": {
+      "label": "Marketing",
+      "description": "Recruiting for marketing and brand roles",
+      "specializations": {
+        "digital": {
+          "label": "Digital Marketing",
+          "sourcing": [
+            "Digital marketing agencies",
+            "Marketing bootcamp graduates",
+            "Freelance platforms for specialists",
+            "Industry conferences and webinars",
+            "Marketing communities and forums"
+          ],
+          "screening": [
+            "Review campaign portfolios with ROI metrics",
+            "Check for relevant certifications (Google, HubSpot)",
+            "Assess analytical and data interpretation skills",
+            "Evaluate creative and strategic thinking",
+            "Look for experience with your industry"
+          ],
+          "redFlags": [
+            "Cannot provide specific campaign metrics",
+            "Outdated digital marketing knowledge",
+            "No experience with marketing analytics",
+            "Over-reliance on one channel or tactic",
+            "Poor understanding of customer journey"
+          ],
+          "interviewTips": [
+            "Present a marketing challenge or case study",
+            "Review their analysis of your current marketing",
+            "Assess technical skills with tools",
+            "Evaluate creative problem-solving",
+            "Include collaborative exercises with team"
+          ]
+        },
+        "brand": {
+          "label": "Brand & Creative",
+          "sourcing": [
+            "Creative agencies and studios",
+            "Design schools and programs",
+            "Freelance creative communities",
+            "Award-winning campaign creators",
+            "Brand consultancies"
+          ],
+          "screening": [
+            "Review portfolio for strategic thinking",
+            "Check for brand development experience",
+            "Assess understanding of brand consistency",
+            "Evaluate stakeholder management skills",
+            "Look for measurable brand impact"
+          ],
+          "redFlags": [
+            "Portfolio lacks strategic rationale",
+            "Cannot articulate brand positioning",
+            "No experience with brand guidelines",
+            "Lack of cross-functional collaboration",
+            "Overly tactical without strategic vision"
+          ],
+          "interviewTips": [
+            "Discuss brand challenges and solutions",
+            "Review portfolio in detail",
+            "Assess presentation skills",
+            "Include creative team in interviews",
+            "Evaluate cultural fit with brand values"
+          ]
+        }
+      }
+    },
+    "operations": {
+      "label": "Operations",
+      "description": "Recruiting for operations and supply chain roles",
+      "specializations": {
+        "supply_chain": {
+          "label": "Supply Chain & Logistics",
+          "sourcing": [
+            "Supply chain programs at universities",
+            "Professional associations (APICS, ISM)",
+            "Military veterans for leadership roles",
+            "Industry-specific talent pools",
+            "Consulting firms for strategic roles"
+          ],
+          "screening": [
+            "Check for relevant certifications (CPIM, CSCP)",
+            "Verify experience with ERP systems",
+            "Assess analytical and problem-solving skills",
+            "Evaluate understanding of end-to-end supply chain",
+            "Look for cost reduction achievements"
+          ],
+          "redFlags": [
+            "Cannot explain supply chain optimization strategies",
+            "No experience with data analysis",
+            "Lack of cross-functional collaboration",
+            "Poor understanding of technology trends",
+            "No continuous improvement mindset"
+          ],
+          "interviewTips": [
+            "Present supply chain scenarios",
+            "Discuss process improvement methodologies",
+            "Assess crisis management skills",
+            "Evaluate technology adoption capability",
+            "Include stakeholder interviews"
+          ]
+        },
+        "project": {
+          "label": "Project Management",
+          "sourcing": [
+            "PMI chapter members and events",
+            "Agile and Scrum communities",
+            "Consulting firms for experienced PMs",
+            "Internal development programs",
+            "Industry-specific PM groups"
+          ],
+          "screening": [
+            "Verify PM certifications (PMP, Agile, Scrum)",
+            "Check for successful project deliveries",
+            "Assess stakeholder management experience",
+            "Evaluate risk management capabilities",
+            "Look for budget management skills"
+          ],
+          "redFlags": [
+            "Cannot provide specific project examples",
+            "No formal PM methodology knowledge",
+            "Poor communication skills",
+            "Lack of adaptability in approach",
+            "No experience with PM tools"
+          ],
+          "interviewTips": [
+            "Review detailed project case studies",
+            "Assess conflict resolution skills",
+            "Evaluate methodology flexibility",
+            "Include team member interviews",
+            "Test presentation and reporting abilities"
+          ]
+        }
+      }
+    },
+    "hr": {
+      "label": "Human Resources",
+      "description": "Recruiting for HR and people operations roles",
+      "specializations": {
+        "talent": {
+          "label": "Talent Acquisition",
+          "sourcing": [
+            "Recruiting agencies for senior roles",
+            "HR programs at universities",
+            "SHRM and local HR chapters",
+            "LinkedIn Recruiter community",
+            "Internal mobility from HR generalist roles"
+          ],
+          "screening": [
+            "Check for experience with ATS systems",
+            "Verify recruiting metrics and achievements",
+            "Assess sourcing strategy knowledge",
+            "Evaluate candidate experience focus",
+            "Look for employer branding experience"
+          ],
+          "redFlags": [
+            "Cannot provide recruiting metrics",
+            "No experience with modern recruiting tools",
+            "Poor communication skills",
+            "Lack of strategic thinking",
+            "No focus on diversity and inclusion"
+          ],
+          "interviewTips": [
+            "Have them evaluate your recruiting process",
+            "Role-play candidate interactions",
+            "Assess sourcing strategies for hard-to-fill roles",
+            "Evaluate data-driven approach",
+            "Include hiring manager interviews"
+          ]
+        },
+        "hrbp": {
+          "label": "HR Business Partner",
+          "sourcing": [
+            "Internal HR team development",
+            "Management consulting backgrounds",
+            "Industry-specific HR professionals",
+            "CHRO networks for senior roles",
+            "Executive search firms"
+          ],
+          "screening": [
+            "Check for business acumen and strategic thinking",
+            "Verify experience with organizational change",
+            "Assess employee relations expertise",
+            "Evaluate data analysis capabilities",
+            "Look for C-suite interaction experience"
+          ],
+          "redFlags": [
+            "Too tactical without strategic vision",
+            "Cannot discuss business impact of HR initiatives",
+            "No experience with data and analytics",
+            "Poor stakeholder management examples",
+            "Lack of change management experience"
+          ],
+          "interviewTips": [
+            "Present business scenarios requiring HR solutions",
+            "Assess strategic thinking and business partnership",
+            "Include business leader interviews",
+            "Evaluate change management approach",
+            "Discuss HR technology and innovation"
+          ]
+        }
+      }
+    },
+    "healthcare": {
+      "label": "Healthcare",
+      "description": "Recruiting for healthcare and medical roles",
+      "specializations": {
+        "clinical": {
+          "label": "Clinical Professionals",
+          "sourcing": [
+            "Healthcare staffing agencies",
+            "Medical school and nursing program partnerships",
+            "Professional associations and boards",
+            "Travel nurse conversions",
+            "International recruitment (with visa support)"
+          ],
+          "screening": [
+            "Verify all licenses and certifications",
+            "Check for specialty experience required",
+            "Assess patient care philosophy",
+            "Evaluate team collaboration skills",
+            "Look for EMR system experience"
+          ],
+          "redFlags": [
+            "Gaps in license or certification",
+            "Multiple short-term positions",
+            "Cannot provide professional references",
+            "Lack of continuing education",
+            "Poor communication skills"
+          ],
+          "interviewTips": [
+            "Include peer interviews",
+            "Assess clinical knowledge and skills",
+            "Evaluate bedside manner",
+            "Discuss challenging patient scenarios",
+            "Tour facilities during interview"
+          ]
+        },
+        "allied": {
+          "label": "Allied Health",
+          "sourcing": [
+            "Allied health program partnerships",
+            "Professional associations",
+            "Contract-to-hire arrangements",
+            "Employee referral programs",
+            "Community health organizations"
+          ],
+          "screening": [
+            "Verify relevant certifications",
+            "Check for specialized skills needed",
+            "Assess interdisciplinary collaboration",
+            "Evaluate patient interaction skills",
+            "Look for technology proficiency"
+          ],
+          "redFlags": [
+            "Expired or lapsed certifications",
+            "No recent clinical experience",
+            "Poor teamwork examples",
+            "Lack of patient-centered focus",
+            "Resistance to new technologies"
+          ],
+          "interviewTips": [
+            "Include department team interviews",
+            "Assess technical competencies",
+            "Evaluate communication with patients",
+            "Discuss quality improvement initiatives",
+            "Review continuing education plans"
+          ]
+        }
+      }
+    },
+    "education": {
+      "label": "Education",
+      "description": "Recruiting for education and training roles",
+      "specializations": {
+        "teaching": {
+          "label": "Teachers & Educators",
+          "sourcing": [
+            "Education program partnerships",
+            "Teacher job fairs",
+            "Alternative certification programs",
+            "Teach for America alumni",
+            "Substitute teacher pools"
+          ],
+          "screening": [
+            "Verify teaching credentials and endorsements",
+            "Check for classroom management experience",
+            "Assess curriculum development skills",
+            "Evaluate student engagement strategies",
+            "Look for technology integration experience"
+          ],
+          "redFlags": [
+            "No valid teaching license",
+            "Cannot provide teaching references",
+            "Poor classroom management examples",
+            "Lack of differentiation strategies",
+            "No evidence of professional development"
+          ],
+          "interviewTips": [
+            "Include teaching demonstration",
+            "Assess classroom management approach",
+            "Evaluate alignment with school culture",
+            "Include panel with current teachers",
+            "Discuss student achievement strategies"
+          ]
+        },
+        "administration": {
+          "label": "Education Administration",
+          "sourcing": [
+            "Educational leadership programs",
+            "Internal teacher development",
+            "Administrator associations",
+            "Executive search for senior roles",
+            "Neighboring district talent"
+          ],
+          "screening": [
+            "Verify administrative credentials",
+            "Check for leadership experience",
+            "Assess budget management skills",
+            "Evaluate stakeholder engagement",
+            "Look for improvement initiatives led"
+          ],
+          "redFlags": [
+            "No progressive leadership experience",
+            "Cannot discuss data-driven decisions",
+            "Poor communication examples",
+            "Lack of community engagement",
+            "No vision for education innovation"
+          ],
+          "interviewTips": [
+            "Present school improvement scenarios",
+            "Include stakeholder panels",
+            "Assess leadership philosophy",
+            "Evaluate crisis management skills",
+            "Discuss vision for the role"
+          ]
+        }
+      }
+    },
+    "legal": {
+      "label": "Legal",
+      "description": "Recruiting for legal and compliance roles",
+      "specializations": {
+        "corporate": {
+          "label": "Corporate Counsel",
+          "sourcing": [
+            "Law firms for experienced attorneys",
+            "In-house counsel networks",
+            "Bar association job boards",
+            "Legal recruiters and headhunters",
+            "Law school career services"
+          ],
+          "screening": [
+            "Verify bar admission and standing",
+            "Check for relevant practice area experience",
+            "Assess business acumen",
+            "Evaluate risk management approach",
+            "Look for specific industry knowledge"
+          ],
+          "redFlags": [
+            "Bar discipline or suspension",
+            "Cannot discuss specific legal work",
+            "Poor business judgment examples",
+            "Lack of in-house experience",
+            "No continuing legal education"
+          ],
+          "interviewTips": [
+            "Present hypothetical legal scenarios",
+            "Assess business partnership skills",
+            "Include executive interviews",
+            "Evaluate communication style",
+            "Discuss approach to risk management"
+          ]
+        },
+        "compliance": {
+          "label": "Compliance Officers",
+          "sourcing": [
+            "Compliance professional associations",
+            "Big 4 accounting firms",
+            "Regulatory agencies",
+            "Industry-specific compliance networks",
+            "Internal audit departments"
+          ],
+          "screening": [
+            "Check for relevant certifications",
+            "Verify regulatory knowledge",
+            "Assess program development experience",
+            "Evaluate investigation skills",
+            "Look for training delivery experience"
+          ],
+          "redFlags": [
+            "No hands-on compliance experience",
+            "Cannot discuss specific regulations",
+            "Poor stakeholder management",
+            "Lack of program development",
+            "No audit or investigation experience"
+          ],
+          "interviewTips": [
+            "Review compliance program examples",
+            "Assess regulatory knowledge",
+            "Evaluate training and communication skills",
+            "Include cross-functional interviews",
+            "Discuss technology and automation"
+          ]
+        }
+      }
+    }
+  },
+  "generalGuidance": {
+    "sourcing": {
+      "bestPractices": [
+        "Build talent pipelines before positions open",
+        "Leverage employee referrals with incentives",
+        "Maintain relationships with passive candidates",
+        "Use Boolean search techniques effectively",
+        "Create compelling job descriptions",
+        "Build employer brand through content",
+        "Engage with university programs",
+        "Attend industry events and conferences"
+      ],
+      "tools": [
+        "LinkedIn Recruiter for professional roles",
+        "Indeed and ZipRecruiter for volume hiring",
+        "AngelList for startup talent",
+        "Dice and Stack Overflow for tech roles",
+        "Handshake for early career recruiting",
+        "Executive search firms for C-level",
+        "Recruitment marketing platforms",
+        "AI-powered sourcing tools"
+      ]
+    },
+    "screening": {
+      "process": [
+        "Initial resume/CV screening for must-haves",
+        "Phone or video screening for basic fit",
+        "Skills assessments relevant to role",
+        "Cultural fit evaluation",
+        "Reference checks with specific questions",
+        "Background checks as appropriate",
+        "Final interview with decision makers",
+        "Structured evaluation and decision"
+      ],
+      "redFlags": [
+        "Inconsistencies in employment history",
+        "Unable to provide specific examples",
+        "Negative comments about previous employers",
+        "Lack of questions about the role or company",
+        "Overemphasis on compensation early on",
+        "Poor communication skills",
+        "No evidence of continuous learning",
+        "Unwillingness to provide references"
+      ]
+    },
+    "interviewing": {
+      "structure": [
+        "Use structured interviews for consistency",
+        "Include behavioral questions (STAR method)",
+        "Add role-specific technical assessments",
+        "Evaluate cultural fit and values alignment",
+        "Include diverse interview panel members",
+        "Allow time for candidate questions",
+        "Provide realistic job preview",
+        "Gather feedback immediately after"
+      ],
+      "bestPractices": [
+        "Train interviewers on legal compliance",
+        "Avoid discriminatory questions",
+        "Focus on job-related competencies",
+        "Take detailed notes during interviews",
+        "Use scoring rubrics for objectivity",
+        "Provide positive candidate experience",
+        "Follow up promptly with decisions",
+        "Gather candidate feedback on process"
+      ]
+    },
+    "diversity": {
+      "strategies": [
+        "Write inclusive job descriptions",
+        "Post on diverse job boards",
+        "Partner with diverse organizations",
+        "Remove bias from screening process",
+        "Use diverse interview panels",
+        "Track and measure diversity metrics",
+        "Provide unconscious bias training",
+        "Build inclusive employer brand"
+      ],
+      "partnerships": [
+        "Historically Black Colleges and Universities (HBCUs)",
+        "Women in Technology organizations",
+        "Veterans transition programs",
+        "Disability employment networks",
+        "LGBTQ+ professional associations",
+        "Diverse professional societies",
+        "Community organizations",
+        "Diversity job boards and platforms"
+      ]
+    },
+    "candidateExperience": {
+      "communication": [
+        "Acknowledge all applications promptly",
+        "Set clear expectations on timeline",
+        "Provide regular status updates",
+        "Give constructive feedback when possible",
+        "Be transparent about process and steps",
+        "Respect candidate time and availability",
+        "Follow up after hire or rejection",
+        "Request feedback on experience"
+      ],
+      "process": [
+        "Streamline application process",
+        "Mobile-optimize career site",
+        "Provide clear job descriptions",
+        "Offer flexible interview scheduling",
+        "Give virtual interview options",
+        "Provide interview preparation tips",
+        "Ensure timely decision making",
+        "Create smooth onboarding transition"
+      ]
+    },
+    "metrics": {
+      "recruiting": [
+        "Time to fill",
+        "Cost per hire",
+        "Quality of hire",
+        "Source of hire",
+        "Offer acceptance rate",
+        "Candidate satisfaction scores",
+        "Diversity metrics",
+        "Retention rates by source"
+      ],
+      "performance": [
+        "Requisitions filled vs. open",
+        "Pipeline conversion rates",
+        "Interview-to-offer ratio",
+        "Recruiter productivity",
+        "Hiring manager satisfaction",
+        "New hire performance ratings",
+        "90-day retention rate",
+        "Internal mobility rate"
+      ]
+    },
+    "compliance": {
+      "legal": [
+        "Follow EEOC guidelines",
+        "Comply with local labor laws",
+        "Maintain I-9 documentation",
+        "Respect GDPR/privacy regulations",
+        "Avoid discriminatory practices",
+        "Document hiring decisions",
+        "Provide reasonable accommodations",
+        "Follow OFCCP requirements if applicable"
+      ],
+      "ethical": [
+        "Maintain candidate confidentiality",
+        "Avoid conflicts of interest",
+        "Be transparent about role and company",
+        "Don't misrepresent opportunities",
+        "Respect non-compete agreements",
+        "Handle rejections professionally",
+        "Provide equal opportunity to all",
+        "Build long-term relationships"
+      ]
+    },
+    "technology": {
+      "ats": [
+        "Maintain clean candidate database",
+        "Use tags and notes effectively",
+        "Set up automated workflows",
+        "Track source effectiveness",
+        "Generate regular reports",
+        "Ensure GDPR compliance",
+        "Regular data cleanup",
+        "Integration with other tools"
+      ],
+      "automation": [
+        "Automated resume screening",
+        "Chatbots for initial engagement",
+        "Interview scheduling tools",
+        "Assessment platforms",
+        "Reference checking software",
+        "Onboarding platforms",
+        "Analytics and reporting tools",
+        "CRM for candidate relationships"
+      ]
+    },
+    "retention": {
+      "strategies": [
+        "Ensure realistic job preview",
+        "Strong onboarding program",
+        "Regular check-ins with new hires",
+        "Clear career development paths",
+        "Competitive compensation reviews",
+        "Recognition and rewards programs",
+        "Work-life balance initiatives",
+        "Exit interview insights"
+      ],
+      "earlyIndicators": [
+        "Engagement in onboarding",
+        "Manager relationship quality",
+        "Early performance indicators",
+        "Team integration success",
+        "Training completion rates",
+        "Feedback in 30/60/90 day reviews",
+        "Participation in company events",
+        "Internal network building"
+      ]
+    }
+  },
+  "templates": {
+    "outreach": {
+      "initial": "Subject: Exciting [Role] Opportunity at [Company]\n\nHi [Name],\n\nI came across your profile and was impressed by your experience in [Specific Skill/Achievement]. We're currently looking for a [Role] to join our team at [Company], and I believe your background aligns perfectly with what we're seeking.\n\n[Brief description of role and why it's exciting]\n\nWould you be open to a brief conversation to learn more about this opportunity?\n\nBest regards,\n[Your Name]",
+      "followUp": "Subject: Following up on [Role] at [Company]\n\nHi [Name],\n\nI wanted to follow up on my previous message about the [Role] opportunity at [Company]. I understand you're likely busy, but I genuinely believe this could be a great next step in your career because [Specific Reason].\n\nIf you're not interested, I completely understand. However, if you know someone in your network who might be a good fit, I'd appreciate any referrals.\n\nBest regards,\n[Your Name]"
+    },
+    "screening": {
+      "phone": [
+        "Tell me about your current role and responsibilities",
+        "What interests you about this opportunity?",
+        "What are your salary expectations?",
+        "What's your availability for next steps?",
+        "Do you have any questions about the role or company?"
+      ],
+      "technical": [
+        "Walk me through a recent project you're proud of",
+        "How do you approach problem-solving?",
+        "What technologies are you most comfortable with?",
+        "How do you stay current with industry trends?",
+        "Describe a technical challenge you overcame"
+      ]
+    }
+  }
+}

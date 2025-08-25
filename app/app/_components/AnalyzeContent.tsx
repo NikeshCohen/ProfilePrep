@@ -5,13 +5,16 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { motion } from "framer-motion";
 import {
+  ArrowUpIcon,
   BarChart3,
-  FileTextIcon,
-  FileUpIcon,
+  FileIcon,
+  FileText,
+  FileWarningIcon,
   Target,
   TrendingUp,
-  XIcon,
+  XCircleIcon,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useDropzone } from "react-dropzone";
@@ -20,7 +23,6 @@ import { toast } from "react-hot-toast";
 
 import { BackButton, NextButton } from "@/components/global/NavigationButtons";
 import { Spinner } from "@/components/global/Spinner";
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -32,6 +34,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
+import { fadeUpAnimation } from "@/lib/animations";
 import { extractTextFromPdf } from "@/lib/utils";
 
 interface AnalysisData {
@@ -208,195 +211,288 @@ function AnalyzeContent() {
 
   return (
     <section className="pt-18 layout flex min-h-[92vh] flex-col items-center justify-center">
-      <div className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl">
+      <motion.div
+        {...fadeUpAnimation}
+        className="w-full max-w-sm sm:max-w-lg md:max-w-xl lg:max-w-2xl"
+      >
         {!showJobDetails ? (
           // Step 1: File Upload
-          <Card>
-            <CardHeader>
-              <CardTitle>Upload Your CV for Analysis</CardTitle>
-              <CardDescription>
+          <div className="space-y-6">
+            <div className="mb-8 space-y-2 text-center">
+              <h1 className="text-3xl font-bold tracking-tight">
+                Upload Your CV for Analysis
+              </h1>
+              <p className="text-muted-foreground">
                 Get AI-powered feedback and ATS compatibility scoring for your
                 resume
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {!selectedFile ? (
-                <div
-                  {...getRootProps()}
-                  className={`cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors ${
-                    isDragActive
-                      ? "border-primary bg-primary/5"
-                      : "border-border hover:border-primary/50"
-                  }`}
-                >
-                  <input {...getInputProps()} />
-                  <FileUpIcon className="mx-auto mb-4 h-16 w-16 text-muted-foreground" />
+              </p>
+            </div>
+
+            <motion.div
+              {...fadeUpAnimation}
+              className="w-full rounded-md border-2 border-dashed"
+            >
+              <div
+                {...getRootProps()}
+                className={`relative ${extractError ? "px-8 pb-8 pt-12" : "p-8"} transition-all duration-300 ease-in-out ${
+                  isDragActive
+                    ? extractError
+                      ? "border-destructive bg-destructive/10"
+                      : "border-primary bg-primary/10"
+                    : extractError
+                      ? "hover:border-destructive hover:bg-destructive/5"
+                      : "hover:border-primary hover:bg-primary/5"
+                } ${isExtracting ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+              >
+                <input {...getInputProps()} disabled={isExtracting} />
+                <div className="flex h-full flex-col items-center justify-center space-y-4">
                   {isDragActive ? (
-                    <p className="text-sm text-muted-foreground">
-                      Drop your CV here...
+                    <ArrowUpIcon className="h-12 w-12 animate-bounce text-primary" />
+                  ) : (
+                    <FileText className="h-12 w-12 text-muted-foreground" />
+                  )}
+
+                  {isDragActive ? (
+                    <p className="text-center text-lg font-medium">
+                      Drop your CV here
                     </p>
                   ) : (
                     <div className="space-y-2">
-                      <p className="text-lg font-medium">
-                        Click to upload or drag and drop
+                      <p className="text-center text-lg">
+                        <span className="font-semibold">Click to upload</span>
+                        <span className="hidden lg:inline">
+                          {" "}
+                          or drag and drop
+                        </span>
                       </p>
                       <p className="text-sm text-muted-foreground">
                         PDF files only, up to 10MB
                       </p>
                     </div>
                   )}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 rounded-lg bg-muted p-4">
-                    <FileTextIcon className="h-8 w-8 text-muted-foreground" />
-                    <div className="flex-1">
-                      <p className="font-medium">{selectedFile.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
-                      </p>
-                      {isExtracting && (
-                        <p className="mt-1 text-xs text-primary">
-                          Extracting text...
-                        </p>
-                      )}
-                      {extractedText && !isExtracting && (
-                        <p className="mt-1 text-xs text-green-600">
-                          ✓ Text extracted successfully
-                        </p>
-                      )}
-                      {extractError && (
-                        <p className="mt-1 text-xs text-red-600">
-                          ✗ Failed to extract text
-                        </p>
-                      )}
+
+                  {extractError && (
+                    <div className="flex items-center text-destructive">
+                      <FileWarningIcon className="mr-1 h-4 w-4" />
+                      <p className="text-sm">PDF Files Only</p>
                     </div>
-                    <Button
+                  )}
+                </div>
+
+                {extractError && (
+                  <div className="absolute left-0 right-0 top-0 flex items-center justify-between rounded-t-lg bg-destructive px-4 py-2 text-sm text-destructive-foreground">
+                    <div className="flex items-center space-x-2">
+                      <XCircleIcon className="h-4 w-4" />
+                      <p>{extractError}</p>
+                    </div>
+                    <button
                       type="button"
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleRemoveFile}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExtractError(null);
+                      }}
+                      className="text-destructive-foreground/80 transition-colors hover:text-destructive-foreground"
+                      aria-label="Dismiss error"
                     >
-                      <XIcon className="h-4 w-4" />
-                    </Button>
+                      <XCircleIcon className="h-4 w-4" />
+                    </button>
                   </div>
+                )}
 
-                  <div className="grid grid-cols-3 gap-4 pt-4">
-                    <div className="text-center">
-                      <BarChart3 className="mx-auto mb-2 h-8 w-8 text-primary" />
-                      <p className="text-xs text-muted-foreground">ATS Score</p>
-                    </div>
-                    <div className="text-center">
-                      <Target className="mx-auto mb-2 h-8 w-8 text-primary" />
-                      <p className="text-xs text-muted-foreground">Job Match</p>
-                    </div>
-                    <div className="text-center">
-                      <TrendingUp className="mx-auto mb-2 h-8 w-8 text-primary" />
-                      <p className="text-xs text-muted-foreground">
-                        Improvements
-                      </p>
+                {isExtracting && (
+                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-background/50">
+                    <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-primary"></div>
+                  </div>
+                )}
+
+                {selectedFile && !isExtracting && (
+                  <div className="mt-4 rounded-lg border p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <FileIcon className="h-6 w-6 text-primary" />
+                        <div>
+                          <p className="text-sm font-medium">
+                            {selectedFile.name}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {(selectedFile.size / 1024 / 1024).toFixed(2)} MB •
+                            PDF
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveFile();
+                        }}
+                        className="text-muted-foreground transition-colors hover:text-destructive"
+                        aria-label="Remove file"
+                      >
+                        <XCircleIcon className="h-5 w-5" />
+                      </button>
                     </div>
                   </div>
-                </div>
-              )}
-
-              {selectedFile && (
-                <div className="flex justify-end">
-                  <NextButton
-                    onClick={handleNext}
-                    className="px-6"
-                    disabled={isExtracting || !extractedText}
-                  />
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        ) : !showJobDescription ? (
-          // Step 2: Job Details
-          <Card>
-            <CardHeader>
-              <CardTitle>Target Job Information</CardTitle>
-              <CardDescription>
-                Provide job details for tailored CV analysis and recommendations
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="jobTitle">Job Title *</Label>
-                <Input
-                  id="jobTitle"
-                  type="text"
-                  placeholder="e.g., Senior Software Engineer"
-                  value={analysisData.jobTitle}
-                  onChange={handleInputChange}
-                  required
-                />
+                )}
               </div>
+            </motion.div>
 
-              <div className="space-y-2">
-                <Label htmlFor="companyName">Company Name (Optional)</Label>
-                <Input
-                  id="companyName"
-                  type="text"
-                  placeholder="e.g., Google, Microsoft"
-                  value={analysisData.companyName}
-                  onChange={handleInputChange}
-                />
-              </div>
+            {selectedFile && (
+              <motion.div
+                className="grid grid-cols-3 gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.4 }}
+              >
+                <motion.div
+                  className="group cursor-default text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <BarChart3 className="mx-auto mb-2 h-8 w-8 text-primary transition-colors group-hover:text-primary/80" />
+                  <p className="text-xs text-muted-foreground transition-colors group-hover:text-foreground/80">
+                    ATS Score
+                  </p>
+                </motion.div>
+                <motion.div
+                  className="group cursor-default text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <Target className="mx-auto mb-2 h-8 w-8 text-primary transition-colors group-hover:text-primary/80" />
+                  <p className="text-xs text-muted-foreground transition-colors group-hover:text-foreground/80">
+                    Job Match
+                  </p>
+                </motion.div>
+                <motion.div
+                  className="group cursor-default text-center"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <TrendingUp className="mx-auto mb-2 h-8 w-8 text-primary transition-colors group-hover:text-primary/80" />
+                  <p className="text-xs text-muted-foreground transition-colors group-hover:text-foreground/80">
+                    Improvements
+                  </p>
+                </motion.div>
+              </motion.div>
+            )}
 
-              <div className="mt-6 flex justify-between">
-                <BackButton
-                  onClick={handleBack}
-                  className="bg-background/20 px-6"
-                />
-                <NextButton onClick={handleNext} className="px-6" />
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          // Step 3: Job Description
-          <Card>
-            <CardHeader>
-              <CardTitle>Job Description</CardTitle>
-              <CardDescription>
-                Paste the job description for more accurate analysis and keyword
-                matching
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="jobDescription">
-                  Job Description (Optional)
-                </Label>
-                <Textarea
-                  id="jobDescription"
-                  placeholder="Paste the full job description here for better analysis..."
-                  rows={10}
-                  value={analysisData.jobDescription}
-                  onChange={handleInputChange}
-                  className="resize-none"
-                />
-                <p className="text-xs text-muted-foreground">
-                  Adding the job description helps identify missing keywords and
-                  skills
-                </p>
-              </div>
-
-              <div className="mt-6 flex justify-between">
-                <BackButton
-                  onClick={handleBack}
-                  className="bg-background/20 px-6"
-                />
+            {selectedFile && (
+              <motion.div
+                className="flex justify-end"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.3 }}
+              >
                 <NextButton
                   onClick={handleNext}
                   className="px-6"
-                  label="Analyze CV"
+                  disabled={isExtracting || !extractedText}
                 />
-              </div>
-            </CardContent>
-          </Card>
+              </motion.div>
+            )}
+          </div>
+        ) : !showJobDescription ? (
+          // Step 2: Job Details
+          <motion.div
+            key="job-details"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="border-0 shadow-none bg-transparent">
+              <CardHeader className="px-0 pb-6">
+                <CardTitle className="text-2xl font-bold tracking-tight">Target Job Information</CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  Provide job details for tailored CV analysis and recommendations
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6 px-0">
+                <div className="space-y-2">
+                  <Label htmlFor="jobTitle">Job Title *</Label>
+                  <Input
+                    id="jobTitle"
+                    type="text"
+                    placeholder="e.g., Senior Software Engineer"
+                    value={analysisData.jobTitle}
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="companyName">Company Name (Optional)</Label>
+                  <Input
+                    id="companyName"
+                    type="text"
+                    placeholder="e.g., Google, Microsoft"
+                    value={analysisData.companyName}
+                    onChange={handleInputChange}
+                  />
+                </div>
+
+                <div className="mt-6 flex justify-between">
+                  <BackButton
+                    onClick={handleBack}
+                    className="bg-background/20 px-6"
+                  />
+                  <NextButton onClick={handleNext} className="px-6" />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ) : (
+          // Step 3: Job Description
+          <motion.div
+            key="job-description"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="border-0 shadow-none bg-transparent">
+              <CardHeader className="px-0 pb-6">
+                <CardTitle className="text-2xl font-bold tracking-tight">Job Description</CardTitle>
+                <CardDescription className="text-muted-foreground">
+                  Paste the job description for more accurate analysis and keyword matching
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6 px-0">
+                <div className="space-y-2">
+                  <Label htmlFor="jobDescription">
+                    Job Description (Optional)
+                  </Label>
+                  <Textarea
+                    id="jobDescription"
+                    placeholder="Paste the full job description here for better analysis..."
+                    rows={10}
+                    value={analysisData.jobDescription}
+                    onChange={handleInputChange}
+                    className="resize-none"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Adding the job description helps identify missing keywords
+                    and skills
+                  </p>
+                </div>
+
+                <div className="mt-6 flex justify-between">
+                  <BackButton
+                    onClick={handleBack}
+                    className="bg-background/20 px-6"
+                  />
+                  <NextButton
+                    onClick={handleNext}
+                    className="px-6"
+                    label="Analyze CV"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </section>
   );
 }

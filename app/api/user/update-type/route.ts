@@ -17,10 +17,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Invalid user type" }, { status: 400 });
     }
 
-    // Update user type in database
+    // Update user type in database (don't mark onboarding as completed yet)
     await prisma.user.update({
       where: { id: session.user.id },
-      data: { userType },
+      data: {
+        userType,
+        // Will be set to true after full enhanced onboarding
+        onboardingCompleted: false,
+      },
     });
 
     return NextResponse.json({ success: true });

@@ -1,0 +1,743 @@
+{
+  "fields": {
+    "technology": {
+      "label": "Technology",
+      "description": "Software development, IT, and tech roles",
+      "specializations": {
+        "frontend": {
+          "label": "Frontend Development",
+          "tips": [
+            "Highlight your proficiency in modern JavaScript frameworks (React, Vue, Angular)",
+            "Showcase responsive design skills and accessibility knowledge",
+            "Include portfolio links with live demos of your projects",
+            "Mention experience with CSS preprocessors and build tools",
+            "Emphasize cross-browser compatibility testing experience"
+          ],
+          "keywords": ["React", "Vue", "Angular", "JavaScript", "TypeScript", "CSS", "HTML", "Responsive Design", "Webpack", "Git"],
+          "interviewTips": [
+            "Prepare to live-code UI components during technical interviews",
+            "Review CSS flexbox and grid layouts thoroughly",
+            "Practice explaining your approach to state management",
+            "Be ready to discuss performance optimization techniques"
+          ]
+        },
+        "backend": {
+          "label": "Backend Development",
+          "tips": [
+            "Emphasize experience with databases (SQL and NoSQL)",
+            "Highlight API design and microservices architecture knowledge",
+            "Include metrics on system performance improvements you've made",
+            "Mention cloud services experience (AWS, Azure, GCP)",
+            "Show understanding of security best practices"
+          ],
+          "keywords": ["Node.js", "Python", "Java", "API", "REST", "GraphQL", "Docker", "Kubernetes", "SQL", "MongoDB"],
+          "interviewTips": [
+            "Review system design principles and scalability patterns",
+            "Practice explaining database optimization strategies",
+            "Be prepared to discuss API security and authentication",
+            "Study common design patterns and when to use them"
+          ]
+        },
+        "fullstack": {
+          "label": "Full-Stack Development",
+          "tips": [
+            "Balance frontend and backend skills in your CV",
+            "Highlight end-to-end project ownership experience",
+            "Show proficiency in both client and server technologies",
+            "Include DevOps and deployment experience",
+            "Demonstrate understanding of the complete software lifecycle"
+          ],
+          "keywords": ["Full-Stack", "MEAN", "MERN", "DevOps", "CI/CD", "Agile", "Git", "Testing", "Deployment"],
+          "interviewTips": [
+            "Prepare to discuss architecture decisions across the stack",
+            "Review both frontend and backend technologies equally",
+            "Practice explaining trade-offs in technology choices",
+            "Be ready to whiteboard complete system designs"
+          ]
+        },
+        "mobile": {
+          "label": "Mobile Development",
+          "tips": [
+            "Specify iOS, Android, or cross-platform expertise clearly",
+            "Include app store links and download statistics if available",
+            "Highlight experience with native and hybrid frameworks",
+            "Mention performance optimization and battery efficiency",
+            "Show understanding of mobile-specific UX patterns"
+          ],
+          "keywords": ["iOS", "Android", "Swift", "Kotlin", "React Native", "Flutter", "Mobile", "App Store", "Play Store"],
+          "interviewTips": [
+            "Review platform-specific guidelines and best practices",
+            "Prepare to discuss app performance and memory management",
+            "Practice explaining mobile app architecture patterns",
+            "Be ready to show your published apps"
+          ]
+        },
+        "data": {
+          "label": "Data Science & Analytics",
+          "tips": [
+            "Quantify the business impact of your data projects",
+            "List specific ML algorithms and statistical methods you've used",
+            "Include experience with data visualization tools",
+            "Mention big data technologies and cloud platforms",
+            "Highlight any published research or kaggle competition results"
+          ],
+          "keywords": ["Python", "R", "Machine Learning", "SQL", "Tableau", "Power BI", "Statistics", "TensorFlow", "Pandas"],
+          "interviewTips": [
+            "Review statistical concepts and hypothesis testing",
+            "Practice explaining complex models to non-technical audiences",
+            "Prepare case studies of your data projects",
+            "Be ready for technical assessments and coding challenges"
+          ]
+        },
+        "devops": {
+          "label": "DevOps & Cloud",
+          "tips": [
+            "Emphasize automation and infrastructure as code experience",
+            "List specific CI/CD tools and cloud platforms you've used",
+            "Include metrics on deployment frequency and system reliability",
+            "Highlight experience with monitoring and logging tools",
+            "Show understanding of security and compliance requirements"
+          ],
+          "keywords": ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Jenkins", "Terraform", "CI/CD", "Linux", "Monitoring"],
+          "interviewTips": [
+            "Review cloud service offerings and pricing models",
+            "Practice explaining infrastructure automation strategies",
+            "Prepare to discuss incident response and troubleshooting",
+            "Study containerization and orchestration concepts"
+          ]
+        }
+      }
+    },
+    "finance": {
+      "label": "Finance & Banking",
+      "description": "Financial services, banking, and investment roles",
+      "specializations": {
+        "analyst": {
+          "label": "Financial Analyst",
+          "tips": [
+            "Highlight proficiency in financial modeling and Excel",
+            "Include specific analysis methodologies you've used",
+            "Quantify the impact of your recommendations",
+            "Mention experience with financial software and ERP systems",
+            "Show understanding of regulatory requirements"
+          ],
+          "keywords": ["Financial Analysis", "Excel", "Financial Modeling", "Budgeting", "Forecasting", "SAP", "QuickBooks"],
+          "interviewTips": [
+            "Review financial statements analysis thoroughly",
+            "Practice case studies and financial modeling exercises",
+            "Prepare to discuss market trends and economic indicators",
+            "Be ready to explain your analytical approach"
+          ]
+        },
+        "accounting": {
+          "label": "Accounting",
+          "tips": [
+            "List relevant certifications (CPA, ACCA, etc.)",
+            "Specify experience with accounting standards (GAAP, IFRS)",
+            "Include experience with audit and tax preparation",
+            "Mention specific accounting software proficiency",
+            "Highlight attention to detail and accuracy metrics"
+          ],
+          "keywords": ["CPA", "GAAP", "IFRS", "Audit", "Tax", "Financial Reporting", "Compliance", "QuickBooks", "Xero"],
+          "interviewTips": [
+            "Review current accounting standards and recent changes",
+            "Practice explaining complex accounting concepts simply",
+            "Prepare examples of problem-solving in previous roles",
+            "Be ready for technical accounting questions"
+          ]
+        },
+        "investment": {
+          "label": "Investment Banking",
+          "tips": [
+            "Emphasize deal experience and transaction values",
+            "Highlight financial modeling and valuation skills",
+            "Include relevant licenses and certifications",
+            "Show ability to work under pressure and long hours",
+            "Mention client relationship management experience"
+          ],
+          "keywords": ["M&A", "IPO", "Valuation", "Due Diligence", "Financial Modeling", "DCF", "LBO", "Pitch Books"],
+          "interviewTips": [
+            "Master valuation methods and financial modeling",
+            "Stay updated on recent deals and market trends",
+            "Practice brain teasers and mental math",
+            "Prepare to discuss why you want to work in IB"
+          ]
+        }
+      }
+    },
+    "marketing": {
+      "label": "Marketing & Communications",
+      "description": "Marketing, advertising, and communications roles",
+      "specializations": {
+        "digital": {
+          "label": "Digital Marketing",
+          "tips": [
+            "Include specific campaign metrics and ROI",
+            "List marketing tools and platforms you've mastered",
+            "Highlight experience with SEO, SEM, and social media",
+            "Show understanding of analytics and data-driven decisions",
+            "Include certifications (Google Ads, HubSpot, etc.)"
+          ],
+          "keywords": ["SEO", "SEM", "Google Analytics", "Social Media", "Content Marketing", "PPC", "Email Marketing", "CRM"],
+          "interviewTips": [
+            "Prepare campaign case studies with specific results",
+            "Review latest digital marketing trends and tools",
+            "Practice explaining technical concepts to non-marketers",
+            "Be ready to analyze sample campaigns"
+          ]
+        },
+        "content": {
+          "label": "Content Marketing",
+          "tips": [
+            "Include writing samples and portfolio links",
+            "Highlight SEO knowledge and content optimization",
+            "Show experience with content management systems",
+            "Mention audience growth and engagement metrics",
+            "Include experience with various content formats"
+          ],
+          "keywords": ["Content Strategy", "Copywriting", "SEO", "Blog", "Social Media", "WordPress", "Content Calendar"],
+          "interviewTips": [
+            "Bring writing samples relevant to the company",
+            "Prepare to complete a writing test",
+            "Review the company's current content strategy",
+            "Practice explaining your content creation process"
+          ]
+        },
+        "brand": {
+          "label": "Brand Management",
+          "tips": [
+            "Emphasize strategic thinking and brand positioning",
+            "Include examples of successful brand campaigns",
+            "Show understanding of market research and consumer insights",
+            "Highlight cross-functional collaboration experience",
+            "Mention experience with brand guidelines and consistency"
+          ],
+          "keywords": ["Brand Strategy", "Market Research", "Consumer Insights", "Brand Guidelines", "Product Launch", "Positioning"],
+          "interviewTips": [
+            "Research the company's brand thoroughly",
+            "Prepare brand analysis of competitors",
+            "Practice presenting strategic recommendations",
+            "Be ready to discuss brand challenges and solutions"
+          ]
+        }
+      }
+    },
+    "healthcare": {
+      "label": "Healthcare",
+      "description": "Medical, nursing, and healthcare administration",
+      "specializations": {
+        "clinical": {
+          "label": "Clinical Roles",
+          "tips": [
+            "List all relevant licenses and certifications prominently",
+            "Include specific clinical skills and procedures",
+            "Highlight patient care metrics and outcomes",
+            "Mention experience with healthcare technology/EMR systems",
+            "Show commitment to continuing education"
+          ],
+          "keywords": ["Patient Care", "Clinical Skills", "EMR", "HIPAA", "Medical Terminology", "CPR", "License"],
+          "interviewTips": [
+            "Review clinical scenarios and best practices",
+            "Prepare to discuss patient care philosophy",
+            "Practice explaining medical concepts to patients",
+            "Be ready for behavioral and situational questions"
+          ]
+        },
+        "administration": {
+          "label": "Healthcare Administration",
+          "tips": [
+            "Emphasize knowledge of healthcare regulations and compliance",
+            "Include experience with healthcare management systems",
+            "Highlight cost reduction and efficiency improvements",
+            "Show understanding of patient satisfaction metrics",
+            "Mention experience with insurance and billing processes"
+          ],
+          "keywords": ["Healthcare Management", "HIPAA", "Compliance", "Patient Satisfaction", "Healthcare IT", "Revenue Cycle"],
+          "interviewTips": [
+            "Review current healthcare policies and regulations",
+            "Prepare examples of process improvements",
+            "Practice discussing healthcare industry challenges",
+            "Be ready to explain your management style"
+          ]
+        }
+      }
+    },
+    "education": {
+      "label": "Education",
+      "description": "Teaching, training, and educational administration",
+      "specializations": {
+        "teaching": {
+          "label": "Teaching",
+          "tips": [
+            "Include teaching certifications and endorsements",
+            "Highlight classroom management and curriculum development",
+            "Show evidence of student achievement and growth",
+            "Mention experience with educational technology",
+            "Include professional development and training"
+          ],
+          "keywords": ["Curriculum", "Lesson Planning", "Classroom Management", "Assessment", "Differentiation", "EdTech"],
+          "interviewTips": [
+            "Prepare a sample lesson plan",
+            "Review current educational trends and methodologies",
+            "Practice explaining your teaching philosophy",
+            "Be ready to discuss classroom management strategies"
+          ]
+        },
+        "training": {
+          "label": "Corporate Training",
+          "tips": [
+            "Emphasize instructional design and adult learning principles",
+            "Include metrics on training effectiveness and ROI",
+            "Highlight experience with e-learning platforms",
+            "Show ability to adapt content for different audiences",
+            "Mention experience with needs assessment"
+          ],
+          "keywords": ["Training", "L&D", "Instructional Design", "eLearning", "LMS", "Adult Learning", "Workshop Facilitation"],
+          "interviewTips": [
+            "Prepare to deliver a mini training session",
+            "Review adult learning theories and principles",
+            "Practice explaining complex topics simply",
+            "Be ready to discuss training evaluation methods"
+          ]
+        }
+      }
+    },
+    "sales": {
+      "label": "Sales",
+      "description": "Sales, business development, and account management",
+      "specializations": {
+        "b2b": {
+          "label": "B2B Sales",
+          "tips": [
+            "Quantify sales achievements with specific numbers and percentages",
+            "Highlight experience with long sales cycles and complex deals",
+            "Include CRM proficiency and sales methodology knowledge",
+            "Show ability to build relationships with C-level executives",
+            "Mention experience with contract negotiation"
+          ],
+          "keywords": ["B2B Sales", "Enterprise Sales", "Solution Selling", "CRM", "Pipeline Management", "Negotiation", "Salesforce"],
+          "interviewTips": [
+            "Prepare specific examples of deals you've closed",
+            "Review the company's products and target market",
+            "Practice your sales pitch and objection handling",
+            "Be ready to role-play sales scenarios"
+          ]
+        },
+        "b2c": {
+          "label": "B2C Sales",
+          "tips": [
+            "Emphasize customer service and relationship building skills",
+            "Include metrics on conversion rates and customer satisfaction",
+            "Highlight ability to handle high-volume transactions",
+            "Show experience with retail or direct-to-consumer sales",
+            "Mention upselling and cross-selling achievements"
+          ],
+          "keywords": ["Customer Service", "Retail Sales", "Upselling", "Customer Satisfaction", "POS Systems", "Product Knowledge"],
+          "interviewTips": [
+            "Demonstrate enthusiasm and product knowledge",
+            "Prepare examples of exceptional customer service",
+            "Practice handling difficult customer situations",
+            "Be ready to discuss sales techniques and strategies"
+          ]
+        },
+        "account_management": {
+          "label": "Account Management",
+          "tips": [
+            "Highlight client retention and growth metrics",
+            "Show ability to manage multiple accounts simultaneously",
+            "Include experience with account planning and strategy",
+            "Emphasize problem-solving and relationship management",
+            "Mention experience with renewals and upselling"
+          ],
+          "keywords": ["Account Management", "Client Relations", "Retention", "Upselling", "Strategic Planning", "Customer Success"],
+          "interviewTips": [
+            "Prepare case studies of account growth",
+            "Review customer success best practices",
+            "Practice explaining how you handle client issues",
+            "Be ready to discuss account prioritization strategies"
+          ]
+        }
+      }
+    },
+    "hr": {
+      "label": "Human Resources",
+      "description": "HR, recruitment, and people operations",
+      "specializations": {
+        "recruitment": {
+          "label": "Recruitment",
+          "tips": [
+            "Include metrics on time-to-fill and quality of hire",
+            "Highlight experience with ATS and recruitment tools",
+            "Show knowledge of various sourcing strategies",
+            "Mention experience with employer branding",
+            "Include diversity and inclusion initiatives"
+          ],
+          "keywords": ["Recruitment", "Talent Acquisition", "ATS", "Sourcing", "Interviewing", "Employer Branding", "LinkedIn Recruiter"],
+          "interviewTips": [
+            "Review current recruitment trends and challenges",
+            "Prepare examples of difficult positions you've filled",
+            "Practice explaining your candidate assessment process",
+            "Be ready to discuss diversity hiring strategies"
+          ]
+        },
+        "hr_generalist": {
+          "label": "HR Generalist",
+          "tips": [
+            "Show broad knowledge across all HR functions",
+            "Include experience with HRIS and HR analytics",
+            "Highlight knowledge of employment law and compliance",
+            "Mention experience with employee relations and conflict resolution",
+            "Include any HR certifications (SHRM, CIPD)"
+          ],
+          "keywords": ["HRIS", "Employee Relations", "Compliance", "Benefits", "Performance Management", "SHRM", "Onboarding"],
+          "interviewTips": [
+            "Review current employment law and regulations",
+            "Prepare examples of HR initiatives you've led",
+            "Practice explaining complex HR policies simply",
+            "Be ready for situational judgment questions"
+          ]
+        }
+      }
+    },
+    "operations": {
+      "label": "Operations",
+      "description": "Operations, logistics, and supply chain management",
+      "specializations": {
+        "supply_chain": {
+          "label": "Supply Chain",
+          "tips": [
+            "Highlight experience with supply chain optimization",
+            "Include knowledge of logistics and inventory management",
+            "Show proficiency with ERP and supply chain software",
+            "Mention cost reduction and efficiency improvements",
+            "Include relevant certifications (APICS, Six Sigma)"
+          ],
+          "keywords": ["Supply Chain", "Logistics", "Inventory Management", "ERP", "Procurement", "Six Sigma", "Lean"],
+          "interviewTips": [
+            "Review supply chain metrics and KPIs",
+            "Prepare examples of process improvements",
+            "Practice explaining complex supply chains simply",
+            "Be ready to discuss risk management strategies"
+          ]
+        },
+        "project_management": {
+          "label": "Project Management",
+          "tips": [
+            "List project management certifications (PMP, Agile, Scrum)",
+            "Include specific methodologies you've used",
+            "Quantify project outcomes (on-time, on-budget delivery)",
+            "Highlight stakeholder management experience",
+            "Show experience with project management tools"
+          ],
+          "keywords": ["PMP", "Agile", "Scrum", "Project Planning", "Risk Management", "Stakeholder Management", "Jira", "MS Project"],
+          "interviewTips": [
+            "Prepare detailed project case studies",
+            "Review project management methodologies",
+            "Practice explaining how you handle project risks",
+            "Be ready to discuss resource management"
+          ]
+        }
+      }
+    },
+    "legal": {
+      "label": "Legal",
+      "description": "Legal, compliance, and regulatory roles",
+      "specializations": {
+        "corporate": {
+          "label": "Corporate Law",
+          "tips": [
+            "Emphasize bar admissions and legal qualifications",
+            "Include specific areas of legal expertise",
+            "Highlight experience with contracts and negotiations",
+            "Show knowledge of regulatory compliance",
+            "Mention any notable cases or transactions"
+          ],
+          "keywords": ["Corporate Law", "Contracts", "Compliance", "M&A", "Securities", "Governance", "Due Diligence"],
+          "interviewTips": [
+            "Review recent legal developments in corporate law",
+            "Prepare to discuss complex legal issues",
+            "Practice explaining legal concepts to non-lawyers",
+            "Be ready for hypothetical legal scenarios"
+          ]
+        },
+        "compliance": {
+          "label": "Compliance",
+          "tips": [
+            "Highlight knowledge of relevant regulations and standards",
+            "Include experience with compliance programs and audits",
+            "Show ability to develop and implement policies",
+            "Mention experience with risk assessment and management",
+            "Include relevant certifications"
+          ],
+          "keywords": ["Compliance", "Risk Management", "Audit", "Regulatory", "Policy Development", "Ethics", "SOX", "GDPR"],
+          "interviewTips": [
+            "Review current regulatory requirements",
+            "Prepare examples of compliance programs you've developed",
+            "Practice explaining compliance risks and mitigation",
+            "Be ready to discuss ethical dilemmas"
+          ]
+        }
+      }
+    },
+    "creative": {
+      "label": "Creative & Design",
+      "description": "Design, creative, and multimedia roles",
+      "specializations": {
+        "graphic_design": {
+          "label": "Graphic Design",
+          "tips": [
+            "Include a strong portfolio link prominently",
+            "List design software proficiency (Adobe Creative Suite, etc.)",
+            "Show range across different design styles and mediums",
+            "Highlight collaborative work with teams and clients",
+            "Mention awards or recognition received"
+          ],
+          "keywords": ["Adobe Creative Suite", "Photoshop", "Illustrator", "InDesign", "Typography", "Branding", "UI/UX"],
+          "interviewTips": [
+            "Prepare a curated portfolio for the specific role",
+            "Practice explaining your design process",
+            "Review the company's brand and design style",
+            "Be ready to complete a design challenge"
+          ]
+        },
+        "ux_ui": {
+          "label": "UX/UI Design",
+          "tips": [
+            "Emphasize user research and testing experience",
+            "Include case studies showing your design process",
+            "Highlight proficiency with design and prototyping tools",
+            "Show understanding of accessibility and usability principles",
+            "Mention experience with design systems"
+          ],
+          "keywords": ["User Research", "Wireframing", "Prototyping", "Figma", "Sketch", "Usability Testing", "Design Systems"],
+          "interviewTips": [
+            "Prepare detailed case studies of your projects",
+            "Practice whiteboarding design solutions",
+            "Review UX principles and methodologies",
+            "Be ready for design critique sessions"
+          ]
+        }
+      }
+    }
+  },
+  "generalTips": {
+    "cvOptimization": [
+      "Use action verbs to start bullet points (achieved, implemented, managed)",
+      "Quantify achievements with numbers, percentages, and metrics",
+      "Tailor your CV to each job description using relevant keywords",
+      "Keep formatting clean and consistent throughout",
+      "Limit your CV to 2 pages unless you have extensive experience",
+      "Include a professional summary that matches the job requirements",
+      "List skills that are relevant and backed by experience",
+      "Ensure contact information is current and professional"
+    ],
+    "atsOptimization": [
+      "Use standard section headings (Experience, Education, Skills)",
+      "Avoid graphics, images, and complex formatting",
+      "Include keywords from the job description naturally",
+      "Use standard fonts like Arial, Calibri, or Times New Roman",
+      "Save your CV in both PDF and Word formats",
+      "Spell out acronyms at least once",
+      "Use bullet points instead of paragraphs",
+      "Avoid headers and footers for important information"
+    ],
+    "coverLetter": [
+      "Address the letter to a specific person when possible",
+      "Open with a strong hook that shows enthusiasm",
+      "Connect your experience directly to job requirements",
+      "Show knowledge of the company and its values",
+      "Explain what you can offer, not just what you want",
+      "Keep it concise - one page maximum",
+      "Close with a clear call to action",
+      "Proofread carefully for errors"
+    ],
+    "interviewPreparation": [
+      "Research the company thoroughly - mission, values, recent news",
+      "Prepare STAR examples for behavioral questions",
+      "Practice your elevator pitch (30-60 seconds about yourself)",
+      "Prepare thoughtful questions to ask the interviewer",
+      "Review the job description and align your experience",
+      "Practice common interview questions out loud",
+      "Prepare for salary negotiation discussions",
+      "Plan your interview outfit in advance"
+    ],
+    "networking": [
+      "Optimize your LinkedIn profile with keywords",
+      "Connect with professionals in your target industry",
+      "Join relevant professional associations and groups",
+      "Attend industry events and conferences",
+      "Request informational interviews to learn about roles",
+      "Maintain relationships with former colleagues",
+      "Share relevant content to establish thought leadership",
+      "Follow up with new connections within 48 hours"
+    ],
+    "jobSearch": [
+      "Set up job alerts on multiple platforms",
+      "Apply early - within the first 48 hours of posting",
+      "Track your applications in a spreadsheet",
+      "Follow up on applications after 1-2 weeks",
+      "Customize each application rather than mass applying",
+      "Look beyond job boards - check company websites directly",
+      "Consider contract or temporary roles as stepping stones",
+      "Don't ignore smaller companies or startups"
+    ]
+  },
+  "careerStages": {
+    "entry": {
+      "label": "Entry Level / Recent Graduate",
+      "challenges": [
+        "Limited professional experience",
+        "Competing with other graduates",
+        "Uncertainty about career direction"
+      ],
+      "strategies": [
+        "Emphasize education, projects, and internships",
+        "Highlight transferable skills from any experience",
+        "Show enthusiasm and willingness to learn",
+        "Include relevant coursework and academic achievements",
+        "Leverage university career services and alumni networks",
+        "Consider entry-level programs and graduate schemes",
+        "Be open to different industries and roles initially"
+      ]
+    },
+    "early": {
+      "label": "Early Career (1-5 years)",
+      "challenges": [
+        "Building specialized expertise",
+        "Transitioning from entry-level roles",
+        "Developing professional network"
+      ],
+      "strategies": [
+        "Focus on achievements and growth in current role",
+        "Pursue relevant certifications and training",
+        "Seek mentorship and feedback actively",
+        "Take on challenging projects to build expertise",
+        "Start building your professional brand",
+        "Network within and outside your organization",
+        "Consider lateral moves to gain broader experience"
+      ]
+    },
+    "mid": {
+      "label": "Mid-Career (5-15 years)",
+      "challenges": [
+        "Breaking into senior positions",
+        "Balancing breadth vs. depth of experience",
+        "Potential career plateau"
+      ],
+      "strategies": [
+        "Emphasize leadership and strategic contributions",
+        "Quantify business impact of your work",
+        "Develop and showcase management skills",
+        "Build thought leadership in your field",
+        "Consider MBA or advanced certifications",
+        "Mentor others to demonstrate leadership",
+        "Network at senior levels in your industry"
+      ]
+    },
+    "senior": {
+      "label": "Senior/Executive (15+ years)",
+      "challenges": [
+        "Age discrimination concerns",
+        "Keeping skills current",
+        "Overqualification for some roles"
+      ],
+      "strategies": [
+        "Focus on recent achievements (last 10-15 years)",
+        "Emphasize strategic thinking and leadership",
+        "Show adaptability and continuous learning",
+        "Consider consulting or advisory roles",
+        "Leverage extensive network for opportunities",
+        "Highlight mentoring and team development",
+        "Consider board positions or portfolio careers"
+      ]
+    },
+    "transition": {
+      "label": "Career Changer",
+      "challenges": [
+        "Lack of direct experience in new field",
+        "Potential salary reduction",
+        "Convincing employers of commitment"
+      ],
+      "strategies": [
+        "Identify and emphasize transferable skills",
+        "Get relevant certifications or education",
+        "Start with volunteer work or side projects",
+        "Network extensively in the new field",
+        "Consider transitional roles that bridge both fields",
+        "Write a compelling career change cover letter",
+        "Be prepared to start at a lower level initially"
+      ]
+    }
+  },
+  "aiToolsInfo": {
+    "cvAnalyzer": {
+      "description": "Our AI-powered CV analyzer helps you optimize your resume for any job application",
+      "features": [
+        "ATS compatibility scoring",
+        "Keyword optimization suggestions",
+        "Format and structure analysis",
+        "Content strength evaluation",
+        "Grammar and spelling check",
+        "Industry-specific recommendations"
+      ],
+      "howToUse": [
+        "Upload your current CV in PDF or Word format",
+        "Paste the job description you're targeting",
+        "Receive instant analysis and improvement suggestions",
+        "Implement changes and re-analyze for better scores"
+      ],
+      "pricing": "Pay-per-use model to keep costs affordable for job seekers"
+    },
+    "coverLetterGenerator": {
+      "description": "Generate tailored cover letters that complement your CV",
+      "features": [
+        "Job-specific customization",
+        "Company research integration",
+        "Tone and style matching",
+        "ATS-friendly formatting",
+        "Multiple templates available"
+      ],
+      "howToUse": [
+        "Input job details and company information",
+        "Upload or reference your CV",
+        "Select tone and style preferences",
+        "Review and customize the generated letter"
+      ]
+    },
+    "interviewPrep": {
+      "description": "Prepare for interviews with AI-powered practice sessions",
+      "features": [
+        "Role-specific question banks",
+        "STAR method coaching",
+        "Answer evaluation and feedback",
+        "Mock interview simulations",
+        "Confidence-building exercises"
+      ],
+      "howToUse": [
+        "Select your interview type and role",
+        "Practice with AI-generated questions",
+        "Record and review your responses",
+        "Receive feedback and improvement tips"
+      ]
+    }
+  },
+  "newsletter": {
+    "purpose": "Stay connected with your career journey",
+    "content": [
+      "Weekly job market insights and trends",
+      "Success stories from our community",
+      "New feature announcements and tips",
+      "Industry-specific opportunities",
+      "Career development resources",
+      "Exclusive discounts on AI tools"
+    ],
+    "frequency": "Weekly on Thursdays",
+    "benefits": [
+      "Track your progress over time",
+      "Get personalized job recommendations",
+      "Access exclusive content and webinars",
+      "Connect with other job seekers",
+      "Celebrate milestones and successes together"
+    ]
+  }
+}

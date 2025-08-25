@@ -3,10 +3,8 @@
 import { useState } from "react";
 
 import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
 
 import { ArrowRight, Briefcase, User } from "lucide-react";
-import { toast } from "react-hot-toast";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,6 +17,9 @@ import {
 } from "@/components/ui/card";
 
 const ClientConfetti = dynamic(() => import("./OnboardingConfetti"), {
+  ssr: false,
+});
+const EnhancedOnboarding = dynamic(() => import("./EnhancedOnboarding"), {
   ssr: false,
 });
 
@@ -50,12 +51,12 @@ const userTypeOptions: UserTypeOption[] = [
   {
     type: "CANDIDATE",
     title: "I'm a Job Seeker",
-    description: "Analyze and optimize your CV for better job matching",
+    description: "Get your foot in the door with AI-powered career guidance",
     features: [
       "CV analysis & scoring",
-      "ATS optimization",
-      "Job matching",
-      "Improvement tracking",
+      "Career guidance & tips",
+      "Interview preparation",
+      "ATS & Cover letter optimisation",
     ],
     icon: User,
     route: "/portal",
@@ -65,11 +66,10 @@ const userTypeOptions: UserTypeOption[] = [
 export function OnboardingBackground() {
   const [selectedType, setSelectedType] = useState<UserType | null>(null);
   const [isUpdating, setIsUpdating] = useState(false);
-  const router = useRouter();
+  const [showEnhancedOnboarding, setShowEnhancedOnboarding] = useState(false);
 
   const handleContinue = async () => {
     if (!selectedType) {
-      toast.error("Please select your user type");
       return;
     }
 
@@ -85,19 +85,18 @@ export function OnboardingBackground() {
         throw new Error("Failed to update user type");
       }
 
-      const option = userTypeOptions.find((opt) => opt.type === selectedType);
-      toast.success(
-        `Welcome! Redirecting to your ${selectedType.toLowerCase()} dashboard...`,
-      );
-
-      setTimeout(() => {
-        router.push(option?.route || "/app");
-      }, 1000);
+      // Move to enhanced onboarding instead of redirecting
+      setShowEnhancedOnboarding(true);
+      setIsUpdating(false);
     } catch {
-      toast.error("Failed to save your preferences. Please try again.");
       setIsUpdating(false);
     }
   };
+
+  // Show enhanced onboarding after user type selection
+  if (showEnhancedOnboarding && selectedType) {
+    return <EnhancedOnboarding initialUserType={selectedType} />;
+  }
 
   return (
     <div className="mx-auto flex max-w-4xl flex-col items-center justify-center">
