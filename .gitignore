@@ -23,6 +23,8 @@ auth-proxy/node_modules
 
 # misc
 .vscode
+.cursor
+.claude
 .DS_Store
 *.pem
 

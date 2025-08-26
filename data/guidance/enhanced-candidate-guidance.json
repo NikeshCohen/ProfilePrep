@@ -1,0 +1,2380 @@
+{
+  "topics": {
+    "cv-writing": {
+      "title": "CV Writing Excellence",
+      "description": "Master the art of creating compelling CVs that capture attention and secure interviews",
+      "icon": "FileText",
+      "sections": {
+        "structure": {
+          "title": "CV Structure & Layout",
+          "content": {
+            "layouts": {
+              "title": "Choose Your Layout",
+              "description": "The structure you choose tells your career story. Each format serves different purposes and career stages.",
+              "types": {
+                "chronological": {
+                  "title": "Chronological CV",
+                  "description": "Best for candidates with steady career progression and no major gaps",
+                  "when_to_use": "When you have consistent work history in the same field",
+                  "pros": [
+                    "Easy for recruiters to follow",
+                    "Shows clear career progression",
+                    "ATS-friendly format"
+                  ],
+                  "cons": [
+                    "Highlights employment gaps",
+                    "May not suit career changers"
+                  ]
+                },
+                "functional": {
+                  "title": "Functional CV",
+                  "description": "Focuses on skills rather than chronological work history",
+                  "when_to_use": "When changing careers, returning to work, or have employment gaps",
+                  "pros": [
+                    "Emphasises skills over gaps",
+                    "Good for career changers",
+                    "Highlights relevant abilities"
+                  ],
+                  "cons": [
+                    "Recruiters may be suspicious",
+                    "Less ATS-friendly",
+                    "Harder to verify experience"
+                  ]
+                },
+                "hybrid": {
+                  "title": "Hybrid (Combination) CV",
+                  "description": "Combines skills focus with chronological experience",
+                  "when_to_use": "When you want to highlight both skills and steady progression",
+                  "pros": [
+                    "Shows skills and experience",
+                    "Flexible format",
+                    "Good for most situations"
+                  ],
+                  "cons": [
+                    "Can be longer",
+                    "More complex to write",
+                    "May seem cluttered if not well-designed"
+                  ]
+                }
+              }
+            },
+            "essential_sections": {
+              "title": "Essential Sections",
+              "description": "Every professional CV needs these fundamental sections, carefully crafted to tell your story.",
+              "sections": {
+                "contact_info": {
+                  "title": "Contact Information",
+                  "placement": "Top of CV, clearly visible",
+                  "must_include": [
+                    "Full name",
+                    "Professional email address",
+                    "Phone number",
+                    "Location (city, country)"
+                  ],
+                  "optional": [
+                    "LinkedIn profile URL",
+                    "Portfolio website",
+                    "Professional social media"
+                  ],
+                  "avoid": [
+                    "Personal email addresses",
+                    "Photos (unless industry-specific)",
+                    "Full home address",
+                    "Date of birth",
+                    "Marital status"
+                  ]
+                },
+                "professional_summary": {
+                  "title": "Professional Summary",
+                  "placement": "Immediately after contact information",
+                  "purpose": "Your elevator pitch - capture attention in 3-4 sentences",
+                  "structure": "Start with your role/expertise, highlight key achievements, mention years of experience, end with value proposition",
+                  "length": "3-4 sentences or 50-100 words",
+                  "tone": "Confident but not boastful, specific rather than generic"
+                },
+                "experience": {
+                  "title": "Professional Experience",
+                  "placement": "Usually after summary, but can come after skills for functional CVs",
+                  "format": "Job title, Company name, Location, Dates (Month/Year format)",
+                  "description_structure": "2-4 bullet points per role, focusing on achievements not just duties",
+                  "achievement_formula": "Action verb + What you did + Result/Impact + Numbers when possible"
+                },
+                "education": {
+                  "title": "Education",
+                  "placement": "After experience (unless recent graduate, then place earlier)",
+                  "include": "Degree type, Institution, Graduation year, Relevant honours/achievements",
+                  "note": "Include GPA only if above 3.5 and you're within 2 years of graduation"
+                },
+                "skills": {
+                  "title": "Skills",
+                  "placement": "Can be prominent section or sidebar",
+                  "categories": [
+                    "Technical skills",
+                    "Software proficiency",
+                    "Languages",
+                    "Certifications"
+                  ],
+                  "formatting": "Use columns or categories, avoid rating systems unless you can back them up"
+                }
+              }
+            }
+          }
+        },
+        "writing_techniques": {
+          "title": "Writing Powerful Content",
+          "content": {
+            "bullet_points": {
+              "title": "Crafting Strong Bullet Points",
+              "description": "Transform mundane job duties into compelling achievements that demonstrate your value.",
+              "formula": "[Action Verb] + [What You Did] + [How/Context] + [Result/Impact] + [Metrics When Possible]",
+              "examples": {
+                "weak": "Managed social media accounts",
+                "strong": "Increased social media engagement by 150% across 5 platforms by implementing content calendar and user-generated campaigns, resulting in 2,000 new followers monthly"
+              },
+              "action_verbs": {
+                "leadership": [
+                  "Directed",
+                  "Orchestrated",
+                  "Spearheaded",
+                  "Championed",
+                  "Mentored",
+                  "Facilitated"
+                ],
+                "achievement": [
+                  "Achieved",
+                  "Delivered",
+                  "Exceeded",
+                  "Surpassed",
+                  "Generated",
+                  "Produced"
+                ],
+                "improvement": [
+                  "Optimised",
+                  "Enhanced",
+                  "Streamlined",
+                  "Revolutionised",
+                  "Transformed",
+                  "Modernised"
+                ],
+                "creation": [
+                  "Developed",
+                  "Designed",
+                  "Established",
+                  "Launched",
+                  "Built",
+                  "Implemented"
+                ],
+                "problem_solving": [
+                  "Resolved",
+                  "Troubleshot",
+                  "Investigated",
+                  "Diagnosed",
+                  "Corrected",
+                  "Rectified"
+                ]
+              },
+              "metrics_to_include": [
+                "Percentages of improvement",
+                "Revenue figures",
+                "Time saved",
+                "Number of people managed",
+                "Project budgets",
+                "Customer satisfaction scores",
+                "Cost reductions",
+                "Process efficiency gains"
+              ]
+            },
+            "tailoring": {
+              "title": "Tailoring to Job Descriptions",
+              "description": "Your CV should feel like it was written specifically for each role, not as a generic document sent to hundreds of employers.",
+              "process": {
+                "step1": "Analyse the job description for keywords, required skills, and preferred experience",
+                "step2": "Identify which of your experiences best match these requirements",
+                "step3": "Reorder and rewrite sections to prioritise the most relevant information",
+                "step4": "Mirror the language used in the job posting (without copying verbatim)",
+                "step5": "Quantify achievements that relate to the role's key performance areas"
+              },
+              "keyword_strategy": {
+                "identification": "Look for repeated terms, required qualifications, and skills mentioned multiple times",
+                "integration": "Naturally incorporate these terms into your experience descriptions and skills section",
+                "balance": "Don't stuff keywords - maintain readability and authenticity",
+                "context": "Use keywords within meaningful sentences that demonstrate your experience"
+              }
+            },
+            "common_mistakes": {
+              "title": "Mistakes That Kill Your Chances",
+              "description": "Avoid these common pitfalls that immediately signal amateur hour to recruiters and hiring managers.",
+              "content_mistakes": {
+                "generic_objectives": "'Seeking a challenging position' tells employers nothing about your value",
+                "duty_descriptions": "Listing job duties instead of achievements makes you sound like everyone else",
+                "irrelevant_information": "Including every job since age 16 or personal hobbies unrelated to the role",
+                "weak_language": "Using passive voice and weak verbs like 'responsible for' or 'involved in'",
+                "unexplained_gaps": "Leaving employment gaps without brief, positive explanations"
+              },
+              "formatting_mistakes": {
+                "inconsistent_formatting": "Mixed fonts, varying bullet styles, or inconsistent date formats",
+                "poor_spacing": "Cramped text or excessive white space that makes reading difficult",
+                "unprofessional_email": "Using emails like partygirl@email.com instead of firstname.lastname@email.com",
+                "outdated_design": "Using templates that look like they're from 2010",
+                "length_issues": "Going over two pages without executive-level experience, or cramming everything onto one page"
+              },
+              "technical_mistakes": {
+                "spelling_errors": "Even one typo can eliminate you from consideration",
+                "grammar_issues": "Poor grammar suggests lack of attention to detail",
+                "file_problems": "Sending in formats that can't be opened or have corrupted formatting",
+                "contact_errors": "Phone numbers or email addresses that don't work"
+              }
+            }
+          }
+        },
+        "ats_optimization": {
+          "title": "ATS Optimization",
+          "content": {
+            "understanding_ats": {
+              "title": "How ATS Systems Work",
+              "description": "Applicant Tracking Systems are the digital gatekeepers between you and human recruiters. Understanding how they parse and rank CVs is crucial for getting past this first hurdle.",
+              "parsing_process": "ATS software scans your CV to extract information into database fields, looking for keywords, dates, and standard formatting",
+              "ranking_factors": [
+                "Keyword matching with job description",
+                "Standard section headings",
+                "Consistent formatting",
+                "Relevant experience duration",
+                "Education requirements match"
+              ],
+              "common_ats_systems": [
+                "Workday",
+                "Taleo",
+                "iCIMS",
+                "Greenhouse",
+                "BambooHR",
+                "Lever"
+              ]
+            },
+            "formatting_for_ats": {
+              "title": "ATS-Friendly Formatting",
+              "description": "Simple, clean formatting ensures your CV is properly parsed and your information reaches human eyes.",
+              "do_use": {
+                "fonts": [
+                  "Arial",
+                  "Calibri",
+                  "Georgia",
+                  "Times New Roman",
+                  "Verdana"
+                ],
+                "headings": [
+                  "Professional Summary",
+                  "Work Experience",
+                  "Education",
+                  "Skills",
+                  "Certifications"
+                ],
+                "formats": "Standard bullet points, clear section breaks, consistent date formatting (MM/YYYY)",
+                "file_types": "Word document (.docx) or PDF (if specified in job posting)"
+              },
+              "avoid": {
+                "graphics": "Images, charts, graphs, or logos that ATS cannot read",
+                "tables": "Complex tables that may scramble your information",
+                "headers_footers": "Important information in headers/footers may be ignored",
+                "columns": "Multi-column layouts can confuse parsing algorithms",
+                "special_characters": "Fancy symbols or non-standard bullet points"
+              }
+            },
+            "keyword_optimization": {
+              "title": "Strategic Keyword Integration",
+              "description": "Keywords are the bridge between your experience and the ATS algorithm. Use them strategically, not desperately.",
+              "identification_process": {
+                "job_description_analysis": "Read through the posting 3-4 times, highlighting repeated terms and phrases",
+                "skills_matching": "Match your actual skills and experience with the keywords found",
+                "industry_research": "Look at similar roles to identify common terminology in your field",
+                "competitor_analysis": "Review profiles of people in similar roles on LinkedIn"
+              },
+              "integration_strategies": {
+                "natural_inclusion": "Weave keywords into your experience descriptions where they genuinely apply",
+                "skills_section": "List relevant technical skills and software mentioned in the job posting",
+                "context_matters": "Don't just list keywords - use them in meaningful sentences that demonstrate experience",
+                "synonym_usage": "Include variations of key terms (e.g., 'digital marketing' and 'online marketing')"
+              },
+              "testing_your_cv": {
+                "keyword_density": "Aim for natural keyword inclusion - not stuffing",
+                "readability_check": "Your CV should read naturally to humans after keyword optimization",
+                "ats_simulators": "Use free online ATS scanners to test how well your CV is parsed",
+                "feedback_loop": "Continuously refine based on application response rates"
+              }
+            }
+          }
+        }
+      }
+    },
+    "cover-letters": {
+      "title": "Cover Letter Mastery",
+      "description": "Transform your cover letter from generic afterthought to compelling narrative that complements your CV",
+      "icon": "Mail",
+      "sections": {
+        "structure": {
+          "title": "Cover Letter Structure",
+          "content": {
+            "opening": {
+              "title": "Compelling Openings",
+              "description": "Your opening paragraph determines whether the reader continues. Make it count by showing genuine interest and immediate value.",
+              "avoid": [
+                "'I am writing to apply for...'",
+                "'Please find attached my CV...'",
+                "'I saw your job posting...'"
+              ],
+              "effective_approaches": {
+                "connection": "Mention a mutual connection or referral from someone in the company",
+                "achievement": "Lead with a quantified achievement that relates to the role",
+                "company_knowledge": "Reference recent company news, achievements, or initiatives that excite you",
+                "value_proposition": "Immediately state what unique value you bring to the role"
+              },
+              "examples": {
+                "achievement_opening": "Having increased digital engagement by 300% for my current employer's B2B campaigns, I'm excited to bring this growth-focused approach to [Company]'s expanding digital marketing team.",
+                "connection_opening": "Sarah Johnson mentioned that your team is looking for a data analyst who can bridge technical insights with business strategy—exactly the combination I've developed over five years in fintech."
+              }
+            },
+            "body_paragraphs": {
+              "title": "Body Paragraph Excellence",
+              "description": "Use 1-2 body paragraphs to tell a story that connects your experience to their needs. This isn't CV repetition—it's strategic storytelling.",
+              "paragraph_one": {
+                "focus": "Your most relevant experience and key achievements",
+                "structure": "Situation → Action → Result format",
+                "connection": "Explicitly link your experience to requirements mentioned in the job posting",
+                "evidence": "Include specific metrics and outcomes"
+              },
+              "paragraph_two": {
+                "focus": "Why this company and role specifically excites you",
+                "research": "Demonstrate knowledge of company values, recent developments, or industry challenges",
+                "alignment": "Show how your career goals align with the company's direction",
+                "culture_fit": "Subtly indicate your compatibility with company culture"
+              }
+            },
+            "closing": {
+              "title": "Strong Closings",
+              "description": "End with confidence and a clear call to action. Show enthusiasm while maintaining professionalism.",
+              "effective_closings": [
+                "I'd welcome the opportunity to discuss how my experience in [specific area] can contribute to [specific company goal/project]. I'll follow up next week to see when we might connect.",
+                "I'm excited about the possibility of bringing my [specific skills] to help [Company] achieve [specific goal mentioned in research]. Thank you for your consideration."
+              ],
+              "avoid": [
+                "'Thank you for your time'",
+                "'I look forward to hearing from you'",
+                "'Please let me know if you need anything else'"
+              ]
+            }
+          }
+        },
+        "personalisation": {
+          "title": "Personalisation Strategies",
+          "content": {
+            "research_process": {
+              "title": "Company Research Framework",
+              "description": "Superficial research shows. Deep research impresses. Here's how to go beyond the company website.",
+              "sources": {
+                "company_website": "Mission, values, recent news, leadership team, product/service evolution",
+                "linkedin": "Employee profiles, company updates, shared content, mutual connections",
+                "industry_news": "Recent mentions in trade publications, awards, partnerships, challenges",
+                "glassdoor": "Company culture insights, interview experiences, employee perspectives",
+                "competitors": "Market positioning, unique differentiators, industry trends"
+              },
+              "information_to_find": [
+                "Recent company achievements or milestones",
+                "Industry challenges the company is addressing",
+                "Company culture and values",
+                "Growth areas or new initiatives",
+                "Leadership team backgrounds and priorities",
+                "Recent hiring patterns or team expansions"
+              ]
+            },
+            "addressing_specifics": {
+              "title": "Addressing Specific Requirements",
+              "description": "Generic cover letters are dead. Address their specific needs with your specific solutions.",
+              "requirement_matching": {
+                "identify_key_requirements": "Pull out 3-5 most important requirements from the job description",
+                "evidence_gathering": "Find specific examples from your experience that demonstrate each requirement",
+                "story_crafting": "Create mini-stories that show how you've successfully handled similar challenges",
+                "impact_quantification": "Include metrics and outcomes wherever possible"
+              },
+              "addressing_concerns": {
+                "career_gaps": "Brief, positive explanation focusing on skills maintained or developed",
+                "career_changes": "Emphasise transferable skills and genuine passion for the new direction",
+                "overqualification": "Show long-term interest and explain what genuinely attracts you to the role",
+                "underqualification": "Focus on learning agility, relevant experience, and enthusiasm to grow"
+              }
+            }
+          }
+        },
+        "tone_and_voice": {
+          "title": "Tone & Voice Mastery",
+          "content": {
+            "finding_your_voice": {
+              "title": "Authentic Professional Voice",
+              "description": "Your cover letter should sound like you—professional you, but still recognisably you. Avoid corporate speak while maintaining professionalism.",
+              "voice_characteristics": {
+                "confident_not_arrogant": "State your achievements clearly without overselling or underselling",
+                "enthusiastic_not_desperate": "Show genuine interest without sounding like you need this job to survive",
+                "specific_not_generic": "Use concrete examples rather than vague statements about being 'passionate' or 'results-driven'",
+                "conversational_not_casual": "Write as if you're speaking to a respected colleague, not texting a friend"
+              }
+            },
+            "industry_adaptation": {
+              "title": "Adapting Tone by Industry",
+              "description": "Different industries have different communication styles. Match yours to theirs while staying authentic.",
+              "conservative_industries": {
+                "examples": ["Banking", "Law", "Government", "Healthcare"],
+                "approach": "More formal tone, emphasis on stability and reliability, conservative language choices",
+                "avoid": "Overly casual language, industry slang, unconventional formats"
+              },
+              "creative_industries": {
+                "examples": ["Marketing", "Design", "Media", "Startups"],
+                "approach": "Show personality, demonstrate creativity in your writing, use industry-relevant language",
+                "opportunities": "Creative formatting (within reason), storytelling, showing thought leadership"
+              },
+              "technical_industries": {
+                "examples": ["Engineering", "IT", "Research", "Manufacturing"],
+                "approach": "Focus on precision, include technical terms appropriately, emphasise problem-solving",
+                "balance": "Technical competence with communication skills"
+              }
+            }
+          }
+        }
+      }
+    },
+    "linkedin-optimization": {
+      "title": "LinkedIn Optimization",
+      "description": "Transform your LinkedIn profile into a powerful career advancement tool that works even while you sleep",
+      "icon": "Users",
+      "sections": {
+        "profile_foundations": {
+          "title": "Profile Foundation Elements",
+          "content": {
+            "professional_photo": {
+              "title": "Professional Profile Photo",
+              "description": "Your photo is your first impression. It should convey professionalism, approachability, and confidence.",
+              "technical_requirements": {
+                "resolution": "400x400 pixels minimum, high resolution",
+                "format": "JPG or PNG format",
+                "file_size": "Under 8MB",
+                "composition": "Head and shoulders, facing camera, professional background"
+              },
+              "photo_guidelines": {
+                "do": [
+                  "Smile genuinely",
+                  "Dress for your target role",
+                  "Use good lighting",
+                  "Make eye contact with camera",
+                  "Keep background simple and professional"
+                ],
+                "avoid": [
+                  "Casual or party photos",
+                  "Sunglasses or hats",
+                  "Busy backgrounds",
+                  "Group photos cropped down",
+                  "Selfies or low-quality images"
+                ]
+              },
+              "industry_considerations": {
+                "corporate": "Business attire, conservative styling, neutral background",
+                "creative": "Can show more personality while maintaining professionalism",
+                "technical": "Clean, professional look that suggests reliability and attention to detail"
+              }
+            },
+            "headline_optimization": {
+              "title": "Compelling Headlines",
+              "description": "Your headline is prime real estate—use all 220 characters to tell your professional story and include searchable keywords.",
+              "formula": "[Current Role] | [Key Skills/Specialties] | [Value Proposition] | [Industry Keywords]",
+              "examples": {
+                "weak": "Marketing Manager at ABC Company",
+                "strong": "Digital Marketing Manager | B2B SaaS Growth Specialist | Driving 40% Revenue Growth Through Data-Driven Campaigns | MarTech Enthusiast"
+              },
+              "headline_types": {
+                "achievement_focused": "Senior Sales Director | Consistently Exceeding Targets by 150% | Enterprise B2B Solutions | Team Leadership Excellence",
+                "skill_focused": "Full-Stack Developer | React, Node.js, Python | Building Scalable Web Applications | Open Source Contributor",
+                "value_focused": "Operations Manager | Process Optimization Expert | Reducing Costs While Improving Quality | Lean Six Sigma Black Belt"
+              },
+              "keyword_strategy": "Include terms recruiters search for in your industry, role-specific skills, and industry buzzwords that are genuinely relevant"
+            },
+            "summary_section": {
+              "title": "Compelling Summary",
+              "description": "Your summary is your elevator pitch expanded. Use this space to tell your professional story, highlight achievements, and show personality.",
+              "structure": {
+                "opening_hook": "Start with a compelling statement about your expertise or a notable achievement",
+                "experience_overview": "Summarise your professional journey and key areas of expertise",
+                "achievements": "Highlight 2-3 major accomplishments with metrics when possible",
+                "values_vision": "Share what drives you professionally and your vision for your career",
+                "call_to_action": "Invite connection and mention how people can reach you"
+              },
+              "writing_tips": {
+                "length": "Use most of the 2,000 character limit",
+                "formatting": "Use bullet points, emojis (sparingly), and line breaks for readability",
+                "voice": "Write in first person, be conversational yet professional",
+                "keywords": "Naturally include industry keywords and skills",
+                "updates": "Refresh regularly to reflect career progress and new interests"
+              }
+            }
+          }
+        },
+        "experience_optimization": {
+          "title": "Experience Section Excellence",
+          "content": {
+            "role_descriptions": {
+              "title": "Engaging Role Descriptions",
+              "description": "Transform job duties into compelling achievement stories that demonstrate impact and value.",
+              "description_formula": "Context + Action + Results + Skills Demonstrated",
+              "examples": {
+                "before": "Responsible for managing social media accounts and creating content.",
+                "after": "Transformed brand presence across 5 social platforms, growing organic reach by 300% and engagement by 150% through strategic content creation and community building. Led cross-functional collaboration with design and product teams to ensure brand consistency."
+              },
+              "section_structure": {
+                "overview": "2-3 sentence overview of the role and your key responsibilities",
+                "achievements": "3-5 bullet points highlighting specific accomplishments with metrics",
+                "skills_keywords": "Natural integration of relevant keywords and technical skills",
+                "growth_story": "Show progression and learning throughout the role"
+              }
+            },
+            "quantifying_impact": {
+              "title": "Quantifying Your Impact",
+              "description": "Numbers tell stories that words alone cannot. Every achievement becomes more compelling with quantification.",
+              "metrics_to_track": {
+                "financial": [
+                  "Revenue generated",
+                  "Costs saved",
+                  "Budget managed",
+                  "ROI achieved",
+                  "Profit margins improved"
+                ],
+                "growth": [
+                  "Percentage increases",
+                  "User growth",
+                  "Market share",
+                  "Customer acquisition",
+                  "Retention rates"
+                ],
+                "efficiency": [
+                  "Time saved",
+                  "Process improvements",
+                  "Error reduction",
+                  "Productivity gains",
+                  "Automation results"
+                ],
+                "scale": [
+                  "Team size managed",
+                  "Projects handled",
+                  "Customers served",
+                  "Transactions processed",
+                  "Geographic coverage"
+                ]
+              },
+              "approximation_guidelines": "If you don't have exact numbers, use reasonable estimates based on available data, but mark them as approximate"
+            },
+            "skills_endorsements": {
+              "title": "Strategic Skills & Endorsements",
+              "description": "Your skills section is crucial for searchability, but endorsements add social proof to your expertise claims.",
+              "skills_strategy": {
+                "top_skills": "List your most relevant and strongest skills first—these appear prominently on your profile",
+                "skill_variety": "Include a mix of technical skills, software proficiency, and soft skills",
+                "industry_alignment": "Ensure skills align with your target roles and industry standards",
+                "skill_maintenance": "Regularly review and update skills as you develop new competencies"
+              },
+              "endorsement_tactics": {
+                "mutual_endorsements": "Endorse colleagues' skills, and many will reciprocate",
+                "strategic_requests": "Ask specific colleagues to endorse skills that matter most for your goals",
+                "diverse_endorsers": "Seek endorsements from various people: managers, peers, direct reports, clients",
+                "quality_over_quantity": "Endorsements from respected professionals in your field carry more weight"
+              }
+            }
+          }
+        },
+        "networking_strategies": {
+          "title": "Professional Networking",
+          "content": {
+            "connection_strategy": {
+              "title": "Strategic Connection Building",
+              "description": "Quality connections matter more than quantity. Build a network that provides mutual value and genuine professional relationships.",
+              "target_connections": {
+                "industry_leaders": "Thought leaders and influential people in your field",
+                "peers": "Professionals at similar levels who can share insights and opportunities",
+                "company_employees": "People at companies you're interested in joining",
+                "alumni": "Colleagues from previous companies, universities, or programmes",
+                "clients_customers": "Professional contacts from business relationships"
+              },
+              "connection_approach": {
+                "personalised_messages": "Always include a personalised note explaining why you want to connect",
+                "mutual_connections": "Leverage mutual connections for warm introductions when appropriate",
+                "value_first": "Think about what you can offer before asking for anything",
+                "follow_up": "Engage with connections' content and maintain relationships over time"
+              }
+            },
+            "content_engagement": {
+              "title": "Content & Engagement Strategy",
+              "description": "Active participation in LinkedIn's content ecosystem increases your visibility and establishes thought leadership.",
+              "content_types": {
+                "original_posts": "Share insights, experiences, and industry observations",
+                "article_writing": "Long-form content that demonstrates deep expertise",
+                "content_sharing": "Curate and comment on relevant industry content",
+                "video_content": "Personal updates, industry insights, or behind-the-scenes content"
+              },
+              "engagement_tactics": {
+                "commenting": "Add thoughtful comments to others' posts to increase visibility",
+                "liking_sharing": "Engage with content from your network to stay visible",
+                "hashtag_strategy": "Use relevant hashtags to increase content discoverability",
+                "consistency": "Regular activity is more valuable than sporadic bursts"
+              },
+              "thought_leadership": {
+                "industry_insights": "Share unique perspectives on industry trends and developments",
+                "problem_solving": "Discuss challenges you've solved and lessons learned",
+                "career_advice": "Share experiences and advice for others in your field",
+                "company_culture": "Highlight positive aspects of your work environment and team"
+              }
+            }
+          }
+        }
+      }
+    },
+    "networking-outreach": {
+      "title": "Networking & Outreach",
+      "description": "Build meaningful professional relationships and create opportunities through strategic networking",
+      "icon": "Network",
+      "sections": {
+        "cold_outreach": {
+          "title": "Cold Outreach Mastery",
+          "content": {
+            "outreach_strategy": {
+              "title": "Strategic Cold Outreach",
+              "description": "Cold outreach isn't about asking for jobs—it's about building relationships and gathering insights that can lead to opportunities.",
+              "preparation": {
+                "research_targets": "Identify specific people rather than sending generic messages to many",
+                "company_research": "Understand the company, recent news, challenges, and opportunities",
+                "person_research": "Review their LinkedIn profile, recent posts, shared interests, or mutual connections",
+                "timing_consideration": "Consider industry cycles, company announcements, or seasonal factors"
+              },
+              "message_framework": {
+                "subject_line": "Clear, specific, and intriguing without being clickbait",
+                "opening": "Personal connection, mutual contact, or specific research-based observation",
+                "value_proposition": "What you bring or what unique perspective you offer",
+                "specific_ask": "Clear, reasonable request (usually informational interview or advice)",
+                "easy_out": "Make it easy for them to decline politely"
+              }
+            },
+            "email_templates": {
+              "title": "Effective Outreach Templates",
+              "description": "These templates provide structure while allowing for personalisation based on your research and specific situation.",
+              "informational_interview": {
+                "subject": "Quick question about [specific topic/industry trend]",
+                "template": "Hi [Name],\n\nI came across your profile while researching [specific topic/company/industry area] and was impressed by your work in [specific area]. Your recent post about [specific topic] particularly resonated with my experience in [relevant area].\n\nI'm currently exploring opportunities in [field/industry] and would value your perspective on [specific question/trend]. Would you be open to a brief 15-minute conversation over coffee or phone in the coming weeks?\n\nI understand you're busy, so please don't feel obligated if the timing isn't right.\n\nBest regards,\n[Your name]"
+              },
+              "industry_insight": {
+                "subject": "Fellow [industry] professional - question about [specific topic]",
+                "template": "Hi [Name],\n\nI noticed we share a background in [specific area] and I've been following your insights on [specific topic/trend]. Your experience with [specific project/company/initiative] is exactly the kind of work I'm passionate about.\n\nI'm particularly interested in understanding [specific question about industry/role/challenge]. Given your experience at [company/role], I'd love to hear your thoughts.\n\nWould you be willing to share your insights over a brief call? I'm happy to work around your schedule.\n\nThanks for considering,\n[Your name]"
+              },
+              "company_specific": {
+                "subject": "Admiration for [Company]'s work in [specific area]",
+                "template": "Hi [Name],\n\nI've been following [Company]'s innovative work in [specific area], particularly [specific project/initiative/achievement]. As someone with experience in [related area], I'm impressed by [specific detail about their work].\n\nI'm exploring opportunities where I can contribute to [specific type of work/mission], and [Company] seems to be at the forefront of this space. I'd love to learn more about your experience there and the team's approach to [specific challenge/opportunity].\n\nWould you be open to a brief conversation about your experience? I'm happy to buy you coffee or chat by phone at your convenience.\n\nBest,\n[Your name]"
+              }
+            },
+            "follow_up_strategy": {
+              "title": "Follow-up Best Practices",
+              "description": "Most opportunities come from thoughtful follow-up, not initial outreach. Here's how to follow up professionally and effectively.",
+              "timing": {
+                "first_follow_up": "1 week after initial message if no response",
+                "second_follow_up": "2-3 weeks after first follow-up",
+                "final_follow_up": "1 month later with value-added content or update"
+              },
+              "follow_up_approaches": {
+                "value_added": "Share relevant article, insight, or resource that might interest them",
+                "update_sharing": "Provide update on your situation or career progress",
+                "different_angle": "Approach from a different perspective or with a different ask",
+                "seasonal_timing": "Reach out during natural transition times (new year, after holidays)"
+              }
+            }
+          }
+        },
+        "relationship_building": {
+          "title": "Building Lasting Professional Relationships",
+          "content": {
+            "networking_mindset": {
+              "title": "The Right Networking Mindset",
+              "description": "Effective networking is about building genuine relationships, not collecting contacts or asking for favours.",
+              "mindset_shifts": {
+                "give_first": "Look for ways to help others before asking for help yourself",
+                "long_term_view": "Build relationships over time rather than transactional interactions",
+                "mutual_benefit": "Seek relationships where both parties can gain value",
+                "authentic_interest": "Show genuine interest in others' work and challenges",
+                "consistency": "Regular, low-key engagement is better than sporadic intense contact"
+              },
+              "value_you_can_offer": [
+                "Industry insights from your unique perspective",
+                "Connections to people in your network",
+                "Skills or expertise in your area of strength",
+                "Feedback or perspective on their projects",
+                "Information about trends or opportunities",
+                "Support during their job search or career transitions"
+              ]
+            },
+            "maintenance_strategies": {
+              "title": "Relationship Maintenance",
+              "description": "The best networkers are those who maintain relationships consistently, not just when they need something.",
+              "regular_touchpoints": {
+                "content_engagement": "Like, comment on, and share their LinkedIn posts and articles",
+                "congratulatory_messages": "Reach out when they announce promotions, awards, or achievements",
+                "industry_updates": "Share relevant news, articles, or opportunities that might interest them",
+                "periodic_check_ins": "Quarterly or bi-annual messages just to stay in touch",
+                "event_invitations": "Invite them to relevant events, webinars, or networking opportunities"
+              },
+              "relationship_levels": {
+                "acquaintances": "Light social media engagement, occasional shares of their content",
+                "professional_contacts": "Periodic industry-related communication, event invitations",
+                "strong_connections": "Regular meaningful conversations, mutual support, collaboration opportunities",
+                "mentors_advisors": "Consistent updates on your progress, seeking guidance, expressing gratitude"
+              }
+            }
+          }
+        },
+        "event_networking": {
+          "title": "Event & Conference Networking",
+          "content": {
+            "preparation": {
+              "title": "Pre-Event Preparation",
+              "description": "Success at networking events starts long before you arrive. Preparation separates effective networkers from time-wasters.",
+              "research_phase": {
+                "attendee_list": "Review speaker lists and attendee information if available",
+                "company_presence": "Identify companies and representatives you'd like to meet",
+                "session_planning": "Choose sessions based on learning goals and networking opportunities",
+                "goal_setting": "Set specific, achievable goals (e.g., 'meet 3 people in product management')"
+              },
+              "materials_preparation": {
+                "elevator_pitch": "Prepare and practice multiple versions (30-second, 1-minute, 2-minute)",
+                "business_cards": "Bring physical cards and set up digital sharing options",
+                "linkedin_optimization": "Ensure your profile is updated and professional",
+                "questions_prepared": "Develop thoughtful questions about industry trends and challenges"
+              }
+            },
+            "event_strategies": {
+              "title": "During Event Networking",
+              "description": "Make genuine connections by focusing on others' interests and finding ways to provide value.",
+              "conversation_starters": [
+                "What brings you to this event?",
+                "What session are you most looking forward to?",
+                "How are you finding the conference so far?",
+                "What trends are you seeing in your industry?",
+                "What's the most interesting project you're working on?"
+              ],
+              "networking_techniques": {
+                "active_listening": "Focus on understanding their challenges and interests",
+                "value_identification": "Look for ways you might help or connect them with resources",
+                "follow_up_planning": "Set clear expectations for post-event contact",
+                "graceful_transitions": "Know how to politely end conversations and move on",
+                "group_dynamics": "Join and contribute to group conversations naturally"
+              },
+              "follow_up_planning": {
+                "note_taking": "Jot down key details about each person immediately after meeting",
+                "connection_promises": "Keep track of any commitments you make to follow up or connect people",
+                "priority_ranking": "Identify your most promising connections for immediate follow-up"
+              }
+            },
+            "post_event": {
+              "title": "Post-Event Follow-up",
+              "description": "The real networking happens after the event. Timely, thoughtful follow-up converts brief meetings into lasting relationships.",
+              "timing": "Reach out within 24-48 hours while the connection is still fresh",
+              "follow_up_approach": {
+                "personalised_message": "Reference specific conversation points from your interaction",
+                "value_delivery": "Include promised resources, connections, or information",
+                "next_steps": "Suggest concrete next steps if there was mutual interest",
+                "no_pressure": "Keep initial follow-up light and professional"
+              },
+              "long_term_engagement": {
+                "calendar_reminders": "Set reminders to follow up periodically with valuable connections",
+                "content_sharing": "Share relevant articles or opportunities with your new network",
+                "event_updates": "Let them know about other relevant events or opportunities",
+                "relationship_building": "Look for ways to deepen the most promising relationships"
+              }
+            }
+          }
+        }
+      }
+    },
+    "interview-preparation": {
+      "title": "Interview Excellence",
+      "description": "Master the art of interviewing to confidently showcase your value and secure job offers",
+      "icon": "MessageCircle",
+      "sections": {
+        "behavioral_interviews": {
+          "title": "Behavioral Interview Mastery",
+          "content": {
+            "star_method": {
+              "title": "STAR Method Framework",
+              "description": "The STAR method provides structure for answering behavioral questions in a way that clearly demonstrates your capabilities and achievements.",
+              "components": {
+                "situation": {
+                  "description": "Set the context for your story",
+                  "tips": "Be specific about when and where this happened, include relevant background",
+                  "time_allocation": "20% of your response"
+                },
+                "task": {
+                  "description": "Explain your role and what needed to be accomplished",
+                  "tips": "Focus on your responsibilities and the challenges you faced",
+                  "time_allocation": "20% of your response"
+                },
+                "action": {
+                  "description": "Detail the specific actions you took",
+                  "tips": "This is the most important part - be specific about YOUR actions, not the team's",
+                  "time_allocation": "40% of your response"
+                },
+                "result": {
+                  "description": "Share the outcomes and what you learned",
+                  "tips": "Quantify results when possible, include lessons learned and skills developed",
+                  "time_allocation": "20% of your response"
+                }
+              },
+              "example": {
+                "question": "Tell me about a time you had to deal with a difficult team member.",
+                "situation": "In my role as project manager, I was leading a cross-functional team of 8 people on a critical product launch with a 6-week deadline.",
+                "task": "One team member consistently missed deadlines and was unresponsive in meetings, putting our timeline at risk.",
+                "action": "I scheduled a private one-on-one meeting to understand their perspective and discovered they were overwhelmed with competing priorities. I worked with their manager to reallocate some responsibilities and created a more structured check-in schedule.",
+                "result": "The team member's performance improved significantly, we launched on time, and the product exceeded initial sales targets by 15%. I learned the importance of addressing performance issues early and with empathy."
+              }
+            },
+            "common_questions": {
+              "title": "Common Behavioral Questions",
+              "description": "Prepare compelling stories for these frequently asked behavioral questions across all industries.",
+              "leadership_teamwork": [
+                "Tell me about a time you led a team through a difficult situation.",
+                "Describe a situation where you had to work with a difficult colleague.",
+                "Give me an example of when you had to persuade someone to see your point of view.",
+                "Tell me about a time you had to give constructive feedback to someone."
+              ],
+              "problem_solving": [
+                "Describe a complex problem you solved at work.",
+                "Tell me about a time you made a mistake and how you handled it.",
+                "Give me an example of when you had to think creatively to solve a problem.",
+                "Describe a situation where you had to make a decision with incomplete information."
+              ],
+              "achievement_growth": [
+                "Tell me about your greatest professional achievement.",
+                "Describe a time you exceeded expectations.",
+                "Give me an example of when you learned something new quickly.",
+                "Tell me about a time you took initiative on a project."
+              ],
+              "conflict_pressure": [
+                "Describe a time you disagreed with your manager's decision.",
+                "Tell me about a time you had to work under significant pressure.",
+                "Give me an example of when you had to manage competing priorities.",
+                "Describe a situation where you had to adapt to significant change."
+              ]
+            },
+            "story_preparation": {
+              "title": "Building Your Story Bank",
+              "description": "Develop a collection of 8-10 versatile stories that can answer multiple types of behavioral questions.",
+              "story_selection": {
+                "diversity": "Choose stories from different roles, projects, and time periods",
+                "relevance": "Select experiences that demonstrate skills relevant to your target roles",
+                "impact": "Focus on situations where you made a significant contribution or learned valuable lessons",
+                "variety": "Include both successes and challenges you overcame"
+              },
+              "story_categories": {
+                "leadership_example": "A time you led a team or initiative successfully",
+                "problem_solving": "A complex challenge you solved creatively",
+                "collaboration": "Working effectively with difficult people or across departments",
+                "innovation": "Implementing a new process or idea",
+                "failure_recovery": "A setback you overcame and what you learned",
+                "growth_learning": "Rapidly acquiring new skills or knowledge",
+                "conflict_resolution": "Navigating disagreements or difficult situations",
+                "achievement": "Your most significant professional accomplishment"
+              }
+            }
+          }
+        },
+        "technical_interviews": {
+          "title": "Technical Interview Preparation",
+          "content": {
+            "technical_formats": {
+              "title": "Common Technical Interview Formats",
+              "description": "Technical interviews vary by role and industry. Understanding the format helps you prepare effectively.",
+              "coding_interviews": {
+                "format": "Live coding challenges, algorithm problems, or take-home assignments",
+                "preparation": "Practice on platforms like LeetCode, HackerRank, or Codility",
+                "focus_areas": "Data structures, algorithms, system design, coding best practices",
+                "tips": "Think out loud, ask clarifying questions, write clean code, test your solutions"
+              },
+              "case_studies": {
+                "format": "Real-world business problems to solve using your expertise",
+                "preparation": "Research common industry challenges and framework approaches",
+                "focus_areas": "Problem-solving process, analytical thinking, business acumen",
+                "tips": "Structure your approach, ask relevant questions, show your thinking process"
+              },
+              "presentations": {
+                "format": "Present solutions to given problems or your past work",
+                "preparation": "Practice explaining complex topics simply, prepare visual aids",
+                "focus_areas": "Communication skills, subject matter expertise, stakeholder management",
+                "tips": "Know your audience, use storytelling, prepare for questions"
+              },
+              "portfolio_reviews": {
+                "format": "Walk through your past work and explain your decisions",
+                "preparation": "Curate your best work, prepare detailed explanations",
+                "focus_areas": "Technical depth, decision-making process, learning from experience",
+                "tips": "Choose diverse examples, explain your role clearly, discuss lessons learned"
+              }
+            },
+            "non_technical_roles": {
+              "title": "Technical Elements in Non-Technical Roles",
+              "description": "Even non-technical roles often include technical assessments or require technical understanding.",
+              "role_specific_prep": {
+                "marketing": "Analytics interpretation, campaign optimization, marketing technology stack",
+                "sales": "CRM systems, sales methodology, market analysis, competitive positioning",
+                "finance": "Financial modeling, analysis techniques, regulatory knowledge, software proficiency",
+                "operations": "Process analysis, project management methodologies, systems thinking",
+                "hr": "HR technology, data analysis, employment law, organizational psychology"
+              },
+              "universal_skills": {
+                "data_analysis": "Ability to interpret data and draw insights",
+                "technology_comfort": "Proficiency with relevant software and digital tools",
+                "process_thinking": "Understanding of workflow optimization and efficiency",
+                "problem_solving": "Structured approach to complex challenges"
+              }
+            }
+          }
+        },
+        "confidence_preparation": {
+          "title": "Building Interview Confidence",
+          "content": {
+            "pre_interview_preparation": {
+              "title": "Comprehensive Pre-Interview Prep",
+              "description": "Thorough preparation builds genuine confidence that shows during the interview.",
+              "company_research": {
+                "basic_information": "Mission, values, recent news, leadership team, company size",
+                "deeper_insights": "Industry position, competitors, challenges, growth areas",
+                "culture_understanding": "Employee reviews, LinkedIn presence, company content",
+                "interviewer_research": "LinkedIn profiles, mutual connections, shared interests"
+              },
+              "role_preparation": {
+                "job_description_analysis": "Identify key requirements and how you meet them",
+                "skill_matching": "Prepare specific examples demonstrating required competencies",
+                "question_anticipation": "Predict likely questions based on the role and industry",
+                "weakness_preparation": "Identify potential concerns and prepare honest, growth-focused responses"
+              },
+              "logistics_preparation": {
+                "location_timing": "Know exactly where to go and plan to arrive 10-15 minutes early",
+                "materials_ready": "Printed copies of CV, portfolio items, list of references",
+                "attire_planned": "Professional outfit chosen and prepared the night before",
+                "technology_tested": "For video interviews, test camera, audio, and internet connection"
+              }
+            },
+            "managing_nerves": {
+              "title": "Nervousness Management Techniques",
+              "description": "Some nervousness is normal and can even help performance. The key is managing it effectively.",
+              "physical_techniques": {
+                "breathing_exercises": "Deep breathing to calm your nervous system",
+                "power_posing": "Stand in confident poses for 2 minutes before the interview",
+                "progressive_relaxation": "Tense and release muscle groups to reduce physical tension",
+                "arrival_strategy": "Arrive early and use waiting time for final mental preparation"
+              },
+              "mental_techniques": {
+                "positive_visualisation": "Imagine the interview going well and receiving positive feedback",
+                "reframing_nerves": "Interpret nervous energy as excitement and preparation",
+                "focus_shifting": "Concentrate on learning about the role and company rather than being judged",
+                "perspective_keeping": "Remember that interviews are conversations, not interrogations"
+              },
+              "practical_strategies": {
+                "mock_interviews": "Practice with friends, family, or career counselors",
+                "recording_practice": "Record yourself answering common questions to identify areas for improvement",
+                "outfit_comfort": "Wear something that makes you feel confident and professional",
+                "success_reminders": "Review your achievements and qualifications before the interview"
+              }
+            },
+            "questions_to_ask": {
+              "title": "Strategic Questions to Ask Interviewers",
+              "description": "Thoughtful questions demonstrate genuine interest and help you evaluate if the role is right for you.",
+              "role_specific_questions": [
+                "What does success look like in this role after 6 months?",
+                "What are the biggest challenges facing the team right now?",
+                "How does this role contribute to the company's strategic goals?",
+                "What opportunities are there for professional development?"
+              ],
+              "team_culture_questions": [
+                "How would you describe the team dynamic?",
+                "What do you enjoy most about working here?",
+                "How does the company support work-life balance?",
+                "What's the communication style like between departments?"
+              ],
+              "growth_opportunity_questions": [
+                "What are the typical career paths from this position?",
+                "How does the company support employee development?",
+                "Are there opportunities to take on additional responsibilities?",
+                "What new initiatives or projects is the team working on?"
+              ],
+              "questions_to_avoid": [
+                "Salary and benefits (save for later stages unless they bring it up)",
+                "Information easily found on the company website",
+                "Negative questions about company problems or challenges",
+                "Questions that suggest you haven't prepared"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "personal-branding": {
+      "title": "Personal Branding & Growth",
+      "description": "Build an authentic professional brand that opens doors and accelerates career advancement",
+      "icon": "User",
+      "sections": {
+        "authentic_branding": {
+          "title": "Authentic Personal Brand Development",
+          "content": {
+            "brand_foundation": {
+              "title": "Building Your Brand Foundation",
+              "description": "Your personal brand should reflect your authentic professional identity, not a manufactured persona.",
+              "core_elements": {
+                "value_proposition": {
+                  "definition": "The unique value you bring to employers and colleagues",
+                  "development": "Identify what sets you apart: unique skill combinations, perspectives, or experiences",
+                  "articulation": "Craft a clear, concise statement of your professional value"
+                },
+                "expertise_areas": {
+                  "primary_expertise": "Your main area of professional competence and experience",
+                  "secondary_skills": "Complementary skills that enhance your primary expertise",
+                  "emerging_interests": "New areas you're developing or planning to grow into"
+                },
+                "professional_values": {
+                  "work_principles": "What guides your professional decisions and behavior",
+                  "collaboration_style": "How you prefer to work with others and contribute to teams",
+                  "impact_focus": "The type of positive impact you want to make in your career"
+                }
+              },
+              "brand_exercises": {
+                "values_identification": "List 5-7 core values that guide your professional decisions",
+                "strengths_analysis": "Identify your top strengths through feedback, assessments, and self-reflection",
+                "unique_story": "Craft your professional narrative - what led you to your current path",
+                "impact_inventory": "Document the positive impact you've made in previous roles"
+              }
+            },
+            "consistency_across_platforms": {
+              "title": "Cross-Platform Brand Consistency",
+              "description": "Your professional brand should be consistent across all platforms while adapting to each platform's unique strengths.",
+              "platform_optimization": {
+                "linkedin": {
+                  "focus": "Professional networking, thought leadership, industry insights",
+                  "content_types": "Industry articles, professional updates, career insights, team achievements",
+                  "tone": "Professional yet personable, insightful, collaborative"
+                },
+                "twitter": {
+                  "focus": "Industry conversations, quick insights, networking, thought leadership",
+                  "content_types": "Industry commentary, article shares with insights, professional observations",
+                  "tone": "Conversational, insightful, engaging with industry conversations"
+                },
+                "personal_website": {
+                  "focus": "Comprehensive professional showcase, portfolio, detailed experience",
+                  "content_types": "Portfolio pieces, detailed case studies, professional bio, contact information",
+                  "tone": "Professional, comprehensive, showcasing depth of expertise"
+                },
+                "github_portfolio": {
+                  "focus": "Technical skills demonstration, project showcases, code quality",
+                  "content_types": "Well-documented projects, contribution history, technical writing",
+                  "tone": "Technical competence, attention to detail, collaborative development"
+                }
+              },
+              "consistency_elements": {
+                "visual_identity": "Consistent professional photos, color schemes, and visual elements",
+                "messaging": "Aligned value propositions and professional descriptions",
+                "content_themes": "Consistent topics and areas of expertise across platforms",
+                "professional_voice": "Recognizable tone and communication style"
+              }
+            },
+            "thought_leadership": {
+              "title": "Developing Thought Leadership",
+              "description": "Establish yourself as a knowledgeable voice in your industry through consistent, valuable content creation and engagement.",
+              "content_strategy": {
+                "expertise_topics": "Identify 3-5 core topics where you can provide unique insights",
+                "content_calendar": "Plan regular content creation schedule (weekly posts, monthly articles)",
+                "value_focus": "Prioritize providing value to your audience over self-promotion",
+                "engagement_strategy": "Actively engage with others' content and build industry conversations"
+              },
+              "content_types": {
+                "industry_insights": "Share perspectives on trends, challenges, and opportunities in your field",
+                "case_studies": "Detailed analysis of projects, successes, and lessons learned",
+                "how_to_guides": "Practical advice and tutorials based on your expertise",
+                "opinion_pieces": "Thoughtful takes on industry developments and debates",
+                "behind_the_scenes": "Insights into your work process and professional journey"
+              },
+              "building_credibility": {
+                "consistent_quality": "Maintain high standards for all content you publish",
+                "research_backing": "Support opinions with data, examples, and research",
+                "authentic_voice": "Write in your natural voice while maintaining professionalism",
+                "engagement_quality": "Respond thoughtfully to comments and engage meaningfully with others",
+                "expertise_demonstration": "Show deep knowledge while being accessible to broader audiences"
+              }
+            }
+          }
+        },
+        "online_presence": {
+          "title": "Professional Online Presence",
+          "content": {
+            "website_portfolio": {
+              "title": "Professional Website & Portfolio",
+              "description": "A professional website serves as your digital headquarters, showcasing your work and making it easy for opportunities to find you.",
+              "essential_pages": {
+                "homepage": {
+                  "purpose": "Clear introduction to who you are and what you do",
+                  "elements": "Professional photo, compelling headline, brief overview, clear navigation",
+                  "goal": "Visitors should immediately understand your value and expertise"
+                },
+                "about": {
+                  "purpose": "Tell your professional story and establish credibility",
+                  "elements": "Professional journey, values, unique perspective, personality glimpses",
+                  "goal": "Build connection and trust with potential employers or collaborators"
+                },
+                "portfolio_work": {
+                  "purpose": "Showcase your best work and demonstrate capabilities",
+                  "elements": "Project descriptions, your role, results achieved, skills demonstrated",
+                  "goal": "Provide concrete evidence of your abilities and impact"
+                },
+                "contact": {
+                  "purpose": "Make it easy for opportunities to reach you",
+                  "elements": "Professional email, LinkedIn profile, location, availability status",
+                  "goal": "Facilitate professional connections and opportunities"
+                }
+              },
+              "portfolio_best_practices": {
+                "project_selection": "Choose 3-6 of your best projects that demonstrate range and expertise",
+                "case_study_format": "Structure: Challenge → Approach → Solution → Results → Reflection",
+                "visual_presentation": "Use high-quality images, clean layout, professional design",
+                "results_focus": "Emphasize outcomes and impact, not just process",
+                "regular_updates": "Keep portfolio current with recent work and achievements"
+              }
+            },
+            "content_creation": {
+              "title": "Strategic Content Creation",
+              "description": "Regular content creation positions you as a thought leader and keeps you visible in your professional network.",
+              "content_planning": {
+                "audience_identification": "Define who you're creating content for: peers, potential employers, industry leaders",
+                "topic_selection": "Focus on areas where you have genuine expertise and unique perspectives",
+                "content_mix": "Balance educational content, personal insights, industry news, and behind-the-scenes",
+                "posting_frequency": "Maintain consistency - better to post weekly consistently than daily sporadically"
+              },
+              "content_formats": {
+                "linkedin_posts": "Professional insights, career lessons, industry observations (300-1300 characters)",
+                "articles": "Deep-dive pieces on industry topics, how-to guides, case studies (800-2000 words)",
+                "videos": "Personal updates, quick tips, behind-the-scenes content, presentation excerpts",
+                "infographics": "Visual representation of data, processes, or tips relevant to your field",
+                "podcast_appearances": "Guest spots discussing your expertise and professional journey"
+              },
+              "engagement_strategy": {
+                "community_building": "Respond to comments, engage with others' content, build genuine relationships",
+                "value_first": "Focus on helping others rather than promoting yourself",
+                "conversation_starting": "Ask questions, invite discussion, encourage others to share experiences",
+                "consistency": "Regular engagement is more valuable than sporadic intense activity"
+              }
+            },
+            "reputation_management": {
+              "title": "Online Reputation Management",
+              "description": "Proactively manage your online presence to ensure it accurately represents your professional brand.",
+              "monitoring_strategy": {
+                "google_alerts": "Set up alerts for your name and professional variations",
+                "social_media_audit": "Regularly review all social media profiles for professional appropriateness",
+                "search_results": "Periodically search your name to see what appears in results",
+                "professional_references": "Monitor what colleagues and industry contacts say about your work"
+              },
+              "privacy_management": {
+                "professional_separation": "Keep personal social media separate from professional presence",
+                "privacy_settings": "Adjust privacy settings on personal accounts to limit professional visibility",
+                "content_curation": "Be selective about what personal content you share publicly",
+                "platform_strategy": "Use some platforms purely for professional purposes"
+              },
+              "crisis_management": {
+                "mistake_handling": "Address errors quickly and transparently when they occur",
+                "negative_feedback": "Respond professionally to criticism and use it as learning opportunity",
+                "content_removal": "Know how to remove or modify content that no longer serves your professional goals",
+                "reputation_recovery": "Strategies for rebuilding reputation after professional setbacks"
+              }
+            }
+          }
+        },
+        "career_development": {
+          "title": "Strategic Career Development",
+          "content": {
+            "goal_setting": {
+              "title": "Career Goal Setting & Planning",
+              "description": "Clear career goals provide direction and help you make strategic decisions about opportunities and skill development.",
+              "goal_framework": {
+                "short_term": "6 months to 1 year: immediate skills, projects, network expansion",
+                "medium_term": "1-3 years: role advancement, expertise development, industry positioning",
+                "long_term": "3-10 years: career aspirations, leadership roles, industry impact"
+              },
+              "smart_goals": {
+                "specific": "Clear, well-defined career objectives",
+                "measurable": "Quantifiable milestones and success metrics",
+                "achievable": "Realistic given your current position and resources",
+                "relevant": "Aligned with your values, interests, and market opportunities",
+                "time_bound": "Clear deadlines and timeline for achievement"
+              },
+              "planning_process": {
+                "current_assessment": "Honestly evaluate your current skills, experience, and market position",
+                "gap_analysis": "Identify skills and experiences needed to reach your goals",
+                "action_planning": "Create specific steps and timelines for closing identified gaps",
+                "resource_identification": "Determine what support, training, or opportunities you need",
+                "progress_tracking": "Regular review and adjustment of goals and plans"
+              }
+            },
+            "skill_development": {
+              "title": "Strategic Skill Development",
+              "description": "Continuous learning and skill development are essential for career advancement in today's rapidly changing workplace.",
+              "skill_categories": {
+                "technical_skills": "Industry-specific knowledge, software proficiency, specialized techniques",
+                "soft_skills": "Communication, leadership, problem-solving, emotional intelligence",
+                "business_skills": "Strategic thinking, financial literacy, project management, data analysis",
+                "digital_skills": "Technology adoption, digital marketing, automation, data literacy"
+              },
+              "learning_strategies": {
+                "formal_education": "Degrees, certifications, professional development programs",
+                "online_learning": "MOOCs, online courses, webinars, virtual conferences",
+                "on_the_job": "Stretch assignments, cross-functional projects, mentoring relationships",
+                "peer_learning": "Professional associations, networking groups, study groups",
+                "self_directed": "Reading, podcasts, videos, practice projects"
+              },
+              "skill_prioritization": {
+                "market_demand": "Skills that are increasingly valuable in your industry",
+                "gap_closure": "Skills needed for your next career step",
+                "differentiation": "Unique skill combinations that set you apart",
+                "future_proofing": "Skills that will remain relevant as industries evolve"
+              }
+            },
+            "mentorship_networking": {
+              "title": "Mentorship & Professional Networks",
+              "description": "Strong professional relationships accelerate career development through guidance, opportunities, and support.",
+              "mentorship_types": {
+                "formal_mentors": "Senior professionals who provide ongoing career guidance and advice",
+                "peer_mentors": "Colleagues at similar levels who share experiences and insights",
+                "reverse_mentors": "Junior colleagues who can teach you new skills or perspectives",
+                "virtual_mentors": "Industry leaders you follow and learn from, even without direct contact"
+              },
+              "finding_mentors": {
+                "internal_identification": "Senior colleagues whose careers or skills you admire",
+                "industry_connections": "Professionals at networking events, conferences, or online communities",
+                "alumni_networks": "Graduates from your school or program working in your field",
+                "professional_associations": "Members of industry organizations or professional groups"
+              },
+              "mentor_relationships": {
+                "clear_expectations": "Discuss goals, time commitment, and communication preferences",
+                "value_exchange": "Offer assistance or insights in return for guidance",
+                "regular_contact": "Maintain consistent but respectful communication",
+                "growth_focus": "Use mentorship for skill development and perspective-broadening",
+                "gratitude_expression": "Acknowledge and appreciate the time and wisdom shared"
+              }
+            }
+          }
+        }
+      }
+    },
+    "miscellaneous-tips": {
+      "title": "Essential Career Tips",
+      "description": "Practical advice for navigating the modern job market with confidence and strategic thinking",
+      "icon": "Lightbulb",
+      "sections": {
+        "authenticity_balance": {
+          "title": "Authenticity vs. Professionalism",
+          "content": {
+            "finding_balance": {
+              "title": "The Authentic Professional",
+              "description": "Being authentic doesn't mean sharing everything. It means being genuinely yourself within professional boundaries.",
+              "authenticity_principles": {
+                "genuine_interests": "Share real passions and interests that connect to your professional life",
+                "honest_communication": "Be truthful about your experience, goals, and work preferences",
+                "consistent_values": "Let your core values guide your professional decisions and interactions",
+                "personal_style": "Develop a professional presentation that feels natural and confident"
+              },
+              "professional_boundaries": {
+                "appropriate_sharing": "Share personal insights that enhance professional relationships without oversharing",
+                "context_awareness": "Adapt your level of personal sharing based on the professional context",
+                "value_alignment": "Express personal values in ways that align with professional environments",
+                "growth_mindset": "Show authentic learning and development rather than pretending to know everything"
+              }
+            },
+            "cross_platform_consistency": {
+              "title": "Consistent Authenticity Across Platforms",
+              "description": "Your authentic professional self should be recognizable across different platforms while adapting to each platform's norms.",
+              "consistency_strategies": {
+                "core_message": "Maintain the same fundamental value proposition and professional identity",
+                "adapted_presentation": "Adjust tone and format for each platform while staying true to your voice",
+                "values_expression": "Express your core values consistently, even as you adapt to different audiences",
+                "expertise_areas": "Focus on the same areas of expertise across all professional platforms"
+              },
+              "platform_adaptation": {
+                "linkedin_professional": "More formal, industry-focused content while showing personality",
+                "twitter_conversational": "More casual tone but still professional, engaging in industry conversations",
+                "portfolio_comprehensive": "Full professional story with personality integrated naturally",
+                "networking_personal": "More personal connection while maintaining professional credibility"
+              }
+            }
+          }
+        },
+        "job_search_strategy": {
+          "title": "Strategic Job Search Management",
+          "content": {
+            "time_management": {
+              "title": "Efficient Job Search Time Management",
+              "description": "Job searching can be overwhelming. Strategic time management keeps you focused and prevents burnout.",
+              "daily_structure": {
+                "morning_routine": "Start with high-energy tasks like applications and outreach when you're freshest",
+                "time_blocking": "Dedicate specific time blocks to different job search activities",
+                "batch_processing": "Group similar tasks together for efficiency (all applications, all research)",
+                "break_scheduling": "Plan regular breaks to maintain energy and perspective"
+              },
+              "weekly_planning": {
+                "goal_setting": "Set specific, achievable weekly goals for applications, networking, and skill development",
+                "activity_balance": "Mix active applications with networking, research, and skill building",
+                "progress_review": "Weekly assessment of what's working and what needs adjustment",
+                "self_care": "Schedule time for activities that maintain your physical and mental health"
+              },
+              "priority_management": {
+                "high_value_activities": "Focus on networking and targeted applications over mass applications",
+                "opportunity_ranking": "Prioritize roles and companies based on fit and potential",
+                "energy_matching": "Match high-energy times with most important activities",
+                "deadline_management": "Track application deadlines and follow-up schedules"
+              }
+            },
+            "burnout_prevention": {
+              "title": "Preventing Job Search Burnout",
+              "description": "Job searching is emotionally and mentally demanding. Protecting your wellbeing ensures sustained performance.",
+              "warning_signs": {
+                "emotional_indicators": "Feeling hopeless, anxious, or consistently negative about opportunities",
+                "behavioral_changes": "Procrastinating on applications, avoiding networking, declining self-care",
+                "physical_symptoms": "Sleep disruption, appetite changes, fatigue, stress-related health issues",
+                "performance_decline": "Declining quality in applications, interviews, or networking interactions"
+              },
+              "prevention_strategies": {
+                "realistic_expectations": "Set achievable daily and weekly goals rather than overwhelming yourself",
+                "diversified_approach": "Balance different job search activities to avoid monotony",
+                "support_system": "Maintain connections with friends, family, and other job seekers for encouragement",
+                "professional_help": "Consider career counseling or coaching if you're struggling",
+                "celebration_milestones": "Acknowledge progress and small wins, not just final outcomes"
+              },
+              "recovery_tactics": {
+                "strategic_breaks": "Take planned breaks from job searching to recharge",
+                "perspective_shifting": "Focus on learning and growth rather than just outcomes",
+                "activity_variety": "Include enjoyable, confidence-building activities in your routine",
+                "goal_adjustment": "Modify goals and expectations if they're consistently causing stress"
+              }
+            },
+            "salary_negotiation": {
+              "title": "Salary Negotiation Fundamentals",
+              "description": "Effective salary negotiation requires preparation, research, and strategic communication to achieve fair compensation.",
+              "preparation_phase": {
+                "market_research": "Research salary ranges using Glassdoor, PayScale, industry reports, and networking",
+                "value_documentation": "Prepare specific examples of your achievements and value you'll bring",
+                "total_package": "Consider base salary, benefits, stock options, professional development, and work flexibility",
+                "negotiation_strategy": "Plan your approach, including opening offers and acceptable ranges"
+              },
+              "negotiation_tactics": {
+                "timing": "Wait for offer before discussing salary, but be prepared when asked about expectations",
+                "opening_position": "Start higher than your target but within reasonable market range",
+                "justification": "Base requests on market research, your qualifications, and value you bring",
+                "package_thinking": "Negotiate total compensation, not just base salary",
+                "professional_tone": "Maintain collaborative, enthusiastic tone while advocating for yourself"
+              },
+              "negotiation_phrases": {
+                "salary_discussion": "Based on my research and experience, I was expecting a range of...",
+                "value_emphasis": "Given my experience in X and proven track record of Y, I believe...",
+                "package_consideration": "I'm excited about the role. Can we discuss the total compensation package?",
+                "counter_offers": "I appreciate the offer. Based on market research, would you be able to consider...",
+                "decision_time": "Thank you for the offer. May I have a couple of days to review all the details?"
+              }
+            }
+          }
+        },
+        "modern_workplace": {
+          "title": "Navigating the Modern Workplace",
+          "content": {
+            "remote_work_skills": {
+              "title": "Remote Work Excellence",
+              "description": "Remote work requires different skills and strategies for success. Master these to thrive in distributed teams.",
+              "communication_skills": {
+                "written_clarity": "Develop clear, concise written communication for async collaboration",
+                "video_presence": "Master professional video calls: setup, presence, and engagement",
+                "cultural_awareness": "Understand how to communicate effectively across time zones and cultures",
+                "feedback_delivery": "Learn to give and receive feedback effectively in remote settings"
+              },
+              "productivity_management": {
+                "home_office_setup": "Create dedicated workspace that promotes focus and professionalism",
+                "time_management": "Develop routines and systems that maintain productivity without supervision",
+                "distraction_management": "Strategies for managing home distractions and maintaining work boundaries",
+                "energy_management": "Balance focused work time with breaks and movement"
+              },
+              "relationship_building": {
+                "virtual_networking": "Build relationships through video calls, messaging, and virtual events",
+                "team_collaboration": "Contribute effectively to team projects and decision-making remotely",
+                "mentorship_remote": "Seek and provide mentorship in virtual environments",
+                "company_culture": "Engage with company culture and values even when working remotely"
+              }
+            },
+            "digital_literacy": {
+              "title": "Essential Digital Literacy",
+              "description": "Modern professionals need strong digital skills regardless of their primary field of work.",
+              "core_competencies": {
+                "collaboration_tools": "Proficiency with Slack, Microsoft Teams, Zoom, Google Workspace, or Office 365",
+                "project_management": "Understanding of tools like Asana, Trello, Monday.com, or Notion",
+                "data_basics": "Ability to work with spreadsheets, basic data analysis, and visualization",
+                "security_awareness": "Understanding of cybersecurity best practices and data protection"
+              },
+              "learning_strategies": {
+                "hands_on_practice": "Use free versions of tools to build familiarity and competence",
+                "online_tutorials": "Leverage free online resources and tutorials for skill development",
+                "workplace_learning": "Ask to be included in projects that use unfamiliar tools",
+                "certification_pursuit": "Consider relevant certifications that demonstrate digital competency"
+              }
+            },
+            "adaptability_resilience": {
+              "title": "Building Adaptability & Resilience",
+              "description": "The modern workplace changes rapidly. Developing adaptability and resilience ensures long-term career success.",
+              "adaptability_skills": {
+                "learning_agility": "Quickly acquire new skills and knowledge as needs change",
+                "flexibility": "Adjust to new processes, technologies, and ways of working",
+                "perspective_taking": "See change as opportunity rather than threat",
+                "continuous_improvement": "Regularly update skills and approaches based on feedback and results"
+              },
+              "resilience_building": {
+                "stress_management": "Develop healthy coping strategies for workplace pressure",
+                "failure_recovery": "Learn from setbacks and bounce back stronger",
+                "support_networks": "Build professional and personal support systems",
+                "self_care": "Maintain physical and mental health to sustain performance",
+                "growth_mindset": "View challenges as opportunities for development"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "careerFields": {
+    "technology": {
+      "label": "Technology & Digital Innovation",
+      "description": "Software development, cybersecurity, data science, and emerging technologies",
+      "specializations": {
+        "frontend_development": {
+          "label": "Frontend Development",
+          "description": "User interface development using modern frameworks and libraries",
+          "current_trends": [
+            "React Server Components",
+            "Web3 interfaces",
+            "Progressive Web Apps",
+            "Micro-frontends"
+          ],
+          "salary_range": {
+            "entry": "£25,000 - £40,000",
+            "mid": "£40,000 - £70,000",
+            "senior": "£70,000 - £120,000+"
+          },
+          "key_skills": [
+            "React",
+            "Vue.js",
+            "Angular",
+            "TypeScript",
+            "CSS",
+            "JavaScript",
+            "Performance optimization"
+          ],
+          "career_paths": [
+            "Senior Frontend Developer",
+            "Lead Developer",
+            "Frontend Architect",
+            "Full-Stack Developer",
+            "UI/UX Developer"
+          ],
+          "remote_viability": "Excellent - 90%+ remote opportunities available",
+          "ai_impact": "Medium - AI assists with code generation but human creativity essential",
+          "growth_outlook": "Strong - 15-20% job growth expected over next 5 years"
+        },
+        "backend_development": {
+          "label": "Backend Development",
+          "description": "Server-side development, APIs, databases, and system architecture",
+          "current_trends": [
+            "Microservices",
+            "Serverless computing",
+            "GraphQL",
+            "Cloud-native development"
+          ],
+          "salary_range": {
+            "entry": "£28,000 - £45,000",
+            "mid": "£45,000 - £80,000",
+            "senior": "£80,000 - £130,000+"
+          },
+          "key_skills": [
+            "Node.js",
+            "Python",
+            "Java",
+            "Go",
+            "Database design",
+            "API development",
+            "Cloud platforms"
+          ],
+          "career_paths": [
+            "Senior Backend Developer",
+            "Solutions Architect",
+            "DevOps Engineer",
+            "Technical Lead",
+            "CTO"
+          ],
+          "remote_viability": "Excellent - 85%+ remote opportunities available",
+          "ai_impact": "Low-Medium - AI assists with boilerplate but complex logic remains human domain",
+          "growth_outlook": "Very Strong - 20-25% job growth expected"
+        },
+        "cybersecurity": {
+          "label": "Cybersecurity",
+          "description": "Information security, threat analysis, and security system implementation",
+          "current_trends": [
+            "Zero Trust architecture",
+            "AI-powered threat detection",
+            "Cloud security",
+            "IoT security"
+          ],
+          "salary_range": {
+            "entry": "£30,000 - £50,000",
+            "mid": "£50,000 - £85,000",
+            "senior": "£85,000 - £140,000+"
+          },
+          "key_skills": [
+            "Network security",
+            "Penetration testing",
+            "Risk assessment",
+            "Compliance",
+            "Incident response"
+          ],
+          "career_paths": [
+            "Security Analyst",
+            "Security Architect",
+            "CISO",
+            "Penetration Tester",
+            "Security Consultant"
+          ],
+          "remote_viability": "Good - 60-70% remote opportunities",
+          "ai_impact": "Low - AI enhances capabilities but human expertise remains critical",
+          "growth_outlook": "Exceptional - 30%+ job growth expected due to increasing cyber threats"
+        },
+        "data_science": {
+          "label": "Data Science & Analytics",
+          "description": "Data analysis, machine learning, and statistical modeling",
+          "current_trends": [
+            "MLOps",
+            "Automated ML",
+            "Edge AI",
+            "Explainable AI",
+            "Real-time analytics"
+          ],
+          "salary_range": {
+            "entry": "£35,000 - £55,000",
+            "mid": "£55,000 - £90,000",
+            "senior": "£90,000 - £150,000+"
+          },
+          "key_skills": [
+            "Python",
+            "R",
+            "SQL",
+            "Machine Learning",
+            "Statistics",
+            "Data visualization",
+            "Business acumen"
+          ],
+          "career_paths": [
+            "Senior Data Scientist",
+            "ML Engineer",
+            "Data Science Manager",
+            "Chief Data Officer",
+            "AI Researcher"
+          ],
+          "remote_viability": "Excellent - 80%+ remote opportunities",
+          "ai_impact": "High - Field is evolving rapidly with AI, creating new opportunities",
+          "growth_outlook": "Very Strong - 25%+ job growth as data becomes more critical"
+        },
+        "devops_cloud": {
+          "label": "DevOps & Cloud Engineering",
+          "description": "Infrastructure automation, cloud services, and deployment pipelines",
+          "current_trends": [
+            "GitOps",
+            "Infrastructure as Code",
+            "Service Mesh",
+            "Kubernetes",
+            "Multi-cloud strategies"
+          ],
+          "salary_range": {
+            "entry": "£32,000 - £52,000",
+            "mid": "£52,000 - £85,000",
+            "senior": "£85,000 - £135,000+"
+          },
+          "key_skills": [
+            "AWS/Azure/GCP",
+            "Docker",
+            "Kubernetes",
+            "Terraform",
+            "CI/CD",
+            "Monitoring",
+            "Scripting"
+          ],
+          "career_paths": [
+            "Senior DevOps Engineer",
+            "Cloud Architect",
+            "Platform Engineer",
+            "SRE",
+            "Infrastructure Lead"
+          ],
+          "remote_viability": "Excellent - 85%+ remote opportunities",
+          "ai_impact": "Medium - AI assists with monitoring and optimization",
+          "growth_outlook": "Very Strong - Cloud adoption driving 20%+ growth"
+        },
+        "mobile_development": {
+          "label": "Mobile Development",
+          "description": "iOS, Android, and cross-platform mobile application development",
+          "current_trends": [
+            "Flutter",
+            "React Native",
+            "SwiftUI",
+            "Kotlin Multiplatform",
+            "5G optimization"
+          ],
+          "salary_range": {
+            "entry": "£28,000 - £45,000",
+            "mid": "£45,000 - £75,000",
+            "senior": "£75,000 - £120,000+"
+          },
+          "key_skills": [
+            "Swift/Kotlin",
+            "React Native/Flutter",
+            "Mobile UI/UX",
+            "App Store optimization",
+            "Performance tuning"
+          ],
+          "career_paths": [
+            "Senior Mobile Developer",
+            "Mobile Architect",
+            "Technical Lead",
+            "Product Manager",
+            "Independent Developer"
+          ],
+          "remote_viability": "Very Good - 70-80% remote opportunities",
+          "ai_impact": "Medium - AI assists with testing and optimization",
+          "growth_outlook": "Strong - Mobile-first world driving steady 15% growth"
+        }
+      }
+    },
+    "finance": {
+      "label": "Finance & FinTech",
+      "description": "Traditional finance, digital banking, cryptocurrency, and financial technology",
+      "specializations": {
+        "investment_banking": {
+          "label": "Investment Banking",
+          "description": "M&A, capital markets, and corporate finance advisory",
+          "current_trends": [
+            "ESG investing",
+            "Digital asset integration",
+            "RegTech adoption",
+            "Remote deal execution"
+          ],
+          "salary_range": {
+            "entry": "£45,000 - £80,000",
+            "mid": "£80,000 - £150,000",
+            "senior": "£150,000 - £500,000+"
+          },
+          "key_skills": [
+            "Financial modeling",
+            "Valuation",
+            "M&A execution",
+            "Capital markets",
+            "Client management"
+          ],
+          "career_paths": [
+            "VP",
+            "Director",
+            "Managing Director",
+            "Private Equity",
+            "Hedge Fund"
+          ],
+          "remote_viability": "Limited - 20-30% due to client interaction requirements",
+          "ai_impact": "Medium - AI assists with analysis but relationship management remains human",
+          "growth_outlook": "Moderate - Consolidation but specialized roles growing"
+        },
+        "fintech": {
+          "label": "Financial Technology",
+          "description": "Digital payments, blockchain, robo-advisory, and financial software",
+          "current_trends": [
+            "DeFi",
+            "Central Bank Digital Currencies",
+            "Open Banking",
+            "AI-driven personalization"
+          ],
+          "salary_range": {
+            "entry": "£35,000 - £60,000",
+            "mid": "£60,000 - £100,000",
+            "senior": "£100,000 - £180,000+"
+          },
+          "key_skills": [
+            "Blockchain",
+            "Payment systems",
+            "Regulatory knowledge",
+            "Product management",
+            "Data analysis"
+          ],
+          "career_paths": [
+            "Product Manager",
+            "Head of Fintech",
+            "Chief Innovation Officer",
+            "Fintech Founder",
+            "Regulatory Lead"
+          ],
+          "remote_viability": "Excellent - 80%+ remote opportunities",
+          "ai_impact": "High - AI is core to many fintech innovations",
+          "growth_outlook": "Exceptional - 25-30% growth as financial services digitize"
+        },
+        "risk_management": {
+          "label": "Risk Management",
+          "description": "Credit risk, market risk, operational risk assessment and mitigation",
+          "current_trends": [
+            "Climate risk modeling",
+            "Algorithmic risk assessment",
+            "Real-time monitoring",
+            "Stress testing"
+          ],
+          "salary_range": {
+            "entry": "£35,000 - £55,000",
+            "mid": "£55,000 - £90,000",
+            "senior": "£90,000 - £150,000+"
+          },
+          "key_skills": [
+            "Risk modeling",
+            "Statistics",
+            "Regulatory compliance",
+            "Stress testing",
+            "Portfolio management"
+          ],
+          "career_paths": [
+            "Senior Risk Manager",
+            "Chief Risk Officer",
+            "Risk Consultant",
+            "Compliance Director",
+            "Regulatory Lead"
+          ],
+          "remote_viability": "Good - 60-70% hybrid/remote opportunities",
+          "ai_impact": "High - AI revolutionizing risk prediction and monitoring",
+          "growth_outlook": "Strong - Increasing regulatory requirements driving 18% growth"
+        },
+        "quantitative_finance": {
+          "label": "Quantitative Finance",
+          "description": "Mathematical modeling, algorithmic trading, and derivatives pricing",
+          "current_trends": [
+            "Machine learning in trading",
+            "Alternative data",
+            "High-frequency trading",
+            "Quantum computing applications"
+          ],
+          "salary_range": {
+            "entry": "£50,000 - £80,000",
+            "mid": "£80,000 - £150,000",
+            "senior": "£150,000 - £300,000+"
+          },
+          "key_skills": [
+            "Mathematics",
+            "Programming (Python/C++)",
+            "Statistics",
+            "Derivatives pricing",
+            "Risk modeling"
+          ],
+          "career_paths": [
+            "Senior Quant",
+            "Quantitative Researcher",
+            "Head of Quant",
+            "Portfolio Manager",
+            "Quant Fund Manager"
+          ],
+          "remote_viability": "Moderate - 40-50% due to proprietary systems",
+          "ai_impact": "Very High - AI and ML are transforming quantitative methods",
+          "growth_outlook": "Strong - 20% growth as markets become more algorithm-driven"
+        }
+      }
+    },
+    "healthcare": {
+      "label": "Healthcare & Life Sciences",
+      "description": "Medical practice, biotechnology, health informatics, and pharmaceutical development",
+      "specializations": {
+        "clinical_practice": {
+          "label": "Clinical Practice",
+          "description": "Direct patient care across medical specialties",
+          "current_trends": [
+            "Telemedicine",
+            "Personalized medicine",
+            "AI diagnostics",
+            "Preventive care focus"
+          ],
+          "salary_range": {
+            "entry": "£28,000 - £50,000 (junior doctors)",
+            "mid": "£50,000 - £80,000",
+            "senior": "£80,000 - £200,000+ (consultants)"
+          },
+          "key_skills": [
+            "Clinical knowledge",
+            "Patient communication",
+            "Diagnostic skills",
+            "Medical technology",
+            "Continuous learning"
+          ],
+          "career_paths": [
+            "Specialist",
+            "Consultant",
+            "Clinical Director",
+            "Medical Director",
+            "Private Practice"
+          ],
+          "remote_viability": "Limited - 20-30% (telemedicine growing)",
+          "ai_impact": "Medium - AI assists diagnosis but human care remains central",
+          "growth_outlook": "Strong - Aging population driving 15% growth"
+        },
+        "health_informatics": {
+          "label": "Health Informatics",
+          "description": "Healthcare data management, electronic health records, and medical software",
+          "current_trends": [
+            "Interoperability",
+            "AI/ML in healthcare",
+            "Patient portals",
+            "Population health analytics"
+          ],
+          "salary_range": {
+            "entry": "£30,000 - £50,000",
+            "mid": "£50,000 - £80,000",
+            "senior": "£80,000 - £130,000+"
+          },
+          "key_skills": [
+            "Health data standards",
+            "EHR systems",
+            "Data analysis",
+            "Healthcare workflow",
+            "Privacy regulations"
+          ],
+          "career_paths": [
+            "Senior Health Informatician",
+            "Chief Medical Information Officer",
+            "Health Data Scientist",
+            "Product Manager",
+            "Consultant"
+          ],
+          "remote_viability": "Very Good - 70-80% remote opportunities",
+          "ai_impact": "High - AI central to healthcare data insights",
+          "growth_outlook": "Very Strong - Digital health transformation driving 25% growth"
+        },
+        "biotechnology": {
+          "label": "Biotechnology",
+          "description": "Genetic engineering, drug development, and biological research",
+          "current_trends": [
+            "Gene therapy",
+            "CRISPR applications",
+            "Personalized medicine",
+            "Synthetic biology"
+          ],
+          "salary_range": {
+            "entry": "£25,000 - £40,000",
+            "mid": "£40,000 - £70,000",
+            "senior": "£70,000 - £120,000+"
+          },
+          "key_skills": [
+            "Molecular biology",
+            "Laboratory techniques",
+            "Research methods",
+            "Regulatory knowledge",
+            "Data analysis"
+          ],
+          "career_paths": [
+            "Senior Scientist",
+            "Research Director",
+            "Chief Scientific Officer",
+            "Biotech Entrepreneur",
+            "Regulatory Affairs"
+          ],
+          "remote_viability": "Limited - 30% (lab work required)",
+          "ai_impact": "High - AI accelerating drug discovery and research",
+          "growth_outlook": "Exceptional - Breakthrough therapies driving 30% growth"
+        },
+        "pharmaceutical": {
+          "label": "Pharmaceutical Development",
+          "description": "Drug discovery, clinical trials, and pharmaceutical manufacturing",
+          "current_trends": [
+            "Precision medicine",
+            "Digital therapeutics",
+            "Accelerated approval pathways",
+            "Real-world evidence"
+          ],
+          "salary_range": {
+            "entry": "£28,000 - £45,000",
+            "mid": "£45,000 - £80,000",
+            "senior": "£80,000 - £150,000+"
+          },
+          "key_skills": [
+            "Drug development",
+            "Clinical trials",
+            "Regulatory affairs",
+            "Project management",
+            "Quality assurance"
+          ],
+          "career_paths": [
+            "Clinical Research Manager",
+            "Regulatory Affairs Director",
+            "Medical Affairs",
+            "VP Drug Development",
+            "Chief Medical Officer"
+          ],
+          "remote_viability": "Moderate - 50-60% for non-lab roles",
+          "ai_impact": "High - AI transforming drug discovery and development",
+          "growth_outlook": "Strong - Aging population and new therapies driving 18% growth"
+        }
+      }
+    },
+    "sustainability": {
+      "label": "Sustainability & Green Economy",
+      "description": "Environmental solutions, renewable energy, and sustainable business practices",
+      "specializations": {
+        "renewable_energy": {
+          "label": "Renewable Energy",
+          "description": "Solar, wind, and energy storage system development and management",
+          "current_trends": [
+            "Grid integration",
+            "Energy storage",
+            "Green hydrogen",
+            "Offshore wind"
+          ],
+          "salary_range": {
+            "entry": "£25,000 - £40,000",
+            "mid": "£40,000 - £70,000",
+            "senior": "£70,000 - £120,000+"
+          },
+          "key_skills": [
+            "Energy systems",
+            "Project management",
+            "Environmental regulations",
+            "Technical analysis",
+            "Grid integration"
+          ],
+          "career_paths": [
+            "Project Manager",
+            "Energy Analyst",
+            "Sustainability Director",
+            "Chief Sustainability Officer",
+            "Energy Consultant"
+          ],
+          "remote_viability": "Moderate - 40-50% for planning/analysis roles",
+          "ai_impact": "Medium - AI optimizes energy production and grid management",
+          "growth_outlook": "Exceptional - Government commitments driving 35% growth"
+        },
+        "environmental_consulting": {
+          "label": "Environmental Consulting",
+          "description": "Environmental impact assessment, compliance, and remediation services",
+          "current_trends": [
+            "ESG reporting",
+            "Carbon accounting",
+            "Biodiversity net gain",
+            "Climate adaptation"
+          ],
+          "salary_range": {
+            "entry": "£22,000 - £35,000",
+            "mid": "£35,000 - £60,000",
+            "senior": "£60,000 - £100,000+"
+          },
+          "key_skills": [
+            "Environmental law",
+            "Impact assessment",
+            "Data analysis",
+            "Report writing",
+            "Stakeholder engagement"
+          ],
+          "career_paths": [
+            "Senior Consultant",
+            "Practice Lead",
+            "Environmental Director",
+            "Independent Consultant",
+            "Government Advisor"
+          ],
+          "remote_viability": "Good - 60-70% for desk-based work",
+          "ai_impact": "Medium - AI assists with data analysis and modeling",
+          "growth_outlook": "Very Strong - Regulatory requirements driving 25% growth"
+        },
+        "sustainable_finance": {
+          "label": "Sustainable Finance",
+          "description": "ESG investing, green bonds, and sustainable financial products",
+          "current_trends": [
+            "Taxonomy alignment",
+            "Impact measurement",
+            "Climate stress testing",
+            "Sustainable banking"
+          ],
+          "salary_range": {
+            "entry": "£35,000 - £55,000",
+            "mid": "£55,000 - £90,000",
+            "senior": "£90,000 - £150,000+"
+          },
+          "key_skills": [
+            "ESG analysis",
+            "Impact measurement",
+            "Financial modeling",
+            "Regulatory knowledge",
+            "Stakeholder engagement"
+          ],
+          "career_paths": [
+            "ESG Analyst",
+            "Sustainable Finance Director",
+            "Chief Sustainability Officer",
+            "Impact Investment Manager",
+            "ESG Consultant"
+          ],
+          "remote_viability": "Excellent - 80%+ remote opportunities",
+          "ai_impact": "High - AI enhances ESG data analysis and reporting",
+          "growth_outlook": "Exceptional - ESG mandates driving 30%+ growth"
+        }
+      }
+    },
+    "creative": {
+      "label": "Creative Industries & Media",
+      "description": "Design, content creation, entertainment, and digital media",
+      "specializations": {
+        "digital_design": {
+          "label": "Digital Design",
+          "description": "UI/UX design, graphic design, and digital brand experiences",
+          "current_trends": [
+            "Design systems",
+            "Voice UI",
+            "AR/VR design",
+            "Inclusive design"
+          ],
+          "salary_range": {
+            "entry": "£22,000 - £35,000",
+            "mid": "£35,000 - £60,000",
+            "senior": "£60,000 - £100,000+"
+          },
+          "key_skills": [
+            "Design software",
+            "User research",
+            "Prototyping",
+            "Visual design",
+            "Design thinking"
+          ],
+          "career_paths": [
+            "Senior Designer",
+            "Design Director",
+            "Head of Design",
+            "Design Consultant",
+            "Creative Director"
+          ],
+          "remote_viability": "Excellent - 85%+ remote opportunities",
+          "ai_impact": "Medium - AI assists with asset creation but human creativity essential",
+          "growth_outlook": "Strong - Digital transformation driving 20% growth"
+        },
+        "content_creation": {
+          "label": "Content Creation",
+          "description": "Video production, podcasting, writing, and social media content",
+          "current_trends": [
+            "Short-form video",
+            "Interactive content",
+            "AI-assisted creation",
+            "Creator economy platforms"
+          ],
+          "salary_range": {
+            "entry": "£18,000 - £30,000",
+            "mid": "£30,000 - £50,000",
+            "senior": "£50,000 - £80,000+"
+          },
+          "key_skills": [
+            "Content strategy",
+            "Video production",
+            "Social media",
+            "SEO",
+            "Analytics"
+          ],
+          "career_paths": [
+            "Content Manager",
+            "Creative Director",
+            "Social Media Director",
+            "Independent Creator",
+            "Content Consultant"
+          ],
+          "remote_viability": "Excellent - 90%+ remote opportunities",
+          "ai_impact": "High - AI tools transforming content creation process",
+          "growth_outlook": "Strong - Digital content demand driving 22% growth"
+        },
+        "game_development": {
+          "label": "Game Development",
+          "description": "Video game design, programming, and interactive entertainment",
+          "current_trends": [
+            "Cloud gaming",
+            "AR/VR games",
+            "Blockchain gaming",
+            "AI-generated content"
+          ],
+          "salary_range": {
+            "entry": "£22,000 - £35,000",
+            "mid": "£35,000 - £65,000",
+            "senior": "£65,000 - £120,000+"
+          },
+          "key_skills": [
+            "Game engines",
+            "Programming",
+            "3D modeling",
+            "Game design",
+            "Project management"
+          ],
+          "career_paths": [
+            "Senior Developer",
+            "Lead Designer",
+            "Technical Director",
+            "Game Producer",
+            "Studio Head"
+          ],
+          "remote_viability": "Good - 60-70% remote opportunities",
+          "ai_impact": "High - AI revolutionizing game development and player experiences",
+          "growth_outlook": "Very Strong - Gaming industry expansion driving 25% growth"
+        }
+      }
+    },
+    "education": {
+      "label": "Education & Learning Technology",
+      "description": "Teaching, educational technology, and learning experience design",
+      "specializations": {
+        "k12_teaching": {
+          "label": "K-12 Teaching",
+          "description": "Primary and secondary education instruction",
+          "current_trends": [
+            "Hybrid learning",
+            "Personalized education",
+            "EdTech integration",
+            "Social-emotional learning"
+          ],
+          "salary_range": {
+            "entry": "£24,000 - £32,000",
+            "mid": "£32,000 - £45,000",
+            "senior": "£45,000 - £65,000+"
+          },
+          "key_skills": [
+            "Curriculum development",
+            "Classroom management",
+            "Assessment",
+            "Technology integration",
+            "Student engagement"
+          ],
+          "career_paths": [
+            "Head of Department",
+            "Deputy Head",
+            "Headteacher",
+            "Education Consultant",
+            "Curriculum Specialist"
+          ],
+          "remote_viability": "Limited - 20-30% (in-person teaching priority)",
+          "ai_impact": "Medium - AI assists with personalization and admin tasks",
+          "growth_outlook": "Moderate - Teacher shortages creating opportunities, 8% growth"
+        },
+        "higher_education": {
+          "label": "Higher Education",
+          "description": "University teaching, research, and academic administration",
+          "current_trends": [
+            "Online learning",
+            "Micro-credentials",
+            "Industry partnerships",
+            "Research commercialization"
+          ],
+          "salary_range": {
+            "entry": "£30,000 - £45,000",
+            "mid": "£45,000 - £70,000",
+            "senior": "£70,000 - £120,000+"
+          },
+          "key_skills": [
+            "Subject expertise",
+            "Research",
+            "Grant writing",
+            "Academic writing",
+            "Student supervision"
+          ],
+          "career_paths": [
+            "Senior Lecturer",
+            "Professor",
+            "Head of School",
+            "Vice-Chancellor",
+            "Research Director"
+          ],
+          "remote_viability": "Good - 60% hybrid opportunities post-pandemic",
+          "ai_impact": "Medium - AI assists research but human expertise remains central",
+          "growth_outlook": "Moderate - International students and online growth, 10% expansion"
+        },
+        "edtech": {
+          "label": "Educational Technology",
+          "description": "Learning platforms, educational software, and digital learning experiences",
+          "current_trends": [
+            "AI tutoring",
+            "Adaptive learning",
+            "VR/AR education",
+            "Learning analytics"
+          ],
+          "salary_range": {
+            "entry": "£28,000 - £45,000",
+            "mid": "£45,000 - £75,000",
+            "senior": "£75,000 - £130,000+"
+          },
+          "key_skills": [
+            "Educational design",
+            "Software development",
+            "Learning analytics",
+            "User experience",
+            "Assessment design"
+          ],
+          "career_paths": [
+            "Product Manager",
+            "Learning Experience Designer",
+            "Head of Product",
+            "EdTech Founder",
+            "Chief Learning Officer"
+          ],
+          "remote_viability": "Excellent - 85%+ remote opportunities",
+          "ai_impact": "Very High - AI is transforming educational technology",
+          "growth_outlook": "Exceptional - Digital learning adoption driving 30% growth"
+        }
+      }
+    }
+  },
+  "generalTips": {
+    "cvOptimization": [
+      "Use action verbs to start bullet points (achieved, implemented, managed)",
+      "Quantify achievements with numbers, percentages, and metrics",
+      "Tailor your CV to each job description using relevant keywords",
+      "Keep formatting clean and consistent throughout",
+      "Limit your CV to 2 pages unless you have extensive experience",
+      "Include a professional summary that matches the job requirements",
+      "List skills that are relevant and backed by experience",
+      "Ensure contact information is current and professional"
+    ],
+    "atsOptimization": [
+      "Use standard section headings (Experience, Education, Skills)",
+      "Avoid graphics, images, and complex formatting",
+      "Include keywords from the job description naturally",
+      "Use standard fonts like Arial, Calibri, or Times New Roman",
+      "Save your CV in both PDF and Word formats",
+      "Spell out acronyms at least once",
+      "Use bullet points instead of paragraphs",
+      "Avoid headers and footers for important information"
+    ],
+    "coverLetter": [
+      "Address the letter to a specific person when possible",
+      "Open with a strong hook that shows enthusiasm",
+      "Connect your experience directly to job requirements",
+      "Show knowledge of the company and its values",
+      "Explain what you can offer, not just what you want",
+      "Keep it concise - one page maximum",
+      "Close with a clear call to action",
+      "Proofread carefully for errors"
+    ],
+    "interviewPreparation": [
+      "Research the company thoroughly - mission, values, recent news",
+      "Prepare STAR examples for behavioral questions",
+      "Practice your elevator pitch (30-60 seconds about yourself)",
+      "Prepare thoughtful questions to ask the interviewer",
+      "Review the job description and align your experience",
+      "Practice common interview questions out loud",
+      "Prepare for salary negotiation discussions",
+      "Plan your interview outfit in advance"
+    ],
+    "networking": [
+      "Optimize your LinkedIn profile with keywords",
+      "Connect with professionals in your target industry",
+      "Join relevant professional associations and groups",
+      "Attend industry events and conferences",
+      "Request informational interviews to learn about roles",
+      "Maintain relationships with former colleagues",
+      "Share relevant content to establish thought leadership",
+      "Follow up with new connections within 48 hours"
+    ],
+    "jobSearch": [
+      "Set up job alerts on multiple platforms",
+      "Apply early - within the first 48 hours of posting",
+      "Track your applications in a spreadsheet",
+      "Follow up on applications after 1-2 weeks",
+      "Customize each application rather than mass applying",
+      "Look beyond job boards - check company websites directly",
+      "Consider contract or temporary roles as stepping stones",
+      "Don't ignore smaller companies or startups"
+    ]
+  },
+  "careerStages": {
+    "entry": {
+      "label": "Entry Level / Recent Graduate",
+      "challenges": [
+        "Limited professional experience",
+        "Competing with other graduates",
+        "Uncertainty about career direction"
+      ],
+      "strategies": [
+        "Emphasize education, projects, and internships",
+        "Highlight transferable skills from any experience",
+        "Show enthusiasm and willingness to learn",
+        "Include relevant coursework and academic achievements",
+        "Leverage university career services and alumni networks",
+        "Consider entry-level programs and graduate schemes",
+        "Be open to different industries and roles initially"
+      ]
+    },
+    "early": {
+      "label": "Early Career (1-5 years)",
+      "challenges": [
+        "Building specialized expertise",
+        "Transitioning from entry-level roles",
+        "Developing professional network"
+      ],
+      "strategies": [
+        "Focus on achievements and growth in current role",
+        "Pursue relevant certifications and training",
+        "Seek mentorship and feedback actively",
+        "Take on challenging projects to build expertise",
+        "Start building your professional brand",
+        "Network within and outside your organization",
+        "Consider lateral moves to gain broader experience"
+      ]
+    },
+    "mid": {
+      "label": "Mid-Career (5-15 years)",
+      "challenges": [
+        "Breaking into senior positions",
+        "Balancing breadth vs. depth of experience",
+        "Potential career plateau"
+      ],
+      "strategies": [
+        "Emphasize leadership and strategic contributions",
+        "Quantify business impact of your work",
+        "Develop and showcase management skills",
+        "Build thought leadership in your field",
+        "Consider MBA or advanced certifications",
+        "Mentor others to demonstrate leadership",
+        "Network at senior levels in your industry"
+      ]
+    },
+    "senior": {
+      "label": "Senior/Executive (15+ years)",
+      "challenges": [
+        "Age discrimination concerns",
+        "Keeping skills current",
+        "Overqualification for some roles"
+      ],
+      "strategies": [
+        "Focus on recent achievements (last 10-15 years)",
+        "Emphasize strategic thinking and leadership",
+        "Show adaptability and continuous learning",
+        "Consider consulting or advisory roles",
+        "Leverage extensive network for opportunities",
+        "Highlight mentoring and team development",
+        "Consider board positions or portfolio careers"
+      ]
+    },
+    "transition": {
+      "label": "Career Changer",
+      "challenges": [
+        "Lack of direct experience in new field",
+        "Potential salary reduction",
+        "Convincing employers of commitment"
+      ],
+      "strategies": [
+        "Identify and emphasize transferable skills",
+        "Get relevant certifications or education",
+        "Start with volunteer work or side projects",
+        "Network extensively in the new field",
+        "Consider transitional roles that bridge both fields",
+        "Write a compelling career change cover letter",
+        "Be prepared to start at a lower level initially"
+      ]
+    }
+  }
+}

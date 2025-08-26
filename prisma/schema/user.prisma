@@ -1,7 +1,7 @@
 model User {
-  id                   String          @id @default(cuid())
+  id                   String               @id @default(cuid())
   name                 String?
-  email                String          @unique
+  email                String               @unique
   emailVerified        DateTime?
   image                String?
   companyId            String?
@@ -9,19 +9,21 @@ model User {
   sessions             Session[]
   GeneratedDocs        GeneratedDocs[]
   CVAnalyses           CVAnalysis[]
-  createdAt            DateTime        @default(now())
-  updatedAt            DateTime        @updatedAt
-  createdDocs          Int             @default(0)
-  allowedDocs          Int             @default(5)
-  company              Company?        @relation(fields: [companyId], references: [id])
-  role                 UserRole        @default(USER)
-  userType             UserType        @default(RECRUITER)
-  isTestAccount        Boolean         @default(false)
-  onboardingCompleted  Boolean         @default(false)
+  GuidanceProgress     GuidanceProgress[]
+  GuidanceAnalytics    GuidanceAnalytics?
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+  createdDocs          Int                  @default(0)
+  allowedDocs          Int                  @default(5)
+  company              Company?             @relation(fields: [companyId], references: [id])
+  role                 UserRole             @default(USER)
+  userType             UserType             @default(RECRUITER)
+  isTestAccount        Boolean              @default(false)
+  onboardingCompleted  Boolean              @default(false)
   field                String?
-  specializations      String[]        @default([])
+  specializations      String[]             @default([])
   careerStage          String?
-  newsletterSubscribed Boolean         @default(false)
+  newsletterSubscribed Boolean              @default(false)
   guidancePreferences  Json?
   lastGuidanceAccess   DateTime?
 

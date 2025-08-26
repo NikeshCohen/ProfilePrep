@@ -1,0 +1,56 @@
+model GuidanceProgress {
+  id                String   @id @default(cuid())
+  userId            String
+  topicId           String
+  userType          UserType // CANDIDATE or RECRUITER
+  progress          Int      @default(0) // 0-100
+  completed         Boolean  @default(false)
+  lastAccessed      DateTime @default(now())
+  sectionsCompleted Json     @default("[]") // Array of completed section IDs
+  timeSpent         Int      @default(0) // Minutes spent on topic
+  bookmarked        Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, topicId, userType])
+  @@map("guidance_progress")
+}
+
+model GuidanceContent {
+  id             String     @id @default(cuid())
+  topicId        String
+  field          String?
+  specialization String?
+  careerStage    String?
+  userType       UserType
+  contentType    String     // "philosophy", "strategies", "tips", etc.
+  content        Json       // The actual content data
+  priority       Int        @default(0) // For content ordering
+  isActive       Boolean    @default(true)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  @@index([topicId, field, specialization, careerStage, userType])
+  @@map("guidance_content")
+}
+
+model GuidanceAnalytics {
+  id                  String   @id @default(cuid())
+  userId              String
+  totalTopicsStarted  Int      @default(0)
+  totalTopicsCompleted Int     @default(0)
+  totalTimeSpent      Int      @default(0) // Minutes
+  averageProgress     Float    @default(0)
+  streakDays          Int      @default(0)
+  lastActiveDate      DateTime @default(now())
+  preferredTopics     Json     @default("[]") // Array of topic IDs based on engagement
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+  @@map("guidance_analytics")
+}

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
-import { RecruiterGuidanceClient } from "@/app/recruiter/guidance/_components/RecruiterGuidanceClient";
+import { RecruiterGuidanceHub } from "@/app/recruiter/guidance/_components/RecruiterGuidanceHub";
 
 export const metadata: Metadata = {
-  title: "Recruiter Guidance | ProfilePrep",
-  description: "Professional guidance and insights for recruiters",
+  title: "Recruitment Excellence Hub | ProfilePrep",
+  description:
+    "Master modern recruiting with personalized guidance tailored to your industry",
 };
 
 export default function RecruiterGuidancePage() {
-  return <RecruiterGuidanceClient />;
+  return <RecruiterGuidanceHub />;
 }

@@ -1,0 +1,566 @@
+{
+  "fields": {
+    "technology": {
+      "label": "Technology Recruiting",
+      "description": "Where technical expertise meets human judgment, where understanding code architecture matters less than understanding the people who create it. Technology recruiting requires fluency in multiple programming languages while speaking the universal language of human motivation and career aspiration.",
+      "specializations": {
+        "engineering": {
+          "label": "Software Engineering",
+          "narrative": "You're sourcing the architects of our digital future—the minds that transform abstract problems into elegant solutions, the professionals who build the systems that increasingly define how we work, communicate, and live. Engineering recruiting demands technical literacy without requiring technical expertise, cultural sensitivity without compromising standards.",
+          "sourcingStrategies": [
+            "GitHub isn't just a code repository—it's a portfolio of thinking. Look for consistent contribution patterns, meaningful project descriptions, clean commit messages, evidence of collaboration through pull requests and issue discussions",
+            "Stack Overflow reputation reveals problem-solving approach and community engagement. High-reputation users demonstrate both technical competence and communication ability—they can explain complex concepts clearly",
+            "Technical meetups and hackathons surface passionate practitioners who invest personal time in craft development. These venues attract people who love technology beyond just job requirements",
+            "University partnerships require long-term relationship building but provide access to emerging talent before they enter competitive markets. Focus on schools with strong computer science programs and diverse student bodies",
+            "Open source communities offer insights into coding style, collaboration ability, and technical interests. Contributors to well-known projects often possess deeper expertise than their formal credentials suggest"
+          ],
+          "screeningCriteria": [
+            "Technical assessment should focus on problem-solving approach, not memorized algorithms. Can they break down complex problems? Explain their thinking process? Handle ambiguity and trade-offs?",
+            "Code quality in portfolio projects reveals craftsmanship. Look for readable code, thoughtful architecture, appropriate use of design patterns, evidence of testing and documentation practices",
+            "Continuous learning indicators show adaptability in rapidly evolving field. Recent courses, certifications, blog posts, conference talks, contributions to new technologies",
+            "Communication skills matter more than many realize. Can they explain technical concepts to non-technical stakeholders? Document their work clearly? Collaborate effectively with diverse teams?",
+            "Cultural fit assessment should examine collaboration style, feedback receptiveness, problem-solving under pressure, alignment with company values and working methods"
+          ],
+          "redFlags": [
+            "No recent projects or learning initiatives suggest stagnation in rapidly evolving field. Technology professionals must stay current to remain effective",
+            "Inability to explain technical decisions clearly indicates communication problems that will affect team collaboration and stakeholder interaction",
+            "Exaggerated claims about individual contributions to team projects reveal either dishonesty or lack of understanding about collaborative software development",
+            "Poor code quality in portfolio suggests lack of attention to maintainability, testing, or professional development practices",
+            "No version control experience indicates unfamiliarity with fundamental collaborative development practices"
+          ],
+          "interviewGuidance": [
+            "Include technical team members throughout interview process. Pair programming sessions, code reviews, architecture discussions provide better insights than abstract technical questions",
+            "Live coding or collaborative problem-solving reveals thinking process, communication style, pressure handling, and approach to ambiguous requirements",
+            "System design discussions for senior candidates should focus on trade-off analysis, scalability thinking, and business context understanding, not just technical implementation",
+            "Cultural integration assessment matters enormously. How do they handle feedback? Approach disagreements? Support team members? Respond to changing requirements?",
+            "Present real challenges your team faces rather than textbook problems. This reveals practical problem-solving ability and generates realistic job preview"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Software developer unemployment sits at just 2.8%, well below national averages, yet job postings have hit five-year lows. This apparent paradox reflects market maturation—companies are hiring more selectively for quality over quantity, seeking professionals who can work effectively with AI tools rather than being replaced by them.",
+            "compensationTrends": "Salary ranges remain competitive: $75,000-$140,000 for mid-level frontend developers, $80,000-$150,000 for backend engineers. However, companies increasingly value T-shaped developers—deep expertise in one area with broad competence across the stack.",
+            "skillPriorities": [
+              "AI-assisted development workflows",
+              "System architecture and design",
+              "Cross-functional collaboration",
+              "Business impact understanding"
+            ],
+            "hiringChallenges": [
+              "Candidate drop-off rates average 53% between technical interview invitations and completions",
+              "Average technical interview scores required for offers have risen 12% as standards increase",
+              "Growing emphasis on quality of hire over speed of hiring",
+              "Need for developers who can bridge technical and business requirements"
+            ]
+          }
+        },
+        "data": {
+          "label": "Data & Analytics",
+          "narrative": "You're seeking the modern alchemists who transform raw information into strategic insight, who see patterns in noise and opportunity in complexity. Data professionals combine statistical rigor with business intuition, technical depth with storytelling ability.",
+          "sourcingStrategies": [
+            "Kaggle competitions reveal both technical competence and competitive drive. Look for consistent participation, novel approaches, clear documentation, and collaboration in team competitions",
+            "Data science bootcamps produce career changers with strong motivation and recent, relevant skills. These candidates often bring domain expertise from previous careers",
+            "Academic conferences and research publications indicate deep technical knowledge and commitment to advancing the field. PhD researchers often transition well to industry roles",
+            "LinkedIn groups focused on data science, machine learning, and analytics provide access to practitioners sharing knowledge and seeking opportunities",
+            "Industry-specific data communities (healthcare analytics, financial modeling, marketing measurement) offer candidates with both technical and domain expertise"
+          ],
+          "screeningCriteria": [
+            "Portfolio projects should demonstrate complete analytical workflows from problem definition through data collection, analysis, and business impact measurement. Look for clear problem statements and measurable outcomes",
+            "Statistical knowledge and methodology understanding are fundamental. Can they explain bias, variance, statistical significance? Choose appropriate methods for different data types and business questions?",
+            "Business context understanding separates analysts from data scientists. Can they connect technical work to business outcomes? Communicate insights to non-technical audiences? Recommend actionable next steps?",
+            "Tool proficiency should be current and relevant. Python, R, SQL are basics, but also look for experience with specific platforms, cloud services, and visualization tools relevant to your environment",
+            "Domain expertise often determines success more than general technical skills. Healthcare, finance, marketing—each has unique data challenges and regulatory considerations"
+          ],
+          "redFlags": [
+            "Only academic or theoretical projects without real-world application suggest limited understanding of business context and practical constraints",
+            "Cannot explain model choices and trade-offs indicates lack of deeper understanding beyond following tutorials or templates",
+            "Poor data visualization and storytelling skills limit ability to influence business decisions and communicate insights effectively",
+            "No experience with production systems, big data platforms, or cloud environments suggests purely academic or small-scale experience",
+            "Unable to discuss ethical considerations or business impact shows lack of strategic thinking about data work"
+          ],
+          "interviewGuidance": [
+            "Present realistic business scenarios requiring analytical solutions. How would they approach the problem? What data would they need? How would they validate results?",
+            "Technical assessments should include both coding challenges and conceptual questions. Can they write clean, efficient code? Explain statistical concepts clearly?",
+            "Communication skills testing is crucial. Have them present previous work, explain complex concepts simply, discuss how they've influenced business decisions",
+            "Cross-functional collaboration examples reveal ability to work with product managers, engineers, business stakeholders who have different priorities and understanding levels"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "AI and machine learning expertise represents the most evident skills gap in technology teams. Data engineers are among the top 10 most in-demand tech roles, with companies desperately seeking professionals who can handle AI infrastructure and massive data processing.",
+            "compensationTrends": "$80,000-$140,000 for mid-level data scientists, with premiums for MLOps expertise and production system experience. Companies increasingly value professionals who can deploy and maintain models, not just build them.",
+            "skillPriorities": [
+              "MLOps and production deployment",
+              "LLM fine-tuning and integration",
+              "Real-time data processing",
+              "Business impact measurement"
+            ],
+            "hiringChallenges": [
+              "Shortage of professionals who can bridge research and production environments",
+              "Competition between tech companies and traditional industries adopting AI",
+              "Need for candidates who understand both technical and ethical implications of AI systems"
+            ]
+          }
+        },
+        "product": {
+          "label": "Product & Design",
+          "narrative": "You're recruiting the experience architects, the professionals who translate user needs into delightful interactions, who balance business objectives with human psychology, who make complex technology feel intuitive and accessible.",
+          "sourcingStrategies": [
+            "Dribbble and Behance portfolios reveal design thinking, aesthetic sensibility, and creative range. Look for case studies that explain process, not just beautiful final outputs",
+            "Product Hunt engagement shows awareness of emerging products and industry trends. Active contributors often have strong opinions about user experience and product strategy",
+            "Design conference speakers and attendees demonstrate thought leadership and commitment to professional development. These venues attract passionate practitioners",
+            "UX/UI bootcamp graduates bring fresh perspectives and recent, relevant training. Career changers often contribute valuable domain expertise from previous industries",
+            "Company design blogs and case studies reveal professionals willing to share knowledge and represent their organizations publicly"
+          ],
+          "screeningCriteria": [
+            "Portfolio should demonstrate design thinking process, not just aesthetic outputs. Look for user research, problem definition, iteration examples, outcome measurement",
+            "User research and testing experience indicates user-centered design approach. Can they gather and analyze user feedback? Design and conduct usability tests?",
+            "Cross-functional collaboration examples show ability to work with engineers, product managers, business stakeholders who have different priorities and constraints",
+            "Business metrics understanding separates decorators from strategic designers. Can they connect design decisions to user engagement, conversion rates, business outcomes?",
+            "Design system experience shows systematic thinking about consistency, scalability, and team collaboration in design implementation"
+          ],
+          "redFlags": [
+            "Portfolio shows only final designs without process documentation suggests limited understanding of user-centered design methodology",
+            "Cannot articulate design decisions or explain rationale indicates lack of strategic thinking beyond aesthetic preferences",
+            "No experience with user research or testing suggests assumption-based rather than evidence-based design approach",
+            "Limited collaboration examples with developers indicate potential challenges in design implementation and technical constraint understanding",
+            "Overemphasis on visual aesthetics without consideration for usability, accessibility, or business objectives shows incomplete understanding of design role"
+          ],
+          "interviewGuidance": [
+            "Portfolio reviews should focus on process, challenges overcome, outcomes achieved, and lessons learned rather than just aesthetic evaluation",
+            "Design challenges should be realistic and time-bounded. How do they approach ambiguous problems? Prioritize competing requirements? Handle feedback?",
+            "Cross-functional collaboration scenarios reveal ability to influence without authority, handle conflicting priorities, communicate design rationale effectively",
+            "User empathy assessment through scenarios or role-playing exercises shows understanding of diverse user needs and accessibility considerations"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Web and UX designers show unemployment rates of just 3.8%, well below national averages. Companies increasingly value designers who can work across the entire product development process.",
+            "compensationTrends": "Design roles command competitive salaries with emphasis on strategic thinking and business impact understanding. Senior designers who can influence product strategy are particularly valued.",
+            "skillPriorities": [
+              "AI-assisted design workflows",
+              "Accessibility and inclusive design",
+              "Design system development",
+              "Cross-platform experience design"
+            ],
+            "hiringChallenges": [
+              "Finding designers who balance creativity with systematic thinking",
+              "Need for professionals who understand both design and business strategy",
+              "Competition for designers with AI/ML product experience"
+            ]
+          }
+        }
+      }
+    },
+    "healthcare": {
+      "label": "Healthcare Recruiting",
+      "description": "Where clinical expertise meets human compassion, where regulatory compliance dances with patient care, where the stakes are measured in lives saved and suffering alleviated. Healthcare recruiting demands understanding of both technical competencies and emotional intelligence required to work in life-and-death situations.",
+      "specializations": {
+        "clinical": {
+          "label": "Clinical Professionals",
+          "narrative": "You're recruiting the frontline heroes who translate medical knowledge into healing action, who hold space for human vulnerability while making split-second decisions that affect lives. Clinical recruiting requires understanding both technical competencies and the emotional resilience needed for this demanding work.",
+          "sourcingStrategies": [
+            "Healthcare staffing agencies maintain relationships with professionals considering transitions, temporary assignments, and geographic moves. These partnerships provide access to passive candidates",
+            "Medical school and nursing program partnerships require investment in relationship building but provide early access to emerging talent with current training and fresh perspectives",
+            "Professional associations and medical boards offer access to licensed professionals seeking new opportunities or considering career changes",
+            "Travel healthcare professional conversion represents significant opportunities. Many traveling clinicians eventually seek permanent positions for stability and community connection",
+            "International recruitment with visa support expands talent pools, particularly valuable for addressing severe shortage areas in underserved communities"
+          ],
+          "screeningCriteria": [
+            "License and certification verification is non-negotiable. Ensure all credentials are current, valid, and appropriate for the specific role and location",
+            "Clinical experience relevance matters more than years of experience. ICU experience differs significantly from ambulatory care—match backgrounds to role requirements",
+            "Patient care philosophy alignment reveals cultural fit and approach to challenging situations. How do they handle difficult patients? Family conflicts? End-of-life care?",
+            "Team collaboration skills are essential in multidisciplinary healthcare environments. Can they communicate effectively with physicians, nurses, specialists, support staff?",
+            "Technology proficiency increasingly important. Electronic medical records, telehealth platforms, clinical decision support systems—comfort with healthcare technology is essential"
+          ],
+          "redFlags": [
+            "Gaps in licensure or certification raise compliance concerns and suggest potential regulatory issues that could affect hiring eligibility",
+            "Multiple short-term positions without clear career progression may indicate performance issues, cultural fit problems, or lack of commitment",
+            "Cannot provide recent professional references, particularly from clinical supervisors, suggests potential performance or relationship issues",
+            "Lack of continuing education or professional development indicates potential knowledge gaps in rapidly evolving healthcare field",
+            "Poor communication skills in interview raise concerns about patient interaction, family communication, and team collaboration abilities"
+          ],
+          "interviewGuidance": [
+            "Clinical scenario discussions reveal both technical knowledge and ethical reasoning. Present challenging cases relevant to the role—how do they prioritize? Make decisions under pressure?",
+            "Peer interviews with current clinical staff provide insights into cultural fit, collaboration style, and professional credibility that HR interviews cannot assess",
+            "Patient interaction philosophy discussions show approach to care, communication style, and alignment with organizational values and patient population needs",
+            "Stress management and resilience assessment crucial given emotional demands of healthcare work. How do they handle patient loss? Difficult families? High-pressure situations?",
+            "Facility tours during interviews help candidates understand work environment while allowing observations of their comfort level and engagement with setting"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Healthcare faces unprecedented staffing shortages with 20% workforce loss during pandemic years and 31% of nurses considering leaving direct patient care. This creates massive opportunities but significant workplace challenges.",
+            "compensationTrends": "Hospital labor expenses increased 36.9% compared to pre-pandemic levels. Travel nursing commands premium rates, but permanent positions offer better long-term stability and benefits.",
+            "skillPriorities": [
+              "Telehealth delivery capabilities",
+              "Electronic health record proficiency",
+              "Specialized critical care experience",
+              "Mental health integration skills"
+            ],
+            "hiringChallenges": [
+              "Severe shortages projected especially in rural areas—13% shortage expected by 2037 versus 5% in metropolitan areas",
+              "Competition from travel nursing and contract work offering higher short-term compensation",
+              "Burnout and retention challenges affecting both recruitment and workforce stability"
+            ]
+          }
+        },
+        "allied": {
+          "label": "Allied Health Professionals",
+          "narrative": "You're sourcing the specialized experts who provide targeted interventions—the physical therapists who restore movement, the respiratory therapists who help patients breathe, the medical technologists who provide diagnostic insight. These professionals require both technical expertise and strong interpersonal skills.",
+          "sourcingStrategies": [
+            "Allied health program partnerships provide access to recent graduates with current training and fresh perspectives. Build relationships with program directors and career services",
+            "Professional associations offer networking opportunities and job board access. Each specialty has specific organizations that serve their unique professional development needs",
+            "Contract-to-hire arrangements allow evaluation of fit before permanent commitment. Many allied health professionals are open to contract work as pathway to permanent positions",
+            "Employee referral programs leverage existing staff networks. Allied health professionals often know colleagues in related specialties or previous workplaces",
+            "Community health organizations and outpatient clinics can be sources for professionals seeking different practice settings or career advancement opportunities"
+          ],
+          "screeningCriteria": [
+            "Certification verification specific to specialty area is essential. Each allied health profession has unique credentialing requirements and continuing education obligations",
+            "Specialized technical skills must match role requirements precisely. Equipment proficiency, treatment protocols, diagnostic procedures—these require specific training and experience",
+            "Interdisciplinary collaboration experience shows ability to work effectively in healthcare teams with physicians, nurses, and other specialists",
+            "Patient education and communication abilities are crucial across all allied health roles. Can they explain procedures? Provide emotional support? Adapt communication to different populations?",
+            "Technology and equipment proficiency should be current and relevant to the practice setting. Healthcare technology evolves rapidly, requiring ongoing adaptation"
+          ],
+          "redFlags": [
+            "Expired or lapsed certifications suggest lack of commitment to professional development and may create regulatory compliance issues",
+            "No recent clinical experience indicates potential skill deterioration or unfamiliarity with current practices and technology",
+            "Limited teamwork examples suggest potential challenges in collaborative healthcare environments where coordination is essential",
+            "Lack of patient-centered focus or poor bedside manner raises concerns about patient satisfaction and care quality",
+            "Resistance to new technologies or practices suggests inflexibility that could limit effectiveness in evolving healthcare environments"
+          ],
+          "interviewGuidance": [
+            "Technical competency assessment should include both theoretical knowledge and practical application. Can they explain procedures clearly? Demonstrate proper techniques?",
+            "Department team interviews provide insights into cultural fit and professional integration within existing workflows and team dynamics",
+            "Patient interaction scenarios reveal communication style, empathy, and ability to provide emotional support during potentially stressful procedures",
+            "Quality improvement and continuing education discussions show commitment to professional development and evidence-based practice",
+            "Equipment and technology familiarity assessment ensures candidates can function effectively with existing infrastructure and adapt to new tools"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "NCHWA projects shortages across many allied health specialties by 2037, with aging populations driving increased demand for therapeutic and diagnostic services.",
+            "compensationTrends": "Salaries vary significantly by specialty from $45,000-$85,000, with premiums for specialized skills and certifications. Rural and underserved areas often offer additional incentives.",
+            "skillPriorities": [
+              "Geriatric specialization",
+              "Technology integration",
+              "Telehealth service delivery",
+              "Outcome measurement and documentation"
+            ],
+            "hiringChallenges": [
+              "Limited graduate production from training programs relative to demand",
+              "Competition between healthcare settings for qualified professionals",
+              "Need for professionals comfortable with emerging healthcare technologies and service delivery models"
+            ]
+          }
+        }
+      }
+    },
+    "finance": {
+      "label": "Finance & Banking Recruiting",
+      "description": "Where numerical precision meets strategic insight, where risk assessment requires both analytical rigor and intuitive judgment, where global markets demand professionals who can navigate complexity while maintaining ethical standards and regulatory compliance.",
+      "specializations": {
+        "investment_banking": {
+          "label": "Investment Banking",
+          "narrative": "You're recruiting for the epicenter of global finance, where billion-dollar deals reshape industries and financial engineering meets strategic vision. These professionals must combine analytical excellence with relationship skills, technical competence with stamina for demanding work environments.",
+          "sourcingStrategies": [
+            "Target school strategy remains crucial. MBA programs at top-tier schools provide access to candidates with both analytical skills and demonstrated achievement patterns",
+            "Alumni networks from target schools offer referrals and cultural fit insights. Existing team members can provide introductions and vouch for candidates' capabilities",
+            "Professional associations like CFA Institute provide access to credentialed professionals with commitment to industry standards and continuing education",
+            "Competitor firms represent source of experienced professionals familiar with industry demands, client expectations, and technical requirements",
+            "Internal referral programs leverage existing relationships and cultural knowledge to identify candidates who will thrive in demanding environments"
+          ],
+          "screeningCriteria": [
+            "Academic credentials and analytical ability demonstrated through grades, test scores, and coursework in finance, economics, or related quantitative fields",
+            "Deal experience should be specific and quantified. What role did they play? What challenges did they overcome? How did they contribute to successful outcomes?",
+            "Financial modeling and valuation skills must be demonstrable through work samples, technical interviews, or case study presentations",
+            "Client relationship capabilities shown through previous sales experience, presentations, or interpersonal interactions during interview process",
+            "Work ethic and pressure tolerance essential given demanding nature of investment banking work. Look for evidence of sustained high performance under pressure"
+          ],
+          "redFlags": [
+            "Gaps in employment during market upturns suggest potential performance issues or lack of commitment to demanding career path",
+            "Cannot discuss specific deals or transactions in appropriate detail (within legal and confidentiality limits) indicates limited actual experience",
+            "Poor attention to detail in application materials raises concerns about accuracy and precision essential in financial work",
+            "Lack of relevant licenses or certifications for the role suggests insufficient preparation or commitment to regulatory requirements",
+            "No evidence of continuous learning or professional development indicates potential stagnation in rapidly evolving field"
+          ],
+          "interviewGuidance": [
+            "Financial modeling tests and case studies reveal both technical competence and thinking process. Focus on approach, assumptions, and business logic rather than perfect execution",
+            "Mental math and analytical skills assessment shows ability to perform under pressure and handle quantitative challenges quickly and accurately",
+            "Cultural fit evaluation crucial given intense work environment. How do they handle feedback? Work in teams? Respond to high-pressure situations?",
+            "Market knowledge discussions reveal genuine interest in finance and awareness of current conditions affecting deals and client needs",
+            "Presentation skills assessment shows ability to communicate complex financial concepts clearly to clients and internal stakeholders"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Investment banking revenue recovered in 2024 with returning deal flow, leading to increased off-cycle hiring and accelerated recruitment timelines for 2025. Banks are responding to pipeline growth with year-round recruiting.",
+            "compensationTrends": "Starting salaries typically range $100,000-$200,000 for analysts, with total compensation significantly higher. Competition for top talent drives premium compensation packages.",
+            "skillPriorities": [
+              "Technology sector expertise",
+              "ESG integration knowledge",
+              "Cross-border transaction experience",
+              "Restructuring and turnaround expertise"
+            ],
+            "hiringChallenges": [
+              "Off-cycle hiring increases as deal pipelines fill up in tech, healthcare, restructuring, and industrials sectors",
+              "Need for professionals who can integrate AI tools into financial modeling and analysis",
+              "Growing importance of ESG considerations in deal structuring and client advisory"
+            ]
+          }
+        },
+        "corporate_finance": {
+          "label": "Corporate Finance & Analysis",
+          "narrative": "You're seeking the strategic thinkers who translate numbers into business insights, who build the financial frameworks that guide organizational decision-making, who balance analytical rigor with practical business judgment.",
+          "sourcingStrategies": [
+            "CPA firms provide access to professionals with strong analytical foundations, attention to detail, and experience with financial reporting and analysis",
+            "MBA programs, particularly those with strong finance concentrations, offer candidates with both technical skills and strategic thinking capabilities",
+            "Professional organizations like IMA (Institute of Management Accountants) and AFP (Association for Financial Professionals) provide networking opportunities",
+            "Industry-specific talent pools understand unique challenges of healthcare finance, manufacturing cost accounting, technology company metrics, or other specialized areas",
+            "Internal development and promotion programs can identify high-potential analysts ready for increased responsibility and broader scope"
+          ],
+          "screeningCriteria": [
+            "Analytical skills demonstrated through specific examples of complex financial problems solved, insights generated, and business impact achieved",
+            "Technical proficiency in Excel, financial planning software, ERP systems, and business intelligence tools relevant to your organization's infrastructure",
+            "Industry expertise valuable given unique financial characteristics of different sectors. Healthcare revenue recognition differs from software subscription models",
+            "Communication abilities crucial for presenting findings to non-financial audiences, explaining complex analysis clearly, and influencing business decisions",
+            "Business acumen shown through understanding of how financial analysis supports strategic planning, operational improvement, and investment decisions"
+          ],
+          "redFlags": [
+            "Cannot provide specific examples of analytical work or business impact suggests limited actual experience with strategic financial analysis",
+            "Outdated technical skills or unfamiliarity with modern financial planning and analysis tools indicates potential productivity challenges",
+            "Poor communication skills limit ability to influence business decisions and collaborate effectively with non-financial colleagues",
+            "Lack of business context understanding suggests purely technical rather than strategic approach to financial analysis",
+            "No evidence of continuous learning about industry trends, new analytical techniques, or regulatory changes affecting financial reporting"
+          ],
+          "interviewGuidance": [
+            "Case study presentations reveal analytical thinking, problem-solving approach, and ability to communicate findings clearly and persuasively",
+            "Technical skills assessment through Excel modeling, database queries, or analytical challenges relevant to role requirements",
+            "Business acumen discussions show understanding of how financial analysis supports strategic decisions and operational improvements",
+            "Cross-functional collaboration examples demonstrate ability to work effectively with operations, sales, marketing, and other business functions"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Financial managers show unemployment of just 1.9% in Q1 2025, with 93% of leaders reporting difficulty finding qualified professionals. The most evident skills gap is in FP&A capabilities.",
+            "compensationTrends": "$55,000-$95,000 for mid-level financial analysts, with premiums for specialized industry knowledge and advanced analytical capabilities.",
+            "skillPriorities": [
+              "FP&A expertise with strategic planning integration",
+              "Data visualization and business intelligence",
+              "Real-time financial reporting",
+              "ESG metrics and reporting"
+            ],
+            "hiringChallenges": [
+              "Shortage of professionals who can turn financial data into actionable business insights",
+              "Need for analysts comfortable with advanced analytics and data visualization tools",
+              "Competition for candidates who understand both traditional finance and emerging business models"
+            ]
+          }
+        }
+      }
+    },
+    "marketing": {
+      "label": "Marketing & Communications Recruiting",
+      "description": "Where creativity meets analytics, where brand building requires both artistic vision and scientific measurement, where understanding human psychology determines campaign success. Marketing recruiting demands appreciation for both strategic thinking and tactical execution.",
+      "specializations": {
+        "digital_marketing": {
+          "label": "Digital Marketing",
+          "narrative": "You're sourcing the hybrid professionals who combine creative intuition with analytical rigor, who can craft compelling content that performs measurably, who understand both human psychology and algorithm behavior in the digital ecosystem.",
+          "sourcingStrategies": [
+            "Digital marketing agencies provide access to professionals with diverse client experience, platform expertise, and proven ability to deliver measurable results",
+            "Marketing bootcamp graduates bring fresh training in current tools and techniques. Career changers often contribute valuable perspectives from previous industries",
+            "Freelance platforms like Upwork and 99designs reveal independent contractors with specialized skills and entrepreneurial mindset who may consider full-time opportunities",
+            "Industry conferences and webinars attract practitioners committed to staying current with rapidly evolving platforms, techniques, and best practices",
+            "Marketing communities and online forums provide access to professionals actively sharing knowledge and demonstrating expertise through content creation"
+          ],
+          "screeningCriteria": [
+            "Campaign portfolio should demonstrate strategic thinking, creative execution, and measurable results. Look for clear problem statements, audience insights, and ROI metrics",
+            "Platform expertise depth more valuable than breadth. Deep knowledge of Google Ads, Facebook advertising, email automation, or SEO shows mastery of complex systems",
+            "Analytical capabilities essential for modern digital marketing. Can they interpret Google Analytics? Conduct A/B tests? Build customer segments? Optimize conversion funnels?",
+            "Creative and analytical balance distinguishes great marketers. How do they use data to inform creative decisions? Test creative hypotheses? Balance brand and performance objectives?",
+            "Certification and continuous learning demonstrate platform proficiency and commitment to staying current in rapidly evolving field"
+          ],
+          "redFlags": [
+            "Cannot provide specific campaign metrics or business impact suggests limited experience with performance-focused digital marketing",
+            "Outdated platform knowledge in rapidly evolving field indicates lack of commitment to professional development and staying current",
+            "No experience with analytics or data interpretation limits ability to optimize campaigns and demonstrate business value",
+            "Over-reliance on single platform or tactic suggests limited strategic thinking about integrated digital marketing approaches",
+            "Poor understanding of customer journey and attribution shows incomplete grasp of how digital marketing supports business objectives"
+          ],
+          "interviewGuidance": [
+            "Campaign case studies should reveal strategic thinking, tactical execution, and optimization approach. How did they define success? Handle challenges? Improve performance?",
+            "Platform knowledge assessment should go beyond basic features to advanced optimization strategies, audience development, and integration with other marketing channels",
+            "Data interpretation skills crucial for role success. Present campaign data and ask for analysis, optimization recommendations, insights about audience behavior",
+            "Creative and analytical collaboration discusses how they balance brand objectives with performance goals, use data to inform creative decisions"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Digital marketing shows solid 6% annual growth projected through 2032, with marketing specialists showing unemployment of just 2.4%. AI-powered tools are becoming essential for content creation and campaign optimization.",
+            "compensationTrends": "$50,000-$85,000 for mid-level digital marketers, with premiums for AI tool proficiency and cross-platform expertise. Companies value marketers who can integrate multiple channels effectively.",
+            "skillPriorities": [
+              "AI-powered marketing tool proficiency",
+              "First-party data strategy",
+              "Social commerce expertise",
+              "Marketing attribution and measurement"
+            ],
+            "hiringChallenges": [
+              "25% of 18-54-year-olds now use social search, requiring marketers who understand evolving search behavior",
+              "Need for professionals who can balance privacy compliance with personalization",
+              "Growing emphasis on short-form video and visual storytelling capabilities"
+            ]
+          }
+        },
+        "content_marketing": {
+          "label": "Content Marketing & Creative",
+          "narrative": "You're recruiting the storytellers of the digital age, professionals who craft narratives that educate, entertain, and inspire action. Content marketing requires understanding of both creative processes and distribution strategies, audience psychology and search algorithms.",
+          "sourcingStrategies": [
+            "Content agencies and creative studios provide access to professionals with portfolio diversity and client management experience",
+            "Freelance creative communities offer independent professionals with specialized skills and proven ability to deliver results across different industries",
+            "Media companies and publishing organizations employ professionals with strong writing, editing, and content production capabilities",
+            "Brand marketing teams may have professionals seeking new challenges or different industry experience while leveraging existing skills",
+            "Academic and journalism backgrounds can provide strong foundation for content creation, research abilities, and communication skills"
+          ],
+          "screeningCriteria": [
+            "Portfolio diversity should demonstrate range across content formats, audiences, and business objectives. Blog posts, video scripts, social content, email campaigns",
+            "SEO and technical knowledge fundamental for content discoverability. Understanding keyword research, on-page optimization, content structure for search and users",
+            "Audience research and persona development show strategic foundation. Can they identify target audiences? Understand pain points? Create content that serves specific needs?",
+            "Content performance measurement demonstrates business impact orientation. How do they track engagement? Measure conversions? Optimize based on data?",
+            "Brand voice and style adaptability shows professional versatility. Can they match different brand personalities? Adapt tone for various platforms and audiences?"
+          ],
+          "redFlags": [
+            "Portfolio lacks strategic context or business outcomes suggests limited understanding of content marketing beyond creative execution",
+            "No SEO knowledge or technical content skills limits effectiveness in digital content marketing where discoverability is crucial",
+            "Poor understanding of different content formats and platform requirements indicates limited versatility in modern content marketing",
+            "Cannot discuss content performance or optimization shows lack of results-oriented approach to content creation",
+            "Limited research or audience development experience suggests assumption-based rather than data-driven content strategy"
+          ],
+          "interviewGuidance": [
+            "Portfolio reviews should focus on strategic thinking, audience insights, and business outcomes rather than just creative quality assessment",
+            "Writing samples should be diverse and relevant to role requirements. Evaluate both creativity and strategic thinking behind content choices",
+            "Content strategy discussions reveal systematic approach to planning, production, distribution, and measurement of content marketing efforts",
+            "SEO and technical knowledge assessment ensures candidates can create content optimized for both search engines and user experience"
+          ],
+          "currentMarketInsights": {
+            "demandPatterns": "Content marketing jobs are surging as companies seek professionals experienced in video content, AI-generated content, and employee-generated content. The focus has shifted toward authentic, engaging content experiences.",
+            "compensationTrends": "$45,000-$75,000 for content marketers, with premiums for video production skills and AI-assisted content creation capabilities.",
+            "skillPriorities": [
+              "Short-form video production",
+              "AI-assisted content generation",
+              "Interactive content development",
+              "Social media storytelling"
+            ],
+            "hiringChallenges": [
+              "Growing demand for content creators who understand both creative and technical aspects of digital distribution",
+              "Need for professionals who can create authentic, engaging content while meeting performance objectives",
+              "Competition for creators with AI and emerging technology integration skills"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "universalGuidance": {
+    "sourcingExcellence": {
+      "philosophy": "Sourcing is detective work that requires both systematic methodology and creative problem-solving. The best candidates aren't always actively looking, and the most effective sourcing strategies combine multiple channels, relationship building, and employer brand development to create sustainable talent pipelines.",
+      "strategies": [
+        "Multi-channel approach maximizes reach across different candidate populations. Job boards reach active seekers, social media engages passive candidates, referrals leverage existing networks, industry events build relationships",
+        "Boolean search mastery enables precise candidate identification across databases. Understand advanced search operators, platform-specific syntax, and how to balance breadth with relevance in search results",
+        "Passive candidate engagement requires value-first approach. Lead with industry insights, career development opportunities, or interesting projects rather than immediate job opportunities",
+        "Employer brand development supports all sourcing efforts. Candidates research companies before responding—strong online presence, employee testimonials, and thought leadership content improve response rates",
+        "Relationship building with industry professionals, professors, and influencers creates ongoing source of referrals and market intelligence that compounds over time"
+      ]
+    },
+    "screeningMastery": {
+      "philosophy": "Screening is pattern recognition that balances efficiency with thoroughness. The goal is identifying candidates who will both perform successfully and integrate well culturally, while minimizing bias and ensuring fair evaluation across all applicants.",
+      "methodology": [
+        "Structured screening process ensures consistency and reduces bias. Use standardized questions, evaluation criteria, and documentation methods across all candidates for fair comparison",
+        "Technical assessment should be role-relevant and predictive of job performance. Avoid brain teasers or irrelevant challenges—focus on skills and situations candidates will actually encounter",
+        "Cultural fit evaluation should focus on working styles, values alignment, and collaboration approach rather than personal characteristics or background similarities",
+        "Reference checks should be strategic and specific. Ask behavioral questions, verify achievements, understand reasons for departure, and assess likelihood of re-hiring",
+        "Documentation and feedback collection support continuous improvement of screening process and provide legal protection for hiring decisions"
+      ]
+    },
+    "interviewExpertise": {
+      "philosophy": "Interviews are mutual evaluation opportunities where both parties assess fit and potential. Great interviews feel like engaging conversations that reveal authentic capabilities, motivations, and working styles while providing realistic job previews.",
+      "bestPractices": [
+        "Structured interviews improve consistency and reduce bias while allowing flexibility for follow-up questions and deeper exploration of relevant topics",
+        "Behavioral questions reveal past performance patterns that predict future behavior. Use STAR format (Situation, Task, Action, Result) to encourage comprehensive responses",
+        "Panel interviews provide multiple perspectives and reduce individual bias while demonstrating team dynamics and collaborative decision-making processes",
+        "Realistic job preview through facility tours, team introductions, and discussion of actual challenges helps candidates make informed decisions",
+        "Candidate questions reveal genuine interest, strategic thinking, and cultural priorities. Allow significant time for candidates to ask questions and gather information"
+      ]
+    },
+    "offerNegotiation": {
+      "philosophy": "Offer negotiation should be collaborative problem-solving focused on mutual benefit and long-term relationship success. The goal is reaching agreements that fairly compensate talent while supporting organizational sustainability and equity.",
+      "approach": [
+        "Market research should be thorough and location-specific. Use multiple data sources and consider total compensation packages, not just base salary comparisons",
+        "Total compensation perspective includes base salary, bonuses, equity, benefits, professional development, flexible work arrangements, and other valuable components",
+        "Negotiation should be data-driven and objective. Present market research, role requirements, candidate qualifications, and organizational constraints clearly",
+        "Timeline management balances candidate decision-making needs with organizational hiring urgency. Provide reasonable timeframes while maintaining momentum",
+        "Documentation of final agreements prevents misunderstandings and provides clarity for all parties about compensation, benefits, start dates, and other terms"
+      ]
+    },
+    "diversityInclusion": {
+      "philosophy": "Diversity, equity, and inclusion in recruiting requires systematic approach to removing barriers, expanding sourcing channels, and creating fair evaluation processes that recognize talent from all backgrounds.",
+      "strategies": [
+        "Inclusive job descriptions avoid biased language, unnecessary requirements, and exclusive terminology. Focus on essential qualifications and use inclusive language that welcomes diverse applicants",
+        "Diverse sourcing channels reach different populations. Partner with HBCUs, women in tech organizations, veteran transition programs, and other groups serving underrepresented communities",
+        "Blind resume screening removes identifying information to focus evaluation on qualifications and experience rather than names, schools, or other potentially biasing factors",
+        "Diverse interview panels provide multiple perspectives and reduce individual bias while demonstrating organizational commitment to inclusion",
+        "Bias training for all interviewers helps identify unconscious biases and provides strategies for fair evaluation of all candidates",
+        "Metrics tracking and regular analysis of diversity outcomes enables continuous improvement and accountability for inclusive hiring practices"
+      ]
+    },
+    "candidateExperience": {
+      "philosophy": "Candidate experience affects both hiring success and employer brand reputation. Every interaction should reflect organizational values while providing clear communication, respectful treatment, and realistic expectations about the process.",
+      "elements": [
+        "Clear communication about timeline, next steps, and decision-making process helps candidates plan appropriately and reduces anxiety about status",
+        "Prompt responses to applications and follow-up communications demonstrate respect for candidates' time and maintain engagement throughout process",
+        "Realistic job previews through detailed role descriptions, team introductions, and honest discussions of challenges help candidates make informed decisions",
+        "Feedback provision, when possible, helps rejected candidates understand decision rationale and improve for future opportunities",
+        "Onboarding planning begins during recruiting process to ensure smooth transition and early success for new hires"
+      ]
+    }
+  },
+  "industryTrends2025": {
+    "technology": {
+      "marketDynamics": "Technology recruiting faces a paradox—while job postings have declined, demand for specialized skills remains intense. AI tools are reshaping work patterns, with companies seeking professionals who can collaborate with AI rather than be replaced by it. Quality over quantity hiring has become the norm.",
+      "talentCompetition": "Unemployment rates for tech professionals remain well below national averages (2.8% for software developers), creating intense competition for qualified candidates. Companies must differentiate through culture, growth opportunities, and technical challenges.",
+      "emergingSkills": "AI-assisted development, system architecture thinking, and cross-functional collaboration have become essential. The most valuable professionals combine deep technical expertise with business understanding and communication skills.",
+      "recruitingChallenges": [
+        "Candidate drop-off rates average 53% between technical interview invitations and completions",
+        "Technical interview score requirements have increased 12% as hiring standards rise",
+        "Competition between traditional tech companies and AI-adopting enterprises across all industries"
+      ]
+    },
+    "healthcare": {
+      "marketDynamics": "Healthcare recruiting operates in crisis mode with unprecedented staffing shortages affecting every specialty. The pandemic accelerated departures while aging populations increase demand, creating perfect storm conditions.",
+      "talentCompetition": "Travel nursing and contract work offer immediate higher compensation, competing with permanent positions that provide stability and benefits. Organizations must compete on total value proposition.",
+      "emergingSkills": "Telehealth delivery, technology integration, and mental health awareness have become essential across all healthcare roles. Professionals who can adapt to new care delivery models are particularly valued.",
+      "recruitingChallenges": [
+        "20% workforce loss during pandemic years with 31% of nurses considering leaving direct patient care",
+        "Rural areas facing 13% nursing shortage by 2037 versus 5% in metropolitan areas",
+        "Competition from higher-paying temporary assignments affecting permanent staffing"
+      ]
+    },
+    "finance": {
+      "marketDynamics": "Finance recruiting shows strong demand with unemployment rates well below national averages. Investment banking is recovering with increased deal flow, while traditional roles are being reshaped by fintech innovation.",
+      "talentCompetition": "Competition for finance professionals remains intense, particularly for those with specialized skills in emerging areas like ESG, technology sector expertise, or AI integration capabilities.",
+      "emergingSkills": "ESG integration, technology sector knowledge, AI-assisted analysis, and cross-border transaction expertise are increasingly valuable. Traditional skills remain essential but must be combined with emerging capabilities.",
+      "recruitingChallenges": [
+        "Off-cycle hiring increases as deal pipelines recover in key sectors",
+        "Need for professionals who can balance traditional expertise with emerging technology understanding",
+        "Competition between traditional financial services and fintech companies for top talent"
+      ]
+    },
+    "marketing": {
+      "marketDynamics": "Marketing recruiting shows healthy demand with unemployment rates below national averages. AI tools are becoming essential for content creation and campaign optimization, reshaping required skill sets.",
+      "talentCompetition": "Companies compete for marketers who can integrate multiple channels effectively while leveraging AI tools and maintaining brand authenticity. Creative and analytical balance is highly valued.",
+      "emergingSkills": "AI-powered tool proficiency, short-form video creation, first-party data strategy, and social commerce expertise are becoming essential alongside traditional marketing fundamentals.",
+      "recruitingChallenges": [
+        "Need for professionals who understand both creative and technical aspects of modern marketing",
+        "Competition for marketers with AI integration and emerging platform expertise",
+        "Balance between automation and authentic human connection in marketing communications"
+      ]
+    }
+  },
+  "complianceGuidance": {
+    "legalRequirements": {
+      "equalOpportunity": "All hiring practices must comply with equal opportunity employment laws. Avoid questions about protected characteristics, ensure job-related criteria, and maintain consistent evaluation standards across all candidates.",
+      "dataPrivacy": "Handle candidate information according to GDPR, CCPA, and other relevant privacy regulations. Obtain consent for data processing, store securely, and respect deletion requests.",
+      "backgroundChecks": "Conduct background checks only after conditional job offers and ensure compliance with Fair Credit Reporting Act requirements. Consider ban-the-box legislation in relevant jurisdictions.",
+      "documentation": "Maintain detailed records of hiring decisions, evaluation criteria, and selection rationale for legal compliance and continuous improvement purposes."
+    },
+    "ethicalPractices": {
+      "candidateRespect": "Treat all candidates with dignity and respect regardless of hiring decisions. Provide clear communication, honest feedback when possible, and professional interactions throughout process.",
+      "confidentiality": "Protect candidate confidentiality and sensitive information. Handle references professionally and respect current employment situations.",
+      "transparency": "Provide clear information about role requirements, company culture, growth opportunities, and potential challenges. Avoid overselling or misrepresenting opportunities.",
+      "fairness": "Ensure fair evaluation processes that focus on job-relevant qualifications and avoid bias based on personal characteristics or background similarities."
+    }
+  }
+}

@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
       careerStage,
       newsletterSubscribed,
       onboardingCompleted,
+      guidancePreferences,
     } = body;
 
     const updatedUser = await prisma.user.update({
@@ -35,6 +36,7 @@ export async function POST(request: NextRequest) {
           specializations,
           careerStage,
           lastUpdated: new Date().toISOString(),
+          ...guidancePreferences,
         },
       },
     });

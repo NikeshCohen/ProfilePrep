@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { BarChart3, Bell, FileText, Shield, User } from "lucide-react";
 
 import { ProgressBar } from "@/components/global/ProgressBar";
+import { GuidancePreferences } from "@/components/settings/GuidancePreferences";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -130,6 +131,26 @@ export default async function CandidateSettingsPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* Guidance Preferences */}
+        <GuidancePreferences
+          userType="CANDIDATE"
+          currentPreferences={
+            (user as { guidancePreferences?: Record<string, unknown> })
+              .guidancePreferences
+          }
+          onSave={async (preferences) => {
+            const response = await fetch("/api/user/guidance/preferences", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(preferences),
+            });
+
+            if (!response.ok) {
+              throw new Error("Failed to save preferences");
+            }
+          }}
+        />
 
         {/* CV Analysis Preferences */}
         <Card>

@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import {
+  type GuidancePreferences,
+  GuidancePreferencesStep,
+} from "@/app/app/onboarding/_components/GuidancePreferencesStep";
 import candidateGuidance from "@/data/guidance/candidate-guidance.json";
 import recruiterGuidance from "@/data/guidance/recruiter-guidance.json";
 import {
@@ -50,14 +54,16 @@ interface OnboardingData {
   specializations: string[];
   careerStage?: string | null;
   newsletterSubscribed: boolean;
+  guidancePreferences?: Partial<GuidancePreferences>;
 }
 
 const STEPS = {
   FIELD_SELECTION: 0,
   SPECIALIZATION: 1,
-  GUIDANCE_PREVIEW: 2,
-  FEATURES: 3,
-  NEWSLETTER: 4,
+  GUIDANCE_PREFERENCES: 2,
+  GUIDANCE_PREVIEW: 3,
+  FEATURES: 4,
+  NEWSLETTER: 5,
 };
 
 // Animation variants for smooth transitions
@@ -150,6 +156,7 @@ export default function EnhancedOnboarding({
     specializations: [],
     careerStage: null,
     newsletterSubscribed: false,
+    guidancePreferences: {},
   });
 
   // Fetch user type from database if not provided
@@ -657,6 +664,26 @@ export default function EnhancedOnboarding({
               </CardContent>
             </Card>
           </motion.div>
+        );
+
+      case STEPS.GUIDANCE_PREFERENCES:
+        return (
+          <GuidancePreferencesStep
+            userType={onboardingData.userType as "CANDIDATE" | "RECRUITER"}
+            field={onboardingData.field || ""}
+            preferences={onboardingData.guidancePreferences || {}}
+            onPreferencesChange={(preferences) =>
+              setOnboardingData((prev) => ({
+                ...prev,
+                guidancePreferences: {
+                  ...prev.guidancePreferences,
+                  ...preferences,
+                },
+              }))
+            }
+            onNext={handleNext}
+            onBack={handleBack}
+          />
         );
 
       case STEPS.FEATURES:

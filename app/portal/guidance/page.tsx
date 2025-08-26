@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 
-import { CandidateGuidanceClient } from "@/app/portal/guidance/_components/CandidateGuidanceClient";
+import { GuidanceHub } from "@/app/portal/guidance/_components/GuidanceHub";
 
 export const metadata: Metadata = {
-  title: "Career Guidance | ProfilePrep",
-  description: "Personalized career guidance and insights for job seekers",
+  title: "Career Guidance Hub | ProfilePrep",
+  description:
+    "Personalized career guidance tailored to your field, specialization, and career stage",
 };
 
 export default function CandidateGuidancePage() {
-  return <CandidateGuidanceClient />;
+  return <GuidanceHub />;
 }

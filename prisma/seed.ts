@@ -8,6 +8,8 @@ async function main() {
   try {
     // Clear existing data
     console.log("🧹 Clearing existing data...");
+    await prisma.guidanceProgress.deleteMany();
+    await prisma.guidanceAnalytics.deleteMany();
     await prisma.cVAnalysis.deleteMany();
     await prisma.generatedDocs.deleteMany();
     await prisma.template.deleteMany();
@@ -846,6 +848,222 @@ MSc Data Science - University of Birmingham (2017-2019)
     });
 
     console.log("✅ Sample CV analyses created");
+
+    // Create guidance progress and analytics for demo users
+    console.log("📈 Creating guidance progress data...");
+
+    const guidanceTopics = [
+      "cv-optimization",
+      "cover-letters",
+      "interview-prep",
+      "linkedin",
+      "networking",
+      "career-growth",
+      "salary-negotiation",
+      "market-insights",
+    ];
+
+    const recruiterTopics = [
+      "sourcing",
+      "screening",
+      "interviewing",
+      "employer-branding",
+      "candidate-experience",
+      "diversity",
+      "market-insights",
+    ];
+
+    // Create progress for demo candidate
+    const candidateProgress = [
+      {
+        userId: demoCandidate.id,
+        topicId: "cv-optimization",
+        userType: "CANDIDATE" as const,
+        progress: 85,
+        completed: true,
+        sectionsCompleted: JSON.stringify([
+          "introduction",
+          "basics",
+          "advanced",
+        ]),
+        timeSpent: 45,
+        bookmarked: true,
+        lastAccessed: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+      },
+      {
+        userId: demoCandidate.id,
+        topicId: "interview-prep",
+        userType: "CANDIDATE" as const,
+        progress: 60,
+        completed: false,
+        sectionsCompleted: JSON.stringify(["introduction", "basics"]),
+        timeSpent: 30,
+        bookmarked: false,
+        lastAccessed: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+      },
+      {
+        userId: demoCandidate.id,
+        topicId: "linkedin",
+        userType: "CANDIDATE" as const,
+        progress: 100,
+        completed: true,
+        sectionsCompleted: JSON.stringify([
+          "introduction",
+          "profile-optimization",
+          "networking",
+        ]),
+        timeSpent: 55,
+        bookmarked: true,
+        lastAccessed: new Date(), // today
+      },
+      {
+        userId: candidateWithOrg.id,
+        topicId: "cv-optimization",
+        userType: "CANDIDATE" as const,
+        progress: 40,
+        completed: false,
+        sectionsCompleted: JSON.stringify(["introduction"]),
+        timeSpent: 20,
+        bookmarked: false,
+        lastAccessed: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+      },
+      {
+        userId: bootcampStudent2.id,
+        topicId: "cv-optimization",
+        userType: "CANDIDATE" as const,
+        progress: 25,
+        completed: false,
+        sectionsCompleted: JSON.stringify([]),
+        timeSpent: 15,
+        bookmarked: true,
+        lastAccessed: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+      },
+    ];
+
+    // Create progress for demo recruiter
+    const recruiterProgress = [
+      {
+        userId: demoRecruiter.id,
+        topicId: "sourcing",
+        userType: "RECRUITER" as const,
+        progress: 90,
+        completed: true,
+        sectionsCompleted: JSON.stringify([
+          "introduction",
+          "platforms",
+          "strategies",
+          "outreach",
+        ]),
+        timeSpent: 60,
+        bookmarked: true,
+        lastAccessed: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+      },
+      {
+        userId: demoRecruiter.id,
+        topicId: "screening",
+        userType: "RECRUITER" as const,
+        progress: 75,
+        completed: false,
+        sectionsCompleted: JSON.stringify([
+          "introduction",
+          "criteria",
+          "questions",
+        ]),
+        timeSpent: 40,
+        bookmarked: false,
+        lastAccessed: new Date(), // today
+      },
+      {
+        userId: adminRecruiter.id,
+        topicId: "employer-branding",
+        userType: "RECRUITER" as const,
+        progress: 50,
+        completed: false,
+        sectionsCompleted: JSON.stringify(["introduction", "basics"]),
+        timeSpent: 25,
+        bookmarked: true,
+        lastAccessed: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+      },
+    ];
+
+    // Insert all progress records
+    for (const progress of [...candidateProgress, ...recruiterProgress]) {
+      await prisma.guidanceProgress.create({
+        data: progress,
+      });
+    }
+
+    // Create analytics records
+    await prisma.guidanceAnalytics.create({
+      data: {
+        userId: demoCandidate.id,
+        totalTopicsStarted: 3,
+        totalTopicsCompleted: 2,
+        totalTimeSpent: 130,
+        averageProgress: 81.67,
+        streakDays: 3,
+        lastActiveDate: new Date(),
+        preferredTopics: JSON.stringify([
+          "cv-optimization",
+          "linkedin",
+          "interview-prep",
+        ]),
+      },
+    });
+
+    await prisma.guidanceAnalytics.create({
+      data: {
+        userId: demoRecruiter.id,
+        totalTopicsStarted: 2,
+        totalTopicsCompleted: 1,
+        totalTimeSpent: 100,
+        averageProgress: 82.5,
+        streakDays: 2,
+        lastActiveDate: new Date(),
+        preferredTopics: JSON.stringify(["sourcing", "screening"]),
+      },
+    });
+
+    await prisma.guidanceAnalytics.create({
+      data: {
+        userId: candidateWithOrg.id,
+        totalTopicsStarted: 1,
+        totalTopicsCompleted: 0,
+        totalTimeSpent: 20,
+        averageProgress: 40,
+        streakDays: 0,
+        lastActiveDate: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+        preferredTopics: JSON.stringify(["cv-optimization"]),
+      },
+    });
+
+    await prisma.guidanceAnalytics.create({
+      data: {
+        userId: adminRecruiter.id,
+        totalTopicsStarted: 1,
+        totalTopicsCompleted: 0,
+        totalTimeSpent: 25,
+        averageProgress: 50,
+        streakDays: 0,
+        lastActiveDate: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+        preferredTopics: JSON.stringify(["employer-branding"]),
+      },
+    });
+
+    await prisma.guidanceAnalytics.create({
+      data: {
+        userId: bootcampStudent2.id,
+        totalTopicsStarted: 1,
+        totalTopicsCompleted: 0,
+        totalTimeSpent: 15,
+        averageProgress: 25,
+        streakDays: 1,
+        lastActiveDate: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+        preferredTopics: JSON.stringify(["cv-optimization"]),
+      },
+    });
+
+    console.log("✅ Guidance progress and analytics created");
 
     // Display summary
     console.log("\n" + "=".repeat(60));

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import AnalyzeContent from "@/app/app/_components/AnalyzeContent";
-import { AppWithGuidance } from "@/app/app/_components/AppWithGuidance";
 import GenerateContent from "@/app/app/_components/GenerateContent";
 import { OnboardingCheck } from "@/app/app/_components/OnboardingCheck";
 
@@ -34,11 +33,7 @@ async function page() {
     return <GenerateContent />;
   };
 
-  return (
-    <OnboardingCheck>
-      <AppWithGuidance>{content()}</AppWithGuidance>
-    </OnboardingCheck>
-  );
+  return <OnboardingCheck>{content()}</OnboardingCheck>;
 }
 
 export default page;

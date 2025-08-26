@@ -136,12 +136,12 @@ export function OnboardingBackground() {
                   >
                     <Icon className="h-5 w-5" />
                   </div>
-                  <div className="flex-1">
+                  <div className="flex">
                     <CardTitle className="text-lg">{option.title}</CardTitle>
                     {isSelected && (
-                      <Badge variant="secondary" className="mt-1">
-                        Selected
-                      </Badge>
+                      <span>
+                        <Badge variant="secondary">Selected</Badge>
+                      </span>
                     )}
                   </div>
                 </div>

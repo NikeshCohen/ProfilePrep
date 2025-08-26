@@ -12,6 +12,7 @@ import {
 
 import { ProgressBar } from "@/components/global/ProgressBar";
 import ThemeToggle from "@/components/global/ThemeToggle";
+import { GuidancePreferences } from "@/components/settings/GuidancePreferences";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -70,6 +71,26 @@ export default async function RecruiterSettingsPage() {
           </p>
         )}
       </div>
+
+      {/* Guidance Preferences - Full Width */}
+      <GuidancePreferences
+        userType="RECRUITER"
+        currentPreferences={
+          (user as { guidancePreferences?: Record<string, unknown> })
+            .guidancePreferences
+        }
+        onSave={async (preferences) => {
+          const response = await fetch("/api/user/guidance/preferences", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(preferences),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to save preferences");
+          }
+        }}
+      />
 
       <div className="grid gap-6 md:grid-cols-2">
         {/* Profile Information */}
