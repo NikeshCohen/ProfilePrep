@@ -39,13 +39,11 @@ interface GuidancePreferences {
 interface GuidancePreferencesProps {
   userType: "CANDIDATE" | "RECRUITER";
   currentPreferences?: GuidancePreferences;
-  onSave?: (preferences: GuidancePreferences) => Promise<void>;
 }
 
 export function GuidancePreferences({
   userType,
   currentPreferences = {},
-  onSave,
 }: GuidancePreferencesProps) {
   const [preferences, setPreferences] =
     useState<GuidancePreferences>(currentPreferences);
@@ -56,11 +54,18 @@ export function GuidancePreferences({
   }, [currentPreferences]);
 
   const handleSave = async () => {
-    if (!onSave) return;
-
     setLoading(true);
     try {
-      await onSave(preferences);
+      const response = await fetch("/api/user/guidance/preferences", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(preferences),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save preferences");
+      }
+
       toast.success("Preferences saved successfully!");
     } catch {
       toast.error("Error saving preferences. Please try again.");

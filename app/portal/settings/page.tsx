@@ -139,17 +139,6 @@ export default async function CandidateSettingsPage() {
             (user as { guidancePreferences?: Record<string, unknown> })
               .guidancePreferences
           }
-          onSave={async (preferences) => {
-            const response = await fetch("/api/user/guidance/preferences", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(preferences),
-            });
-
-            if (!response.ok) {
-              throw new Error("Failed to save preferences");
-            }
-          }}
         />
 
         {/* CV Analysis Preferences */}
