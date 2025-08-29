@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import {
+  useBookmarkedTopicsQuery,
   useGuidanceProgressQuery,
   usePersonalizedRecommendationsQuery,
   useUserProfileForContentQuery,
@@ -19,6 +20,7 @@ import {
   Clock,
   DollarSign,
   FileText,
+  Heart,
   LinkedinIcon,
   Lock,
   Mail,
@@ -177,7 +179,7 @@ interface TopicProgress {
 export function GuidanceHubClient() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<
-    "all" | "recommended" | "in-progress" | "completed"
+    "all" | "recommended" | "in-progress" | "completed" | "bookmarked"
   >("all");
 
   // Use React Query hooks for data fetching with proper caching
@@ -186,6 +188,7 @@ export function GuidanceHubClient() {
   const { data: progressData, isLoading: progressLoading } =
     useGuidanceProgressQuery("CANDIDATE");
   const { data: recommendationsData } = usePersonalizedRecommendationsQuery();
+  const { data: bookmarkedData } = useBookmarkedTopicsQuery("CANDIDATE");
 
   // Update last guidance access (fire and forget)
   useState(() => {
@@ -249,6 +252,14 @@ export function GuidanceHubClient() {
         return guidanceTopics.filter(
           (topic) => topicProgress[topic.id]?.completed,
         );
+      case "bookmarked":
+        if (bookmarkedData?.success && bookmarkedData.data) {
+          const bookmarkedTopicIds = bookmarkedData.data.map((item) => item.topicId);
+          return guidanceTopics.filter((topic) =>
+            bookmarkedTopicIds.includes(topic.id),
+          );
+        }
+        return [];
       default:
         return guidanceTopics;
     }
@@ -385,18 +396,20 @@ export function GuidanceHubClient() {
         value={selectedCategory}
         onValueChange={(value) =>
           setSelectedCategory(
-            value as "all" | "recommended" | "in-progress" | "completed",
+            value as "all" | "recommended" | "in-progress" | "completed" | "bookmarked",
           )
         }
       >
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="all">All Topics</TabsTrigger>
           <TabsTrigger value="recommended">Recommended</TabsTrigger>
           <TabsTrigger value="in-progress">In Progress</TabsTrigger>
           <TabsTrigger value="completed">Completed</TabsTrigger>
+          <TabsTrigger value="bookmarked">Bookmarked</TabsTrigger>
         </TabsList>
 
-        <TabsContent value={selectedCategory} className="mt-6">
+        {/* All Topics Tab */}
+        <TabsContent value="all" className="mt-6">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {getFilteredTopics().map((topic, index) => {
               const Icon = topic.icon;
@@ -498,6 +511,462 @@ export function GuidanceHubClient() {
               );
             })}
           </div>
+        </TabsContent>
+
+        {/* Recommended Tab */}
+        <TabsContent value="recommended" className="mt-6">
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {getFilteredTopics().map((topic, index) => {
+              const Icon = topic.icon;
+              const progress = topicProgress[topic.id];
+              const locked = isTopicLocked(topic.id);
+
+              return (
+                <motion.div
+                  key={topic.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <Card
+                    className={`h-full cursor-pointer transition-all duration-200 ${locked ? "opacity-60" : "hover:-translate-y-1 hover:shadow-lg"} ${progress?.completed ? "border-green-500/50" : ""} `}
+                    onClick={() => handleTopicClick(topic.id)}
+                  >
+                    <CardHeader>
+                      <div className="flex items-start justify-between">
+                        <div
+                          className={`rounded-lg p-2 bg-${topic.color}-100 dark:bg-${topic.color}-900/20`}
+                        >
+                          <Icon
+                            className={`h-6 w-6 text-${topic.color}-600 dark:text-${topic.color}-400`}
+                          />
+                        </div>
+                        {locked && (
+                          <Lock className="h-4 w-4 text-muted-foreground" />
+                        )}
+                        {progress?.completed && (
+                          <CheckCircle2 className="h-5 w-5 text-green-500" />
+                        )}
+                      </div>
+                      <CardTitle className="mt-4">{topic.label}</CardTitle>
+                      <CardDescription>{topic.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                        <Clock className="h-3 w-3" />
+                        <span>{topic.estimatedTime}</span>
+                      </div>
+
+                      {progress?.progress > 0 && !progress.completed && (
+                        <div className="space-y-2">
+                          <div className="flex justify-between text-sm">
+                            <span>Progress</span>
+                            <span>{progress.progress}%</span>
+                          </div>
+                          <Progress
+                            value={progress.progress}
+                            className="h-1.5"
+                          />
+                        </div>
+                      )}
+
+                      <div className="space-y-2">
+                        {topic.topics.slice(0, 3).map((subtopic, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-2 text-sm"
+                          >
+                            <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
+                            <span className="text-muted-foreground">
+                              {subtopic}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {!locked && (
+                        <Button
+                          className="w-full"
+                          variant={progress?.completed ? "outline" : "default"}
+                        >
+                          {progress?.completed
+                            ? "Review"
+                            : progress?.progress > 0
+                              ? "Continue"
+                              : "Start"}
+                          <ChevronRight className="ml-2 h-4 w-4" />
+                        </Button>
+                      )}
+
+                      {locked && topic.prerequisites.length > 0 && (
+                        <p className="text-xs text-muted-foreground">
+                          Complete{" "}
+                          {topic.prerequisites
+                            .map(
+                              (p) =>
+                                guidanceTopics.find((t) => t.id === p)?.label,
+                            )
+                            .join(", ")}{" "}
+                          first
+                        </p>
+                      )}
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+        </TabsContent>
+
+        {/* In Progress Tab */}
+        <TabsContent value="in-progress" className="mt-6">
+          {getFilteredTopics().length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {getFilteredTopics().map((topic, index) => {
+                const Icon = topic.icon;
+                const progress = topicProgress[topic.id];
+                const locked = isTopicLocked(topic.id);
+
+                return (
+                  <motion.div
+                    key={topic.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Card
+                      className={`h-full cursor-pointer transition-all duration-200 ${locked ? "opacity-60" : "hover:-translate-y-1 hover:shadow-lg"} ${progress?.completed ? "border-green-500/50" : ""} `}
+                      onClick={() => handleTopicClick(topic.id)}
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div
+                            className={`rounded-lg p-2 bg-${topic.color}-100 dark:bg-${topic.color}-900/20`}
+                          >
+                            <Icon
+                              className={`h-6 w-6 text-${topic.color}-600 dark:text-${topic.color}-400`}
+                            />
+                          </div>
+                          {locked && (
+                            <Lock className="h-4 w-4 text-muted-foreground" />
+                          )}
+                          {progress?.completed && (
+                            <CheckCircle2 className="h-5 w-5 text-green-500" />
+                          )}
+                        </div>
+                        <CardTitle className="mt-4">{topic.label}</CardTitle>
+                        <CardDescription>{topic.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="h-3 w-3" />
+                          <span>{topic.estimatedTime}</span>
+                        </div>
+
+                        {progress?.progress > 0 && !progress.completed && (
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span>Progress</span>
+                              <span>{progress.progress}%</span>
+                            </div>
+                            <Progress
+                              value={progress.progress}
+                              className="h-1.5"
+                            />
+                          </div>
+                        )}
+
+                        <div className="space-y-2">
+                          {topic.topics.slice(0, 3).map((subtopic, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 text-sm"
+                            >
+                              <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
+                              <span className="text-muted-foreground">
+                                {subtopic}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {!locked && (
+                          <Button
+                            className="w-full"
+                            variant={progress?.completed ? "outline" : "default"}
+                          >
+                            {progress?.completed
+                              ? "Review"
+                              : progress?.progress > 0
+                                ? "Continue"
+                                : "Start"}
+                            <ChevronRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        )}
+
+                        {locked && topic.prerequisites.length > 0 && (
+                          <p className="text-xs text-muted-foreground">
+                            Complete{" "}
+                            {topic.prerequisites
+                              .map(
+                                (p) =>
+                                  guidanceTopics.find((t) => t.id === p)?.label,
+                              )
+                              .join(", ")}{" "}
+                            first
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12">
+              <Clock className="h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">
+                No Topics In Progress
+              </h3>
+              <p className="mt-2 text-center text-muted-foreground">
+                Start a topic to see your progress here.
+              </p>
+            </div>
+          )}
+        </TabsContent>
+
+        {/* Completed Tab */}
+        <TabsContent value="completed" className="mt-6">
+          {getFilteredTopics().length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {getFilteredTopics().map((topic, index) => {
+                const Icon = topic.icon;
+                const progress = topicProgress[topic.id];
+                const locked = isTopicLocked(topic.id);
+
+                return (
+                  <motion.div
+                    key={topic.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Card
+                      className={`h-full cursor-pointer transition-all duration-200 ${locked ? "opacity-60" : "hover:-translate-y-1 hover:shadow-lg"} ${progress?.completed ? "border-green-500/50" : ""} `}
+                      onClick={() => handleTopicClick(topic.id)}
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div
+                            className={`rounded-lg p-2 bg-${topic.color}-100 dark:bg-${topic.color}-900/20`}
+                          >
+                            <Icon
+                              className={`h-6 w-6 text-${topic.color}-600 dark:text-${topic.color}-400`}
+                            />
+                          </div>
+                          {locked && (
+                            <Lock className="h-4 w-4 text-muted-foreground" />
+                          )}
+                          {progress?.completed && (
+                            <CheckCircle2 className="h-5 w-5 text-green-500" />
+                          )}
+                        </div>
+                        <CardTitle className="mt-4">{topic.label}</CardTitle>
+                        <CardDescription>{topic.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="h-3 w-3" />
+                          <span>{topic.estimatedTime}</span>
+                        </div>
+
+                        {progress?.progress > 0 && !progress.completed && (
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span>Progress</span>
+                              <span>{progress.progress}%</span>
+                            </div>
+                            <Progress
+                              value={progress.progress}
+                              className="h-1.5"
+                            />
+                          </div>
+                        )}
+
+                        <div className="space-y-2">
+                          {topic.topics.slice(0, 3).map((subtopic, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 text-sm"
+                            >
+                              <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
+                              <span className="text-muted-foreground">
+                                {subtopic}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {!locked && (
+                          <Button
+                            className="w-full"
+                            variant={progress?.completed ? "outline" : "default"}
+                          >
+                            {progress?.completed
+                              ? "Review"
+                              : progress?.progress > 0
+                                ? "Continue"
+                                : "Start"}
+                            <ChevronRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        )}
+
+                        {locked && topic.prerequisites.length > 0 && (
+                          <p className="text-xs text-muted-foreground">
+                            Complete{" "}
+                            {topic.prerequisites
+                              .map(
+                                (p) =>
+                                  guidanceTopics.find((t) => t.id === p)?.label,
+                              )
+                              .join(", ")}{" "}
+                            first
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12">
+              <CheckCircle2 className="h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">
+                No Completed Topics Yet
+              </h3>
+              <p className="mt-2 text-center text-muted-foreground">
+                Complete your first topic to see achievements here.
+              </p>
+            </div>
+          )}
+        </TabsContent>
+
+        {/* Bookmarked Tab */}
+        <TabsContent value="bookmarked" className="mt-6">
+          {getFilteredTopics().length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {getFilteredTopics().map((topic, index) => {
+                const Icon = topic.icon;
+                const progress = topicProgress[topic.id];
+                const locked = isTopicLocked(topic.id);
+
+                return (
+                  <motion.div
+                    key={topic.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <Card
+                      className={`h-full cursor-pointer transition-all duration-200 ${locked ? "opacity-60" : "hover:-translate-y-1 hover:shadow-lg"} ${progress?.completed ? "border-green-500/50" : ""} `}
+                      onClick={() => handleTopicClick(topic.id)}
+                    >
+                      <CardHeader>
+                        <div className="flex items-start justify-between">
+                          <div
+                            className={`rounded-lg p-2 bg-${topic.color}-100 dark:bg-${topic.color}-900/20`}
+                          >
+                            <Icon
+                              className={`h-6 w-6 text-${topic.color}-600 dark:text-${topic.color}-400`}
+                            />
+                          </div>
+                          {locked && (
+                            <Lock className="h-4 w-4 text-muted-foreground" />
+                          )}
+                          {progress?.completed && (
+                            <CheckCircle2 className="h-5 w-5 text-green-500" />
+                          )}
+                        </div>
+                        <CardTitle className="mt-4">{topic.label}</CardTitle>
+                        <CardDescription>{topic.description}</CardDescription>
+                      </CardHeader>
+                      <CardContent className="space-y-4">
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <Clock className="h-3 w-3" />
+                          <span>{topic.estimatedTime}</span>
+                        </div>
+
+                        {progress?.progress > 0 && !progress.completed && (
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm">
+                              <span>Progress</span>
+                              <span>{progress.progress}%</span>
+                            </div>
+                            <Progress
+                              value={progress.progress}
+                              className="h-1.5"
+                            />
+                          </div>
+                        )}
+
+                        <div className="space-y-2">
+                          {topic.topics.slice(0, 3).map((subtopic, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-center gap-2 text-sm"
+                            >
+                              <div className="h-1.5 w-1.5 rounded-full bg-muted-foreground/50" />
+                              <span className="text-muted-foreground">
+                                {subtopic}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {!locked && (
+                          <Button
+                            className="w-full"
+                            variant={progress?.completed ? "outline" : "default"}
+                          >
+                            {progress?.completed
+                              ? "Review"
+                              : progress?.progress > 0
+                                ? "Continue"
+                                : "Start"}
+                            <ChevronRight className="ml-2 h-4 w-4" />
+                          </Button>
+                        )}
+
+                        {locked && topic.prerequisites.length > 0 && (
+                          <p className="text-xs text-muted-foreground">
+                            Complete{" "}
+                            {topic.prerequisites
+                              .map(
+                                (p) =>
+                                  guidanceTopics.find((t) => t.id === p)?.label,
+                              )
+                              .join(", ")}{" "}
+                            first
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-12">
+              <Heart className="h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-4 text-lg font-semibold">
+                No Bookmarked Topics Yet
+              </h3>
+              <p className="mt-2 text-center text-muted-foreground">
+                Bookmark topics you want to revisit later.
+              </p>
+            </div>
+          )}
         </TabsContent>
       </Tabs>
 

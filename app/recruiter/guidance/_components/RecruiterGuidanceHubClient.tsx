@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import {
+  useBookmarkedTopicsQuery,
   useGuidanceProgressQuery,
   usePersonalizedRecommendationsQuery,
   useUserProfileForContentQuery,
@@ -151,7 +152,7 @@ interface TopicProgress {
 export function RecruiterGuidanceHubClient() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<
-    "all" | "recommended" | "in-progress" | "completed"
+    "all" | "recommended" | "in-progress" | "completed" | "bookmarked"
   >("all");
 
   // Use React Query hooks for data fetching with proper caching
@@ -160,6 +161,7 @@ export function RecruiterGuidanceHubClient() {
   const { data: progressData, isLoading: progressLoading } =
     useGuidanceProgressQuery("RECRUITER");
   const { data: recommendationsData } = usePersonalizedRecommendationsQuery();
+  const { data: bookmarkedData } = useBookmarkedTopicsQuery("RECRUITER");
 
   // Update last guidance access (fire and forget)
   useState(() => {
@@ -262,6 +264,14 @@ export function RecruiterGuidanceHubClient() {
         return recruiterTopics.filter(
           (topic) => topicProgress[topic.id]?.completed,
         );
+      case "bookmarked":
+        if (bookmarkedData?.success && bookmarkedData.data) {
+          const bookmarkedTopicIds = bookmarkedData.data.map((item) => item.topicId);
+          return recruiterTopics.filter((topic) =>
+            bookmarkedTopicIds.includes(topic.id),
+          );
+        }
+        return [];
       default:
         return recruiterTopics;
     }
@@ -409,13 +419,13 @@ export function RecruiterGuidanceHubClient() {
           value={selectedCategory}
           onValueChange={(value) =>
             setSelectedCategory(
-              value as "all" | "recommended" | "in-progress" | "completed",
+              value as "all" | "recommended" | "in-progress" | "completed" | "bookmarked",
             )
           }
           className="w-full"
         >
           <div className="flex items-center justify-between">
-            <TabsList className="grid w-fit grid-cols-4">
+            <TabsList className="grid w-fit grid-cols-5">
               <TabsTrigger value="all">
                 All Topics ({recruiterTopics.length})
               </TabsTrigger>
@@ -427,6 +437,9 @@ export function RecruiterGuidanceHubClient() {
               </TabsTrigger>
               <TabsTrigger value="completed">
                 Completed ({stats.completed})
+              </TabsTrigger>
+              <TabsTrigger value="bookmarked">
+                Bookmarked ({bookmarkedData?.success && bookmarkedData.data ? bookmarkedData.data.length : 0})
               </TabsTrigger>
             </TabsList>
 
@@ -507,6 +520,22 @@ export function RecruiterGuidanceHubClient() {
                 </h3>
                 <p className="mt-2 text-center text-muted-foreground">
                   Complete your first topic to see achievements here.
+                </p>
+              </div>
+            )}
+          </TabsContent>
+
+          <TabsContent value="bookmarked" className="space-y-6">
+            {filteredTopics.length > 0 ? (
+              <TopicGrid topics={filteredTopics} progress={topicProgress} />
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12">
+                <Heart className="h-12 w-12 text-muted-foreground" />
+                <h3 className="mt-4 text-lg font-semibold">
+                  No Bookmarked Topics Yet
+                </h3>
+                <p className="mt-2 text-center text-muted-foreground">
+                  Bookmark topics you want to revisit later.
                 </p>
               </div>
             )}
