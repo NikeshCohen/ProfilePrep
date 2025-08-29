@@ -5,10 +5,11 @@ import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
-  toggleGuidanceBookmark,
-  updateGuidanceProgress,
-} from "@/actions/guidance.actions";
-import { getTopicProgress } from "@/actions/guidance.actions";
+  useToggleBookmarkMutation,
+  useTopicProgressQuery,
+  useUpdateGuidanceProgressMutation,
+  useUserProfileForContentQuery,
+} from "@/actions/queries/guidance.queries";
 import recruiterGuidance from "@/constants/guidance/recruiter.json";
 import { motion } from "framer-motion";
 import {
@@ -33,12 +34,6 @@ interface RecruiterTopicPageProps {
   topic: string;
 }
 
-interface User {
-  field?: string;
-  specializations?: string[];
-  careerStage?: string;
-  guidancePreferences?: Record<string, unknown>;
-}
 
 interface FieldData {
   label: string;
@@ -88,161 +83,23 @@ interface PersonalizedContent {
 
 export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
-  const [bookmarked, setBookmarked] = useState(false);
   const [sectionsCompleted, setSectionsCompleted] = useState<string[]>([]);
   const [timeSpent, setTimeSpent] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<Date>(new Date());
 
-  const loadProgress = useCallback(
-    async (contentSections: number) => {
-      try {
-        const result = await getTopicProgress(topic, "RECRUITER");
-        if (result.success && result.data) {
-          setProgress(result.data.progress);
-          // Calculate active section based on completed sections
-          const sections = Array.isArray(result.data.sectionsCompleted)
-            ? result.data.sectionsCompleted
-            : typeof result.data.sectionsCompleted === "string"
-              ? JSON.parse(result.data.sectionsCompleted)
-              : [];
-          const maxSection = Math.min(sections.length, contentSections - 1);
-          setActiveSection(Math.max(0, maxSection));
-          setSectionsCompleted(sections);
-          setTimeSpent(result.data.timeSpent);
-          setBookmarked(result.data.bookmarked || false);
-        }
-      } catch (error) {
-        console.error("Failed to load progress:", error);
-      }
-    },
-    [topic],
-  );
+  // React Query hooks
+  const { data: profileData, isLoading: profileLoading } = useUserProfileForContentQuery("RECRUITER");
+  const { data: progressData, isLoading: progressLoading } = useTopicProgressQuery(topic, "RECRUITER");
+  const toggleBookmarkMutation = useToggleBookmarkMutation();
+  const updateProgressMutation = useUpdateGuidanceProgressMutation();
 
-  const getPersonalizedContent = useCallback((): PersonalizedContent => {
-    // Full personalization based on user profile - no more "for now" comments!
-    if (!user?.field) return getDefaultContent();
+  const user = profileData?.data?.userProfile;
+  const loading = profileLoading || progressLoading;
+  const progress = progressData?.data?.progress || 0;
+  const bookmarked = progressData?.data?.bookmarked || false;
 
-    const fieldData =
-      recruiterGuidance.fields[
-        user.field as keyof typeof recruiterGuidance.fields
-      ];
-    if (!fieldData) return getDefaultContent();
-
-    const specializationData = user.specializations?.[0]
-      ? fieldData.specializations[
-          user.specializations[0] as keyof typeof fieldData.specializations
-        ]
-      : null;
-
-    const universalGuidance = getUniversalGuidanceForTopic(topic);
-
-    return generatePersonalizedContent(
-      fieldData,
-      specializationData as SpecializationData | null,
-      universalGuidance,
-      topic,
-      user.careerStage,
-    );
-  }, [user, topic]);
-
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch("/api/user/profile");
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData.user);
-      }
-    } catch (error) {
-      console.error("Failed to fetch user profile:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const initializeData = async () => {
-      await fetchUserData();
-      // Load progress after user data is available (for content generation)
-      const content = getPersonalizedContent();
-      if (content.sections.length > 0) {
-        await loadProgress(content.sections.length);
-      }
-    };
-
-    initializeData();
-    setSessionStartTime(new Date());
-  }, [topic, loadProgress, getPersonalizedContent]);
-
-  const saveProgress = async (
-    newProgress: number,
-    section: number,
-    completed: boolean = false,
-  ) => {
-    try {
-      // Calculate time spent in this session
-      const sessionTime = Math.floor(
-        (new Date().getTime() - sessionStartTime.getTime()) / (1000 * 60),
-      );
-      const totalTimeSpent = timeSpent + sessionTime;
-
-      // Update sections completed
-      const newSectionsCompleted = [...sectionsCompleted];
-      if (!newSectionsCompleted.includes(section.toString())) {
-        newSectionsCompleted.push(section.toString());
-      }
-
-      const result = await updateGuidanceProgress({
-        topicId: topic,
-        progress: newProgress,
-        completed,
-        sectionsCompleted: newSectionsCompleted,
-        timeSpent: totalTimeSpent,
-        bookmarked,
-      });
-
-      if (result.success) {
-        setProgress(newProgress);
-        setActiveSection(section);
-        setSectionsCompleted(newSectionsCompleted);
-        setTimeSpent(totalTimeSpent);
-        setSessionStartTime(new Date()); // Reset session timer
-      }
-    } catch (error) {
-      console.error("Failed to save progress:", error);
-      // Fallback to optimistic update
-      setProgress(newProgress);
-      setActiveSection(section);
-    }
-  };
-
-  const getUniversalGuidanceForTopic = (
-    topicId: string,
-  ): UniversalGuidanceSection | null => {
-    const topicMapping: Record<
-      string,
-      keyof typeof recruiterGuidance.universalGuidance
-    > = {
-      sourcing: "sourcingExcellence",
-      screening: "screeningMastery",
-      interviewing: "interviewExpertise",
-      "market-insights": "offerNegotiation",
-      diversity: "diversityInclusion",
-      "candidate-experience": "candidateExperience",
-    };
-
-    const universalKey = topicMapping[topicId];
-    if (!universalKey) return null;
-
-    return recruiterGuidance.universalGuidance[
-      universalKey
-    ] as UniversalGuidanceSection;
-  };
-
-  const generatePersonalizedContent = (
+  const generatePersonalizedContent = useCallback((
     fieldData: FieldData,
     specializationData: SpecializationData | null,
     universalGuidance: UniversalGuidanceSection | null,
@@ -280,18 +137,128 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
       field: fieldData,
       specialization: specializationData,
       universalGuidance,
-      title: generateTopicTitle(topicId, fieldLabel, careerStage),
+      title: generateTopicTitle(topicId, fieldLabel),
       description: generateTopicDescription(
         topicId,
         fieldLabel,
         specializationLabel,
-        careerStage,
       ),
       philosophy,
-      difficulty: getDifficultyLevel(topicId, careerStage),
+      difficulty: getDifficultyLevel(topicId),
       totalEstimatedTime: totalTime,
       sections,
     };
+  }, []);
+
+  const getPersonalizedContent = useCallback((): PersonalizedContent => {
+    // Full personalization based on user profile - no more "for now" comments!
+    if (!user?.field) return getDefaultContent();
+
+    const fieldData =
+      recruiterGuidance.fields[
+        user.field as keyof typeof recruiterGuidance.fields
+      ];
+    if (!fieldData) return getDefaultContent();
+
+    const specializationData = user.specializations?.[0]
+      ? fieldData.specializations[
+          user.specializations[0] as keyof typeof fieldData.specializations
+        ]
+      : null;
+
+    const universalGuidance = getUniversalGuidanceForTopic(topic);
+
+    return generatePersonalizedContent(
+      fieldData,
+      specializationData as SpecializationData | null,
+      universalGuidance,
+      topic,
+      user.careerStage,
+    );
+  }, [user, topic, generatePersonalizedContent]);
+
+  // Update local state when progress data changes
+  useEffect(() => {
+    if (progressData?.success && progressData.data) {
+      const sections = Array.isArray(progressData.data.sectionsCompleted)
+        ? progressData.data.sectionsCompleted
+        : typeof progressData.data.sectionsCompleted === "string"
+          ? JSON.parse(progressData.data.sectionsCompleted)
+          : [];
+      const content = getPersonalizedContent();
+      const maxSection = Math.min(sections.length, content.sections.length - 1);
+      setActiveSection(Math.max(0, maxSection));
+      setSectionsCompleted(sections);
+      setTimeSpent(progressData.data.timeSpent);
+    }
+  }, [progressData, getPersonalizedContent]);
+
+  // Initialize session start time
+  useEffect(() => {
+    setSessionStartTime(new Date());
+  }, [topic]);
+
+
+  const saveProgress = async (
+    newProgress: number,
+    section: number,
+    completed: boolean = false,
+  ) => {
+    try {
+      // Calculate time spent in this session
+      const sessionTime = Math.floor(
+        (new Date().getTime() - sessionStartTime.getTime()) / (1000 * 60),
+      );
+      const totalTimeSpent = timeSpent + sessionTime;
+
+      // Update sections completed
+      const newSectionsCompleted = [...sectionsCompleted];
+      if (!newSectionsCompleted.includes(section.toString())) {
+        newSectionsCompleted.push(section.toString());
+      }
+
+      await updateProgressMutation.mutateAsync({
+        topicId: topic,
+        progress: newProgress,
+        completed,
+        sectionsCompleted: newSectionsCompleted,
+        timeSpent: totalTimeSpent,
+        bookmarked,
+      });
+
+      // Update local state
+      setActiveSection(section);
+      setSectionsCompleted(newSectionsCompleted);
+      setTimeSpent(totalTimeSpent);
+      setSessionStartTime(new Date()); // Reset session timer
+    } catch (error) {
+      console.error("Failed to save progress:", error);
+      // Optimistic update for better UX
+      setActiveSection(section);
+    }
+  };
+
+  const getUniversalGuidanceForTopic = (
+    topicId: string,
+  ): UniversalGuidanceSection | null => {
+    const topicMapping: Record<
+      string,
+      keyof typeof recruiterGuidance.universalGuidance
+    > = {
+      sourcing: "sourcingExcellence",
+      screening: "screeningMastery",
+      interviewing: "interviewExpertise",
+      "market-insights": "offerNegotiation",
+      diversity: "diversityInclusion",
+      "candidate-experience": "candidateExperience",
+    };
+
+    const universalKey = topicMapping[topicId];
+    if (!universalKey) return null;
+
+    return recruiterGuidance.universalGuidance[
+      universalKey
+    ] as UniversalGuidanceSection;
   };
 
   const generatePersonalizedPhilosophy = (
@@ -329,7 +296,6 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
   const generateTopicTitle = (
     topicId: string,
     field: string,
-    careerStage?: string,
   ): string => {
     const titles: Record<string, string> = {
       sourcing: `${field} Talent Sourcing Mastery`,
@@ -347,7 +313,6 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
     topicId: string,
     field: string,
     specialization: string,
-    careerStage?: string,
   ): string => {
     const descriptions: Record<string, string> = {
       sourcing: `Master advanced sourcing techniques for finding exceptional ${specialization.toLowerCase()} talent in the competitive ${field.toLowerCase()} market.`,
@@ -366,7 +331,6 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
 
   const getDifficultyLevel = (
     topicId: string,
-    careerStage?: string,
   ): string => {
     const difficulties: Record<string, string> = {
       sourcing: "intermediate",
@@ -774,17 +738,13 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
             <Button
               variant="outline"
               size="icon"
-              onClick={async () => {
-                const newBookmarked = !bookmarked;
-                setBookmarked(newBookmarked);
-                try {
-                  await toggleGuidanceBookmark(topic, newBookmarked);
-                } catch (error) {
-                  console.error("Failed to update bookmark:", error);
-                  // Revert on error
-                  setBookmarked(!newBookmarked);
-                }
+              onClick={() => {
+                toggleBookmarkMutation.mutate({
+                  topicId: topic,
+                  bookmarked: !bookmarked,
+                });
               }}
+              disabled={toggleBookmarkMutation.isPending}
             >
               <Bookmark
                 className={`h-4 w-4 ${bookmarked ? "fill-current" : ""}`}

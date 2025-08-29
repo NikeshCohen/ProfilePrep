@@ -19,8 +19,9 @@ export const useGuidanceProgressQuery = (userType?: UserType) => {
   return useQuery({
     queryKey: ["guidance-progress", userType],
     queryFn: () => getUserGuidanceProgress(userType),
-    staleTime: 1000 * 60 * 60, // 1 hour
-    gcTime: 1000 * 60 * 60 * 2, // 2 hours
+    staleTime: 1000 * 60 * 10, // 10 minutes (shorter)
+    gcTime: 1000 * 60 * 60, // 1 hour
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -73,8 +74,10 @@ export const useTopicProgressQuery = (
   return useQuery({
     queryKey: ["topic-progress", topicId, userType],
     queryFn: () => getTopicProgress(topicId, userType),
-    staleTime: 1000 * 60 * 30, // 30 minutes
-    gcTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 5, // 5 minutes (more aggressive)
+    gcTime: 1000 * 60 * 30, // 30 minutes
+    refetchOnWindowFocus: false,
+    retry: 1,
     enabled,
   });
 };
@@ -84,8 +87,10 @@ export const useBookmarkedTopicsQuery = (userType?: UserType) => {
   return useQuery({
     queryKey: ["bookmarked-topics", userType],
     queryFn: () => getBookmarkedTopics(userType),
-    staleTime: 1000 * 60 * 30, // 30 minutes
-    gcTime: 1000 * 60 * 60, // 1 hour
+    staleTime: 1000 * 60 * 5, // 5 minutes (more aggressive)
+    gcTime: 1000 * 60 * 30, // 30 minutes (shorter garbage collection)
+    refetchOnWindowFocus: false, // Don't refetch on window focus
+    retry: 1, // Only retry once on failure
   });
 };
 
@@ -121,11 +126,61 @@ export const useToggleBookmarkMutation = () => {
       topicId: string;
       bookmarked: boolean;
     }) => toggleGuidanceBookmark(topicId, bookmarked),
+    onMutate: async ({ topicId, bookmarked }) => {
+      // Optimistic update for better UX
+      await queryClient.cancelQueries({ queryKey: ["bookmarked-topics"] });
+      await queryClient.cancelQueries({ queryKey: ["guidance-progress"] });
+      
+      // Store previous data for rollback
+      const previousBookmarkedData = queryClient.getQueryData(["bookmarked-topics"]);
+      const previousProgressData = queryClient.getQueryData(["guidance-progress"]);
+      
+      // Optimistically update bookmarked data
+      queryClient.setQueryData(["bookmarked-topics"], (old: unknown) => {
+        const oldData = old as { success?: boolean; data?: Array<{ topicId: string; bookmarked: boolean }> } | undefined;
+        if (oldData?.success && oldData?.data) {
+          if (bookmarked) {
+            // Add to bookmarks if not already there
+            const exists = oldData.data.some((item) => item.topicId === topicId);
+            if (!exists) {
+              return {
+                ...oldData,
+                data: [...oldData.data, { topicId, bookmarked: true }]
+              };
+            }
+          } else {
+            // Remove from bookmarks
+            return {
+              ...oldData,
+              data: oldData.data.filter((item) => item.topicId !== topicId)
+            };
+          }
+        }
+        return old;
+      });
+      
+      return { previousBookmarkedData, previousProgressData };
+    },
     onSuccess: (result) => {
       if (result.success) {
+        // Invalidate queries to ensure consistency
         queryClient.invalidateQueries({ queryKey: ["guidance-progress"] });
         queryClient.invalidateQueries({ queryKey: ["bookmarked-topics"] });
       }
+    },
+    onError: (_, __, context) => {
+      // Rollback optimistic updates on error
+      if (context?.previousBookmarkedData) {
+        queryClient.setQueryData(["bookmarked-topics"], context.previousBookmarkedData);
+      }
+      if (context?.previousProgressData) {
+        queryClient.setQueryData(["guidance-progress"], context.previousProgressData);
+      }
+    },
+    onSettled: () => {
+      // Ensure data is fresh after mutation
+      queryClient.invalidateQueries({ queryKey: ["bookmarked-topics"] });
+      queryClient.invalidateQueries({ queryKey: ["guidance-progress"] });
     },
   });
 };

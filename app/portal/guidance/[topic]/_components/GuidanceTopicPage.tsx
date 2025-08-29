@@ -1,14 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
 import {
-  toggleGuidanceBookmark,
-  updateGuidanceProgress,
-} from "@/actions/guidance.actions";
-import { getTopicProgress } from "@/actions/guidance.actions";
+  useToggleBookmarkMutation,
+  useTopicProgressQuery,
+  useUpdateGuidanceProgressMutation,
+  useUserProfileForContentQuery,
+} from "@/actions/queries/guidance.queries";
 import candidateGuidance from "@/constants/guidance/candidate.json";
 import { motion } from "framer-motion";
 import {
@@ -38,12 +39,6 @@ interface GuidanceTopicPageProps {
   topic: string;
 }
 
-interface User {
-  field?: string;
-  specializations?: string[];
-  careerStage?: string;
-  guidancePreferences?: Record<string, unknown>;
-}
 
 interface SpecializationData {
   label?: string;
@@ -92,58 +87,41 @@ interface GuidanceSection {
 
 export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
   const router = useRouter();
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
   const [activeSection, setActiveSection] = useState(0);
-  const [bookmarked, setBookmarked] = useState(false);
   const [sectionsCompleted, setSectionsCompleted] = useState<string[]>([]);
   const [timeSpent, setTimeSpent] = useState(0);
   const [sessionStartTime, setSessionStartTime] = useState<Date>(new Date());
 
-  const loadProgress = useCallback(async () => {
-    try {
-      const result = await getTopicProgress(topic, "CANDIDATE");
-      if (result.success && result.data) {
-        setProgress(result.data.progress);
-        const sections = Array.isArray(result.data.sectionsCompleted)
-          ? result.data.sectionsCompleted
-          : typeof result.data.sectionsCompleted === "string"
-            ? JSON.parse(result.data.sectionsCompleted)
-            : [];
-        setActiveSection(Math.max(0, sections.length));
-        setSectionsCompleted(sections);
-        setTimeSpent(result.data.timeSpent);
-        setBookmarked(result.data.bookmarked || false);
-      }
-    } catch (error) {
-      console.error("Failed to load progress:", error);
+  // React Query hooks
+  const { data: profileData, isLoading: profileLoading } = useUserProfileForContentQuery("CANDIDATE");
+  const { data: progressData, isLoading: progressLoading } = useTopicProgressQuery(topic, "CANDIDATE");
+  const toggleBookmarkMutation = useToggleBookmarkMutation();
+  const updateProgressMutation = useUpdateGuidanceProgressMutation();
+
+  const user = profileData?.data?.userProfile;
+  const loading = profileLoading || progressLoading;
+  const progress = progressData?.data?.progress || 0;
+  const bookmarked = progressData?.data?.bookmarked || false;
+
+  // Update local state when progress data changes
+  useEffect(() => {
+    if (progressData?.success && progressData.data) {
+      const sections = Array.isArray(progressData.data.sectionsCompleted)
+        ? progressData.data.sectionsCompleted
+        : typeof progressData.data.sectionsCompleted === "string"
+          ? JSON.parse(progressData.data.sectionsCompleted)
+          : [];
+      setActiveSection(Math.max(0, sections.length));
+      setSectionsCompleted(sections);
+      setTimeSpent(progressData.data.timeSpent);
     }
+  }, [progressData]);
+
+  // Initialize session start time
+  useEffect(() => {
+    setSessionStartTime(new Date());
   }, [topic]);
 
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch("/api/user/profile");
-      if (response.ok) {
-        const userData = await response.json();
-        setUser(userData.user);
-      }
-    } catch (error) {
-      console.error("Failed to fetch user profile:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    const initializeData = async () => {
-      await fetchUserData();
-      await loadProgress();
-    };
-
-    initializeData();
-    setSessionStartTime(new Date());
-  }, [topic, loadProgress]);
 
   const saveProgress = async (
     newProgress: number,
@@ -163,7 +141,7 @@ export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
         newSectionsCompleted.push(section.toString());
       }
 
-      const result = await updateGuidanceProgress({
+      await updateProgressMutation.mutateAsync({
         topicId: topic,
         progress: newProgress,
         completed,
@@ -172,17 +150,14 @@ export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
         bookmarked,
       });
 
-      if (result.success) {
-        setProgress(newProgress);
-        setActiveSection(section);
-        setSectionsCompleted(newSectionsCompleted);
-        setTimeSpent(totalTimeSpent);
-        setSessionStartTime(new Date()); // Reset session timer
-      }
+      // Update local state
+      setActiveSection(section);
+      setSectionsCompleted(newSectionsCompleted);
+      setTimeSpent(totalTimeSpent);
+      setSessionStartTime(new Date()); // Reset session timer
     } catch (error) {
       console.error("Failed to save progress:", error);
-      // Fallback to optimistic update
-      setProgress(newProgress);
+      // Optimistic update for better UX
       setActiveSection(section);
     }
   };
@@ -859,17 +834,13 @@ export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
             <Button
               variant="outline"
               size="icon"
-              onClick={async () => {
-                const newBookmarked = !bookmarked;
-                setBookmarked(newBookmarked);
-                try {
-                  await toggleGuidanceBookmark(topic, newBookmarked);
-                } catch (error) {
-                  console.error("Failed to update bookmark:", error);
-                  // Revert on error
-                  setBookmarked(!newBookmarked);
-                }
+              onClick={() => {
+                toggleBookmarkMutation.mutate({
+                  topicId: topic,
+                  bookmarked: !bookmarked,
+                });
               }}
+              disabled={toggleBookmarkMutation.isPending}
             >
               <Bookmark
                 className={`h-4 w-4 ${bookmarked ? "fill-current" : ""}`}
