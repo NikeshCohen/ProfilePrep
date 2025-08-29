@@ -6,13 +6,10 @@ import { useRouter } from "next/navigation";
 
 import {
   type GuidancePreferences,
-  GuidancePreferencesStep,
 } from "@/app/app/onboarding/_components/GuidancePreferencesStep";
 import candidateGuidance from "@/data/guidance/candidate-guidance.json";
 import recruiterGuidance from "@/data/guidance/recruiter-guidance.json";
 import {
-  ArrowLeft,
-  ArrowRight,
   Briefcase,
   CheckCircle2,
   FileText,
@@ -36,15 +33,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Separator } from "@/components/ui/separator";
+import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import { BackButton, NextButton } from "@/components/global/NavigationButtons";
 
 type UserType = "RECRUITER" | "CANDIDATE" | "TESTER";
 
@@ -60,11 +54,75 @@ interface OnboardingData {
 const STEPS = {
   FIELD_SELECTION: 0,
   SPECIALIZATION: 1,
-  GUIDANCE_PREFERENCES: 2,
-  GUIDANCE_PREVIEW: 3,
-  FEATURES: 4,
-  NEWSLETTER: 5,
+  GOALS_EXPERIENCE: 2,
+  LEARNING_PREFERENCES: 3,
+  TOPIC_PRIORITIES: 4,
+  PERSONALIZATION: 5,
+  GUIDANCE_PREVIEW: 6,
+  FEATURES: 7,
+  NEWSLETTER: 8,
 };
+
+// Guidance preference options
+const candidateGoals = [
+  { id: "find_job", label: "Find a new job", icon: Target },
+  { id: "improve_cv", label: "Improve my CV/Resume", icon: FileText },
+  { id: "interview_prep", label: "Prepare for interviews", icon: User },
+  { id: "salary_negotiation", label: "Learn salary negotiation", icon: Sparkles },
+  { id: "career_change", label: "Change career paths", icon: Briefcase },
+  { id: "skill_development", label: "Develop new skills", icon: CheckCircle2 },
+];
+
+const recruiterGoals = [
+  { id: "improve_sourcing", label: "Improve candidate sourcing", icon: Target },
+  { id: "better_screening", label: "Enhance screening process", icon: User },
+  { id: "interview_techniques", label: "Master interviewing", icon: FileText },
+  { id: "employer_branding", label: "Build employer brand", icon: Sparkles },
+  { id: "diversity_hiring", label: "Improve diversity hiring", icon: CheckCircle2 },
+  { id: "market_insights", label: "Stay current with market trends", icon: Briefcase },
+];
+
+const candidateChallenges = [
+  "Getting past ATS systems",
+  "Standing out from other candidates", 
+  "Lack of interview opportunities",
+  "Salary negotiation confidence",
+  "Career direction clarity",
+  "Building professional network",
+  "Keeping skills up to date",
+  "Work-life balance",
+];
+
+const recruiterChallenges = [
+  "Finding quality candidates",
+  "Candidate engagement and response rates",
+  "Hiring manager alignment", 
+  "Time-to-hire optimization",
+  "Diversity and inclusion",
+  "Competitive talent market",
+  "Employer branding",
+  "Interview scheduling and coordination",
+];
+
+const candidateTopics = [
+  { id: "cv-optimization", label: "CV/Resume Optimization", priority: "high" as const },
+  { id: "cover-letters", label: "Cover Letters", priority: "medium" as const },
+  { id: "interview-prep", label: "Interview Preparation", priority: "high" as const },
+  { id: "linkedin", label: "LinkedIn Optimization", priority: "medium" as const },
+  { id: "networking", label: "Professional Networking", priority: "medium" as const },
+  { id: "salary-negotiation", label: "Salary Negotiation", priority: "high" as const },
+  { id: "career-growth", label: "Career Development", priority: "low" as const },
+  { id: "market-insights", label: "Industry Insights", priority: "low" as const },
+];
+
+const recruiterTopics = [
+  { id: "sourcing", label: "Candidate Sourcing", priority: "high" as const },
+  { id: "screening", label: "Candidate Screening", priority: "high" as const },
+  { id: "interviewing", label: "Interview Techniques", priority: "medium" as const },
+  { id: "employer-branding", label: "Employer Branding", priority: "medium" as const },
+  { id: "diversity", label: "Diversity Hiring", priority: "medium" as const },
+  { id: "market-insights", label: "Market Intelligence", priority: "low" as const },
+];
 
 // Animation variants for smooth transitions
 const pageVariants = {
@@ -243,6 +301,29 @@ export default function EnhancedOnboarding({
       toast.error("Please select at least one specialization");
       return;
     }
+    if (
+      currentStep === STEPS.GOALS_EXPERIENCE && 
+      (!onboardingData.guidancePreferences?.experienceLevel || 
+       !onboardingData.guidancePreferences?.primaryGoals?.length)
+    ) {
+      toast.error("Please complete your goals and experience");
+      return;
+    }
+    if (
+      currentStep === STEPS.LEARNING_PREFERENCES && 
+      (!onboardingData.guidancePreferences?.learningStyle || 
+       !onboardingData.guidancePreferences?.timeCommitment)
+    ) {
+      toast.error("Please set your learning preferences");
+      return;
+    }
+    if (
+      currentStep === STEPS.TOPIC_PRIORITIES && 
+      !onboardingData.guidancePreferences?.priorityTopics?.length
+    ) {
+      toast.error("Please select your priority topics");
+      return;
+    }
 
     if (currentStep < STEPS.NEWSLETTER) {
       setCurrentStep(currentStep + 1);
@@ -295,6 +376,27 @@ export default function EnhancedOnboarding({
         ? prev.specializations.filter((s) => s !== spec)
         : [...prev.specializations, spec],
     }));
+  };
+
+  const updateGuidancePreference = (
+    key: keyof GuidancePreferences,
+    value: string | number | boolean | string[],
+  ) => {
+    setOnboardingData((prev) => ({
+      ...prev,
+      guidancePreferences: {
+        ...prev.guidancePreferences,
+        [key]: value,
+      },
+    }));
+  };
+
+  const toggleGuidanceArrayItem = (key: keyof GuidancePreferences, item: string) => {
+    const currentArray = (onboardingData.guidancePreferences?.[key] as string[]) || [];
+    const newArray = currentArray.includes(item)
+      ? currentArray.filter((i) => i !== item)
+      : [...currentArray, item];
+    updateGuidancePreference(key, newArray);
   };
 
   // Get animation props based on user's motion preference
@@ -407,42 +509,6 @@ export default function EnhancedOnboarding({
                 );
               })}
             </motion.div>
-
-            <AnimatePresence>
-              {onboardingData.userType === "CANDIDATE" && (
-                <motion.div
-                  className="mt-6"
-                  initial={{ opacity: 0, height: 0, y: -20 }}
-                  animate={{ opacity: 1, height: "auto", y: 0 }}
-                  exit={{ opacity: 0, height: 0, y: -20 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                >
-                  <Label htmlFor="career-stage">Career Stage (Optional)</Label>
-                  <Select
-                    value={onboardingData.careerStage || ""}
-                    onValueChange={(value) =>
-                      setOnboardingData({
-                        ...onboardingData,
-                        careerStage: value,
-                      })
-                    }
-                  >
-                    <SelectTrigger id="career-stage" className="mt-2">
-                      <SelectValue placeholder="Select your career stage" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {Object.entries(candidateGuidance.careerStages).map(
-                        ([key, stage]) => (
-                          <SelectItem key={key} value={key}>
-                            {stage.label}
-                          </SelectItem>
-                        ),
-                      )}
-                    </SelectContent>
-                  </Select>
-                </motion.div>
-              )}
-            </AnimatePresence>
           </motion.div>
         );
 
@@ -666,24 +732,457 @@ export default function EnhancedOnboarding({
           </motion.div>
         );
 
-      case STEPS.GUIDANCE_PREFERENCES:
+      case STEPS.GOALS_EXPERIENCE:
+        const goals = onboardingData.userType === "CANDIDATE" ? candidateGoals : recruiterGoals;
+        
         return (
-          <GuidancePreferencesStep
-            userType={onboardingData.userType as "CANDIDATE" | "RECRUITER"}
-            field={onboardingData.field || ""}
-            preferences={onboardingData.guidancePreferences || {}}
-            onPreferencesChange={(preferences) =>
-              setOnboardingData((prev) => ({
-                ...prev,
-                guidancePreferences: {
-                  ...prev.guidancePreferences,
-                  ...preferences,
-                },
-              }))
-            }
-            onNext={handleNext}
-            onBack={handleBack}
-          />
+          <motion.div
+            className="space-y-6"
+            {...getAnimationProps(containerVariants)}
+          >
+            <motion.div
+              className="text-center"
+              {...getAnimationProps(itemVariants)}
+            >
+              <motion.h2
+                className="mb-2 text-3xl font-bold"
+                {...getAnimationProps(itemVariants)}
+              >
+                Your Goals & Experience
+              </motion.h2>
+              <motion.p
+                className="text-muted-foreground"
+                {...getAnimationProps(itemVariants)}
+              >
+                {onboardingData.userType === "CANDIDATE" 
+                  ? "Help us understand your career journey and what you're looking to achieve"
+                  : "Tell us about your recruiting experience and what you want to accomplish"}
+              </motion.p>
+            </motion.div>
+
+            <Card>
+              <CardContent className="pt-6 space-y-6">
+                {/* Experience Level */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">
+                    What&apos;s your experience level?
+                  </Label>
+                  <RadioGroup
+                    value={onboardingData.guidancePreferences?.experienceLevel}
+                    onValueChange={(value) => {
+                      updateGuidancePreference("experienceLevel", value);
+                      // Map to career stage for candidates
+                      if (onboardingData.userType === "CANDIDATE") {
+                        const stageMap: Record<string, string> = {
+                          entry: "entry_level",
+                          mid: "mid_level", 
+                          senior: "senior_level",
+                          executive: "executive",
+                          changing: "career_change",
+                        };
+                        setOnboardingData(prev => ({...prev, careerStage: stageMap[value] || prev.careerStage}));
+                      }
+                    }}
+                    className="grid grid-cols-1 gap-2"
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="entry" id="entry" />
+                      <Label htmlFor="entry">Entry Level (0-2 years)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="mid" id="mid" />
+                      <Label htmlFor="mid">Mid Level (3-7 years)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="senior" id="senior" />
+                      <Label htmlFor="senior">Senior Level (8+ years)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="executive" id="executive" />
+                      <Label htmlFor="executive">Executive Level</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="changing" id="changing" />
+                      <Label htmlFor="changing">Changing careers</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {/* Primary Goals */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">
+                    What are your main goals? (Select all that apply)
+                  </Label>
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                    {goals.map((goal) => {
+                      const Icon = goal.icon;
+                      const isSelected = (onboardingData.guidancePreferences?.primaryGoals || []).includes(goal.id);
+                      return (
+                        <Card
+                          key={goal.id}
+                          className={`cursor-pointer transition-colors ${
+                            isSelected
+                              ? "border-primary bg-primary/5"
+                              : "hover:bg-muted/50"
+                          }`}
+                          onClick={() => toggleGuidanceArrayItem("primaryGoals", goal.id)}
+                        >
+                          <CardContent className="flex items-center gap-3 p-3">
+                            <Icon
+                              className={`h-5 w-5 ${isSelected ? "text-primary" : "text-muted-foreground"}`}
+                            />
+                            <span className="text-sm">{goal.label}</span>
+                            {isSelected && (
+                              <CheckCircle2 className="ml-auto h-4 w-4 text-primary" />
+                            )}
+                          </CardContent>
+                        </Card>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Job Search Status for Candidates */}
+                {onboardingData.userType === "CANDIDATE" && (
+                  <div className="space-y-3">
+                    <Label className="text-base font-medium">
+                      Current job search status
+                    </Label>
+                    <RadioGroup
+                      value={onboardingData.guidancePreferences?.jobSearchStatus}
+                      onValueChange={(value) => updateGuidancePreference("jobSearchStatus", value)}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="active" id="active" />
+                        <Label htmlFor="active">Actively looking</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="starting_soon" id="starting_soon" />
+                        <Label htmlFor="starting_soon">Planning to start soon</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="passive" id="passive" />
+                        <Label htmlFor="passive">Open to opportunities</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="not_looking" id="not_looking" />
+                        <Label htmlFor="not_looking">Just improving skills</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case STEPS.LEARNING_PREFERENCES:
+        return (
+          <motion.div
+            className="space-y-6"
+            {...getAnimationProps(containerVariants)}
+          >
+            <motion.div
+              className="text-center"
+              {...getAnimationProps(itemVariants)}
+            >
+              <motion.h2
+                className="mb-2 text-3xl font-bold"
+                {...getAnimationProps(itemVariants)}
+              >
+                Learning Preferences
+              </motion.h2>
+              <motion.p
+                className="text-muted-foreground"
+                {...getAnimationProps(itemVariants)}
+              >
+                Let&apos;s customize how you like to learn and engage with content
+              </motion.p>
+            </motion.div>
+
+            <Card>
+              <CardContent className="pt-6 space-y-6">
+                {/* Learning Style */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">
+                    How do you prefer to learn?
+                  </Label>
+                  <RadioGroup
+                    value={onboardingData.guidancePreferences?.learningStyle}
+                    onValueChange={(value) => updateGuidancePreference("learningStyle", value)}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="reading" id="reading" />
+                      <Label htmlFor="reading">Reading articles and guides</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="interactive" id="interactive" />
+                      <Label htmlFor="interactive">Interactive exercises</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="video" id="video" />
+                      <Label htmlFor="video">Video content</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="visual" id="visual" />
+                      <Label htmlFor="visual">Visual content (infographics, charts)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="mixed" id="mixed" />
+                      <Label htmlFor="mixed">Mix of all formats</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {/* Time Commitment */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">
+                    How much time can you dedicate per week? (
+                    {onboardingData.guidancePreferences?.timeCommitment || 30} minutes)
+                  </Label>
+                  <Slider
+                    value={[onboardingData.guidancePreferences?.timeCommitment || 30]}
+                    onValueChange={([value]) => updateGuidancePreference("timeCommitment", value)}
+                    max={180}
+                    min={15}
+                    step={15}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-sm text-muted-foreground">
+                    <span>15 min</span>
+                    <span>3 hours</span>
+                  </div>
+                </div>
+
+                {/* Pace Preference */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">Learning pace preference</Label>
+                  <RadioGroup
+                    value={onboardingData.guidancePreferences?.pacePreference}
+                    onValueChange={(value) => updateGuidancePreference("pacePreference", value)}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="self_paced" id="self_paced" />
+                      <Label htmlFor="self_paced">Self-paced (learn at my own speed)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="structured" id="structured" />
+                      <Label htmlFor="structured">Structured (recommended schedule)</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem value="accelerated" id="accelerated" />
+                      <Label htmlFor="accelerated">Accelerated (intensive learning)</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case STEPS.TOPIC_PRIORITIES:
+        const challenges = onboardingData.userType === "CANDIDATE" ? candidateChallenges : recruiterChallenges;
+        const topics = onboardingData.userType === "CANDIDATE" ? candidateTopics : recruiterTopics;
+        
+        return (
+          <motion.div
+            className="space-y-6"
+            {...getAnimationProps(containerVariants)}
+          >
+            <motion.div
+              className="text-center"
+              {...getAnimationProps(itemVariants)}
+            >
+              <motion.h2
+                className="mb-2 text-3xl font-bold"
+                {...getAnimationProps(itemVariants)}
+              >
+                Topic Priorities & Challenges
+              </motion.h2>
+              <motion.p
+                className="text-muted-foreground"
+                {...getAnimationProps(itemVariants)}
+              >
+                Help us understand what you&apos;d like to focus on first
+              </motion.p>
+            </motion.div>
+
+            <Card>
+              <CardContent className="pt-6 space-y-6">
+                {/* Current Challenges */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">
+                    What challenges are you currently facing? (Select all that apply)
+                  </Label>
+                  <div className="grid grid-cols-1 gap-2">
+                    {challenges.map((challenge, index) => {
+                      const isSelected = (onboardingData.guidancePreferences?.currentChallenges || []).includes(challenge);
+                      return (
+                        <div key={index} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={`challenge-${index}`}
+                            checked={isSelected}
+                            onCheckedChange={() => toggleGuidanceArrayItem("currentChallenges", challenge)}
+                          />
+                          <Label htmlFor={`challenge-${index}`} className="text-sm">
+                            {challenge}
+                          </Label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Priority Topics */}
+                <div className="space-y-3">
+                  <Label className="text-base font-medium">
+                    Which topics are most important to you right now?
+                  </Label>
+                  <div className="grid grid-cols-1 gap-2">
+                    {topics.map((topic) => {
+                      const isSelected = (onboardingData.guidancePreferences?.priorityTopics || []).includes(topic.id);
+                      const isUrgent = (onboardingData.guidancePreferences?.urgentNeeds || []).includes(topic.id);
+                      return (
+                        <div key={topic.id} className="space-y-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-2">
+                              <Checkbox
+                                id={`topic-${topic.id}`}
+                                checked={isSelected}
+                                onCheckedChange={() => toggleGuidanceArrayItem("priorityTopics", topic.id)}
+                              />
+                              <Label htmlFor={`topic-${topic.id}`} className="text-sm">
+                                {topic.label}
+                              </Label>
+                              <Badge
+                                variant={
+                                  topic.priority === "high"
+                                    ? "destructive"
+                                    : topic.priority === "medium"
+                                      ? "default"
+                                      : "secondary"
+                                }
+                                className="text-xs"
+                              >
+                                {topic.priority}
+                              </Badge>
+                            </div>
+                            {isSelected && (
+                              <div className="flex items-center space-x-2">
+                                <Checkbox
+                                  id={`urgent-${topic.id}`}
+                                  checked={isUrgent}
+                                  onCheckedChange={() => toggleGuidanceArrayItem("urgentNeeds", topic.id)}
+                                />
+                                <Label htmlFor={`urgent-${topic.id}`} className="text-xs text-muted-foreground">
+                                  Urgent
+                                </Label>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        );
+
+      case STEPS.PERSONALIZATION:
+        return (
+          <motion.div
+            className="space-y-6"
+            {...getAnimationProps(containerVariants)}
+          >
+            <motion.div
+              className="text-center"
+              {...getAnimationProps(itemVariants)}
+            >
+              <motion.h2
+                className="mb-2 text-3xl font-bold"
+                {...getAnimationProps(itemVariants)}
+              >
+                Personalization & Preferences
+              </motion.h2>
+              <motion.p
+                className="text-muted-foreground"
+                {...getAnimationProps(itemVariants)}
+              >
+                Final touches to customize your experience just the way you like it
+              </motion.p>
+            </motion.div>
+
+            <Card>
+              <CardContent className="pt-6 space-y-6">
+                {/* Preferences */}
+                <div className="space-y-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="reminders"
+                      checked={onboardingData.guidancePreferences?.reminders || false}
+                      onCheckedChange={(checked) => updateGuidancePreference("reminders", checked)}
+                    />
+                    <Label htmlFor="reminders" className="text-sm">
+                      Send me gentle reminders to continue learning
+                    </Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="progress-sharing"
+                      checked={onboardingData.guidancePreferences?.progressSharing || false}
+                      onCheckedChange={(checked) => updateGuidancePreference("progressSharing", checked)}
+                    />
+                    <Label htmlFor="progress-sharing" className="text-sm">
+                      Share my progress achievements (anonymously) to inspire others
+                    </Label>
+                  </div>
+
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="mentorship"
+                      checked={onboardingData.guidancePreferences?.mentorshipInterest || false}
+                      onCheckedChange={(checked) => updateGuidancePreference("mentorshipInterest", checked)}
+                    />
+                    <Label htmlFor="mentorship" className="text-sm">
+                      I&apos;m interested in mentorship opportunities (when available)
+                    </Label>
+                  </div>
+                </div>
+
+                {/* Additional Context */}
+                <div className="space-y-3">
+                  <Label htmlFor="specific-challenges" className="text-base font-medium">
+                    Any specific challenges or goals we should know about? (Optional)
+                  </Label>
+                  <Textarea
+                    id="specific-challenges"
+                    placeholder="e.g., I'm targeting roles at tech startups, struggling with technical interviews, looking to switch to remote work..."
+                    value={onboardingData.guidancePreferences?.specificChallenges || ""}
+                    onChange={(e) => updateGuidancePreference("specificChallenges", e.target.value)}
+                    rows={3}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-primary/5">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <HelpCircle className="mt-0.5 h-5 w-5 text-primary" />
+                  <div>
+                    <p className="text-sm font-medium">Your preferences matter!</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      We&apos;ll use this information to personalize your guidance experience. 
+                      You can always update these preferences in your settings.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         );
 
       case STEPS.FEATURES:
@@ -1006,33 +1505,38 @@ export default function EnhancedOnboarding({
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-8">
-      {/* Progress Indicator */}
+    <div className="relative">
+      {/* Fixed Progress Indicator - positioned below header */}
       <motion.div
-        className="mb-8"
+        className="fixed top-16 left-0 right-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 border-b px-4 py-4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex justify-center space-x-2">
-          {Object.values(STEPS).map((step, index) => (
-            <motion.div
-              key={step}
-              className={`h-2 w-16 rounded-full ${
-                step <= currentStep ? "bg-primary" : "bg-muted"
-              }`}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{
-                delay: index * 0.1,
-                type: "spring",
-                stiffness: 500,
-                damping: 30,
-              }}
-            />
-          ))}
+        <div className="mx-auto max-w-4xl">
+          <div className="flex justify-center space-x-2">
+            {Object.values(STEPS).map((step, index) => (
+              <motion.div
+                key={step}
+                className={`h-2 w-16 rounded-full ${
+                  step <= currentStep ? "bg-primary" : "bg-muted"
+                }`}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 30,
+                }}
+              />
+            ))}
+          </div>
         </div>
       </motion.div>
+
+      {/* Main Content Container with padding for fixed header and progress bar */}
+      <div className="mx-auto max-w-4xl px-4 pt-32 pb-8">
 
       {/* Main Content with Page Transitions */}
       <AnimatePresence mode="wait">
@@ -1048,87 +1552,32 @@ export default function EnhancedOnboarding({
         </motion.div>
       </AnimatePresence>
 
-      {/* Navigation Buttons */}
-      <motion.div
-        className="mt-8 flex justify-between"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3, duration: 0.4 }}
-      >
+        {/* Navigation Buttons */}
         <motion.div
-          whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-          whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
+          className="mt-8 flex justify-between"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3, duration: 0.4 }}
         >
-          <Button
-            variant="outline"
+          <BackButton
             onClick={handleBack}
             disabled={currentStep === STEPS.FIELD_SELECTION}
-            className="transition-all duration-200"
-          >
-            <motion.div
-              className="flex items-center"
-              initial={false}
-              animate={
-                currentStep === STEPS.FIELD_SELECTION
-                  ? { opacity: 0.5 }
-                  : { opacity: 1 }
-              }
-            >
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back
-            </motion.div>
-          </Button>
-        </motion.div>
+          />
 
-        <motion.div
-          whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
-          whileTap={shouldReduceMotion ? {} : { scale: 0.95 }}
-        >
           {currentStep === STEPS.NEWSLETTER ? (
-            <Button
+            <NextButton
               onClick={handleComplete}
               disabled={isUpdating}
-              className="transition-all duration-200"
-            >
-              <AnimatePresence mode="wait">
-                {isUpdating ? (
-                  <motion.div
-                    key="loading"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex items-center"
-                  >
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Setting up...
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="complete"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="flex items-center"
-                  >
-                    Get Started
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </Button>
+              label={isUpdating ? "Setting up..." : "Get Started"}
+            />
           ) : (
-            <Button
+            <NextButton
               onClick={handleNext}
-              className="transition-all duration-200"
-            >
-              <div className="flex items-center">
-                Next
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </div>
-            </Button>
+              label="Next"
+            />
           )}
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }

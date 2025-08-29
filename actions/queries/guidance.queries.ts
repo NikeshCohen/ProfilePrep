@@ -3,9 +3,6 @@
 import {
   toggleGuidanceBookmark,
   updateGuidanceProgress,
-} from "@/actions/guidance.actions";
-// Import server actions
-import {
   getBookmarkedTopics,
   getGuidanceAnalytics,
   getPersonalizedRecommendations,
@@ -13,7 +10,7 @@ import {
   getUserGuidancePreferences,
   getUserGuidanceProgress,
   getUserProfileForContent,
-} from "@/actions/guidance.server.actions";
+} from "@/actions/guidance.actions";
 import type { UserType } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 

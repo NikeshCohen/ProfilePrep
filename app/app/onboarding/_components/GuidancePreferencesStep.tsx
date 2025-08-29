@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 import { motion } from "framer-motion";
 import {
   AlertCircle,
@@ -136,7 +134,6 @@ export function GuidancePreferencesStep({
   onNext,
   onBack,
 }: GuidancePreferencesStepProps) {
-  const [currentSection, setCurrentSection] = useState(0);
 
   const goals = userType === "CANDIDATE" ? candidateGoals : recruiterGoals;
   const challenges =
@@ -558,22 +555,19 @@ export function GuidancePreferencesStep({
     },
   ];
 
-  const canProceedToNext = () => {
-    switch (currentSection) {
-      case 0:
-        return (
-          preferences.experienceLevel &&
-          (preferences.primaryGoals?.length || 0) > 0
-        );
-      case 1:
-        return preferences.learningStyle && preferences.timeCommitment;
-      case 2:
-        return (preferences.priorityTopics?.length || 0) > 0;
-      case 3:
-        return true; // All optional
-      default:
-        return false;
-    }
+
+  // Validate all sections at once
+  const isComplete = () => {
+    return (
+      // Section 1 validation
+      preferences.experienceLevel &&
+      (preferences.primaryGoals?.length || 0) > 0 &&
+      // Section 2 validation  
+      preferences.learningStyle &&
+      preferences.timeCommitment &&
+      // Section 3 validation
+      (preferences.priorityTopics?.length || 0) > 0
+    );
   };
 
   return (
@@ -582,60 +576,36 @@ export function GuidancePreferencesStep({
       animate={{ opacity: 1, y: 0 }}
       className="space-y-6"
     >
-      {/* Progress indicator */}
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm">
-          <span>Guidance Preferences</span>
-          <span>
-            {currentSection + 1} of {sections.length}
-          </span>
-        </div>
-        <div className="h-2 w-full rounded-full bg-muted">
-          <div
-            className="h-2 rounded-full bg-primary transition-all duration-300"
-            style={{
-              width: `${((currentSection + 1) / sections.length) * 100}%`,
-            }}
-          />
-        </div>
+      <div className="text-center">
+        <h2 className="mb-2 text-3xl font-bold">Guidance Preferences</h2>
+        <p className="text-muted-foreground">
+          Let&apos;s personalize your experience with a few quick questions
+        </p>
       </div>
 
-      {/* Current section */}
-      <Card>
-        <CardHeader>
-          <CardTitle>{sections[currentSection].title}</CardTitle>
-          <p className="text-sm text-muted-foreground">
-            {sections[currentSection].description}
-          </p>
-        </CardHeader>
-        <CardContent>{sections[currentSection].content}</CardContent>
-      </Card>
+      {/* All sections as a single scrollable form */}
+      <div className="space-y-6">
+        {sections.map((section, index) => (
+          <Card key={index}>
+            <CardHeader>
+              <CardTitle>{section.title}</CardTitle>
+              <p className="text-sm text-muted-foreground">
+                {section.description}
+              </p>
+            </CardHeader>
+            <CardContent>{section.content}</CardContent>
+          </Card>
+        ))}
+      </div>
 
       {/* Navigation */}
       <div className="flex justify-between gap-4">
-        <Button
-          variant="outline"
-          onClick={
-            currentSection === 0
-              ? onBack
-              : () => setCurrentSection(currentSection - 1)
-          }
-        >
+        <Button variant="outline" onClick={onBack}>
           Back
         </Button>
-
-        {currentSection < sections.length - 1 ? (
-          <Button
-            onClick={() => setCurrentSection(currentSection + 1)}
-            disabled={!canProceedToNext()}
-          >
-            Next
-          </Button>
-        ) : (
-          <Button onClick={onNext} disabled={!canProceedToNext()}>
-            Complete Setup
-          </Button>
-        )}
+        <Button onClick={onNext} disabled={!isComplete()}>
+          Continue
+        </Button>
       </div>
     </motion.div>
   );

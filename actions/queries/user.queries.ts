@@ -42,3 +42,18 @@ export const useRecruiterDocumentsQuery = (userId: string) => {
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
+
+export const useUserProfileQuery = () => {
+  return useQuery({
+    queryKey: ["userProfile"],
+    queryFn: async () => {
+      const response = await fetch("/api/user/profile");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user profile");
+      }
+      return response.json();
+    },
+    staleTime: 1000 * 60 * 60, // 1 hour
+    gcTime: 1000 * 60 * 60 * 2, // 2 hours
+  });
+};

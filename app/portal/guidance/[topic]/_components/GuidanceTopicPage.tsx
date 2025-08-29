@@ -8,8 +8,7 @@ import {
   toggleGuidanceBookmark,
   updateGuidanceProgress,
 } from "@/actions/guidance.actions";
-import { getTopicProgress } from "@/actions/guidance.server.actions";
-// Import the guidance data (we'll need to create this)
+import { getTopicProgress } from "@/actions/guidance.actions";
 import candidateGuidance from "@/constants/guidance/candidate.json";
 import { motion } from "framer-motion";
 import {

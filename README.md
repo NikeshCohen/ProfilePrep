@@ -7,6 +7,7 @@
 - [Core Architecture](#core-architecture)
 - [User Systems & Permissions](#user-systems--permissions)
 - [Feature Documentation](#feature-documentation)
+- [Onboarding Data Mapping](#onboarding-data-mapping)
 - [Database & Data Models](#database--data-models)
 - [AI Integration](#ai-integration)
 - [Development Guide](#development-guide)
@@ -380,6 +381,112 @@ ProfilePrep implements a comprehensive dual-user system with parallel organizati
 - Set company-wide limits and permissions
 - Cross-organization analytics and reporting
 - System health monitoring and maintenance
+
+---
+
+## Onboarding Data Mapping
+
+### User Onboarding Flow
+
+ProfilePrep implements a comprehensive 10-step onboarding process that collects user preferences and stores them in the database. Each step maps to specific database fields:
+
+### Step 1: User Type Selection (OnboardingBackground component)
+
+- **Question**: "I'm a Recruiter" vs "I'm a Job Seeker"
+- **Saved to**: `userType` (UserType enum: RECRUITER | CANDIDATE | TESTER)
+
+### Step 2: Field Selection (EnhancedOnboarding - FIELD_SELECTION)
+
+- **Question**: "Select Your Field" (Tech, Healthcare, Finance, etc.)
+- **Saved to**: `field` (String)
+
+### Step 3: Specialization Selection (EnhancedOnboarding - SPECIALIZATION)
+
+- **Question**: "Select Specializations" (multiple checkboxes)
+- **Saved to**: `specializations` (String[])
+
+### Step 4: Goals & Experience (EnhancedOnboarding - GOALS_EXPERIENCE)
+
+All saved to `guidancePreferences` (Json object) containing:
+
+- **Experience Level**: `guidancePreferences.experienceLevel` (entry|mid|senior|executive|changing)
+  - Also mapped to: `careerStage` (entry_level|mid_level|senior_level|executive|career_change)
+- **Primary Goals**: `guidancePreferences.primaryGoals` (String[])
+- **Job Search Status** (Candidates only): `guidancePreferences.jobSearchStatus` (active|passive|not_looking|starting_soon)
+
+### Step 5: Learning Preferences (EnhancedOnboarding - LEARNING_PREFERENCES)
+
+- **Learning Style**: `guidancePreferences.learningStyle` (visual|reading|interactive|video|mixed)
+- **Time Commitment**: `guidancePreferences.timeCommitment` (Number - minutes per week)
+- **Pace Preference**: `guidancePreferences.pacePreference` (self_paced|structured|accelerated)
+
+### Step 6: Topic Priorities & Challenges (EnhancedOnboarding - TOPIC_PRIORITIES)
+
+- **Current Challenges**: `guidancePreferences.currentChallenges` (String[])
+- **Priority Topics**: `guidancePreferences.priorityTopics` (String[])
+- **Urgent Needs**: `guidancePreferences.urgentNeeds` (String[])
+
+### Step 7: Personalization & Preferences (EnhancedOnboarding - PERSONALIZATION)
+
+- **Reminders**: `guidancePreferences.reminders` (Boolean)
+- **Progress Sharing**: `guidancePreferences.progressSharing` (Boolean)
+- **Mentorship Interest**: `guidancePreferences.mentorshipInterest` (Boolean)
+- **Specific Challenges**: `guidancePreferences.specificChallenges` (String - optional)
+- **Additional Info**: `guidancePreferences.additionalInfo` (String - optional)
+
+### Step 8: Guidance Preview (EnhancedOnboarding - GUIDANCE_PREVIEW)
+
+- **No data collection** - This step shows a preview of personalized guidance based on previous selections
+
+### Step 9: Features Overview (EnhancedOnboarding - FEATURES)
+
+- **No data collection** - This step showcases platform features relevant to user type
+
+### Step 10: Newsletter (EnhancedOnboarding - NEWSLETTER)
+
+- **Question**: Newsletter subscription checkbox with detailed benefits
+- **Saved to**: `newsletterSubscribed` (Boolean)
+
+### Onboarding Data Storage
+
+All onboarding data is processed by the `/api/user/onboarding` endpoint and stored as:
+
+```typescript
+{
+  userType,              // Set in step 1
+  field,                 // From step 2
+  specializations,       // From step 3
+  careerStage,          // Derived from step 4 experience level
+  newsletterSubscribed,  // From step 10
+  onboardingCompleted,  // Set to true on completion
+  guidancePreferences: {
+    field,
+    specializations,
+    careerStage,
+    lastUpdated: new Date().toISOString(),
+    // All preferences from steps 4-7
+    experienceLevel,
+    primaryGoals,
+    jobSearchStatus,
+    learningStyle,
+    timeCommitment,
+    pacePreference,
+    currentChallenges,
+    priorityTopics,
+    urgentNeeds,
+    reminders,
+    progressSharing,
+    mentorshipInterest,
+    specificChallenges,
+    additionalInfo
+  }
+}
+```
+
+### Metadata Fields
+
+- **Onboarding Completion Status**: `onboardingCompleted` (Boolean)
+- **Last Guidance Access**: `lastGuidanceAccess` (DateTime)
 
 ---
 
