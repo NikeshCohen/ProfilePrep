@@ -23,6 +23,7 @@ import {
   Share2,
 } from "lucide-react";
 
+import { Spinner } from "@/components/global/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 interface RecruiterTopicPageProps {
   topic: string;
 }
-
 
 interface FieldData {
   label: string;
@@ -89,8 +89,10 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
   const [sessionStartTime, setSessionStartTime] = useState<Date>(new Date());
 
   // React Query hooks
-  const { data: profileData, isLoading: profileLoading } = useUserProfileForContentQuery("RECRUITER");
-  const { data: progressData, isLoading: progressLoading } = useTopicProgressQuery(topic, "RECRUITER");
+  const { data: profileData, isLoading: profileLoading } =
+    useUserProfileForContentQuery("RECRUITER");
+  const { data: progressData, isLoading: progressLoading } =
+    useTopicProgressQuery(topic, "RECRUITER");
   const toggleBookmarkMutation = useToggleBookmarkMutation();
   const updateProgressMutation = useUpdateGuidanceProgressMutation();
 
@@ -99,56 +101,59 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
   const progress = progressData?.data?.progress || 0;
   const bookmarked = progressData?.data?.bookmarked || false;
 
-  const generatePersonalizedContent = useCallback((
-    fieldData: FieldData,
-    specializationData: SpecializationData | null,
-    universalGuidance: UniversalGuidanceSection | null,
-    topicId: string,
-    careerStage?: string,
-  ): PersonalizedContent => {
-    const fieldLabel = fieldData.label;
-    const specializationLabel =
-      specializationData?.label || "general recruiting";
+  const generatePersonalizedContent = useCallback(
+    (
+      fieldData: FieldData,
+      specializationData: SpecializationData | null,
+      universalGuidance: UniversalGuidanceSection | null,
+      topicId: string,
+      careerStage?: string,
+    ): PersonalizedContent => {
+      const fieldLabel = fieldData.label;
+      const specializationLabel =
+        specializationData?.label || "general recruiting";
 
-    // Generate personalized philosophy based on career stage
-    const philosophy = generatePersonalizedPhilosophy(
-      topicId,
-      fieldLabel,
-      specializationLabel,
-      careerStage,
-    );
-
-    // Generate content sections based on topic, field, specialization AND career stage
-    const sections = generatePersonalizedSections(
-      topicId,
-      fieldData,
-      specializationData,
-      universalGuidance,
-      careerStage,
-    );
-
-    // Calculate total time based on content
-    const totalTime = sections.reduce(
-      (total, section) => total + section.estimatedTimeMinutes,
-      0,
-    );
-
-    return {
-      field: fieldData,
-      specialization: specializationData,
-      universalGuidance,
-      title: generateTopicTitle(topicId, fieldLabel),
-      description: generateTopicDescription(
+      // Generate personalized philosophy based on career stage
+      const philosophy = generatePersonalizedPhilosophy(
         topicId,
         fieldLabel,
         specializationLabel,
-      ),
-      philosophy,
-      difficulty: getDifficultyLevel(topicId),
-      totalEstimatedTime: totalTime,
-      sections,
-    };
-  }, []);
+        careerStage,
+      );
+
+      // Generate content sections based on topic, field, specialization AND career stage
+      const sections = generatePersonalizedSections(
+        topicId,
+        fieldData,
+        specializationData,
+        universalGuidance,
+        careerStage,
+      );
+
+      // Calculate total time based on content
+      const totalTime = sections.reduce(
+        (total, section) => total + section.estimatedTimeMinutes,
+        0,
+      );
+
+      return {
+        field: fieldData,
+        specialization: specializationData,
+        universalGuidance,
+        title: generateTopicTitle(topicId, fieldLabel),
+        description: generateTopicDescription(
+          topicId,
+          fieldLabel,
+          specializationLabel,
+        ),
+        philosophy,
+        difficulty: getDifficultyLevel(topicId),
+        totalEstimatedTime: totalTime,
+        sections,
+      };
+    },
+    [],
+  );
 
   const getPersonalizedContent = useCallback((): PersonalizedContent => {
     // Full personalization based on user profile - no more "for now" comments!
@@ -197,7 +202,6 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
   useEffect(() => {
     setSessionStartTime(new Date());
   }, [topic]);
-
 
   const saveProgress = async (
     newProgress: number,
@@ -293,10 +297,7 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
     );
   };
 
-  const generateTopicTitle = (
-    topicId: string,
-    field: string,
-  ): string => {
+  const generateTopicTitle = (topicId: string, field: string): string => {
     const titles: Record<string, string> = {
       sourcing: `${field} Talent Sourcing Mastery`,
       screening: `${field} Candidate Screening Excellence`,
@@ -329,9 +330,7 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
     );
   };
 
-  const getDifficultyLevel = (
-    topicId: string,
-  ): string => {
+  const getDifficultyLevel = (topicId: string): string => {
     const difficulties: Record<string, string> = {
       sourcing: "intermediate",
       screening: "intermediate",
@@ -664,8 +663,15 @@ export function RecruiterTopicPage({ topic }: RecruiterTopicPageProps) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <div className="animate-pulse">
-          Loading personalized recruitment guidance...
+        <div className="flex min-h-screen items-center justify-center">
+          <div className="flex min-h-[400px] items-center justify-center">
+            <div className="space-y-4 text-center">
+              <Spinner />
+              <p className="text-muted-foreground">
+                Loading personalised recruitment guidance...
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -5,9 +5,9 @@ import DocContextMenu from "@/app/dashboard/cvs/_components/ContextMenu";
 import { Calendar, FileText } from "lucide-react";
 import { User } from "next-auth";
 
+import { Spinner } from "@/components/global/Spinner";
 import EmptyState from "@/components/shared/EmptyState";
 import ErrorCard from "@/components/shared/ErrorCard";
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import StatsCard from "@/components/shared/StatsCard";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -32,7 +32,14 @@ export default function RecruiterDocumentsClient({
   } = useRecruiterDocumentsQuery(user.id!);
 
   if (isLoading) {
-    return <LoadingSpinner text="Loading documents..." />;
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="space-y-4 text-center">
+          <Spinner />
+          <p className="text-muted-foreground">Loading documents...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {

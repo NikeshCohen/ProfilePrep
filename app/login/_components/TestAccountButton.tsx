@@ -4,10 +4,11 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
-import { Loader2, TestTube } from "lucide-react";
+import { TestTube } from "lucide-react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-hot-toast";
 
+import { Spinner } from "@/components/global/Spinner";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -160,7 +161,9 @@ export default function TestAccountButton({
             >
               {isLoading ? (
                 <>
-                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <div className="mr-2 h-4 w-4">
+                    <Spinner />
+                  </div>
                   Signing in...
                 </>
               ) : (

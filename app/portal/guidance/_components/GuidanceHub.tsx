@@ -2,14 +2,19 @@ import { Suspense } from "react";
 
 import { GuidanceHubClient } from "@/app/portal/guidance/_components/GuidanceHubClient";
 
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
+import { Spinner } from "@/components/global/Spinner";
 
 export function GuidanceHub() {
   return (
     <Suspense
       fallback={
         <div className="flex min-h-screen items-center justify-center">
-          <LoadingSpinner text="Loading your personalised guidance..." />
+          <div className="space-y-4 text-center">
+            <Spinner />
+            <p className="text-muted-foreground">
+              Loading your personalised guidance...
+            </p>
+          </div>
         </div>
       }
     >

@@ -27,7 +27,7 @@ import {
   Users,
 } from "lucide-react";
 
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
+import { Spinner } from "@/components/global/Spinner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -266,7 +266,9 @@ export function RecruiterGuidanceHubClient() {
         );
       case "bookmarked":
         if (bookmarkedData?.success && bookmarkedData.data) {
-          const bookmarkedTopicIds = bookmarkedData.data.map((item) => item.topicId);
+          const bookmarkedTopicIds = bookmarkedData.data.map(
+            (item) => item.topicId,
+          );
           return recruiterTopics.filter((topic) =>
             bookmarkedTopicIds.includes(topic.id),
           );
@@ -301,7 +303,7 @@ export function RecruiterGuidanceHubClient() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <LoadingSpinner />
+        <Spinner />
       </div>
     );
   }
@@ -329,7 +331,7 @@ export function RecruiterGuidanceHubClient() {
         </div>
 
         {user && (
-          <Alert>
+          <Alert className="bg-background/40">
             <Sparkles className="h-4 w-4" />
             <AlertDescription>
               <strong>Personalized for you:</strong> Content tailored to your{" "}
@@ -419,7 +421,12 @@ export function RecruiterGuidanceHubClient() {
           value={selectedCategory}
           onValueChange={(value) =>
             setSelectedCategory(
-              value as "all" | "recommended" | "in-progress" | "completed" | "bookmarked",
+              value as
+                | "all"
+                | "recommended"
+                | "in-progress"
+                | "completed"
+                | "bookmarked",
             )
           }
           className="w-full"
@@ -439,7 +446,11 @@ export function RecruiterGuidanceHubClient() {
                 Completed ({stats.completed})
               </TabsTrigger>
               <TabsTrigger value="bookmarked">
-                Bookmarked ({bookmarkedData?.success && bookmarkedData.data ? bookmarkedData.data.length : 0})
+                Bookmarked (
+                {bookmarkedData?.success && bookmarkedData.data
+                  ? bookmarkedData.data.length
+                  : 0}
+                )
               </TabsTrigger>
             </TabsList>
 

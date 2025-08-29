@@ -30,7 +30,7 @@ import {
   Users,
 } from "lucide-react";
 
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
+import { Spinner } from "@/components/global/Spinner";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -254,7 +254,9 @@ export function GuidanceHubClient() {
         );
       case "bookmarked":
         if (bookmarkedData?.success && bookmarkedData.data) {
-          const bookmarkedTopicIds = bookmarkedData.data.map((item) => item.topicId);
+          const bookmarkedTopicIds = bookmarkedData.data.map(
+            (item) => item.topicId,
+          );
           return guidanceTopics.filter((topic) =>
             bookmarkedTopicIds.includes(topic.id),
           );
@@ -290,7 +292,12 @@ export function GuidanceHubClient() {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <LoadingSpinner text="Loading your personalised guidance..." />
+        <div className="space-y-4 text-center">
+          <Spinner />
+          <p className="text-muted-foreground">
+            Loading your personalised guidance...
+          </p>
+        </div>
       </div>
     );
   }
@@ -396,7 +403,12 @@ export function GuidanceHubClient() {
         value={selectedCategory}
         onValueChange={(value) =>
           setSelectedCategory(
-            value as "all" | "recommended" | "in-progress" | "completed" | "bookmarked",
+            value as
+              | "all"
+              | "recommended"
+              | "in-progress"
+              | "completed"
+              | "bookmarked",
           )
         }
       >
@@ -693,7 +705,9 @@ export function GuidanceHubClient() {
                         {!locked && (
                           <Button
                             className="w-full"
-                            variant={progress?.completed ? "outline" : "default"}
+                            variant={
+                              progress?.completed ? "outline" : "default"
+                            }
                           >
                             {progress?.completed
                               ? "Review"
@@ -810,7 +824,9 @@ export function GuidanceHubClient() {
                         {!locked && (
                           <Button
                             className="w-full"
-                            variant={progress?.completed ? "outline" : "default"}
+                            variant={
+                              progress?.completed ? "outline" : "default"
+                            }
                           >
                             {progress?.completed
                               ? "Review"
@@ -927,7 +943,9 @@ export function GuidanceHubClient() {
                         {!locked && (
                           <Button
                             className="w-full"
-                            variant={progress?.completed ? "outline" : "default"}
+                            variant={
+                              progress?.completed ? "outline" : "default"
+                            }
                           >
                             {progress?.completed
                               ? "Review"

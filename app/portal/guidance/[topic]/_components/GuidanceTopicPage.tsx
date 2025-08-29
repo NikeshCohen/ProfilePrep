@@ -25,7 +25,7 @@ import {
   Star,
 } from "lucide-react";
 
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
+import { Spinner } from "@/components/global/Spinner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -38,7 +38,6 @@ import { formatCareerStage, formatField } from "@/lib/utils/career-stage";
 interface GuidanceTopicPageProps {
   topic: string;
 }
-
 
 interface SpecializationData {
   label?: string;
@@ -93,8 +92,10 @@ export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
   const [sessionStartTime, setSessionStartTime] = useState<Date>(new Date());
 
   // React Query hooks
-  const { data: profileData, isLoading: profileLoading } = useUserProfileForContentQuery("CANDIDATE");
-  const { data: progressData, isLoading: progressLoading } = useTopicProgressQuery(topic, "CANDIDATE");
+  const { data: profileData, isLoading: profileLoading } =
+    useUserProfileForContentQuery("CANDIDATE");
+  const { data: progressData, isLoading: progressLoading } =
+    useTopicProgressQuery(topic, "CANDIDATE");
   const toggleBookmarkMutation = useToggleBookmarkMutation();
   const updateProgressMutation = useUpdateGuidanceProgressMutation();
 
@@ -121,7 +122,6 @@ export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
   useEffect(() => {
     setSessionStartTime(new Date());
   }, [topic]);
-
 
   const saveProgress = async (
     newProgress: number,
@@ -786,7 +786,12 @@ export function GuidanceTopicPage({ topic }: GuidanceTopicPageProps) {
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <LoadingSpinner text="Loading personalised content..." />
+        <div className="space-y-4 text-center">
+          <Spinner />
+          <p className="text-muted-foreground">
+            Loading personalised content...
+          </p>
+        </div>
       </div>
     );
   }

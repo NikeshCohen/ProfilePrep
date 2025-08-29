@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-import { BookOpen, Loader2, Save } from "lucide-react";
+import { BookOpen, Save } from "lucide-react";
 import { toast } from "react-hot-toast";
 
+import { Spinner } from "@/components/global/Spinner";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -347,7 +348,11 @@ export function GuidancePreferences({
 
         <div className="flex justify-end">
           <Button onClick={handleSave} disabled={loading}>
-            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {loading && (
+              <div className="mr-2 h-4 w-4">
+                <Spinner />
+              </div>
+            )}
             <Save className="mr-2 h-4 w-4" />
             Save Preferences
           </Button>

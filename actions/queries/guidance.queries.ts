@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  toggleGuidanceBookmark,
-  updateGuidanceProgress,
   getBookmarkedTopics,
   getGuidanceAnalytics,
   getPersonalizedRecommendations,
@@ -10,6 +8,8 @@ import {
   getUserGuidancePreferences,
   getUserGuidanceProgress,
   getUserProfileForContent,
+  toggleGuidanceBookmark,
+  updateGuidanceProgress,
 } from "@/actions/guidance.actions";
 import type { UserType } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -130,35 +130,46 @@ export const useToggleBookmarkMutation = () => {
       // Optimistic update for better UX
       await queryClient.cancelQueries({ queryKey: ["bookmarked-topics"] });
       await queryClient.cancelQueries({ queryKey: ["guidance-progress"] });
-      
+
       // Store previous data for rollback
-      const previousBookmarkedData = queryClient.getQueryData(["bookmarked-topics"]);
-      const previousProgressData = queryClient.getQueryData(["guidance-progress"]);
-      
+      const previousBookmarkedData = queryClient.getQueryData([
+        "bookmarked-topics",
+      ]);
+      const previousProgressData = queryClient.getQueryData([
+        "guidance-progress",
+      ]);
+
       // Optimistically update bookmarked data
       queryClient.setQueryData(["bookmarked-topics"], (old: unknown) => {
-        const oldData = old as { success?: boolean; data?: Array<{ topicId: string; bookmarked: boolean }> } | undefined;
+        const oldData = old as
+          | {
+              success?: boolean;
+              data?: Array<{ topicId: string; bookmarked: boolean }>;
+            }
+          | undefined;
         if (oldData?.success && oldData?.data) {
           if (bookmarked) {
             // Add to bookmarks if not already there
-            const exists = oldData.data.some((item) => item.topicId === topicId);
+            const exists = oldData.data.some(
+              (item) => item.topicId === topicId,
+            );
             if (!exists) {
               return {
                 ...oldData,
-                data: [...oldData.data, { topicId, bookmarked: true }]
+                data: [...oldData.data, { topicId, bookmarked: true }],
               };
             }
           } else {
             // Remove from bookmarks
             return {
               ...oldData,
-              data: oldData.data.filter((item) => item.topicId !== topicId)
+              data: oldData.data.filter((item) => item.topicId !== topicId),
             };
           }
         }
         return old;
       });
-      
+
       return { previousBookmarkedData, previousProgressData };
     },
     onSuccess: (result) => {
@@ -171,10 +182,16 @@ export const useToggleBookmarkMutation = () => {
     onError: (_, __, context) => {
       // Rollback optimistic updates on error
       if (context?.previousBookmarkedData) {
-        queryClient.setQueryData(["bookmarked-topics"], context.previousBookmarkedData);
+        queryClient.setQueryData(
+          ["bookmarked-topics"],
+          context.previousBookmarkedData,
+        );
       }
       if (context?.previousProgressData) {
-        queryClient.setQueryData(["guidance-progress"], context.previousProgressData);
+        queryClient.setQueryData(
+          ["guidance-progress"],
+          context.previousProgressData,
+        );
       }
     },
     onSettled: () => {

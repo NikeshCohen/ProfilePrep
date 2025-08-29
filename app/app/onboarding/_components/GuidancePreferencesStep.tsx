@@ -134,7 +134,6 @@ export function GuidancePreferencesStep({
   onNext,
   onBack,
 }: GuidancePreferencesStepProps) {
-
   const goals = userType === "CANDIDATE" ? candidateGoals : recruiterGoals;
   const challenges =
     userType === "CANDIDATE" ? candidateChallenges : recruiterChallenges;
@@ -555,14 +554,13 @@ export function GuidancePreferencesStep({
     },
   ];
 
-
   // Validate all sections at once
   const isComplete = () => {
     return (
       // Section 1 validation
       preferences.experienceLevel &&
       (preferences.primaryGoals?.length || 0) > 0 &&
-      // Section 2 validation  
+      // Section 2 validation
       preferences.learningStyle &&
       preferences.timeCommitment &&
       // Section 3 validation

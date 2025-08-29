@@ -4,10 +4,10 @@ import { useOrganizationAnalyticsQuery } from "@/actions/queries/admin.queries";
 import { BarChart3, FileText, TrendingUp, Users } from "lucide-react";
 import { User } from "next-auth";
 
+import { Spinner } from "@/components/global/Spinner";
 import AccessDeniedCard from "@/components/shared/AccessDeniedCard";
 import EmptyState from "@/components/shared/EmptyState";
 import ErrorCard from "@/components/shared/ErrorCard";
-import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import StatsCard from "@/components/shared/StatsCard";
 import {
   Card,
@@ -42,7 +42,14 @@ export default function OrganizationAnalyticsClient({
   }
 
   if (isLoading) {
-    return <LoadingSpinner text="Loading analytics..." />;
+    return (
+      <div className="flex min-h-[400px] items-center justify-center">
+        <div className="space-y-4 text-center">
+          <Spinner />
+          <p className="text-muted-foreground">Loading analytics...</p>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
