@@ -18,6 +18,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 
 import { cn } from "@/lib/utils";
+import { isAdmin, isSuperAdmin } from "@/lib/roleUtils";
 
 interface CandidateLayoutProps {
   children: ReactNode;
@@ -25,16 +26,14 @@ interface CandidateLayoutProps {
 }
 
 function getFilteredNavItems(user: AuthUser) {
-  const isAdmin = user.role === "ADMIN" || user.role === "SUPERADMIN";
-
   return candidateSidebarItems.filter((item) => {
     // Filter admin-only items
-    if (item.adminOnly && !isAdmin) {
+    if (item.adminOnly && !isAdmin(user)) {
       return false;
     }
 
     // Filter superadmin-only items
-    if (item.superAdminOnly && user.role !== "SUPERADMIN") {
+    if (item.superAdminOnly && !isSuperAdmin(user)) {
       return false;
     }
 
@@ -45,7 +44,6 @@ function getFilteredNavItems(user: AuthUser) {
 export function CandidateLayout({ children, user }: CandidateLayoutProps) {
   const pathname = usePathname();
   const navItems = getFilteredNavItems(user);
-  const isAdmin = user.role === "ADMIN" || user.role === "SUPERADMIN";
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -79,7 +77,7 @@ export function CandidateLayout({ children, user }: CandidateLayoutProps) {
                 <Badge variant="secondary" className="text-xs">
                   Job Seeker
                 </Badge>
-                {isAdmin && (
+                {isAdmin(user) && (
                   <Badge
                     variant="outline"
                     className="border-primary text-xs text-primary"

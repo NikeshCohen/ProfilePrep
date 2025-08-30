@@ -13,6 +13,7 @@ import { TemplateUsage } from "@/app/dashboard/analytics/_components/TemplateUsa
 import { TopCompanies } from "@/app/dashboard/analytics/_components/TopCompanies";
 
 import { requireAuth } from "@/lib/utils";
+import { isSuperAdmin, isAdmin, isRecruiter, isCandidate } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Analytics",
@@ -22,12 +23,12 @@ export default async function AnalyticsPage() {
   const { user } = await requireAuth("/dashboard/analytics");
 
   // Only SuperAdmins can access this page - company admins should use their specific routes
-  if (user.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(user)) {
     // Redirect company admins to their specific analytics pages
-    if (user.role === "ADMIN") {
-      if (user.userType === "RECRUITER") {
+    if (isAdmin(user)) {
+      if (isRecruiter(user)) {
         redirect("/recruiter/analytics");
-      } else if (user.userType === "CANDIDATE") {
+      } else if (isCandidate(user)) {
         redirect("/portal/organization/analytics");
       }
     }

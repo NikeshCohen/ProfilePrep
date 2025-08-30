@@ -5,6 +5,7 @@ import GenerateContent from "@/app/app/_components/GenerateContent";
 import { OnboardingCheck } from "@/app/app/_components/OnboardingCheck";
 
 import { requireAuth } from "@/lib/utils";
+import { isCandidate, isRecruiter, isTester } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "ProfilePrep - AI-Powered CV Tools",
@@ -15,16 +16,16 @@ async function page() {
 
   const content = () => {
     // Show different content based on user type
-    if (user.userType === "CANDIDATE") {
+    if (isCandidate(user)) {
       return <AnalyzeContent />;
     }
 
-    if (user.userType === "RECRUITER") {
+    if (isRecruiter(user)) {
       return <GenerateContent />;
     }
 
     // TESTER type can access both - default to generation
-    if (user.userType === "TESTER") {
+    if (isTester(user)) {
       return <GenerateContent />;
     }
 

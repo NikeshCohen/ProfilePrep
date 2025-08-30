@@ -587,12 +587,14 @@ model CVAnalysis {
 All data access is automatically scoped to the user's company/organization:
 
 ```typescript
+import { isUser } from "@/lib/roleUtils";
+
 // Example: Get company documents
 const documents = await prisma.generatedDocs.findMany({
   where: {
     companyId: user.companyId,
     // Additional filters based on user role
-    ...(user.role === "USER" && { createdBy: user.id }),
+    ...(isUser(user) && { createdBy: user.id }),
   },
 });
 ```
@@ -600,9 +602,10 @@ const documents = await prisma.generatedDocs.findMany({
 #### Role-Based Access
 
 ```typescript
+import { isAdmin } from "@/lib/roleUtils";
+
 // Example: Admin can see all company data, users see only their own
-const canViewAllCompanyData =
-  user.role === "ADMIN" || user.role === "SUPERADMIN";
+const canViewAllCompanyData = isAdmin(user);
 const baseWhere = canViewAllCompanyData
   ? { companyId: user.companyId }
   : { companyId: user.companyId, userId: user.id };
@@ -765,11 +768,13 @@ Follow the established patterns:
 Ensure proper role and userType checking:
 
 ```typescript
+import { isAdmin } from "@/lib/roleUtils";
+
 export default async function NewFeaturePage() {
   const { user } = await requireAuth("/feature");
 
   // Role-based feature access
-  const canAccessFeature = user.role === 'ADMIN' || user.role === 'SUPERADMIN';
+  const canAccessFeature = isAdmin(user);
 
   if (!canAccessFeature) {
     return <AccessDeniedCard />;

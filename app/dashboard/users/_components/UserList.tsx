@@ -14,6 +14,7 @@ import {
   ErrorFallback,
   NoDataFallback,
 } from "@/components/global/QueryFallbacks";
+import { isSuperAdmin, isAdmin } from "@/lib/roleUtils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -84,9 +85,9 @@ const UserTable = ({ sessionUser }: { sessionUser: User }) => {
               <TableCell>
                 <Badge
                   variant={
-                    user.role === "SUPERADMIN"
+                    isSuperAdmin(user)
                       ? "destructive"
-                      : user.role === "ADMIN"
+                      : isAdmin(user)
                         ? "default"
                         : "secondary"
                   }

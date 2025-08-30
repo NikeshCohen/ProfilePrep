@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { BookOpen, Save } from "lucide-react";
 import { toast } from "react-hot-toast";
 
+import { isCandidate } from "@/lib/roleUtils";
+
 import { Spinner } from "@/components/global/Spinner";
 import { Button } from "@/components/ui/button";
 import {
@@ -150,10 +152,10 @@ export function GuidancePreferences({
     { id: "specialization", label: "Industry Specialization" },
   ];
 
-  const topics = userType === "CANDIDATE" ? candidateTopics : recruiterTopics;
+  const topics = isCandidate({ userType }) ? candidateTopics : recruiterTopics;
   const challenges =
-    userType === "CANDIDATE" ? candidateChallenges : recruiterChallenges;
-  const goals = userType === "CANDIDATE" ? candidateGoals : recruiterGoals;
+    isCandidate({ userType }) ? candidateChallenges : recruiterChallenges;
+  const goals = isCandidate({ userType }) ? candidateGoals : recruiterGoals;
 
   return (
     <Card>

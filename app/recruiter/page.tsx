@@ -13,6 +13,8 @@ import {
   Users,
 } from "lucide-react";
 
+import { isUser } from "@/lib/roleUtils";
+
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -106,7 +108,7 @@ export default async function RecruiterDashboard() {
           <CardContent>
             <div className="flex items-center space-x-2">
               <Badge variant="secondary">
-                {user.role === "USER" ? "Recruiter" : user.role}
+                {isUser(user) ? "Recruiter" : user.role}
               </Badge>
               {user.isTestAccount && (
                 <Badge

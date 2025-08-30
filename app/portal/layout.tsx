@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { ErrorBoundary } from "react-error-boundary";
 
 import FallBack from "@/components/global/Fallback";
+import { isRecruiter, isCandidate, isTester } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Candidate Portal | ProfilePrep",
@@ -24,13 +25,13 @@ export default async function PortalLayoutWrapper({
   }
 
   // Only allow candidates and testers
-  if (session.user.userType === "RECRUITER") {
+  if (isRecruiter(session.user)) {
     redirect("/recruiter"); // Recruiters should go to their dashboard
   }
 
   if (
-    session.user.userType !== "CANDIDATE" &&
-    session.user.userType !== "TESTER"
+    !isCandidate(session.user) &&
+    !isTester(session.user)
   ) {
     redirect("/app"); // Other types go to main app
   }

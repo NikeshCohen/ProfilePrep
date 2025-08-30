@@ -3,20 +3,11 @@
 import prisma from "@/prisma/prisma";
 import type { User } from "next-auth";
 
-import { getCompanyFilter, isSuperAdmin } from "@/lib/roleUtils";
+import { getCompanyFilter, isSuperAdmin, isAdmin, getUserFilter, isCandidate } from "@/lib/roleUtils";
 
 export async function getTotalUsers(user: User) {
-  // count all users (superadmins)
-  if (isSuperAdmin(user)) {
-    return await prisma.user.count();
-  }
-
-  // count only users in their company with the same user type (admins)
   return await prisma.user.count({
-    where: {
-      companyId: user.company?.id,
-      userType: user.userType, // Only count users of the same type (RECRUITER/CANDIDATE)
-    },
+    where: getUserFilter(user),
   });
 }
 
@@ -29,7 +20,7 @@ export async function getTotalDocs(user: User) {
   // count only docs from their company for same user type (admins)
   return await prisma.generatedDocs.count({
     where: {
-      companyId: user.company?.id,
+      ...getCompanyFilter(user),
       user: {
         userType: user.userType,
       },
@@ -52,7 +43,7 @@ export async function getDocsWithTrend(user: User, userId?: string) {
   const whereFilter = {
     ...userFilter,
     ...companyFilter,
-    ...(user.role === "ADMIN" && {
+    ...(isAdmin(user) && !isSuperAdmin(user) && {
       user: {
         userType: user.userType,
       },
@@ -74,7 +65,7 @@ export async function getDocsWithTrend(user: User, userId?: string) {
     where: {
       ...userFilter,
       ...companyFilter,
-      ...(user.role === "ADMIN" && {
+      ...(isAdmin(user) && !isSuperAdmin(user) && {
         user: {
           userType: user.userType,
         },
@@ -133,7 +124,7 @@ export async function getRecentActivity(user: User, userId?: string) {
     where: {
       ...userFilter,
       ...companyFilter,
-      ...(user.role === "ADMIN" && {
+      ...(isAdmin(user) && !isSuperAdmin(user) && {
         user: {
           userType: user.userType,
         },
@@ -176,15 +167,14 @@ export async function getSystemStats(user: User) {
   } else {
     // only their company's templates (admins)
     totalTemplates = await prisma.template.count({
-      where: {
-        companyId: user.company?.id,
-      },
+      where: getCompanyFilter(user),
     });
 
     // allowed templates for this company
+    const companyFilter = getCompanyFilter(user);
     const company = await prisma.company.findUnique({
       where: {
-        id: user.company?.id,
+        id: companyFilter.companyId,
       },
       select: {
         allowedTemplates: true,
@@ -207,10 +197,7 @@ export async function getSystemStats(user: User) {
   } else {
     // sum of allowed docs for users in this company with same user type (admins)
     const allowedDocsAgg = await prisma.user.aggregate({
-      where: {
-        companyId: user.company?.id,
-        userType: user.userType,
-      },
+      where: getUserFilter(user),
       _sum: {
         allowedDocs: true,
       },
@@ -253,7 +240,7 @@ export async function getUserStats(userId?: string) {
 
 // Candidate-specific statistics functions
 export async function getCandidateStats(user: User) {
-  if (user.userType !== "CANDIDATE") {
+  if (!isCandidate(user)) {
     return {
       totalAnalyses: 0,
       averageScore: 0,
@@ -266,23 +253,25 @@ export async function getCandidateStats(user: User) {
   const userFilter = { userId: user.id };
 
   // Company filter for admin candidates
+  const baseCompanyFilter = getCompanyFilter(user);
   let companyFilter = {};
-  if (user.role === "ADMIN" && user.company?.id) {
+  if (isAdmin(user) && !isSuperAdmin(user) && baseCompanyFilter.companyId) {
     companyFilter = {
       user: {
-        companyId: user.company.id,
+        ...baseCompanyFilter,
         userType: "CANDIDATE",
       },
     };
   }
 
+  const isAdminNotSuper = isAdmin(user) && !isSuperAdmin(user);
   const totalAnalyses = await prisma.cVAnalysis.count({
-    where: user.role === "ADMIN" ? companyFilter : userFilter,
+    where: isAdminNotSuper ? companyFilter : userFilter,
   });
 
   // Get average score for the candidate or organization
   const analysesWithScores = await prisma.cVAnalysis.findMany({
-    where: user.role === "ADMIN" ? companyFilter : userFilter,
+    where: isAdminNotSuper ? companyFilter : userFilter,
     select: {
       overallScore: true,
     },
@@ -309,7 +298,7 @@ export async function getCandidateStats(user: User) {
 
   const recentAnalyses = await prisma.cVAnalysis.count({
     where: {
-      ...(user.role === "ADMIN" ? companyFilter : userFilter),
+      ...(isAdminNotSuper ? companyFilter : userFilter),
       createdAt: {
         gte: thirtyDaysAgo,
       },

@@ -5,6 +5,7 @@ import UserList from "@/app/dashboard/users/_components/UserList";
 import NewUser from "@/app/dashboard/users/_components/UserManipulations";
 
 import { requireAuth } from "@/lib/utils";
+import { isRecruiterAdmin, hasCompanyAccess } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Team Management | Recruiter Dashboard",
@@ -15,12 +16,12 @@ async function RecruiterUsersPage() {
   const { user } = await requireAuth("/recruiter/users");
 
   // Only allow recruiter admins (not candidates or superadmins)
-  if (user.role !== "ADMIN" || user.userType !== "RECRUITER") {
+  if (!isRecruiterAdmin(user)) {
     redirect("/recruiter");
   }
 
   // Ensure they have a company
-  if (!user.company?.id) {
+  if (!hasCompanyAccess(user)) {
     redirect("/recruiter");
   }
 
@@ -30,7 +31,7 @@ async function RecruiterUsersPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Team Management</h1>
           <p className="text-muted-foreground">
-            Manage recruiters in {user.company.name}
+            Manage recruiters in {user.company?.name}
           </p>
         </div>
         <NewUser sessionUser={user} />

@@ -7,6 +7,7 @@ import { User } from "next-auth";
 
 import { handleError } from "@/lib/apiUtils";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { isAdmin, isSuperAdmin, getCompanyFilter, isCandidateAdmin, canAccessCompanyResource } from "@/lib/roleUtils";
 
 interface CreateTemplateData {
   name: string;
@@ -19,37 +20,22 @@ interface EditTemplateData {
   companyId?: string;
 }
 
-export const fetchAllUsers = async (user: {
-  role: string;
-  companyId?: string;
-  userType?: string;
-}) => {
+export const fetchAllUsers = async (user: User) => {
   // Check user role
-  if (user.role === "USER") {
+  if (!isAdmin(user)) {
     throw new Error(
       "403 Forbidden: You do not have permission to access this resource.",
     );
   }
 
-  // If the user is an admin, fetch users from their company
-  if (user.role === "ADMIN") {
-    return await prisma.user.findMany({
-      where: {
-        companyId: user.companyId,
-      },
-      include: {
-        company: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-  }
+  // Get the appropriate filter based on role
+  const companyFilter = getCompanyFilter(user);
+  
+  // If superadmin with userType filter specified
+  const whereClause = isSuperAdmin(user) && user.userType
+    ? { ...companyFilter, userType: user.userType as "RECRUITER" | "CANDIDATE" | "TESTER" }
+    : companyFilter;
 
-  // If the user is a superadmin, fetch all users (or filter by user type if specified)
-  const whereClause = user.userType
-    ? { userType: user.userType as "RECRUITER" | "CANDIDATE" | "TESTER" }
-    : {};
   return await prisma.user.findMany({
     where: whereClause,
     include: {
@@ -93,21 +79,19 @@ export const editUser = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to edit users.",
     };
   }
 
-  // If admin, verify the user belongs to their company
-  if (sessionUser.role === "ADMIN") {
-    if (userData.companyId !== sessionUser.company?.id) {
-      return {
-        success: false,
-        message: "403 Forbidden: You can only edit users from your company.",
-      };
-    }
+  // If admin (not superadmin), verify the user belongs to their company
+  if (!canAccessCompanyResource(sessionUser, userData.companyId)) {
+    return {
+      success: false,
+      message: "403 Forbidden: You can only edit users from your company.",
+    };
   }
 
   try {
@@ -165,21 +149,21 @@ export const editUser = async (
 
 export const deleteUser = async (userId: string, sessionUser: User) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to delete users.",
     };
   }
 
-  // If admin, verify the user belongs to their company
-  if (sessionUser.role === "ADMIN") {
+  // If admin (not superadmin), verify the user belongs to their company
+  if (!isSuperAdmin(sessionUser)) {
     const userToDelete = await prisma.user.findUnique({
       where: { id: userId },
       select: { companyId: true },
     });
 
-    if (!userToDelete || userToDelete.companyId !== sessionUser.company?.id) {
+    if (!userToDelete || !canAccessCompanyResource(sessionUser, userToDelete.companyId)) {
       return {
         success: false,
         message: "403 Forbidden: You can only delete users from your company.",
@@ -228,7 +212,7 @@ export const updateCompany = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: Only superadmins can update companies.",
@@ -297,7 +281,7 @@ export const updateCompany = async (
 
 export const deleteCompany = async (companyId: string, sessionUser: User) => {
   // Check permissions
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: Only superadmins can delete companies.",
@@ -348,7 +332,7 @@ export const fetchAllCompanies = async (
   sessionUser: User,
   companyType?: string,
 ) => {
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     throw new Error(
       "403 Forbidden: You do not have permission to access this resource.",
     );
@@ -386,7 +370,7 @@ export const fetchAllCompanies = async (
 };
 
 export async function getAllUserDocs(sessionUser: User) {
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to delete users.",
@@ -428,12 +412,10 @@ export async function getAllUserDocs(sessionUser: User) {
 
 export async function fetchAllTemplates(sessionUser: User) {
   try {
-    // If admin or user, fetch only company templates
-    if (sessionUser.role === "ADMIN" || sessionUser.role === "USER") {
+    // If not superadmin, fetch only company templates
+    if (!isSuperAdmin(sessionUser)) {
       const templates = await prisma.template.findMany({
-        where: {
-          companyId: sessionUser.company?.id,
-        },
+        where: getCompanyFilter(sessionUser),
         select: {
           id: true,
           name: true,
@@ -515,7 +497,7 @@ export const createTemplate = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to create templates.",
@@ -523,10 +505,10 @@ export const createTemplate = async (
   }
 
   try {
-    // If admin, verify the template is being created for their company
+    // If admin (not superadmin), verify the template is being created for their company
     if (
-      sessionUser.role === "ADMIN" &&
-      templateData.companyId !== sessionUser.company?.id
+      !isSuperAdmin(sessionUser) &&
+      !canAccessCompanyResource(sessionUser, templateData.companyId)
     ) {
       return {
         success: false,
@@ -590,7 +572,7 @@ export const editTemplate = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to edit templates.",
@@ -611,10 +593,10 @@ export const editTemplate = async (
       };
     }
 
-    // If admin, verify they're editing a template from their company
+    // If admin (not superadmin), verify they're editing a template from their company
     if (
-      sessionUser.role === "ADMIN" &&
-      currentTemplate.companyId !== sessionUser.company?.id
+      !isSuperAdmin(sessionUser) &&
+      !canAccessCompanyResource(sessionUser, currentTemplate.companyId)
     ) {
       return {
         success: false,
@@ -623,14 +605,14 @@ export const editTemplate = async (
       };
     }
 
-    // If admin, ensure they can't change the company
-    if (sessionUser.role === "ADMIN" && templateData.companyId) {
+    // If admin (not superadmin), ensure they can't change the company
+    if (!isSuperAdmin(sessionUser) && templateData.companyId) {
       delete templateData.companyId;
     }
 
     // If superadmin is changing company, verify the new company exists
     if (
-      sessionUser.role === "SUPERADMIN" &&
+      isSuperAdmin(sessionUser) &&
       templateData.companyId &&
       templateData.companyId !== currentTemplate.companyId
     ) {
@@ -695,7 +677,7 @@ export const editTemplate = async (
 
 export const deleteTemplate = async (templateId: string, sessionUser: User) => {
   // Check permissions
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: Only Super Admins can delete templates.",
@@ -742,22 +724,20 @@ export const deleteTemplate = async (templateId: string, sessionUser: User) => {
 
 // Candidate organization actions
 export const getOrganizationMembers = async (user: User) => {
-  if (
-    (user.role !== "ADMIN" && user.role !== "SUPERADMIN") ||
-    user.userType !== "CANDIDATE"
-  ) {
+  if (!isCandidateAdmin(user)) {
     throw new Error(
       "Unauthorized: Insufficient permissions for candidate organization access",
     );
   }
 
-  if (!user.company?.id) {
+  const companyFilter = getCompanyFilter(user);
+  if (!companyFilter.companyId) {
     throw new Error("User not associated with any organization");
   }
 
   return await prisma.user.findMany({
     where: {
-      companyId: user.company.id,
+      ...companyFilter,
       userType: "CANDIDATE",
     },
     select: {
@@ -777,23 +757,21 @@ export const getOrganizationMembers = async (user: User) => {
 };
 
 export const getOrganizationAnalyses = async (user: User) => {
-  if (
-    (user.role !== "ADMIN" && user.role !== "SUPERADMIN") ||
-    user.userType !== "CANDIDATE"
-  ) {
+  if (!isCandidateAdmin(user)) {
     throw new Error(
       "Unauthorized: Insufficient permissions for candidate organization access",
     );
   }
 
-  if (!user.company?.id) {
+  const companyFilter = getCompanyFilter(user);
+  if (!companyFilter.companyId) {
     return [];
   }
 
   return await prisma.cVAnalysis.findMany({
     where: {
       user: {
-        companyId: user.company.id,
+        ...companyFilter,
         userType: "CANDIDATE",
       },
     },
@@ -812,10 +790,7 @@ export const getOrganizationAnalyses = async (user: User) => {
 };
 
 export const getOrganizationAnalytics = async (user: User) => {
-  if (
-    (user.role !== "ADMIN" && user.role !== "SUPERADMIN") ||
-    user.userType !== "CANDIDATE"
-  ) {
+  if (!isCandidateAdmin(user)) {
     throw new Error(
       "Unauthorized: Insufficient permissions for candidate organization access",
     );

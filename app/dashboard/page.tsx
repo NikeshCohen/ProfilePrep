@@ -13,6 +13,8 @@ import {
 import { SystemStatus } from "@/app/dashboard/_components/statistics/SystemStatus";
 
 import { requireAuth } from "@/lib/utils";
+import { isRecruiter, isCandidate } from "@/lib/roleUtils";
+import { isSuperAdmin, isAdmin } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Global Dashboard | SuperAdmin",
@@ -22,17 +24,17 @@ export default async function DashboardPage() {
   const { user } = await requireAuth("/dashboard");
 
   // Only SuperAdmins can access this page - redirect company admins to their specific dashboards
-  if (user.role !== "SUPERADMIN") {
-    if (user.role === "ADMIN") {
-      if (user.userType === "RECRUITER") {
+  if (!isSuperAdmin(user)) {
+    if (isAdmin(user)) {
+      if (isRecruiter(user)) {
         redirect("/recruiter");
-      } else if (user.userType === "CANDIDATE") {
+      } else if (isCandidate(user)) {
         redirect("/portal");
       }
-    } else if (user.role === "USER") {
-      if (user.userType === "RECRUITER") {
+    } else {
+      if (isRecruiter(user)) {
         redirect("/recruiter");
-      } else if (user.userType === "CANDIDATE") {
+      } else if (isCandidate(user)) {
         redirect("/portal");
       } else {
         redirect("/app");

@@ -26,6 +26,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import { isAdmin, isSuperAdmin } from "@/lib/roleUtils";
+
 interface MemberManagementProps {
   sessionUser: User;
 }
@@ -66,8 +68,7 @@ export default function MemberManagement({
     }
   };
 
-  const canAddMembers =
-    sessionUser.role === "ADMIN" || sessionUser.role === "SUPERADMIN";
+  const canAddMembers = isAdmin(sessionUser);
 
   if (!canAddMembers) return null;
 
@@ -127,7 +128,7 @@ export default function MemberManagement({
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="USER">User</SelectItem>
-                  {sessionUser.role === "SUPERADMIN" && (
+                  {isSuperAdmin(sessionUser) && (
                     <SelectItem value="ADMIN">Admin</SelectItem>
                   )}
                 </SelectContent>

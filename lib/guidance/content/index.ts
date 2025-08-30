@@ -14,6 +14,7 @@ import {
   GuidancePreferences,
   TopicContent,
 } from "@/lib/guidance/content/types";
+import { isCandidate } from "@/lib/roleUtils";
 
 // Topic mapping for cleaner API
 const CANDIDATE_TOPICS = {
@@ -37,7 +38,7 @@ export function getTopicContent(
   preferences?: GuidancePreferences,
 ): TopicContent | null {
   try {
-    if (userType === "CANDIDATE") {
+    if (isCandidate({ userType })) {
       const generator =
         CANDIDATE_TOPICS[topicId as keyof typeof CANDIDATE_TOPICS];
       return generator
@@ -58,7 +59,7 @@ export function getTopicContent(
 export function getAvailableTopics(
   userType: "CANDIDATE" | "RECRUITER",
 ): string[] {
-  return userType === "CANDIDATE"
+  return isCandidate({ userType })
     ? Object.keys(CANDIDATE_TOPICS)
     : Object.keys(RECRUITER_TOPICS);
 }

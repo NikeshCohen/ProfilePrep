@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { auth } from "@/auth";
 import prisma from "@/prisma/prisma";
+import { isCandidate } from "@/lib/roleUtils";
 
 export async function POST(request: NextRequest) {
   try {
@@ -52,7 +53,7 @@ export async function POST(request: NextRequest) {
       success: true,
       userType,
       targetEmail,
-      redirectUrl: userType === "CANDIDATE" ? "/portal" : "/recruiter",
+      redirectUrl: isCandidate({ userType }) ? "/portal" : "/recruiter",
       message: `Ready to switch to ${userType.toLowerCase()} mode`,
     });
   } catch (error) {

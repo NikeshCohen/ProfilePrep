@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import { ErrorBoundary } from "react-error-boundary";
 
 import FallBack from "@/components/global/Fallback";
+import { isCandidate, isRecruiter, isTester } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Recruiter Dashboard | ProfilePrep",
@@ -24,13 +25,13 @@ export default async function RecruiterLayoutWrapper({
   }
 
   // Only allow recruiter user types (including admin recruiters)
-  if (session.user.userType === "CANDIDATE") {
+  if (isCandidate(session.user)) {
     redirect("/portal"); // Candidates should go to their portal
   }
 
   if (
-    session.user.userType !== "RECRUITER" &&
-    session.user.userType !== "TESTER"
+    !isRecruiter(session.user) &&
+    !isTester(session.user)
   ) {
     redirect("/app"); // Other types go to main app
   }

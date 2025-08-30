@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
 import { getUserWithCompany } from "@/actions/user.actions";
+import { isAdmin } from "@/lib/roleUtils";
 
 /**
  * Redirects user to appropriate dashboard based on their user type
@@ -14,7 +15,7 @@ export async function redirectToDashboard(userId: string) {
   }
 
   // Route based on user type and role
-  if (user.role === "ADMIN" || user.role === "SUPERADMIN") {
+  if (isAdmin(user)) {
     redirect("/dashboard"); // Admin dashboard for all admins
     return;
   }
@@ -46,7 +47,7 @@ export async function getDashboardRoute(userId: string): Promise<string> {
   }
 
   // Route based on user type and role
-  if (user.role === "ADMIN" || user.role === "SUPERADMIN") {
+  if (isAdmin(user)) {
     return "/dashboard"; // Admin dashboard for all admins
   } else {
     switch (user.userType) {

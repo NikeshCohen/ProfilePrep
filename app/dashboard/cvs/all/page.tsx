@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import GeneratedDocsList from "@/app/dashboard/cvs/all/_components/DocList";
 
 import { requireAuth } from "@/lib/utils";
+import { isSuperAdmin } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "All CVs",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 async function page() {
   const { user } = await requireAuth("/app/cvs/all");
 
-  if (user.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(user)) {
     redirect("/dashboard/cvs");
   }
 

@@ -11,6 +11,8 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { User } from "next-auth";
 
+import { isCandidateAdmin, hasCompanyAccess } from "@/lib/roleUtils";
+
 export const useUsersQuery = (sessionUser: User) => {
   return useQuery({
     queryKey: ["users"],
@@ -38,11 +40,7 @@ export const useOrganizationMembersQuery = (user: User) => {
   return useQuery({
     queryKey: ["organizationMembers", user.company?.id],
     queryFn: () => getOrganizationMembers(user),
-    enabled: !!(
-      user.company?.id &&
-      user.userType === "CANDIDATE" &&
-      (user.role === "ADMIN" || user.role === "SUPERADMIN")
-    ),
+    enabled: !!(hasCompanyAccess(user) && isCandidateAdmin(user)),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
@@ -51,11 +49,7 @@ export const useOrganizationAnalysesQuery = (user: User) => {
   return useQuery({
     queryKey: ["organizationAnalyses", user.company?.id],
     queryFn: () => getOrganizationAnalyses(user),
-    enabled: !!(
-      user.company?.id &&
-      user.userType === "CANDIDATE" &&
-      (user.role === "ADMIN" || user.role === "SUPERADMIN")
-    ),
+    enabled: !!(hasCompanyAccess(user) && isCandidateAdmin(user)),
     staleTime: 1000 * 60 * 5, // 5 minutes
   });
 };
@@ -64,11 +58,7 @@ export const useOrganizationAnalyticsQuery = (user: User) => {
   return useQuery({
     queryKey: ["organizationAnalytics", user.company?.id],
     queryFn: () => getOrganizationAnalytics(user),
-    enabled: !!(
-      user.company?.id &&
-      user.userType === "CANDIDATE" &&
-      (user.role === "ADMIN" || user.role === "SUPERADMIN")
-    ),
+    enabled: !!(hasCompanyAccess(user) && isCandidateAdmin(user)),
     staleTime: 1000 * 60 * 2, // 2 minutes for analytics
   });
 };

@@ -8,6 +8,7 @@ import { useTemplatesQuery } from "@/actions/queries/user.queries";
 import type { CandidateData } from "@/types";
 import { motion } from "framer-motion";
 import { User } from "next-auth";
+import { hasCompanyAccess } from "@/lib/roleUtils";
 
 import { LoaderIcon } from "@/components/global/LoaderButton";
 import { Input } from "@/components/ui/input";
@@ -227,10 +228,10 @@ function TemplateSelect({
 
   useEffect(() => {
     // Auto-select ProfilePrep template if user doesn't have a company
-    if (!sessionUser.company && !value) {
+    if (!hasCompanyAccess(sessionUser) && !value) {
       onValueChange("pp", undefined);
     }
-  }, [sessionUser.company, value, onValueChange]);
+  }, [sessionUser, value, onValueChange]);
 
   const handleTemplateChange = (selectedId: string) => {
     const selectedTemplate = templates?.templates?.find(
@@ -240,7 +241,7 @@ function TemplateSelect({
   };
 
   const hasCustomTemplates =
-    sessionUser.company &&
+    hasCompanyAccess(sessionUser) &&
     templates?.success &&
     templates.templates &&
     templates.templates.length > 0;
@@ -250,14 +251,14 @@ function TemplateSelect({
       <Select
         value={value || undefined}
         onValueChange={handleTemplateChange}
-        disabled={isLoading || !sessionUser.company}
+        disabled={isLoading || !hasCompanyAccess(sessionUser)}
       >
         <SelectTrigger className="bg-background/20">
           <SelectValue placeholder="Choose a template style" />
           {isLoading && <LoaderIcon className="ml-2 h-4 w-4 animate-spin" />}
         </SelectTrigger>
         <SelectContent>
-          {isLoading && sessionUser.company ? (
+          {isLoading && hasCompanyAccess(sessionUser) ? (
             <div className="flex items-center justify-center py-2">
               <p className="text-sm text-muted-foreground">
                 Loading templates...
@@ -276,7 +277,7 @@ function TemplateSelect({
           )}
         </SelectContent>
       </Select>
-      {!sessionUser.company && (
+      {!hasCompanyAccess(sessionUser) && (
         <Link
           href="https://cal.com/profileprep/quick-chat"
           target="_blank"

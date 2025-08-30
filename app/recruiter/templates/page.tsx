@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
+import { isRecruiterAdmin, hasCompanyAccess } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Templates | Recruiter Dashboard",
@@ -12,12 +13,12 @@ async function RecruiterTemplatesPage() {
   const { user } = await requireAuth("/recruiter/templates");
 
   // Only allow recruiter admins (not candidates or superadmins)
-  if (user.role !== "ADMIN" || user.userType !== "RECRUITER") {
+  if (!isRecruiterAdmin(user)) {
     redirect("/recruiter");
   }
 
   // Ensure they have a company
-  if (!user.company?.id) {
+  if (!hasCompanyAccess(user)) {
     redirect("/recruiter");
   }
 
@@ -29,7 +30,7 @@ async function RecruiterTemplatesPage() {
             Template Management
           </h1>
           <p className="text-muted-foreground">
-            Manage CV templates for {user.company.name}
+            Manage CV templates for {user.company?.name}
           </p>
         </div>
         <button className="rounded-md bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90">

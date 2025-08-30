@@ -20,6 +20,8 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Slider } from "@/components/ui/slider";
 import { Textarea } from "@/components/ui/textarea";
 
+import { isCandidate } from "@/lib/roleUtils";
+
 export interface GuidancePreferences {
   // Experience and Goals
   experienceLevel: "entry" | "mid" | "senior" | "executive" | "changing";
@@ -134,10 +136,10 @@ export function GuidancePreferencesStep({
   onNext,
   onBack,
 }: GuidancePreferencesStepProps) {
-  const goals = userType === "CANDIDATE" ? candidateGoals : recruiterGoals;
+  const goals = isCandidate({ userType }) ? candidateGoals : recruiterGoals;
   const challenges =
-    userType === "CANDIDATE" ? candidateChallenges : recruiterChallenges;
-  const topics = userType === "CANDIDATE" ? candidateTopics : recruiterTopics;
+    isCandidate({ userType }) ? candidateChallenges : recruiterChallenges;
+  const topics = isCandidate({ userType }) ? candidateTopics : recruiterTopics;
 
   const updatePreference = (
     key: keyof GuidancePreferences,
@@ -234,7 +236,7 @@ export function GuidancePreferencesStep({
             </div>
           </div>
 
-          {userType === "CANDIDATE" && (
+          {isCandidate({ userType }) && (
             <div className="space-y-3">
               <Label className="text-base font-medium">
                 Current job search status

@@ -28,6 +28,7 @@ import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 
 import { requireAuth } from "@/lib/utils";
+import { isRecruiterAdmin, isSuperAdmin, isUser } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Settings | Recruiter Dashboard",
@@ -36,8 +37,7 @@ export const metadata: Metadata = {
 
 export default async function RecruiterSettingsPage() {
   const { user } = await requireAuth("/recruiter/settings");
-  const isAdmin = user.role === "ADMIN" || user.role === "SUPERADMIN";
-  const isRecruiterAdmin = isAdmin && user.userType === "RECRUITER";
+  const isRecruiterAdminUser = isRecruiterAdmin(user);
 
   // Fetch actual documents count
   const documentsResult = await getRecruiterDocuments(user.id!);
@@ -61,7 +61,7 @@ export default async function RecruiterSettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-        {isRecruiterAdmin ? (
+        {isRecruiterAdminUser ? (
           <p className="text-muted-foreground">
             Administrative settings and recruiter preferences
           </p>
@@ -113,7 +113,7 @@ export default async function RecruiterSettingsPage() {
                 </label>
                 <div className="flex items-center space-x-2">
                   <Badge variant="secondary">
-                    {user.role === "USER" ? "Recruiter" : user.role}
+                    {isUser(user) ? "Recruiter" : user.role}
                   </Badge>
                   {user.isTestAccount && (
                     <Badge
@@ -136,7 +136,7 @@ export default async function RecruiterSettingsPage() {
                 <p className="text-sm text-muted-foreground">
                   You are affiliated with{" "}
                   <span className="font-medium">{user.company.name}</span>
-                  {isRecruiterAdmin && " (Administrator)"}
+                  {isRecruiterAdminUser && " (Administrator)"}
                 </p>
               </div>
             )}
@@ -283,7 +283,7 @@ export default async function RecruiterSettingsPage() {
       </Card>
 
       {/* Admin-only settings for recruiter companies */}
-      {isRecruiterAdmin && (
+      {isRecruiterAdminUser && (
         <>
           <Card className="border-primary/20 bg-card/40">
             <CardHeader>
@@ -325,7 +325,7 @@ export default async function RecruiterSettingsPage() {
                   You have {user.role.toLowerCase()} permissions for company
                   management.
                 </p>
-                {user.role === "SUPERADMIN" && (
+                {isSuperAdmin(user) && (
                   <p className="mt-1 text-sm font-medium text-orange-600">
                     Super Admin: Full system access across all companies
                   </p>

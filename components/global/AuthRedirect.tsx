@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 import { useSession } from "next-auth/react";
 
+import { isCandidate, isRecruiter, isTester } from "@/lib/roleUtils";
+
 export function AuthRedirect() {
   const { data: session } = useSession();
   const router = useRouter();
@@ -16,13 +18,13 @@ export function AuthRedirect() {
       const currentPath = window.location.pathname;
 
       // Don't redirect if we're already in the correct section
-      if (userType === "CANDIDATE" && currentPath.startsWith("/portal")) {
+      if (isCandidate({ userType }) && currentPath.startsWith("/portal")) {
         return;
       }
-      if (userType === "RECRUITER" && currentPath.startsWith("/recruiter")) {
+      if (isRecruiter({ userType }) && currentPath.startsWith("/recruiter")) {
         return;
       }
-      if (userType === "TESTER") {
+      if (isTester({ userType })) {
         // Testers can access both, so don't auto-redirect
         return;
       }
@@ -34,9 +36,9 @@ export function AuthRedirect() {
         currentPath === "/dashboard" ||
         currentPath === "/portal"
       ) {
-        if (userType === "CANDIDATE") {
+        if (isCandidate({ userType })) {
           router.replace("/portal");
-        } else if (userType === "RECRUITER") {
+        } else if (isRecruiter({ userType })) {
           router.replace("/recruiter");
         }
       }

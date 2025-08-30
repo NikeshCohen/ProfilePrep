@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/auth";
 import prisma from "@/prisma/prisma";
+import { shouldShowOnboarding } from "@/lib/roleUtils";
 
 export async function OnboardingCheck({
   children,
@@ -23,12 +24,8 @@ export async function OnboardingCheck({
     },
   });
 
-  // If user hasn't completed onboarding and isn't a tester/test account, redirect to onboarding
-  if (
-    !user?.onboardingCompleted &&
-    user?.userType !== "TESTER" &&
-    !user?.isTestAccount
-  ) {
+  // If user should show onboarding, redirect to onboarding
+  if (user && shouldShowOnboarding(user)) {
     redirect("/app/onboarding");
   }
 

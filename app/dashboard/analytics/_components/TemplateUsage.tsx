@@ -21,7 +21,6 @@ interface TemplateUsageProps {
 
 export function TemplateUsage({ user }: TemplateUsageProps) {
   const { data: templateUsage, isLoading, error } = useTemplateUsageQuery(user);
-  // const isSuperAdmin = user.role === "SUPERADMIN";
   const isSuperAdminUser = isSuperAdmin(user);
 
   if (isLoading) {

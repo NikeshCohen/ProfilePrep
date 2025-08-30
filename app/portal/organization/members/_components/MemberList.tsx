@@ -29,6 +29,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { isSuperAdmin, isAdmin, canAccessCompanyResource, isCandidate, isUser } from "@/lib/roleUtils";
+
 // Type for database user with all properties
 type DatabaseUser = {
   id: string;
@@ -57,8 +59,8 @@ const MemberContextMenu = ({
   sessionUser,
 }: MemberContextMenuProps) => {
   const canModify =
-    sessionUser.role === "SUPERADMIN" ||
-    (sessionUser.role === "ADMIN" && memberData.role !== "SUPERADMIN");
+    isSuperAdmin(sessionUser) ||
+    (isAdmin(sessionUser) && !isSuperAdmin(memberData));
 
   if (!canModify) return null;
 
@@ -92,10 +94,10 @@ const MemberTable = ({ sessionUser }: { sessionUser: User }) => {
 
     return members.filter(
       (member: DatabaseUser) =>
-        member.userType === "CANDIDATE" &&
-        member.company?.id === sessionUser.company?.id,
+        isCandidate(member) &&
+        canAccessCompanyResource(sessionUser, member.company?.id),
     );
-  }, [members, sessionUser.company?.id]);
+  }, [members, sessionUser]);
 
   if (isLoading) {
     return (
@@ -157,11 +159,11 @@ const MemberTable = ({ sessionUser }: { sessionUser: User }) => {
               <TableCell>
                 <div className="flex items-center space-x-2">
                   <Badge
-                    variant={member.role === "USER" ? "secondary" : "default"}
+                    variant={isUser(member) ? "secondary" : "default"}
                     className={
-                      member.role === "ADMIN"
+                      isAdmin(member) && !isSuperAdmin(member)
                         ? "bg-primary text-primary-foreground"
-                        : member.role === "SUPERADMIN"
+                        : isSuperAdmin(member)
                           ? "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
                           : ""
                     }

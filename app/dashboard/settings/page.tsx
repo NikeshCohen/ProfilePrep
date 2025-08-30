@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 
 import { requireAuth } from "@/lib/utils";
+import { isAdmin, isSuperAdmin } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Settings",
@@ -23,13 +24,13 @@ export const metadata: Metadata = {
 
 export default async function SettingsPage() {
   const { user } = await requireAuth("/dashboard/settings");
-  const isAdmin = user.role === "ADMIN" || user.role === "SUPERADMIN";
+  const isAdminUser = isAdmin(user);
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-        {isAdmin && (
+        {isAdminUser && (
           <p className="text-muted-foreground">
             Administrative settings and user preferences
           </p>
@@ -120,7 +121,7 @@ export default async function SettingsPage() {
         </Card>
 
         {/* Admin-only settings */}
-        {isAdmin && (
+        {isAdminUser && (
           <>
             <Card className="bg-card/40 md:col-span-2">
               <CardHeader>
@@ -200,7 +201,7 @@ export default async function SettingsPage() {
                     You have {user.role.toLowerCase()} permissions with access
                     to system management features.
                   </p>
-                  {user.role === "SUPERADMIN" && (
+                  {isSuperAdmin(user) && (
                     <p className="mt-1 text-sm font-medium text-orange-600">
                       Super Admin: Full system access including company
                       management

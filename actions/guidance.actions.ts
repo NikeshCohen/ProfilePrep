@@ -7,6 +7,7 @@ import prisma from "@/prisma/prisma";
 import { UserType } from "@prisma/client";
 
 import { GuidancePreferences } from "@/lib/guidance/content/types";
+import { isCandidate } from "@/lib/roleUtils";
 
 // ==================== QUERY FUNCTIONS (READ) ====================
 
@@ -176,7 +177,7 @@ export async function getPersonalizedRecommendations() {
     if (recommendations.length < 3) {
       let profileRecommendations: string[] = [];
 
-      if (user.userType === "CANDIDATE") {
+      if (isCandidate(user)) {
         // Enhanced candidate recommendations based on preferences
         if (preferences?.jobSearchStatus === "active") {
           profileRecommendations = [

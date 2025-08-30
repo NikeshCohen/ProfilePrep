@@ -7,6 +7,8 @@ import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import LinkedIn from "next-auth/providers/linkedin";
 
+import { isRecruiter } from "@/lib/roleUtils";
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   trustHost: true,
   adapter: PrismaAdapter(prisma) as Adapter,
@@ -72,7 +74,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!testUser) {
             // First check if demo company exists (for recruiter accounts)
             let demoCompany = null;
-            if (demoAccount.userType === "RECRUITER") {
+            // if (demoAccount.userType === "RECRUITER") {
+            if (isRecruiter(demoAccount)) {
               demoCompany = await prisma.company.findFirst({
                 where: { name: "Demo Company" },
               });

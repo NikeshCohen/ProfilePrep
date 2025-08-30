@@ -22,7 +22,6 @@ interface SystemStatusProps {
 
 export function SystemStatus({ user }: SystemStatusProps) {
   const { data: stats, isLoading, error } = useSystemStatsQuery(user);
-  // const isSuperAdmin = user.role === "SUPERADMIN";
   const isSuperAdminUser = isSuperAdmin(user);
 
   if (isLoading) {

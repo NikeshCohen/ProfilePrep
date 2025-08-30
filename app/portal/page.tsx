@@ -26,15 +26,15 @@ import {
 } from "@/components/ui/card";
 
 import { requireAuth } from "@/lib/utils";
+import { isAdmin, isCandidateAdmin } from "@/lib/roleUtils";
 
 export default async function CandidateDashboard() {
   const { user } = await requireAuth("/portal");
-  const isAdmin = user.role === "ADMIN" || user.role === "SUPERADMIN";
-  const isCandidateAdmin = isAdmin && user.userType === "CANDIDATE";
+  const isCandidateAdminUser = isCandidateAdmin(user);
 
   // Get candidate statistics
   const personalStats = user.id ? await getCandidateUserStats(user.id) : null;
-  const orgStats = isCandidateAdmin ? await getCandidateStats(user) : null;
+  const orgStats = isCandidateAdminUser ? await getCandidateStats(user) : null;
 
   // Fetch actual documents for monthly usage calculation
   const documentsResult = await getRecruiterDocuments(user.id!);
@@ -60,7 +60,7 @@ export default async function CandidateDashboard() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          {isCandidateAdmin ? (
+          {isCandidateAdminUser ? (
             <p className="text-muted-foreground">
               Organization overview and CV analysis platform for candidates
             </p>
@@ -73,7 +73,7 @@ export default async function CandidateDashboard() {
         </div>
         <div className="flex items-center space-x-2">
           <Badge variant="secondary">Job Seeker</Badge>
-          {isAdmin && (
+          {isAdmin(user) && (
             <Badge variant="outline" className="border-primary text-primary">
               Admin
             </Badge>
@@ -82,7 +82,7 @@ export default async function CandidateDashboard() {
       </div>
 
       {/* Organization Stats for Admins */}
-      {isCandidateAdmin && (
+      {isCandidateAdminUser && (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           <Card className="bg-card/40">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -240,7 +240,7 @@ export default async function CandidateDashboard() {
               <p className="text-sm text-muted-foreground">
                 You are a member of{" "}
                 <span className="font-medium">{user.company.name}</span>
-                {isCandidateAdmin && " (Administrator)"}
+                {isCandidateAdminUser && " (Administrator)"}
               </p>
             </div>
           )}
@@ -299,7 +299,7 @@ export default async function CandidateDashboard() {
         </Card>
 
         {/* Admin Quick Actions */}
-        {isCandidateAdmin && (
+        {isCandidateAdminUser && (
           <Card className="border-primary/20 bg-card/40">
             <CardHeader>
               <CardTitle>Organization Management</CardTitle>

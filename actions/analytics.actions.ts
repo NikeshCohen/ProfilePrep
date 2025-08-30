@@ -3,7 +3,7 @@
 import prisma from "@/prisma/prisma";
 import type { User } from "next-auth";
 
-import { isSuperAdmin } from "@/lib/roleUtils";
+import { isSuperAdmin, getCompanyFilter } from "@/lib/roleUtils";
 
 export async function getTopCompanies(user: User) {
   // monthly document generation counts for the last 6 months
@@ -56,10 +56,11 @@ export async function getTopCompanies(user: User) {
   // NOTE: departments/teams can be shown within their company pending expansion
   else {
     // top users in their company instead of companies (admins)
+    const companyFilter = getCompanyFilter(user);
     const topUsers = await prisma.generatedDocs.groupBy({
       by: ["createdBy"],
       where: {
-        companyId: user.company?.id,
+        ...companyFilter,
         createdAt: {
           gte: sixMonthsAgo,
         },
@@ -121,9 +122,7 @@ export async function getActiveUsers(user: User) {
 
   // only users in their company (admins)
   return await prisma.user.findMany({
-    where: {
-      companyId: user.company?.id,
-    },
+    where: getCompanyFilter(user),
     orderBy: {
       createdDocs: "desc",
     },
@@ -157,9 +156,7 @@ export async function getTemplateUsage(user: User) {
 
   // templates in their company (admins)
   return await prisma.template.findMany({
-    where: {
-      companyId: user.company?.id,
-    },
+    where: getCompanyFilter(user),
     select: {
       id: true,
       name: true,

@@ -8,6 +8,8 @@ import { OnboardingClient } from "@/app/app/onboarding/_components/OnboardingCli
 import { auth } from "@/auth";
 import prisma from "@/prisma/prisma";
 
+import { isCandidate, isRecruiter } from "@/lib/roleUtils";
+
 export const metadata: Metadata = {
   title: "Onboarding",
 };
@@ -39,7 +41,13 @@ export default async function OnboardingPage() {
   // 2. Regular user with onboardingCompleted = false
   if (!user.isTestAccount && user.onboardingCompleted) {
     // User has already completed onboarding, redirect to their dashboard
-    const dashboardRoute = user.userType === "CANDIDATE" ? "/portal" : "/app";
+    // determine dashboard route based on user type
+    const dashboardRoute = isCandidate(user)
+      ? "/portal"
+      : isRecruiter(user)
+        ? "/recruiter"
+        : "/dashboard";
+
     redirect(dashboardRoute);
   }
 

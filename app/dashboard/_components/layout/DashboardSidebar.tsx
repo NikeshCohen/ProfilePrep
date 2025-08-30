@@ -12,6 +12,7 @@ import Logo from "@/components/global/Logo";
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
+import { isSuperAdmin, isAdmin, isCandidate, isTester } from "@/lib/roleUtils";
 
 interface SidebarProps {
   user: User;
@@ -19,20 +20,18 @@ interface SidebarProps {
 
 export function DashboardSidebar({ user }: SidebarProps) {
   const pathname = usePathname();
-  const isSuperAdmin = user.role === "SUPERADMIN";
-  const isAdmin = user.role === "ADMIN" || isSuperAdmin;
-  const isCandidate = user.userType === "CANDIDATE";
-  const isTester = user.userType === "TESTER";
+  const isCandidateUser = isCandidate(user);
+  const isTesterUser = isTester(user);
 
   // Choose the appropriate navigation items based on user type
-  const navigationItems = isCandidate ? candidateSidebarItems : sidebarItems;
+  const navigationItems = isCandidateUser ? candidateSidebarItems : sidebarItems;
 
   // filter items based on user role and type
   const filteredItems = navigationItems.filter((item) => {
-    if (item.superAdminOnly && !isSuperAdmin) return false;
-    if (item.adminOnly && !isAdmin) return false;
-    if (item.recruiterOnly && isCandidate && !isTester) return false;
-    if (item.candidateOnly && !isCandidate && !isTester) return false;
+    if (item.superAdminOnly && !isSuperAdmin(user)) return false;
+    if (item.adminOnly && !isAdmin(user)) return false;
+    if (item.recruiterOnly && isCandidateUser && !isTesterUser) return false;
+    if (item.candidateOnly && !isCandidateUser && !isTesterUser) return false;
     return true;
   });
 

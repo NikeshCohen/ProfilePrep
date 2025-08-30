@@ -7,6 +7,7 @@ import { Compass } from "lucide-react";
 import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
+import { isCandidate, isRecruiter } from "@/lib/roleUtils";
 
 export default function GuidanceButton() {
   const router = useRouter();
@@ -14,9 +15,9 @@ export default function GuidanceButton() {
 
   const handleClick = () => {
     // Redirect to appropriate dashboard based on user type
-    if (session?.user?.userType === "CANDIDATE") {
+    if (session?.user && isCandidate(session.user)) {
       router.push("/portal");
-    } else if (session?.user?.userType === "RECRUITER") {
+    } else if (session?.user && isRecruiter(session.user)) {
       router.push("/recruiter");
     } else {
       // Fallback for TESTER or other types

@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 
+import { isSuperAdmin, isCandidateAdmin, isCandidate } from "@/lib/roleUtils";
+
 export const metadata: Metadata = {
   title: "Settings | Candidate Dashboard",
   description: "Manage your candidate profile and preferences",
@@ -30,8 +32,7 @@ export default async function CandidateSettingsPage() {
   }
 
   const user = session.user;
-  const isAdmin = user.role === "ADMIN" || user.role === "SUPERADMIN";
-  const isCandidateAdmin = isAdmin && user.userType === "CANDIDATE";
+  const isCandidateAdminUser = isCandidateAdmin(user);
 
   // Fetch actual documents for monthly usage calculation
   const documentsResult = await getRecruiterDocuments(user.id!);
@@ -56,7 +57,7 @@ export default async function CandidateSettingsPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Settings</h1>
-        {isCandidateAdmin ? (
+        {isCandidateAdminUser ? (
           <p className="text-muted-foreground">
             Administrative settings and candidate preferences
           </p>
@@ -99,7 +100,7 @@ export default async function CandidateSettingsPage() {
                 </label>
                 <div className="flex items-center space-x-2">
                   <Badge variant="secondary">
-                    {user.userType === "CANDIDATE"
+                    {isCandidate(user)
                       ? "Job Seeker"
                       : user.userType}
                   </Badge>
@@ -357,7 +358,7 @@ export default async function CandidateSettingsPage() {
         </Card>
 
         {/* Admin-only settings for candidate organizations */}
-        {isCandidateAdmin && (
+        {isCandidateAdminUser && (
           <>
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader>
@@ -397,7 +398,7 @@ export default async function CandidateSettingsPage() {
                     You have {user.role.toLowerCase()} permissions for candidate
                     organization management.
                   </p>
-                  {user.role === "SUPERADMIN" && (
+                  {isSuperAdmin(user) && (
                     <p className="mt-1 text-sm font-medium text-orange-600">
                       Super Admin: Full system access across all organizations
                     </p>

@@ -19,6 +19,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { isCandidateAdmin } from "@/lib/roleUtils";
+
 interface AllCVAnalysesClientProps {
   user: User;
 }
@@ -27,9 +29,7 @@ export default function AllCVAnalysesClient({
   user,
 }: AllCVAnalysesClientProps) {
   // Check if user has admin permissions for candidate organization
-  const isAuthorized =
-    (user.role === "ADMIN" || user.role === "SUPERADMIN") &&
-    user.userType === "CANDIDATE";
+  const isAuthorized = isCandidateAdmin(user);
 
   const {
     data: analyses,

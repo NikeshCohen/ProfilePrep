@@ -17,6 +17,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { isCandidateAdmin } from "@/lib/roleUtils";
+
 interface OrganizationAnalyticsClientProps {
   user: User;
 }
@@ -25,9 +27,7 @@ export default function OrganizationAnalyticsClient({
   user,
 }: OrganizationAnalyticsClientProps) {
   // Check if user has admin permissions for candidate organization
-  const isAuthorized =
-    (user.role === "ADMIN" || user.role === "SUPERADMIN") &&
-    user.userType === "CANDIDATE";
+  const isAuthorized = isCandidateAdmin(user);
 
   const {
     data: analyticsData,

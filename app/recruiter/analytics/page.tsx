@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 import { requireAuth } from "@/lib/utils";
+import { isRecruiterAdmin, hasCompanyAccess } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Analytics | Recruiter Dashboard",
@@ -13,12 +14,12 @@ async function RecruiterAnalyticsPage() {
   const { user } = await requireAuth("/recruiter/analytics");
 
   // Only allow recruiter admins (not candidates or superadmins)
-  if (user.role !== "ADMIN" || user.userType !== "RECRUITER") {
+  if (!isRecruiterAdmin(user)) {
     redirect("/recruiter");
   }
 
   // Ensure they have a company
-  if (!user.company?.id) {
+  if (!hasCompanyAccess(user)) {
     redirect("/recruiter");
   }
 
@@ -27,7 +28,7 @@ async function RecruiterAnalyticsPage() {
       <div>
         <h1 className="text-3xl font-bold tracking-tight">Company Analytics</h1>
         <p className="text-muted-foreground">
-          Performance metrics and insights for {user.company.name}
+          Performance metrics and insights for {user.company?.name}
         </p>
       </div>
 

@@ -28,6 +28,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+import { isAdmin, isRecruiter, isCandidate, isTester } from "@/lib/roleUtils";
+
 interface UserContextMenuProps {
   sessionUser: AuthUser;
 }
@@ -120,7 +122,7 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         <DropdownMenuSeparator />
 
         {/* CV Generation for Recruiters / CV Analysis for Candidates */}
-        {sessionUser.userType === "RECRUITER" && (
+        {isRecruiter(sessionUser) && (
           <DropdownMenuItem asChild>
             <Link href="/app" className="flex items-center">
               <RiRobot3Line className="mr-2 h-4 w-4" />
@@ -129,7 +131,7 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
           </DropdownMenuItem>
         )}
 
-        {sessionUser.userType === "CANDIDATE" && (
+        {isCandidate(sessionUser) && (
           <DropdownMenuItem asChild>
             <Link href="/app" className="flex items-center">
               <RiRobot3Line className="mr-2 h-4 w-4" />
@@ -139,7 +141,7 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         )}
 
         {/* Candidate Portal - only for candidates */}
-        {sessionUser.userType === "CANDIDATE" && (
+        {isCandidate(sessionUser) && (
           <DropdownMenuItem asChild>
             <Link href="/portal" className="flex items-center">
               <User className="mr-2 h-4 w-4" />
@@ -149,7 +151,7 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         )}
 
         {/* For test accounts, show both options */}
-        {sessionUser.userType === "TESTER" && (
+        {isTester(sessionUser) && (
           <>
             <DropdownMenuItem asChild>
               <Link href="/app" className="flex items-center">
@@ -167,9 +169,9 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
         )}
 
         {/* Recruiter Dashboard - only for recruiters and test accounts (non-admin) */}
-        {(sessionUser.userType === "RECRUITER" ||
-          sessionUser.userType === "TESTER") &&
-          sessionUser.role === "USER" && (
+        {(isRecruiter(sessionUser) ||
+          isTester(sessionUser)) &&
+          !isAdmin(sessionUser) && (
             <DropdownMenuItem asChild>
               <Link href="/recruiter" className="flex items-center">
                 <Briefcase className="mr-2 h-4 w-4" />
@@ -179,8 +181,7 @@ function UserContextMenu({ sessionUser }: UserContextMenuProps) {
           )}
 
         {/* Admin Dashboard - only for admins */}
-        {(sessionUser.role === "ADMIN" ||
-          sessionUser.role === "SUPERADMIN") && (
+        {isAdmin(sessionUser) && (
           <DropdownMenuItem asChild>
             <Link href="/dashboard" className="flex items-center">
               <Folder className="mr-2 h-4 w-4" />

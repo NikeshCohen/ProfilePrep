@@ -6,6 +6,7 @@ import MemberManagement from "@/app/portal/organization/members/_components/Memb
 import { Card, CardContent } from "@/components/ui/card";
 
 import { requireAuth } from "@/lib/utils";
+import { isCandidateAdmin } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Organization Members | Candidate Dashboard",
@@ -16,9 +17,7 @@ export default async function OrganizationMembersPage() {
   const { user } = await requireAuth("/portal/organization/members");
 
   // Check if user has admin permissions for candidate organization
-  const isAuthorized =
-    (user.role === "ADMIN" || user.role === "SUPERADMIN") &&
-    user.userType === "CANDIDATE";
+  const isAuthorized = isCandidateAdmin(user);
 
   if (!isAuthorized) {
     return (

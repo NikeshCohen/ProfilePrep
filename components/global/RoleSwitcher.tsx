@@ -14,6 +14,8 @@ import { toast } from "react-hot-toast";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+
+import { isCandidate, isRecruiter } from "@/lib/roleUtils";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -76,25 +78,23 @@ export function RoleSwitcher() {
   };
 
   const getRoleIcon = (role: string) => {
-    switch (role) {
-      case "RECRUITER":
-        return <BriefcaseIcon className="h-4 w-4" />;
-      case "CANDIDATE":
-        return <TargetIcon className="h-4 w-4" />;
-      default:
-        return <UserIcon className="h-4 w-4" />;
+    if (isRecruiter({ userType: role })) {
+      return <BriefcaseIcon className="h-4 w-4" />;
     }
+    if (isCandidate({ userType: role })) {
+      return <TargetIcon className="h-4 w-4" />;
+    }
+    return <UserIcon className="h-4 w-4" />;
   };
 
   const getRoleLabel = (role: string) => {
-    switch (role) {
-      case "RECRUITER":
-        return "Recruiter";
-      case "CANDIDATE":
-        return "Candidate";
-      default:
-        return "User";
+    if (isRecruiter({ userType: role })) {
+      return "Recruiter";
     }
+    if (isCandidate({ userType: role })) {
+      return "Candidate";
+    }
+    return "User";
   };
 
   return (
@@ -119,12 +119,12 @@ export function RoleSwitcher() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => handleRoleSwitch("RECRUITER")}
-          disabled={currentUserType === "RECRUITER" || isLoading}
+          disabled={isRecruiter({ userType: currentUserType }) || isLoading}
           className="gap-2"
         >
           <BriefcaseIcon className="h-4 w-4" />
           Recruiter Mode
-          {currentUserType === "RECRUITER" && (
+          {isRecruiter({ userType: currentUserType }) && (
             <Badge variant="outline" className="ml-auto">
               Current
             </Badge>
@@ -132,12 +132,12 @@ export function RoleSwitcher() {
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => handleRoleSwitch("CANDIDATE")}
-          disabled={currentUserType === "CANDIDATE" || isLoading}
+          disabled={isCandidate({ userType: currentUserType }) || isLoading}
           className="gap-2"
         >
           <TargetIcon className="h-4 w-4" />
           Candidate Mode
-          {currentUserType === "CANDIDATE" && (
+          {isCandidate({ userType: currentUserType }) && (
             <Badge variant="outline" className="ml-auto">
               Current
             </Badge>

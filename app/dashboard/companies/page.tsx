@@ -5,6 +5,7 @@ import CompanyList from "@/app/dashboard/companies/_components/CompanyList";
 import CreateCompany from "@/app/dashboard/companies/_components/CompanyManipulations";
 
 import { requireAuth } from "@/lib/utils";
+import { isSuperAdmin } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Companies",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 async function page() {
   const { user } = await requireAuth("/dashboard/companies");
 
-  if (user.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(user)) {
     redirect("/app");
   }
 

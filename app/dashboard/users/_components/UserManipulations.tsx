@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/select";
 
 import { getQueryClient } from "@/lib/getQueryClient";
+import { isSuperAdmin, isAdmin, getCompanyFilter } from "@/lib/roleUtils";
 
 // Define the form schema with Zod
 export const NewUserDataSchema = z.object({
@@ -73,8 +74,8 @@ export default function CreateUserModal({
   const queryClient = getQueryClient();
 
   // Determine if the current user is a super admin or admin
-  const isSuperAdmin = sessionUser?.role === "SUPERADMIN";
-  const isAdmin = sessionUser?.role === "ADMIN";
+  const isSuperAdminUser = sessionUser ? isSuperAdmin(sessionUser) : false;
+  const isAdminUser = sessionUser ? isAdmin(sessionUser) : false;
 
   // Only fetch companies data when the dialog is open AND the user is a superadmin
   const {
@@ -82,7 +83,7 @@ export default function CreateUserModal({
     error,
     isLoading,
   } = useCompaniesQuery(sessionUser, {
-    enabled: isDialogOpen && isSuperAdmin,
+    enabled: isDialogOpen && isSuperAdminUser,
   });
 
   // Initialize the form with react-hook-form
@@ -91,8 +92,8 @@ export default function CreateUserModal({
     defaultValues: {
       name: userToEdit?.name || "",
       email: userToEdit?.email || "",
-      companyId: isAdmin
-        ? sessionUser?.company?.id
+      companyId: isAdminUser
+        ? getCompanyFilter(sessionUser).companyId
         : userToEdit?.companyId || "",
       role: userToEdit?.role || "user",
     },
@@ -200,7 +201,7 @@ export default function CreateUserModal({
               )}
             />
 
-            {isSuperAdmin && (
+            {isSuperAdminUser && (
               <>
                 <FormField
                   control={form.control}
@@ -270,7 +271,7 @@ export default function CreateUserModal({
               </>
             )}
 
-            {isAdmin && !isSuperAdmin && (
+            {isAdminUser && !isSuperAdminUser && (
               <FormField
                 control={form.control}
                 name="role"
@@ -296,7 +297,7 @@ export default function CreateUserModal({
                         User will be added to your company:{" "}
                         {
                           companies.find(
-                            (c) => c.id === sessionUser.company?.id,
+                            (c) => c.id === getCompanyFilter(sessionUser).companyId,
                           )?.name
                         }
                       </FormDescription>
