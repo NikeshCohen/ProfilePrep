@@ -26,6 +26,7 @@ model User {
   newsletterSubscribed Boolean              @default(false)
   guidancePreferences  Json?
   lastGuidanceAccess   DateTime?
+  referralSource       String?
 
   @@map("users")
 }

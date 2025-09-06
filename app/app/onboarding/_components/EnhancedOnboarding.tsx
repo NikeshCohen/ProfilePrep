@@ -47,6 +47,7 @@ interface OnboardingData {
   careerStage?: string | null;
   newsletterSubscribed: boolean;
   guidancePreferences?: Partial<GuidancePreferences>;
+  referralSource?: string | null;
 }
 
 const STEPS = {
@@ -58,7 +59,8 @@ const STEPS = {
   PERSONALIZATION: 5,
   GUIDANCE_PREVIEW: 6,
   FEATURES: 7,
-  NEWSLETTER: 8,
+  REFERRAL_SOURCE: 8,
+  NEWSLETTER: 9,
 };
 
 // Guidance preference options
@@ -265,6 +267,7 @@ export default function EnhancedOnboarding({
     careerStage: null,
     newsletterSubscribed: false,
     guidancePreferences: {},
+    referralSource: null,
   });
 
   // Fetch user type from database if not provided
@@ -372,6 +375,13 @@ export default function EnhancedOnboarding({
       !onboardingData.guidancePreferences?.priorityTopics?.length
     ) {
       toast.error("Please select your priority topics");
+      return;
+    }
+    if (
+      currentStep === STEPS.REFERRAL_SOURCE &&
+      !onboardingData.referralSource
+    ) {
+      toast.error("Please let us know how you heard about us");
       return;
     }
 
@@ -1519,6 +1529,129 @@ export default function EnhancedOnboarding({
                 </Card>
               </div>
             )}
+          </motion.div>
+        );
+
+      case STEPS.REFERRAL_SOURCE:
+        return (
+          <motion.div
+            className="space-y-6"
+            {...getAnimationProps(containerVariants)}
+          >
+            <motion.div
+              className="text-center"
+              {...getAnimationProps(itemVariants)}
+            >
+              <motion.h2
+                className="mb-2 text-3xl font-bold"
+                {...getAnimationProps(itemVariants)}
+              >
+                How did you hear about us?
+              </motion.h2>
+              <motion.p
+                className="text-muted-foreground"
+                {...getAnimationProps(itemVariants)}
+              >
+                Help us understand which channels are most effective
+              </motion.p>
+            </motion.div>
+
+            <Card>
+              <CardContent className="space-y-4 pt-6">
+                <RadioGroup
+                  value={onboardingData.referralSource || ""}
+                  onValueChange={(value) =>
+                    setOnboardingData({
+                      ...onboardingData,
+                      referralSource: value,
+                    })
+                  }
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="google" id="google" />
+                      <Label htmlFor="google" className="cursor-pointer">
+                        Google/Search Engine
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="linkedin" id="linkedin" />
+                      <Label htmlFor="linkedin" className="cursor-pointer">
+                        LinkedIn
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="twitter" id="twitter" />
+                      <Label htmlFor="twitter" className="cursor-pointer">
+                        Twitter/X
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="facebook" id="facebook" />
+                      <Label htmlFor="facebook" className="cursor-pointer">
+                        Facebook
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="friend" id="friend" />
+                      <Label htmlFor="friend" className="cursor-pointer">
+                        Friend/Colleague Referral
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="hyperiondev" id="hyperiondev" />
+                      <Label htmlFor="hyperiondev" className="cursor-pointer">
+                        HyperionDev
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="producthunt" id="producthunt" />
+                      <Label htmlFor="producthunt" className="cursor-pointer">
+                        Product Hunt
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="newsletter" id="newsletter-ref" />
+                      <Label
+                        htmlFor="newsletter-ref"
+                        className="cursor-pointer"
+                      >
+                        Newsletter/Email
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="blog" id="blog" />
+                      <Label htmlFor="blog" className="cursor-pointer">
+                        Blog/Article
+                      </Label>
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <RadioGroupItem value="other" id="other" />
+                      <Label htmlFor="other" className="cursor-pointer">
+                        Other
+                      </Label>
+                    </div>
+                  </div>
+                </RadioGroup>
+              </CardContent>
+            </Card>
+
+            <Card className="border-primary/20 bg-primary/5">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <HelpCircle className="mt-0.5 h-5 w-5 text-primary" />
+                  <div>
+                    <p className="text-sm font-medium">Why we ask this</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      This helps us understand which channels are most effective
+                      at reaching people who could benefit from our platform.
+                      Your response helps us focus our efforts on the right
+                      places.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
         );
 
