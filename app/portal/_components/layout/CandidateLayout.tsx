@@ -10,15 +10,14 @@ import type { User as AuthUser } from "next-auth";
 
 import Logo from "@/components/global/Logo";
 import LogoutButton from "@/components/global/LogoutButton";
-import { RoleSwitcher } from "@/components/global/RoleSwitcher";
 import ThemeToggle from "@/components/global/ThemeToggle";
 import UserContextMenu from "@/components/global/UserContextMenu";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 
-import { cn } from "@/lib/utils";
 import { isAdmin, isSuperAdmin } from "@/lib/roleUtils";
+import { cn } from "@/lib/utils";
 
 interface CandidateLayoutProps {
   children: ReactNode;
@@ -140,8 +139,6 @@ export function CandidateLayout({ children, user }: CandidateLayoutProps) {
             <div className="text-center text-xs text-muted-foreground">
               ProfilePrep Candidate Portal
             </div>
-
-            {user?.isTestAccount && <RoleSwitcher />}
           </div>
         </div>
       </div>
@@ -154,7 +151,7 @@ export function CandidateLayout({ children, user }: CandidateLayoutProps) {
             <Logo size="sm" />
           </Link>
           <div className="flex-1" />
-          {user?.isTestAccount && <RoleSwitcher />}
+
           <ThemeToggle />
           <LogoutButton />
         </header>
