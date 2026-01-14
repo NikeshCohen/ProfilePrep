@@ -18,7 +18,7 @@ function LinkedInButton({ redirectUrl }: { redirectUrl: string }) {
     <form action={disPatchLinkedIn}>
       <Button
         type="submit"
-        className="flex justify-center items-center gap-1 w-full text-white"
+        className="flex w-full items-center justify-center gap-1 text-white"
         disabled={isLoading}
       >
         <Image
@@ -26,7 +26,7 @@ function LinkedInButton({ redirectUrl }: { redirectUrl: string }) {
           width={20}
           height={20}
           alt="LinkedIn logo"
-          className="group-hover:scale-110 transition-transform"
+          className="transition-transform group-hover:scale-110"
         />
         <span className="font-medium">Continue with LinkedIn</span>
       </Button>

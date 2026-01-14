@@ -22,7 +22,6 @@ interface TopCompaniesProps {
 
 export function TopCompanies({ user }: TopCompaniesProps) {
   const { data: topCompanies, isLoading, error } = useTopCompaniesQuery(user);
-  // const isSuperAdmin = user.role === "SUPERADMIN";
   const isSuperAdminUser = isSuperAdmin(user);
 
   if (isLoading) {

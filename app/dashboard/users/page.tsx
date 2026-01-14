@@ -5,6 +5,8 @@ import UserList from "@/app/dashboard/users/_components/UserList";
 import NewUser from "@/app/dashboard/users/_components/UserManipulations";
 
 import { requireAuth } from "@/lib/utils";
+import { isRecruiter, isCandidate } from "@/lib/roleUtils";
+import { isSuperAdmin, isAdmin } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Users",
@@ -13,7 +15,16 @@ export const metadata: Metadata = {
 async function page() {
   const { user } = await requireAuth("/dashboard/users");
 
-  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+  // Only SuperAdmins can access this page - company admins should use their specific routes
+  if (!isSuperAdmin(user)) {
+    // Redirect company admins to their specific user management pages
+    if (isAdmin(user)) {
+      if (isRecruiter(user)) {
+        redirect("/recruiter/users");
+      } else if (isCandidate(user)) {
+        redirect("/portal/organization/members");
+      }
+    }
     redirect("/app");
   }
 
@@ -21,10 +32,7 @@ async function page() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">
-          User Management (
-          {(user.role === "SUPERADMIN" && "All Companies") ||
-            user.company?.name}
-          )
+          Global User Management
         </h1>
         <NewUser sessionUser={user} />
       </div>

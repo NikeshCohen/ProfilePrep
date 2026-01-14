@@ -7,6 +7,7 @@ import { User } from "next-auth";
 
 import { handleError } from "@/lib/apiUtils";
 import { getQueryClient } from "@/lib/getQueryClient";
+import { isAdmin, isSuperAdmin, getCompanyFilter, isCandidateAdmin, canAccessCompanyResource } from "@/lib/roleUtils";
 
 interface CreateTemplateData {
   name: string;
@@ -19,34 +20,24 @@ interface EditTemplateData {
   companyId?: string;
 }
 
-export const fetchAllUsers = async (user: {
-  role: string;
-  companyId?: string;
-}) => {
+export const fetchAllUsers = async (user: User) => {
   // Check user role
-  if (user.role === "USER") {
+  if (!isAdmin(user)) {
     throw new Error(
       "403 Forbidden: You do not have permission to access this resource.",
     );
   }
 
-  // If the user is an admin, fetch users from their company
-  if (user.role === "ADMIN") {
-    return await prisma.user.findMany({
-      where: {
-        companyId: user.companyId,
-      },
-      include: {
-        company: true,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-  }
+  // Get the appropriate filter based on role
+  const companyFilter = getCompanyFilter(user);
+  
+  // If superadmin with userType filter specified
+  const whereClause = isSuperAdmin(user) && user.userType
+    ? { ...companyFilter, userType: user.userType as "RECRUITER" | "CANDIDATE" | "TESTER" }
+    : companyFilter;
 
-  // If the user is a superadmin, fetch all users
   return await prisma.user.findMany({
+    where: whereClause,
     include: {
       company: true,
     },
@@ -88,21 +79,19 @@ export const editUser = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to edit users.",
     };
   }
 
-  // If admin, verify the user belongs to their company
-  if (sessionUser.role === "ADMIN") {
-    if (userData.companyId !== sessionUser.company?.id) {
-      return {
-        success: false,
-        message: "403 Forbidden: You can only edit users from your company.",
-      };
-    }
+  // If admin (not superadmin), verify the user belongs to their company
+  if (!canAccessCompanyResource(sessionUser, userData.companyId)) {
+    return {
+      success: false,
+      message: "403 Forbidden: You can only edit users from your company.",
+    };
   }
 
   try {
@@ -160,21 +149,21 @@ export const editUser = async (
 
 export const deleteUser = async (userId: string, sessionUser: User) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to delete users.",
     };
   }
 
-  // If admin, verify the user belongs to their company
-  if (sessionUser.role === "ADMIN") {
+  // If admin (not superadmin), verify the user belongs to their company
+  if (!isSuperAdmin(sessionUser)) {
     const userToDelete = await prisma.user.findUnique({
       where: { id: userId },
       select: { companyId: true },
     });
 
-    if (!userToDelete || userToDelete.companyId !== sessionUser.company?.id) {
+    if (!userToDelete || !canAccessCompanyResource(sessionUser, userToDelete.companyId)) {
       return {
         success: false,
         message: "403 Forbidden: You can only delete users from your company.",
@@ -196,7 +185,9 @@ export const deleteUser = async (userId: string, sessionUser: User) => {
   }
 };
 
-export const createCompany = async (companyData: NewCompanyData) => {
+export const createCompany = async (
+  companyData: NewCompanyData & { companyType?: string },
+) => {
   try {
     const company = await prisma.company.create({
       data: {
@@ -204,6 +195,9 @@ export const createCompany = async (companyData: NewCompanyData) => {
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
         allowedTemplates: companyData.allowedTemplates,
         createdTemplates: 0,
+        companyType:
+          (companyData.companyType as "RECRUITER" | "CANDIDATE_ORG") ||
+          "RECRUITER",
       },
     });
     return company;
@@ -214,11 +208,11 @@ export const createCompany = async (companyData: NewCompanyData) => {
 
 export const updateCompany = async (
   companyId: string,
-  companyData: NewCompanyData,
+  companyData: NewCompanyData & { companyType?: string },
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: Only superadmins can update companies.",
@@ -259,6 +253,9 @@ export const updateCompany = async (
         name: companyData.name,
         allowedDocsPerUsers: companyData.allowedDocsPerUsers,
         allowedTemplates: companyData.allowedTemplates,
+        ...(companyData.companyType && {
+          companyType: companyData.companyType as "RECRUITER" | "CANDIDATE_ORG",
+        }),
       },
     });
 
@@ -284,7 +281,7 @@ export const updateCompany = async (
 
 export const deleteCompany = async (companyId: string, sessionUser: User) => {
   // Check permissions
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: Only superadmins can delete companies.",
@@ -331,14 +328,22 @@ export const deleteCompany = async (companyId: string, sessionUser: User) => {
   }
 };
 
-export const fetchAllCompanies = async (sessionUser: User) => {
-  if (sessionUser.role !== "SUPERADMIN") {
+export const fetchAllCompanies = async (
+  sessionUser: User,
+  companyType?: string,
+) => {
+  if (!isSuperAdmin(sessionUser)) {
     throw new Error(
       "403 Forbidden: You do not have permission to access this resource.",
     );
   }
 
+  const whereClause = companyType
+    ? { companyType: companyType as "RECRUITER" | "CANDIDATE_ORG" }
+    : {};
+
   return await prisma.company.findMany({
+    where: whereClause,
     include: {
       _count: {
         select: {
@@ -365,7 +370,7 @@ export const fetchAllCompanies = async (sessionUser: User) => {
 };
 
 export async function getAllUserDocs(sessionUser: User) {
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to delete users.",
@@ -407,12 +412,10 @@ export async function getAllUserDocs(sessionUser: User) {
 
 export async function fetchAllTemplates(sessionUser: User) {
   try {
-    // If admin or user, fetch only company templates
-    if (sessionUser.role === "ADMIN" || sessionUser.role === "USER") {
+    // If not superadmin, fetch only company templates
+    if (!isSuperAdmin(sessionUser)) {
       const templates = await prisma.template.findMany({
-        where: {
-          companyId: sessionUser.company?.id,
-        },
+        where: getCompanyFilter(sessionUser),
         select: {
           id: true,
           name: true,
@@ -494,7 +497,7 @@ export const createTemplate = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to create templates.",
@@ -502,10 +505,10 @@ export const createTemplate = async (
   }
 
   try {
-    // If admin, verify the template is being created for their company
+    // If admin (not superadmin), verify the template is being created for their company
     if (
-      sessionUser.role === "ADMIN" &&
-      templateData.companyId !== sessionUser.company?.id
+      !isSuperAdmin(sessionUser) &&
+      !canAccessCompanyResource(sessionUser, templateData.companyId)
     ) {
       return {
         success: false,
@@ -569,7 +572,7 @@ export const editTemplate = async (
   sessionUser: User,
 ) => {
   // Check permissions
-  if (sessionUser.role === "USER") {
+  if (!isAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: You do not have permission to edit templates.",
@@ -590,10 +593,10 @@ export const editTemplate = async (
       };
     }
 
-    // If admin, verify they're editing a template from their company
+    // If admin (not superadmin), verify they're editing a template from their company
     if (
-      sessionUser.role === "ADMIN" &&
-      currentTemplate.companyId !== sessionUser.company?.id
+      !isSuperAdmin(sessionUser) &&
+      !canAccessCompanyResource(sessionUser, currentTemplate.companyId)
     ) {
       return {
         success: false,
@@ -602,14 +605,14 @@ export const editTemplate = async (
       };
     }
 
-    // If admin, ensure they can't change the company
-    if (sessionUser.role === "ADMIN" && templateData.companyId) {
+    // If admin (not superadmin), ensure they can't change the company
+    if (!isSuperAdmin(sessionUser) && templateData.companyId) {
       delete templateData.companyId;
     }
 
     // If superadmin is changing company, verify the new company exists
     if (
-      sessionUser.role === "SUPERADMIN" &&
+      isSuperAdmin(sessionUser) &&
       templateData.companyId &&
       templateData.companyId !== currentTemplate.companyId
     ) {
@@ -674,7 +677,7 @@ export const editTemplate = async (
 
 export const deleteTemplate = async (templateId: string, sessionUser: User) => {
   // Check permissions
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return {
       success: false,
       message: "403 Forbidden: Only Super Admins can delete templates.",
@@ -717,4 +720,117 @@ export const deleteTemplate = async (templateId: string, sessionUser: User) => {
   } catch (error: unknown) {
     return handleError(error);
   }
+};
+
+// Candidate organization actions
+export const getOrganizationMembers = async (user: User) => {
+  if (!isCandidateAdmin(user)) {
+    throw new Error(
+      "Unauthorized: Insufficient permissions for candidate organization access",
+    );
+  }
+
+  const companyFilter = getCompanyFilter(user);
+  if (!companyFilter.companyId) {
+    throw new Error("User not associated with any organization");
+  }
+
+  return await prisma.user.findMany({
+    where: {
+      ...companyFilter,
+      userType: "CANDIDATE",
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      createdDocs: true,
+      allowedDocs: true,
+      createdAt: true,
+      role: true,
+      isTestAccount: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const getOrganizationAnalyses = async (user: User) => {
+  if (!isCandidateAdmin(user)) {
+    throw new Error(
+      "Unauthorized: Insufficient permissions for candidate organization access",
+    );
+  }
+
+  const companyFilter = getCompanyFilter(user);
+  if (!companyFilter.companyId) {
+    return [];
+  }
+
+  return await prisma.cVAnalysis.findMany({
+    where: {
+      user: {
+        ...companyFilter,
+        userType: "CANDIDATE",
+      },
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+};
+
+export const getOrganizationAnalytics = async (user: User) => {
+  if (!isCandidateAdmin(user)) {
+    throw new Error(
+      "Unauthorized: Insufficient permissions for candidate organization access",
+    );
+  }
+
+  const [orgMembers, orgAnalyses] = await Promise.all([
+    getOrganizationMembers(user),
+    getOrganizationAnalyses(user),
+  ]);
+
+  const totalMembers = orgMembers.length;
+  const totalAnalyses = orgAnalyses.length;
+  const avgScore =
+    orgAnalyses.length > 0
+      ? Math.round(
+          orgAnalyses.reduce((sum, a) => sum + a.overallScore, 0) /
+            orgAnalyses.length,
+        )
+      : 0;
+  const totalUsed = orgMembers.reduce(
+    (sum, member) => sum + member.createdDocs,
+    0,
+  );
+  const totalAllowed = orgMembers.reduce(
+    (sum, member) => sum + member.allowedDocs,
+    0,
+  );
+  const usageRate =
+    totalAllowed > 0 ? Math.round((totalUsed / totalAllowed) * 100) : 0;
+
+  return {
+    members: orgMembers,
+    analyses: orgAnalyses,
+    stats: {
+      totalMembers,
+      totalAnalyses,
+      avgScore,
+      totalUsed,
+      totalAllowed,
+      usageRate,
+    },
+  };
 };

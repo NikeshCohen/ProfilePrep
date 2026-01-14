@@ -32,7 +32,7 @@ export const LoaderButton = React.forwardRef<
           {...props}
         >
           {children}
-          <LoaderIcon className="ml-2 w-4 h-4 animate-spin" />
+          <LoaderIcon className="ml-2 h-4 w-4 animate-spin" />
         </Button>
       );
     }
@@ -46,7 +46,7 @@ export const LoaderButton = React.forwardRef<
         size={size}
         {...props}
       >
-        {Icon && <Icon className="mr-2 w-4 h-4" />}
+        {Icon && <Icon className="mr-2 h-4 w-4" />}
         {children}
       </Button>
     );

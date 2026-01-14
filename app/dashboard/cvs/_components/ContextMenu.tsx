@@ -110,9 +110,9 @@ const DocContextMenu = ({ docId, notes }: DocContextMenuProps) => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="p-0 w-8 h-8">
+          <Button variant="ghost" className="h-8 w-8 p-0">
             <span className="sr-only">Open menu</span>
-            <MoreHorizontal className="w-4 h-4" />
+            <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -137,7 +137,7 @@ const DocContextMenu = ({ docId, notes }: DocContextMenuProps) => {
             <DialogTitle className="text-xl">Notes</DialogTitle>
           </DialogHeader>
 
-          <div className="pr-2 max-h-[60vh] overflow-y-auto text-muted-foreground text-sm leading-relaxed whitespace-pre-wrap">
+          <div className="max-h-[60vh] overflow-y-auto whitespace-pre-wrap pr-2 text-sm leading-relaxed text-muted-foreground">
             {notes}
           </div>
         </DialogContent>
@@ -160,7 +160,7 @@ const DocContextMenu = ({ docId, notes }: DocContextMenuProps) => {
               onClick={handleDelete}
               isLoading={isDeleting}
               variant="destructive"
-              className="bg-destructive hover:bg-destructive/90 text-destructive-foreground"
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
               {isDeleting ? "Deleting..." : "Delete"}
             </LoaderButton>

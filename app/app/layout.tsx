@@ -5,6 +5,9 @@ import Footer from "@/components/global/Footer";
 import Header from "@/components/global/Header";
 
 async function layout({ children }: { children: React.ReactNode }) {
+  // /app route is accessible to both candidates and recruiters for CV analysis
+  // No redirect logic needed here - this is the main CV analysis interface
+
   return (
     <ErrorBoundary FallbackComponent={FallBack}>
       <Header />

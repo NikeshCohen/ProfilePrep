@@ -5,6 +5,7 @@ import CreateTemplate from "@/app/dashboard/templates/_components/CreateTemplate
 import TemplateList from "@/app/dashboard/templates/_components/TemplateList";
 
 import { requireAuth } from "@/lib/utils";
+import { isSuperAdmin, isAdmin, isRecruiter } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Templates",
@@ -13,7 +14,14 @@ export const metadata: Metadata = {
 async function page() {
   const { user } = await requireAuth("/dashboard/templates");
 
-  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+  // Only SuperAdmins can access this page - company admins should use their specific routes
+  if (!isSuperAdmin(user)) {
+    // Redirect company admins to their specific template management pages
+    if (isAdmin(user)) {
+      if (isRecruiter(user)) {
+        redirect("/recruiter/templates");
+      }
+    }
     redirect("/app");
   }
 
@@ -21,11 +29,7 @@ async function page() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-bold tracking-tight">
-          {" "}
-          Templates (
-          {(user.role === "SUPERADMIN" && "All Companies") ||
-            user.company?.name}
-          )
+          Global Template Management
         </h1>
 
         <CreateTemplate sessionUser={user} />

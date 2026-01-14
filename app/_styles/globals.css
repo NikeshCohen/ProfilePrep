@@ -33,6 +33,16 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    
+    /* Candidate personality - Personal & warm B2C */
+    --candidate-bg-primary: 217 100% 97%;
+    --candidate-bg-secondary: 225 100% 98%;
+    --candidate-accent: 217 91% 85%;
+    
+    /* Recruiter personality - Professional & structured B2B */
+    --recruiter-bg-primary: 210 40% 96%;
+    --recruiter-bg-secondary: 210 40% 98%;
+    --recruiter-accent: 210 50% 85%;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -59,6 +69,15 @@ body {
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    
+    /* Dark mode personality variants */
+    --candidate-bg-primary: 217 91% 8%;
+    --candidate-bg-secondary: 225 91% 6%;
+    --candidate-accent: 217 91% 25%;
+    
+    --recruiter-bg-primary: 210 40% 6%;
+    --recruiter-bg-secondary: 210 40% 4%;
+    --recruiter-accent: 210 50% 25%;
   }
 }
 
@@ -77,6 +96,28 @@ body {
 @layer components {
   .layout {
     @apply ml-auto mr-auto max-w-7xl;
+  }
+  
+  /* Landing page personality styles */
+  .candidate-personality {
+    @apply transition-all duration-700;
+  }
+  
+  .recruiter-personality {
+    @apply transition-all duration-700;
+  }
+  
+  /* Subtle gradient backgrounds for visual distinction */
+  .candidate-bg-subtle {
+    background: linear-gradient(135deg, 
+      hsl(var(--candidate-bg-primary)) 0%, 
+      hsl(var(--candidate-bg-secondary)) 100%);
+  }
+  
+  .recruiter-bg-subtle {
+    background: linear-gradient(135deg, 
+      hsl(var(--recruiter-bg-primary)) 0%, 
+      hsl(var(--recruiter-bg-secondary)) 100%);
   }
 }
 

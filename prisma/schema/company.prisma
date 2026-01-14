@@ -9,8 +9,14 @@ model Company {
   allowedDocsPerUsers Int             @default(5)
   allowedTemplates    Int             @default(2)
   createdTemplates    Int             @default(0)
+  companyType         CompanyType     @default(RECRUITER)
 
   @@map("companies")
+}
+
+enum CompanyType {
+  RECRUITER
+  CANDIDATE_ORG
 }
 
 model Template {

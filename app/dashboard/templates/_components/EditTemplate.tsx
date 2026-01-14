@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/select";
 
 import { getQueryClient } from "@/lib/getQueryClient";
+import { isSuperAdmin } from "@/lib/roleUtils";
 
 interface Template {
   id: string;
@@ -74,7 +75,7 @@ export default function EditTemplate({
   const queryClient = getQueryClient();
 
   // Determine if the current user is a super admin
-  const isSuperAdmin = sessionUser?.role === "SUPERADMIN";
+  const isSuperAdminUser = sessionUser ? isSuperAdmin(sessionUser) : false;
 
   // Only fetch companies data when the dialog is open AND the user is a superadmin
   const {
@@ -82,7 +83,7 @@ export default function EditTemplate({
     error: companiesError,
     isLoading: isLoadingCompanies,
   } = useCompaniesQuery(sessionUser, {
-    enabled: isOpenExternal && isSuperAdmin,
+    enabled: isOpenExternal && isSuperAdminUser,
   });
 
   const form = useForm<EditTemplateData>({
@@ -143,7 +144,7 @@ export default function EditTemplate({
               )}
             />
 
-            {isSuperAdmin && (
+            {isSuperAdminUser && (
               <FormField
                 control={form.control}
                 name="companyId"

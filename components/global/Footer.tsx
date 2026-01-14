@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Linkedin } from "lucide-react";
 import { motion } from "motion/react";
 
+import GuidanceButton from "@/components/global/GuidanceButton";
 import InfoButton from "@/components/global/InfoButton";
 import Logo from "@/components/global/Logo";
 import ThemeToggle from "@/components/global/ThemeToggle";
@@ -23,6 +24,7 @@ function Footer() {
         {pathname.includes("/app") && (
           <>
             <InfoButton />
+            <GuidanceButton />
           </>
         )}
 

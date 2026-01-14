@@ -15,6 +15,7 @@ import { generateText } from "ai";
 import { User } from "next-auth";
 
 import { logTokenUsage } from "@/lib/utils";
+import { getCompanyFilter } from "@/lib/roleUtils";
 
 const selectedModel = google("gemini-2.0-flash-001");
 
@@ -78,11 +79,12 @@ export const generateDocument = async (
   logTokenUsage(response.usage, "Document Generation");
 
   incrementUserGenerations(user.id!);
+  const companyFilter = getCompanyFilter(user);
   await createGeneratedDoc({
     documentContent: candidateInfo,
     rawContent: cleanedText,
     userId: user.id!,
-    companyId: user.company?.id || " ",
+    companyId: companyFilter.companyId || " ",
   });
 
   return cleanedText;

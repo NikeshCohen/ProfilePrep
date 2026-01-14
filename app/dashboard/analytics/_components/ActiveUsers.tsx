@@ -22,7 +22,6 @@ interface ActiveUsersProps {
 
 export function ActiveUsers({ user }: ActiveUsersProps) {
   const { data: activeUsers, isLoading, error } = useActiveUsersQuery(user);
-  // const isSuperAdmin = user.role === "SUPERADMIN";
   const isSuperAdminUser = isSuperAdmin(user);
 
   if (isLoading) {

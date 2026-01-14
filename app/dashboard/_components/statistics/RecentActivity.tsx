@@ -27,7 +27,6 @@ export function RecentActivity({ user, userId }: RecentActivityProps) {
     isLoading,
     error,
   } = useRecentActivityQuery(user, userId);
-  // const isSuperAdmin = user.role === "SUPERADMIN";
   const isSuperAdminUser = isSuperAdmin(user);
 
   if (isLoading) {

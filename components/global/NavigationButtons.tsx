@@ -12,6 +12,7 @@ type NextButtonProps = {
   onClick: () => void;
   disabled?: boolean;
   className?: string;
+  label?: string;
 };
 
 type BackButtonProps = {
@@ -24,6 +25,7 @@ export function NextButton({
   onClick,
   disabled = false,
   className = "",
+  label = "Next",
 }: NextButtonProps) {
   return (
     <motion.div {...fadeUpAnimation}>
@@ -35,7 +37,7 @@ export function NextButton({
         icon={ArrowRightIcon}
         iconPlacement="right"
       >
-        Next
+        {label}
       </Button>
     </motion.div>
   );

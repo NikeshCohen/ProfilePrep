@@ -31,6 +31,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+import { isSuperAdmin } from "@/lib/roleUtils";
+
 interface Template {
   id: string;
   name: string;
@@ -118,7 +120,7 @@ const TemplateContextMenu = ({
         <DropdownMenuContent align="end">
           <ViewTemplate template={template} />
           <DropdownMenuItem onClick={handleEditClick}>Edit</DropdownMenuItem>
-          {sessionUser.role === "SUPERADMIN" && (
+          {isSuperAdmin(sessionUser) && (
             <DeleteTemplate template={template} sessionUser={sessionUser} />
           )}
         </DropdownMenuContent>

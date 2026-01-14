@@ -1,11 +1,7 @@
 "use client";
 
-import { useState } from "react";
-
-import { InfoPanel } from "@/components/global/InfoPanel";
+import { OnboardingBackground } from "@/app/app/onboarding/_components/Onboarding";
 
 export function OnboardingClient() {
-  const [isInfoPanelOpen, setIsInfoPanelOpen] = useState(true);
-
-  return <InfoPanel isOpen={isInfoPanelOpen} setIsOpen={setIsInfoPanelOpen} />;
+  return <OnboardingBackground />;
 }

@@ -47,6 +47,7 @@ import {
 
 import { getQueryClient } from "@/lib/getQueryClient";
 import { extractTextFromPdf } from "@/lib/utils";
+import { isSuperAdmin, isAdmin, getCompanyFilter } from "@/lib/roleUtils";
 
 const NewTemplateSchema = z.object({
   templateName: z
@@ -78,8 +79,8 @@ export default function CreateTemplate({ sessionUser }: CreateTemplateProps) {
   const queryClient = getQueryClient();
 
   // Determine if the current user is a super admin or admin
-  const isSuperAdmin = sessionUser?.role === "SUPERADMIN";
-  const isAdmin = sessionUser?.role === "ADMIN";
+  const isSuperAdminUser = sessionUser ? isSuperAdmin(sessionUser) : false;
+  const isAdminUser = sessionUser ? isAdmin(sessionUser) : false;
 
   // Only fetch companies data when the dialog is open AND the user is a superadmin
   const {
@@ -87,14 +88,14 @@ export default function CreateTemplate({ sessionUser }: CreateTemplateProps) {
     error: companiesError,
     isLoading: isLoadingCompanies,
   } = useCompaniesQuery(sessionUser, {
-    enabled: isOpenInternal && isSuperAdmin,
+    enabled: isOpenInternal && isSuperAdminUser,
   });
 
   const form = useForm<NewTemplateData>({
     resolver: zodResolver(NewTemplateSchema),
     defaultValues: {
       templateName: "",
-      companyId: isAdmin ? sessionUser?.company?.id : "",
+      companyId: isAdminUser ? getCompanyFilter(sessionUser).companyId : "",
     },
   });
 
@@ -192,7 +193,7 @@ export default function CreateTemplate({ sessionUser }: CreateTemplateProps) {
         {
           name: data.templateName,
           templateContent: formattedTemplate,
-          companyId: data.companyId || sessionUser.company?.id || "",
+          companyId: data.companyId || getCompanyFilter(sessionUser).companyId || "",
         },
         sessionUser,
       );
@@ -252,7 +253,7 @@ export default function CreateTemplate({ sessionUser }: CreateTemplateProps) {
               )}
             />
 
-            {isSuperAdmin && (
+            {isSuperAdminUser && (
               <FormField
                 control={form.control}
                 name="companyId"

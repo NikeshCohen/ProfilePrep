@@ -13,6 +13,7 @@ import { TemplateUsage } from "@/app/dashboard/analytics/_components/TemplateUsa
 import { TopCompanies } from "@/app/dashboard/analytics/_components/TopCompanies";
 
 import { requireAuth } from "@/lib/utils";
+import { isSuperAdmin, isAdmin, isRecruiter, isCandidate } from "@/lib/roleUtils";
 
 export const metadata: Metadata = {
   title: "Analytics",
@@ -21,14 +22,22 @@ export const metadata: Metadata = {
 export default async function AnalyticsPage() {
   const { user } = await requireAuth("/dashboard/analytics");
 
-  // only admin and superadmin can access analytics
-  if (user.role !== "ADMIN" && user.role !== "SUPERADMIN") {
+  // Only SuperAdmins can access this page - company admins should use their specific routes
+  if (!isSuperAdmin(user)) {
+    // Redirect company admins to their specific analytics pages
+    if (isAdmin(user)) {
+      if (isRecruiter(user)) {
+        redirect("/recruiter/analytics");
+      } else if (isCandidate(user)) {
+        redirect("/portal/organization/analytics");
+      }
+    }
     redirect("/app");
   }
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold tracking-tight">Analytics</h1>
+      <h1 className="text-3xl font-bold tracking-tight">Global Analytics</h1>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Suspense fallback={<TopCompaniesSkeleton />}>

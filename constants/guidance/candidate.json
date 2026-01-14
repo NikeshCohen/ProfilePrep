@@ -1,0 +1,1283 @@
+{
+  "fields": {
+    "technology": {
+      "label": "Technology",
+      "description": "Where the future lives and breathes. This isn't just about writing code anymore—it's about understanding how technology shapes human experience, how systems talk to each other, how data flows like digital blood through the veins of our modern world.",
+      "specializations": {
+        "frontend": {
+          "label": "Frontend Development",
+          "narrative": "You're the bridge between human intuition and machine logic, the architect of every click, every swipe, every moment of delight or frustration someone experiences on screen. This field has evolved beyond simple webpage creation—you're now crafting immersive digital experiences that respond, adapt, and anticipate.",
+          "tips": [
+            "Your portfolio isn't just a collection of projects; it's a story of problems solved and users delighted. Each piece should whisper to potential employers about your thought process, your eye for detail, your understanding that great frontend work makes the complex feel effortless",
+            "Modern React isn't optional—it's your lingua franca. But understand the why behind the how. Show them you grasp component lifecycle, state management philosophy, and the delicate dance between performance and functionality",
+            "Accessibility isn't a checkbox; it's a worldview. When you demonstrate semantic HTML mastery and ARIA implementation, you're showing employers that you build for everyone, not just the lucky few",
+            "Your code needs to breathe across browsers and devices. Cross-browser compatibility isn't just technical competence—it's empathy for the diverse ways people access your work",
+            "Performance metrics tell stories about user experience. Know your Core Web Vitals, understand how bundle size affects real humans waiting on slow connections, show that you optimise for the person, not just the machine"
+          ],
+          "keywords": [
+            "React",
+            "Vue",
+            "Angular",
+            "Next.js",
+            "TypeScript",
+            "JavaScript",
+            "CSS-in-JS",
+            "Tailwind",
+            "Webpack",
+            "Vite",
+            "GraphQL",
+            "REST APIs",
+            "Responsive Design",
+            "PWA",
+            "Accessibility",
+            "Web Vitals",
+            "Performance Optimization",
+            "Component Libraries",
+            "State Management",
+            "Testing (Jest, Cypress)",
+            "Git",
+            "CI/CD",
+            "Figma to Code"
+          ],
+          "interviewTips": [
+            "They'll ask you to build something live, and your process matters more than perfection. Talk through your thinking—why you chose that approach, how you'd handle edge cases, what trade-offs you're making",
+            "CSS isn't beneath you. Whether it's flexbox wizardry or grid mastery, showing you can solve layout problems elegantly proves you understand the foundational craft",
+            "State management discussions reveal your architectural thinking. Be ready to explain when you'd use context versus external libraries, how you'd structure a complex application's data flow",
+            "Performance isn't an afterthought. Discuss code splitting, lazy loading, image optimisation—show that you think about the entire user journey, not just the happy path"
+          ],
+          "currentMarket": {
+            "outlook": "The frontend landscape in 2025 is experiencing a fascinating tension. With AI tools increasingly handling routine coding tasks, companies are prioritising professionals who can manage AI-driven workflows and focus on system architecture rather than just writing code. Yet demand remains strong—software developer unemployment sits at just 2.8%, well below the national average.",
+            "salaryRange": "£45,000 - £85,000 (UK), $75,000 - $140,000 (US) for mid-level roles",
+            "hotSkills": [
+              "AI-assisted development",
+              "Micro-frontends",
+              "Edge computing",
+              "Web3 integration"
+            ],
+            "trends": [
+              "Companies seeking developers who can work alongside AI coding assistants rather than being replaced by them",
+              "Increased focus on performance and sustainability in web development",
+              "Growing demand for developers who understand both technical and business implications"
+            ]
+          }
+        },
+        "backend": {
+          "label": "Backend Development",
+          "narrative": "You're the invisible architect, the keeper of data integrity, the one who ensures that when someone clicks 'purchase' or sends a message, the digital world responds with quiet reliability. Backend development is where logic lives, where scalability is born, where security stands guard.",
+          "tips": [
+            "Your database design reveals your thinking about relationships—not just between tables, but between concepts, between users, between systems. Show them you understand that data modelling is really about understanding the world",
+            "API design is conversation design. Whether REST or GraphQL, your interfaces should feel intuitive to other developers. Document not just what your endpoints do, but why they exist",
+            "Performance isn't just about fast queries; it's about graceful degradation, intelligent caching, understanding that users don't care about your elegant code if their experience is sluggish",
+            "Security thinking should permeate everything you build. Authentication, authorisation, input validation, rate limiting—these aren't bolt-on features but fundamental considerations that shape architecture",
+            "Cloud services aren't just deployment targets; they're tools that reshape how we think about scale, reliability, and cost. Show familiarity with serverless patterns, containerization, and infrastructure as code"
+          ],
+          "keywords": [
+            "Node.js",
+            "Python",
+            "Java",
+            "Go",
+            "Rust",
+            "TypeScript",
+            "PostgreSQL",
+            "MongoDB",
+            "Redis",
+            "Docker",
+            "Kubernetes",
+            "AWS",
+            "Azure",
+            "GCP",
+            "Microservices",
+            "API Design",
+            "GraphQL",
+            "REST",
+            "gRPC",
+            "Event-Driven Architecture",
+            "Message Queues",
+            "Caching",
+            "Database Optimization",
+            "Security",
+            "DevOps"
+          ],
+          "interviewTips": [
+            "System design conversations are your moment to shine. Walk them through how you'd architect a solution, explaining trade-offs, discussing where bottlenecks might emerge, showing you think at scale",
+            "Database performance questions go deeper than indexing. Discuss query optimization, connection pooling, read replicas, showing you understand that data access patterns shape application architecture",
+            "Security discussions should be nuanced. Talk about defense in depth, principle of least privilege, how you'd handle different attack vectors—show security is woven into your design thinking",
+            "Monitoring and observability aren't afterthoughts. Discuss logging strategies, metrics that matter, how you'd debug issues in production—show you build systems that can be understood and maintained"
+          ],
+          "currentMarket": {
+            "outlook": "Backend development remains the backbone of digital transformation. Data engineers and systems engineers are among the top 10 most in-demand tech roles for 2025, with companies desperately seeking professionals who can handle the infrastructure challenges of AI integration and massive data processing.",
+            "salaryRange": "£50,000 - £95,000 (UK), $80,000 - $150,000 (US)",
+            "hotSkills": [
+              "AI/ML infrastructure",
+              "Event streaming",
+              "Distributed systems",
+              "Cloud-native development"
+            ],
+            "trends": [
+              "Growing need for developers who understand AI model deployment and scaling",
+              "Emphasis on building resilient, observable systems",
+              "Demand for expertise in real-time data processing and event-driven architectures"
+            ]
+          }
+        },
+        "fullstack": {
+          "label": "Full-Stack Development",
+          "narrative": "You're the bridge between worlds, comfortable in the abstract realm of system design and the tangible world of user interaction. Full-stack development isn't about being mediocre at everything—it's about understanding the connections, seeing how frontend dreams become backend realities.",
+          "tips": [
+            "Your value lies in translation—between business requirements and technical implementation, between user needs and system constraints, between different parts of the technology stack",
+            "Don't claim expertise in everything. Instead, demonstrate deep knowledge in your core areas while showing competence and curiosity about the broader ecosystem",
+            "Project ownership stories resonate powerfully. Talk about times you've seen a feature from conception through deployment, handling both user-facing polish and infrastructure challenges",
+            "Understanding deployment and DevOps basics isn't optional. You don't need to be a platform engineer, but you should understand how your code gets from development to production",
+            "Business context matters more for full-stack roles. Show you understand how technical decisions impact user experience, performance budgets, operational costs"
+          ],
+          "keywords": [
+            "Full-Stack",
+            "MEAN",
+            "MERN",
+            "Next.js",
+            "Node.js",
+            "React",
+            "Vue",
+            "Angular",
+            "Express",
+            "Django",
+            "FastAPI",
+            "PostgreSQL",
+            "MongoDB",
+            "Docker",
+            "CI/CD",
+            "AWS",
+            "Heroku",
+            "Vercel",
+            "Git",
+            "Testing",
+            "API Integration",
+            "Database Design",
+            "Authentication",
+            "Deployment",
+            "Performance Optimization"
+          ],
+          "interviewTips": [
+            "Be ready to discuss architecture decisions across the entire stack. How do you structure a project? What technologies do you choose and why? How do you handle different concerns?",
+            "They'll test both breadth and depth. Be honest about what you know deeply versus what you're familiar with. Show enthusiasm for learning rather than pretending expertise",
+            "Talk about trade-offs constantly. Full-stack roles require constant decisions about where to invest time and complexity. Show your decision-making process",
+            "Deployment and monitoring understanding separates good candidates from great ones. Discuss how you'd deploy, monitor, and maintain applications in production"
+          ],
+          "currentMarket": {
+            "outlook": "Full-stack developers remain among the most in-demand roles, with companies valuing professionals who can ship complete features end-to-end. The focus has shifted toward developers who can work effectively with AI tools while maintaining broad technical competence.",
+            "salaryRange": "£45,000 - £90,000 (UK), $70,000 - $130,000 (US)",
+            "hotSkills": [
+              "JAMstack architecture",
+              "AI integration",
+              "Mobile-responsive development",
+              "API-first development"
+            ],
+            "trends": [
+              "Companies prefer T-shaped developers: deep expertise in one area, competence across the stack",
+              "Increased focus on developers who can work with AI coding assistants effectively",
+              "Growing emphasis on developers who understand business impact alongside technical implementation"
+            ]
+          }
+        },
+        "mobile": {
+          "label": "Mobile Development",
+          "narrative": "You're crafting experiences that live in pockets, that accompany people through their daily routines, that bridge the digital and physical worlds through touch, sensors, and location awareness. Mobile development is intimate—your code becomes part of people's lives in ways web applications rarely achieve.",
+          "tips": [
+            "Platform choice tells a story about your strategic thinking. Native iOS and Android show deep commitment to platform excellence, while React Native or Flutter demonstrate pragmatic cross-platform efficiency",
+            "App Store presence is your public portfolio. If you've shipped apps, include download numbers, ratings, user feedback responses—show the complete lifecycle from code to user satisfaction",
+            "Performance on mobile is unforgiving. Battery life, memory usage, network efficiency—these aren't optimizations, they're fundamental requirements. Show you think about resource constraints",
+            "Mobile UX principles differ fundamentally from web. Touch targets, gesture navigation, offline functionality, push notifications—demonstrate you understand the mobile-first mindset",
+            "Platform integration separates good from great mobile developers. Camera, location, sensors, platform-specific APIs—show you can make apps feel truly native to their environment"
+          ],
+          "keywords": [
+            "iOS",
+            "Android",
+            "Swift",
+            "Kotlin",
+            "React Native",
+            "Flutter",
+            "Dart",
+            "Xamarin",
+            "Firebase",
+            "Core Data",
+            "SQLite",
+            "RestKit",
+            "Retrofit",
+            "Push Notifications",
+            "App Store",
+            "Google Play",
+            "TestFlight",
+            "CI/CD",
+            "Performance Optimization",
+            "Offline Storage",
+            "Gesture Recognition",
+            "Camera API",
+            "Location Services",
+            "Bluetooth",
+            "ARKit",
+            "ARCore",
+            "Material Design",
+            "Human Interface Guidelines"
+          ],
+          "interviewTips": [
+            "Bring your phone and show your apps. Nothing beats seeing your work running on actual devices. Walk through the user experience, discuss technical challenges you solved",
+            "Platform-specific knowledge matters. Whether it's iOS memory management or Android lifecycle methods, show deep understanding of your chosen platform's characteristics",
+            "Discuss app architecture patterns. MVP, MVVM, Clean Architecture—show you think about maintainable, testable code structure in mobile contexts",
+            "Performance metrics and app analytics understanding shows you think beyond just building features. Discuss crash reporting, user analytics, A/B testing approaches"
+          ],
+          "currentMarket": {
+            "outlook": "Mobile development continues evolving rapidly, with AI integration, AR capabilities, and cross-platform frameworks reshaping the landscape. Native expertise remains valuable, but pragmatic cross-platform skills are increasingly sought after.",
+            "salaryRange": "£40,000 - £80,000 (UK), $70,000 - $125,000 (US)",
+            "hotSkills": [
+              "AR/VR integration",
+              "AI-powered features",
+              "Cross-platform frameworks",
+              "IoT connectivity"
+            ],
+            "trends": [
+              "Growing demand for developers who can integrate AI/ML capabilities into mobile apps",
+              "Increased focus on privacy-compliant app development",
+              "Rising importance of progressive web apps as mobile-first experiences"
+            ]
+          }
+        },
+        "data": {
+          "label": "Data Science & Analytics",
+          "narrative": "You're a storyteller who speaks in statistics, a detective who finds patterns in noise, a translator who turns raw information into actionable insight. Data science sits at the intersection of mathematics, computer science, and domain expertise—you're not just crunching numbers, you're extracting understanding from the digital exhales of human behaviour.",
+          "tips": [
+            "Business impact stories resonate more than technical complexity. Don't just describe your models—explain how they changed decisions, saved money, improved outcomes. Quantify the human consequences of your work",
+            "Your GitHub should tell the story of your thinking process. Jupyter notebooks with clear explanations, well-documented code, thoughtful visualizations—show how you move from question to insight",
+            "Domain expertise often matters more than algorithmic sophistication. Whether it's healthcare, finance, or retail, show you understand the context in which your models will operate",
+            "Communication skills separate data scientists from data technicians. Can you explain complex concepts to non-technical stakeholders? Can you visualise insights compellingly? Can you defend your methodological choices?",
+            "Ethical considerations in data work aren't optional. Show awareness of bias, privacy, fairness—demonstrate that you think about the broader implications of data-driven decision making"
+          ],
+          "keywords": [
+            "Python",
+            "R",
+            "SQL",
+            "Pandas",
+            "NumPy",
+            "Scikit-learn",
+            "TensorFlow",
+            "PyTorch",
+            "Jupyter",
+            "Git",
+            "Tableau",
+            "Power BI",
+            "Matplotlib",
+            "Seaborn",
+            "Plotly",
+            "Statistics",
+            "Machine Learning",
+            "Deep Learning",
+            "A/B Testing",
+            "Hypothesis Testing",
+            "Regression",
+            "Classification",
+            "Clustering",
+            "Time Series",
+            "NLP",
+            "Computer Vision",
+            "Feature Engineering",
+            "Model Deployment",
+            "MLOps",
+            "Docker",
+            "Cloud Platforms"
+          ],
+          "interviewTips": [
+            "Prepare to walk through your methodology step by step. From problem definition through data collection, cleaning, modeling, validation, and deployment—show systematic thinking",
+            "Statistical concepts matter more than you might think. Be ready to discuss bias, variance, overfitting, cross-validation—demonstrate solid theoretical foundations",
+            "Business case discussions reveal strategic thinking. How do you prioritize features? How do you handle missing data? How do you communicate uncertainty in predictions?",
+            "Technical assessments are common. Practice coding problems, be comfortable with SQL, know your way around data manipulation libraries—show fluency with your tools"
+          ],
+          "currentMarket": {
+            "outlook": "AI and machine learning expertise represents the most evident skills gap in tech teams, with data engineers being among the top in-demand roles for 2025. The field is maturing from experimental to production-focused, requiring both technical depth and business acumen.",
+            "salaryRange": "£45,000 - £90,000 (UK), $80,000 - $140,000 (US)",
+            "hotSkills": [
+              "MLOps",
+              "LLM fine-tuning",
+              "Generative AI",
+              "Edge AI deployment"
+            ],
+            "trends": [
+              "Shift from research-focused to production-focused data science roles",
+              "Growing demand for professionals who can deploy and maintain ML models in production",
+              "Increased emphasis on ethical AI and responsible data use"
+            ]
+          }
+        },
+        "devops": {
+          "label": "DevOps & Cloud Engineering",
+          "narrative": "You're the conductor of digital orchestras, ensuring that code flows smoothly from developer imagination to user reality. DevOps isn't just about tools and automation—it's about creating reliable, scalable, observable systems that teams can understand, modify, and trust.",
+          "tips": [
+            "Infrastructure as Code isn't just a tool choice—it's a philosophy about reproducibility, version control, and treating infrastructure as a first-class software artifact. Show how you bring software engineering principles to operations",
+            "Reliability engineering thinking should permeate your approach. SLIs, SLOs, error budgets—demonstrate you understand how to balance reliability with development velocity",
+            "Automation stories should include both the technical implementation and the human impact. How did your CI/CD pipeline reduce deployment anxiety? How did monitoring improvements change how the team responds to issues?",
+            "Cloud platform expertise goes beyond knowing which buttons to click. Understanding pricing models, service limits, regional considerations—show strategic thinking about cloud architecture",
+            "Security in DevOps isn't bolt-on—it's built-in. Show how you implement security scanning, secret management, compliance monitoring throughout the development lifecycle"
+          ],
+          "keywords": [
+            "AWS",
+            "Azure",
+            "GCP",
+            "Docker",
+            "Kubernetes",
+            "Terraform",
+            "Ansible",
+            "Jenkins",
+            "GitLab CI",
+            "GitHub Actions",
+            "Prometheus",
+            "Grafana",
+            "ELK Stack",
+            "Datadog",
+            "Linux",
+            "Bash",
+            "Python",
+            "Infrastructure as Code",
+            "Microservices",
+            "Service Mesh",
+            "API Gateway",
+            "Load Balancing",
+            "Auto-scaling",
+            "Disaster Recovery",
+            "Security Scanning",
+            "Secret Management",
+            "Compliance",
+            "Cost Optimization"
+          ],
+          "interviewTips": [
+            "Architecture discussions should cover both technical and operational aspects. How do you design for observability? How do you handle scaling challenges? How do you plan for failure?",
+            "Real-world problem solving matters more than theoretical knowledge. Discuss incidents you've resolved, performance bottlenecks you've addressed, systems you've scaled",
+            "Cost consciousness shows business alignment. Discuss how you optimize cloud spending, how you make trade-offs between performance and cost, how you measure resource efficiency",
+            "Collaboration skills are crucial. DevOps is fundamentally about improving how teams work together. Show how you've bridged gaps between development and operations"
+          ],
+          "currentMarket": {
+            "outlook": "DevOps and cloud engineering expertise is more critical than ever as organizations accelerate digital transformation and AI adoption. The focus has shifted from basic cloud migration to sophisticated, AI-powered infrastructure management.",
+            "salaryRange": "£50,000 - £95,000 (UK), $85,000 - $150,000 (US)",
+            "hotSkills": [
+              "AI/ML infrastructure",
+              "Multi-cloud management",
+              "FinOps",
+              "Platform engineering"
+            ],
+            "trends": [
+              "Growing demand for platform engineers who can build developer-friendly internal tooling",
+              "Increased focus on cost optimization and FinOps practices",
+              "Need for professionals who can manage AI/ML infrastructure and GPU resources"
+            ]
+          }
+        }
+      }
+    },
+    "healthcare": {
+      "label": "Healthcare",
+      "description": "Where technology meets humanity at its most vulnerable, where decisions carry the weight of lives, where precision and compassion must dance together in perfect balance. This field demands not just clinical expertise, but emotional intelligence, ethical grounding, and unwavering commitment to human wellbeing.",
+      "specializations": {
+        "nursing": {
+          "label": "Registered Nursing",
+          "narrative": "You're the heartbeat of healthcare, the constant presence in moments of fear and healing, the advocate who ensures that behind every medical number is a human story that deserves dignity, care, and hope. Nursing has evolved far beyond following orders—you're a critical thinker, a patient advocate, a coordinator of complex care.",
+          "tips": [
+            "Your clinical competencies should tell stories of patient outcomes. Don't just list procedures you can perform—explain how your interventions improved patient experiences, shortened recovery times, prevented complications",
+            "Specialization matters in today's healthcare landscape. Whether it's ICU, emergency, pediatrics, or mental health—show deep understanding of your chosen area's unique challenges and patient populations",
+            "Technology fluency isn't optional anymore. EMR systems, telehealth platforms, patient monitoring devices—demonstrate comfort with the digital tools that increasingly shape modern nursing practice",
+            "Leadership experience, even in informal capacities, shows your potential for growth. Mentoring new nurses, participating in quality improvement initiatives, serving on committees—these demonstrate professional maturity",
+            "Continuing education should be visible and purposeful. Certifications, specializations, conference attendance—show commitment to staying current in an ever-evolving field"
+          ],
+          "keywords": [
+            "Patient Assessment",
+            "Medication Administration",
+            "IV Therapy",
+            "Electronic Health Records",
+            "HIPAA Compliance",
+            "Patient Advocacy",
+            "Care Coordination",
+            "Infection Control",
+            "Emergency Response",
+            "Wound Care",
+            "Critical Care",
+            "Pediatric Care",
+            "Geriatric Care",
+            "Mental Health",
+            "Telehealth",
+            "Quality Improvement",
+            "Evidence-Based Practice",
+            "Cultural Competency",
+            "Team Collaboration",
+            "Clinical Documentation"
+          ],
+          "interviewTips": [
+            "Patient scenario discussions reveal both clinical knowledge and ethical reasoning. Be prepared to walk through complex cases, explaining your assessment process, prioritization decisions, and patient advocacy approach",
+            "Stress management and emotional resilience are crucial topics. Discuss how you handle high-pressure situations, cope with patient loss, maintain empathy without burnout",
+            "Technology adaptation shows future-readiness. Discuss your experience with different EMR systems, telehealth delivery, or clinical decision support tools",
+            "Cultural competency isn't just nice to have—it's essential. Show understanding of how cultural factors influence health behaviors, communication preferences, and treatment compliance"
+          ],
+          "currentMarket": {
+            "outlook": "The nursing shortage crisis has reached critical levels. Nearly 100,000 RNs left the profession in 2021, with an expected shortage of approximately 500,000 nurses by 2025. This creates unprecedented opportunities but also significant workplace challenges.",
+            "salaryRange": "£25,000 - £45,000 (UK), $60,000 - $90,000 (US)",
+            "hotSkills": [
+              "Telehealth delivery",
+              "Electronic health records",
+              "Specialized critical care",
+              "Mental health integration"
+            ],
+            "trends": [
+              "Severe shortages projected especially in nonmetropolitan areas, with 13% shortage expected by 2037 versus 5% in metropolitan areas",
+              "Increased focus on nurse retention through improved working conditions and career development",
+              "Growing demand for nurses with technology integration skills",
+              "Rising opportunities in ambulatory care and community health settings"
+            ]
+          }
+        },
+        "physicians": {
+          "label": "Physicians",
+          "narrative": "You carry the profound responsibility of diagnosis, the weight of treatment decisions, the challenge of translating complex medical knowledge into healing action. Modern medicine demands not just clinical expertise, but systems thinking, technological fluency, and the ability to collaborate across increasingly complex healthcare teams.",
+          "tips": [
+            "Specialty choice should reflect both personal interest and market realities. Primary care, psychiatry, and geriatrics face significant shortages, while some surgical specialties remain highly competitive",
+            "Research experience, publications, and conference presentations demonstrate commitment to advancing medical knowledge and evidence-based practice",
+            "Leadership experience in medical school, residency, or early practice shows potential for administrative or teaching roles that increasingly define physician career paths",
+            "Technology integration skills are becoming essential. Telehealth delivery, AI-assisted diagnosis, digital therapeutics—show comfort with medicine's technological evolution",
+            "Population health understanding reflects medicine's shift toward prevention and community health outcomes, not just individual patient care"
+          ],
+          "keywords": [
+            "Clinical Medicine",
+            "Differential Diagnosis",
+            "Evidence-Based Medicine",
+            "Patient Management",
+            "EMR Systems",
+            "Clinical Research",
+            "Medical Education",
+            "Quality Improvement",
+            "Patient Safety",
+            "Healthcare Informatics",
+            "Telehealth",
+            "Chronic Disease Management",
+            "Preventive Medicine",
+            "Healthcare Administration",
+            "Multidisciplinary Care",
+            "Cultural Competency",
+            "Medical Ethics",
+            "Risk Management"
+          ],
+          "interviewTips": [
+            "Clinical reasoning discussions should demonstrate systematic thinking. Walk through diagnostic processes, explain differential diagnosis approaches, show evidence-based decision making",
+            "Leadership potential is highly valued. Discuss experiences leading teams, managing conflicts, implementing changes—show ability to function beyond individual patient care",
+            "Technology adoption discussions reveal adaptability. How do you stay current with medical advances? How do you integrate new tools into practice?",
+            "Population health perspective shows strategic thinking. Discuss approaches to preventive care, community health initiatives, healthcare disparities"
+          ],
+          "currentMarket": {
+            "outlook": "NCHWA projects an overall shortage of 187,130 physicians by 2037, with shortages across 31 of 35 physician specialties modeled. Rural areas will be particularly affected, creating opportunities for physicians willing to serve underserved communities.",
+            "salaryRange": "£40,000 - £120,000 (UK depending on experience and specialty), $200,000 - $400,000+ (US)",
+            "hotSkills": [
+              "Telehealth delivery",
+              "AI-assisted diagnosis",
+              "Population health management",
+              "Healthcare informatics"
+            ],
+            "trends": [
+              "Nonmetro areas facing 60% physician shortage by 2037 compared to 10% in metro areas",
+              "Growing emphasis on primary care and preventive medicine",
+              "Increased integration of AI and digital health tools",
+              "Rising demand for physicians with healthcare administration experience"
+            ]
+          }
+        },
+        "allied_health": {
+          "label": "Allied Health Professionals",
+          "narrative": "You're the specialists who bring targeted expertise to complex health challenges—the physical therapists who restore movement, the respiratory therapists who help patients breathe, the medical technologists who provide diagnostic insight. Allied health represents the specialized knowledge that makes comprehensive healthcare possible.",
+          "tips": [
+            "Certification and licensure requirements vary significantly by specialty and location. Ensure all credentials are current and prominently displayed",
+            "Interdisciplinary collaboration skills are essential. Show experience working with physicians, nurses, and other allied health professionals in coordinated care teams",
+            "Technology proficiency in your specialty area demonstrates current competence. Whether it's diagnostic equipment, treatment devices, or specialized software—show familiarity with industry-standard tools",
+            "Patient interaction skills matter across all allied health roles. Show ability to educate patients, provide emotional support, adapt communication styles to different populations",
+            "Evidence-based practice and continuing education show commitment to professional development and optimal patient outcomes"
+          ],
+          "keywords": [
+            "Patient Assessment",
+            "Treatment Planning",
+            "Equipment Operation",
+            "Quality Control",
+            "Safety Protocols",
+            "Patient Education",
+            "Documentation",
+            "Regulatory Compliance",
+            "Interdisciplinary Collaboration",
+            "Evidence-Based Practice",
+            "Continuing Education",
+            "Cultural Competency",
+            "Electronic Health Records"
+          ],
+          "interviewTips": [
+            "Technical competency discussions should include both equipment proficiency and safety protocols. Show systematic approach to your specialty's technical requirements",
+            "Patient interaction scenarios reveal communication skills and empathy. Discuss challenging cases, patient education approaches, cultural sensitivity",
+            "Quality improvement experience shows professional maturity. Have you participated in process improvements, outcome measurements, or safety initiatives?",
+            "Continuing education demonstrates commitment to excellence. Discuss recent training, certification maintenance, professional development activities"
+          ],
+          "currentMarket": {
+            "outlook": "NCHWA projects shortages across many allied health specialties by 2037, including significant gaps in key disciplines. The aging population is driving increased demand for specialized therapeutic and diagnostic services.",
+            "salaryRange": "Varies significantly by specialty: £22,000 - £45,000 (UK), $45,000 - $85,000 (US)",
+            "hotSkills": [
+              "Geriatric specialization",
+              "Technology integration",
+              "Telehealth delivery",
+              "Outcome measurement"
+            ],
+            "trends": [
+              "Growing demand for specialists who can work with aging populations",
+              "Increased emphasis on outcomes measurement and evidence-based practice",
+              "Rising opportunities in ambulatory and community-based settings",
+              "Need for professionals comfortable with emerging healthcare technologies"
+            ]
+          }
+        }
+      }
+    },
+    "finance": {
+      "label": "Finance & Banking",
+      "description": "Where numbers tell stories about human ambition, where risk dances with opportunity, where global markets pulse with the rhythms of hope and fear. This field demands analytical precision, strategic thinking, and the ability to navigate complex regulatory environments while understanding that behind every financial decision are real people with real dreams.",
+      "specializations": {
+        "investment_banking": {
+          "label": "Investment Banking",
+          "narrative": "You're operating at the epicenter of corporate finance, where billion-dollar deals reshape industries, where financial engineering meets strategic vision, where the pace is relentless and the stakes couldn't be higher. This isn't just about numbers—it's about understanding how capital flows can transform entire sectors of the economy.",
+          "tips": [
+            "Deal experience should be quantified and contextualized. Don't just list transaction values—explain your role, the challenges overcome, the strategic rationale, the market conditions that made the deal significant",
+            "Financial modeling skills need to be demonstrable, not just claimed. Build comprehensive models that show sophisticated thinking about valuation, scenario analysis, and risk assessment",
+            "Industry expertise often matters more than general finance knowledge. Whether it's healthcare, technology, or energy—develop deep understanding of sector-specific dynamics, regulations, and trends",
+            "Client relationship management and presentation skills separate good analysts from great ones. Show ability to communicate complex financial concepts clearly to C-suite executives",
+            "Regulatory knowledge and compliance experience are increasingly valuable. Understanding Sarbanes-Oxley, SEC requirements, international regulatory frameworks shows sophistication"
+          ],
+          "keywords": [
+            "Financial Modeling",
+            "Valuation",
+            "M&A",
+            "IPO",
+            "DCF",
+            "LBO",
+            "Comparable Analysis",
+            "Precedent Transactions",
+            "Due Diligence",
+            "Pitch Books",
+            "Client Relations",
+            "Excel",
+            "PowerPoint",
+            "Bloomberg Terminal",
+            "Capital Markets",
+            "Debt Financing",
+            "Equity Research",
+            "Risk Analysis",
+            "Regulatory Compliance"
+          ],
+          "interviewTips": [
+            "Technical questions will test your understanding of valuation methods, financial concepts, and modeling skills. Practice walking through DCF models, explaining LBO mechanics, discussing market conditions",
+            "Case studies reveal both analytical and presentation abilities. Structure your thinking clearly, make reasonable assumptions, show awareness of real-world constraints and opportunities",
+            "Market knowledge discussions show broader understanding. Stay current with recent deals, market trends, regulatory changes that affect your target sectors",
+            "Behavioral questions often focus on ability to handle pressure, work long hours, maintain attention to detail. Be honest but show resilience and commitment"
+          ],
+          "currentMarket": {
+            "outlook": "Investment banking revenue picked up in 2024 due to returning deal flow, leading to increased off-cycle hiring, more full-time opportunities, and accelerated recruitment timelines for 2025. The market is showing signs of recovery from the previous downturn.",
+            "salaryRange": "£45,000 - £80,000+ (UK analyst), $100,000 - $200,000+ (US analyst)",
+            "hotSkills": [
+              "Technology sector expertise",
+              "ESG integration",
+              "Cross-border transactions",
+              "Restructuring experience"
+            ],
+            "trends": [
+              "Off-cycle hiring increasing as banks respond to deal pipeline filling up, especially in tech, healthcare, restructuring, and industrials",
+              "Emphasis on professionals who can manage AI-driven market analysis and modeling",
+              "Growing importance of ESG considerations in deal structuring",
+              "Increased demand for bankers with cross-border and regulatory expertise"
+            ]
+          }
+        },
+        "financial_analysis": {
+          "label": "Financial Analysis",
+          "narrative": "You're the detective who uncovers stories hidden in financial statements, the strategist who translates numbers into actionable insights, the advisor who helps organizations understand their financial health and chart courses toward sustainable growth.",
+          "tips": [
+            "Analytical skills should be demonstrated through concrete examples. Describe complex financial problems you've solved, how your analysis influenced business decisions, how you identified opportunities or risks others missed",
+            "Industry expertise adds significant value. Whether it's understanding working capital cycles in manufacturing or regulatory capital requirements in banking—show domain knowledge",
+            "Technology proficiency extends beyond Excel. Familiarity with ERP systems, business intelligence tools, financial planning software shows ability to work with modern financial infrastructure",
+            "Communication skills are crucial. Show ability to present findings clearly to both financial and non-financial audiences, to distill complex analysis into actionable recommendations",
+            "Continuous learning demonstrates adaptability. Whether it's new accounting standards, regulatory changes, or emerging analytical techniques—show commitment to staying current"
+          ],
+          "keywords": [
+            "Financial Analysis",
+            "Financial Modeling",
+            "Budgeting",
+            "Forecasting",
+            "Variance Analysis",
+            "KPI Development",
+            "Excel",
+            "SQL",
+            "Tableau",
+            "Power BI",
+            "ERP Systems",
+            "Financial Reporting",
+            "Cash Flow Analysis",
+            "Cost Analysis",
+            "Investment Analysis",
+            "Risk Assessment",
+            "Business Intelligence",
+            "Data Visualization"
+          ],
+          "interviewTips": [
+            "Case study discussions should show systematic analytical thinking. Walk through your approach to analyzing financial statements, identifying trends, making recommendations",
+            "Technical skills assessments might include Excel modeling, SQL queries, or data visualization tasks. Practice building models from scratch, writing complex formulas",
+            "Business acumen questions reveal understanding of how financial analysis supports strategic decisions. Discuss how your work has influenced business outcomes",
+            "Attention to detail and accuracy are critical. Be prepared to discuss how you ensure data quality, validate assumptions, check your work for errors"
+          ],
+          "currentMarket": {
+            "outlook": "Financial managers have unemployment rates of just 1.9% in Q1 2025, well below the national average, with 93% of leaders reporting difficulty securing qualified professionals. The field shows strong demand across industries.",
+            "salaryRange": "£30,000 - £60,000 (UK), $55,000 - $95,000 (US)",
+            "hotSkills": [
+              "FP&A expertise",
+              "Data visualization",
+              "Business intelligence tools",
+              "ESG reporting"
+            ],
+            "trends": [
+              "Most evident skills gap is in finance and FP&A, with companies needing professionals who can turn data into actionable insights",
+              "Growing demand for analysts who can work with big data and advanced analytics",
+              "Increased focus on real-time financial reporting and dashboard creation",
+              "Need for professionals who understand both traditional finance and emerging technologies"
+            ]
+          }
+        },
+        "accounting": {
+          "label": "Accounting & Audit",
+          "narrative": "You're the guardian of financial truth, the professional who ensures that numbers tell accurate stories, the expert who navigates complex regulatory requirements while helping organizations maintain transparency and compliance. Modern accounting blends traditional rigor with technological innovation.",
+          "tips": [
+            "Professional certifications carry significant weight. CPA, ACCA, CMA—these credentials demonstrate commitment and competence. Keep them current and prominently featured",
+            "Technical expertise should span traditional accounting and emerging areas. Understanding GAAP/IFRS is fundamental, but familiarity with data analytics, automation tools, and emerging reporting requirements adds value",
+            "Industry specialization often determines career trajectory. Healthcare, financial services, nonprofit, government—each has unique accounting challenges and regulatory requirements",
+            "Process improvement experience shows business partnership potential. Can you identify inefficiencies, recommend automation, streamline workflows? Show systems thinking beyond compliance",
+            "Technology adoption demonstrates future-readiness. ERP systems, cloud-based accounting platforms, data analytics tools—show comfort with the digital transformation of accounting"
+          ],
+          "keywords": [
+            "GAAP",
+            "IFRS",
+            "Financial Reporting",
+            "Audit",
+            "Tax Compliance",
+            "Internal Controls",
+            "SOX Compliance",
+            "ERP Systems",
+            "Excel",
+            "QuickBooks",
+            "NetSuite",
+            "Data Analytics",
+            "Process Improvement",
+            "Risk Assessment",
+            "Regulatory Compliance",
+            "Cost Accounting",
+            "Management Reporting"
+          ],
+          "interviewTips": [
+            "Technical accounting discussions will test knowledge of standards, principles, and recent updates. Stay current with new pronouncements, implementation guidance, industry-specific requirements",
+            "Process improvement discussions reveal strategic thinking. Describe how you've streamlined procedures, implemented new systems, improved accuracy or efficiency",
+            "Attention to detail and accuracy are fundamental requirements. Be prepared to discuss quality control procedures, error prevention strategies, review processes",
+            "Communication skills matter more than many realize. Can you explain complex accounting concepts to non-accountants? Can you present findings clearly to management?"
+          ],
+          "currentMarket": {
+            "outlook": "Accountants and auditors show unemployment rates of just 1.3% in Q1 2025, indicating extremely strong demand. The profession is evolving rapidly with technology integration and expanding advisory roles.",
+            "salaryRange": "£22,000 - £55,000 (UK), $45,000 - $85,000 (US)",
+            "hotSkills": [
+              "Data analytics",
+              "Cloud accounting platforms",
+              "Process automation",
+              "Advisory services"
+            ],
+            "trends": [
+              "Shift from traditional compliance work toward advisory and analytical roles",
+              "Increasing demand for accountants who can work with data analytics and automation tools",
+              "Growing emphasis on real-time financial reporting and continuous auditing",
+              "Need for professionals who understand both accounting and technology integration"
+            ]
+          }
+        }
+      }
+    },
+    "marketing": {
+      "label": "Marketing & Communications",
+      "description": "Where psychology meets creativity, where data informs intuition, where brand stories connect with human desires and aspirations. This field has transformed dramatically with digital technology—today's marketers must be part analyst, part artist, part technologist, always human-centered.",
+      "specializations": {
+        "digital_marketing": {
+          "label": "Digital Marketing",
+          "narrative": "You're navigating the complex ecosystem where algorithms and human behavior intersect, where creative content must perform measurably, where campaign success depends on understanding both emotional triggers and conversion funnels. Digital marketing is equal parts art and science, requiring both creative vision and analytical rigor.",
+          "tips": [
+            "Campaign results should tell stories, not just list metrics. Explain the strategy behind your approach, the challenges you overcame, how you adapted based on data, what the numbers meant for business outcomes",
+            "Platform expertise needs depth, not just breadth. Whether it's Google Ads, Facebook marketing, email automation, or SEO—show sophisticated understanding of how each channel contributes to overall marketing strategy",
+            "Data analysis skills separate good marketers from great ones. Can you interpret Google Analytics data? Build customer segments? Conduct A/B tests? Show comfort with both data collection and insight extraction",
+            "Creative and analytical balance is your unique value. Show how you use data to inform creative decisions, how you test creative hypotheses, how you optimize for both engagement and conversion",
+            "Certification and continuous learning demonstrate platform proficiency. Google Ads, HubSpot, Facebook Blueprint—these credentials show commitment to mastering complex, evolving platforms"
+          ],
+          "keywords": [
+            "Google Analytics",
+            "Google Ads",
+            "Facebook Ads",
+            "SEO",
+            "SEM",
+            "Content Marketing",
+            "Email Marketing",
+            "Social Media Marketing",
+            "Marketing Automation",
+            "CRM",
+            "A/B Testing",
+            "Conversion Optimization",
+            "Customer Segmentation",
+            "Lead Generation",
+            "Attribution Modeling",
+            "Marketing Funnels",
+            "ROI Analysis"
+          ],
+          "interviewTips": [
+            "Campaign case studies should demonstrate both strategic thinking and tactical execution. Walk through campaign development from strategy through measurement and optimization",
+            "Platform knowledge discussions will test depth of understanding. Be prepared to discuss advanced features, optimization strategies, how different channels work together",
+            "Data interpretation skills are crucial. You might be asked to analyze campaign data, identify optimization opportunities, explain what metrics matter for different business goals",
+            "Creative and analytical balance shows versatility. Discuss how you use data to inform creative decisions, how you test creative concepts, how you balance brand and performance objectives"
+          ],
+          "currentMarket": {
+            "outlook": "Digital marketing shows solid 6% annual growth projected through 2032, with digital revenue expected to reach $700 billion by 2025. The field continues expanding as businesses prioritize online presence and data-driven marketing.",
+            "salaryRange": "£25,000 - £55,000 (UK), $50,000 - $85,000 (US)",
+            "hotSkills": [
+              "AI-powered marketing tools",
+              "First-party data strategies",
+              "Social commerce",
+              "Marketing attribution"
+            ],
+            "trends": [
+              "25% of 18-54-year-olds now use social search, with AI-powered tools becoming essential for content creation and campaign optimization",
+              "Growing emphasis on privacy-compliant marketing and first-party data strategies",
+              "Increased demand for marketers who can integrate AI tools into campaigns",
+              "Focus on short-form video content and visual storytelling capabilities"
+            ]
+          }
+        },
+        "content_marketing": {
+          "label": "Content Marketing",
+          "narrative": "You're the storyteller in the digital age, crafting narratives that educate, entertain, and inspire action. Content marketing isn't just about creating material—it's about understanding audience psychology, search algorithms, distribution strategies, and how different content formats serve different stages of the customer journey.",
+          "tips": [
+            "Portfolio diversity should demonstrate range and strategic thinking. Blog posts, video scripts, social media content, email campaigns—show ability to adapt your voice and approach to different formats and audiences",
+            "SEO knowledge is fundamental, not optional. Understanding keyword research, on-page optimization, content structure for search—these technical skills amplify your creative work",
+            "Audience research and persona development show strategic foundation. Can you identify target audiences, understand their pain points, create content that serves their specific needs and interests?",
+            "Content performance measurement demonstrates business impact. Don't just create content—show how you measure engagement, track conversions, optimize based on performance data",
+            "Cross-platform content strategy shows systematic thinking. How do you adapt core messages for different channels? How do you maintain brand consistency while optimizing for platform-specific audiences?"
+          ],
+          "keywords": [
+            "Content Strategy",
+            "Copywriting",
+            "SEO",
+            "Content Management Systems",
+            "Social Media",
+            "Email Marketing",
+            "Blog Writing",
+            "Video Production",
+            "Graphic Design",
+            "Analytics",
+            "Content Calendar",
+            "Brand Voice",
+            "Audience Research",
+            "Content Optimization",
+            "Distribution Strategy",
+            "Performance Measurement"
+          ],
+          "interviewTips": [
+            "Writing samples should be relevant and diverse. Bring examples that show different styles, audiences, and objectives. Be prepared to explain your strategic thinking behind each piece",
+            "Content strategy discussions should reveal systematic thinking. How do you plan content calendars? How do you balance different content types? How do you measure content success?",
+            "SEO and technical knowledge questions test foundational skills. Be prepared to discuss keyword research, content optimization, how you structure content for both readers and search engines",
+            "Creative process discussions show problem-solving ability. How do you generate ideas? How do you overcome writer's block? How do you adapt content based on performance feedback?"
+          ],
+          "currentMarket": {
+            "outlook": "Content marketing jobs are surging as companies seek video producers, motion designers, and content marketers who understand AI-generated content and employee-generated content trends. The field is expanding rapidly with new content formats and distribution channels.",
+            "salaryRange": "£22,000 - £45,000 (UK), $45,000 - $75,000 (US)",
+            "hotSkills": [
+              "Video content creation",
+              "AI-assisted content generation",
+              "Social media storytelling",
+              "Interactive content"
+            ],
+            "trends": [
+              "Growing demand for professionals experienced in short-form video and visual storytelling, with AI-powered content creation becoming essential",
+              "Increased emphasis on authentic, employee-generated content",
+              "Rising importance of interactive and immersive content experiences",
+              "Need for content creators who understand both creative and technical aspects of digital distribution"
+            ]
+          }
+        },
+        "brand_management": {
+          "label": "Brand Management & Strategy",
+          "narrative": "You're the architect of perception, the guardian of brand identity, the strategist who ensures every touchpoint reinforces a coherent story about what an organization represents. Brand management sits at the intersection of psychology, design, marketing, and business strategy.",
+          "tips": [
+            "Brand strategy work should demonstrate both creative and analytical thinking. Show how you've developed brand positioning, managed brand guidelines, measured brand health and equity",
+            "Market research and consumer insight experience adds credibility. Can you interpret consumer research? Develop buyer personas? Understand competitive positioning? Show data-driven brand decisions",
+            "Cross-functional collaboration skills are essential. Brand management touches every part of an organization—show experience working with product development, sales, customer service, external agencies",
+            "Creative project management demonstrates execution ability. Brand campaigns require coordinating multiple stakeholders, managing timelines, ensuring consistency across channels",
+            "Brand measurement and ROI understanding shows business acumen. How do you measure brand awareness? Track brand sentiment? Connect brand investments to business outcomes?"
+          ],
+          "keywords": [
+            "Brand Strategy",
+            "Brand Positioning",
+            "Market Research",
+            "Consumer Insights",
+            "Brand Guidelines",
+            "Campaign Management",
+            "Creative Direction",
+            "Competitive Analysis",
+            "Brand Metrics",
+            "Customer Journey",
+            "Brand Equity",
+            "Product Launch",
+            "Integrated Marketing",
+            "Stakeholder Management",
+            "ROI Analysis"
+          ],
+          "interviewTips": [
+            "Brand strategy case studies should show systematic thinking. Walk through brand challenges you've solved, from analysis through strategy development to execution and measurement",
+            "Creative and analytical balance discussions reveal versatility. Show how you use research to inform creative decisions, how you test creative concepts, how you measure creative impact",
+            "Cross-functional collaboration examples demonstrate leadership potential. How do you influence without authority? How do you ensure brand consistency across teams?",
+            "Competitive analysis and market understanding show strategic depth. Be prepared to discuss brand positioning in competitive contexts, how you identify market opportunities"
+          ],
+          "currentMarket": {
+            "outlook": "Marketing managers show unemployment rates of just 3.1%, well below the national average, with companies competing for brand management talent. The field is evolving with digital transformation and increased focus on customer experience.",
+            "salaryRange": "£30,000 - £65,000 (UK), $60,000 - $110,000 (US)",
+            "hotSkills": [
+              "Digital brand experience",
+              "Customer experience design",
+              "Brand purpose and sustainability",
+              "Data-driven brand measurement"
+            ],
+            "trends": [
+              "Growing emphasis on purpose-driven branding and sustainability messaging",
+              "Increased focus on customer experience as a brand differentiator",
+              "Rising importance of employee advocacy in brand building",
+              "Need for brand managers who understand digital-first customer journeys"
+            ]
+          }
+        }
+      }
+    },
+    "sales": {
+      "label": "Sales",
+      "description": "Where relationship building meets revenue generation, where persuasion is an art form backed by data, where understanding human psychology determines business success. Modern sales requires consultative approaches, technology fluency, and the ability to create value for customers while achieving organizational goals.",
+      "specializations": {
+        "b2b_sales": {
+          "label": "B2B Sales",
+          "narrative": "You're operating in complex ecosystems where decisions involve multiple stakeholders, longer sales cycles, and higher stakes. B2B sales is about building trust, understanding business challenges, and positioning solutions that create measurable value for other organizations.",
+          "tips": [
+            "Sales achievements should be quantified and contextualized. Don't just list quota attainment percentages—explain the market conditions, competitive landscape, deal complexity that made your results significant",
+            "Industry expertise often determines success more than generic sales skills. Whether it's software, manufacturing, or professional services—develop deep understanding of your buyers' business challenges",
+            "CRM proficiency and data-driven selling approach demonstrate modern sales competence. Show ability to manage complex sales processes, analyze pipeline data, forecast accurately",
+            "Consultative selling skills separate order-takers from trusted advisors. Show ability to uncover business needs, develop custom solutions, navigate complex organizational decision-making",
+            "Relationship building and account management experience show long-term thinking. B2B success often depends on developing multi-year partnerships, not just closing individual transactions"
+          ],
+          "keywords": [
+            "B2B Sales",
+            "Enterprise Sales",
+            "Solution Selling",
+            "Consultative Selling",
+            "CRM",
+            "Salesforce",
+            "Pipeline Management",
+            "Lead Qualification",
+            "Proposal Writing",
+            "Contract Negotiation",
+            "Account Management",
+            "Relationship Building",
+            "Sales Forecasting",
+            "Competitive Analysis"
+          ],
+          "interviewTips": [
+            "Sales scenario discussions will test your ability to navigate complex situations. Be prepared to role-play discovery calls, objection handling, closing techniques",
+            "Numbers will be scrutinized carefully. Be ready to explain your sales metrics, discuss how you achieved results, provide context for your performance",
+            "Industry knowledge demonstrates credibility. Show understanding of your target market's challenges, competitive landscape, business drivers",
+            "Process and methodology discussions reveal systematic thinking. How do you qualify prospects? Manage your pipeline? Forecast deals? Show disciplined approach"
+          ],
+          "currentMarket": {
+            "outlook": "B2B sales remains critical as organizations invest in growth and digital transformation. Companies are seeking sales professionals who can navigate complex buying processes and demonstrate clear ROI for their solutions.",
+            "salaryRange": "£30,000 - £80,000+ (UK), $60,000 - $150,000+ (US, often with significant commission potential)",
+            "hotSkills": [
+              "Social selling",
+              "Sales technology platforms",
+              "Value-based selling",
+              "Digital sales presentation"
+            ],
+            "trends": [
+              "Increased emphasis on digital selling and virtual relationship building",
+              "Growing importance of sales professionals who understand AI and automation tools",
+              "Focus on value-based selling and ROI demonstration",
+              "Need for sales professionals who can navigate hybrid buying processes"
+            ]
+          }
+        },
+        "account_management": {
+          "label": "Account Management",
+          "narrative": "You're the relationship curator, the trusted advisor who ensures that initial sales transform into long-term partnerships. Account management is about understanding customer success, identifying expansion opportunities, and serving as the bridge between client needs and organizational capabilities.",
+          "tips": [
+            "Customer retention and growth metrics tell your story better than initial sales numbers. Show how you've maintained accounts, expanded relationships, prevented churn, increased customer lifetime value",
+            "Strategic account planning demonstrates sophisticated thinking. Can you develop comprehensive account strategies? Map organizational relationships? Identify growth opportunities?",
+            "Problem-solving and crisis management experience shows reliability. Difficult situations are inevitable—show how you've navigated challenges while maintaining customer trust",
+            "Cross-functional collaboration skills are essential. Account management requires coordinating with product, support, delivery teams to ensure customer success",
+            "Industry expertise and customer business understanding add credibility. Show deep knowledge of your clients' industries, challenges, competitive landscapes"
+          ],
+          "keywords": [
+            "Account Management",
+            "Customer Success",
+            "Relationship Management",
+            "Account Planning",
+            "Upselling",
+            "Cross-selling",
+            "Customer Retention",
+            "Contract Renewal",
+            "Stakeholder Management",
+            "Problem Resolution",
+            "Strategic Planning",
+            "Revenue Growth",
+            "Client Relations",
+            "Business Development"
+          ],
+          "interviewTips": [
+            "Customer success stories should demonstrate both relationship skills and business impact. Show how you've helped clients achieve their objectives while growing account value",
+            "Conflict resolution and problem-solving examples reveal important capabilities. How do you handle difficult situations? Manage competing priorities? Maintain relationships during challenges?",
+            "Strategic thinking discussions show account management maturity. How do you plan for account growth? Identify expansion opportunities? Map organizational relationships?",
+            "Cross-functional collaboration examples demonstrate leadership potential. How do you coordinate internal resources? Influence without authority? Ensure customer success?"
+          ],
+          "currentMarket": {
+            "outlook": "Account management roles are increasingly strategic as companies focus on customer lifetime value and retention. The shift toward subscription and service-based business models increases demand for skilled account managers.",
+            "salaryRange": "£25,000 - £60,000 (UK), $50,000 - $100,000 (US)",
+            "hotSkills": [
+              "Customer success platforms",
+              "Data analysis",
+              "Strategic account planning",
+              "Digital relationship building"
+            ],
+            "trends": [
+              "Growing emphasis on customer success and retention over acquisition",
+              "Increased use of data analytics and customer success platforms",
+              "Focus on strategic account planning and expansion selling",
+              "Need for account managers who understand subscription and SaaS business models"
+            ]
+          }
+        }
+      }
+    },
+    "human_resources": {
+      "label": "Human Resources",
+      "description": "Where organizational psychology meets legal compliance, where people strategy drives business outcomes, where empathy and analytical thinking must coexist. Modern HR is evolving from administrative function to strategic business partnership, requiring both deep people skills and data-driven decision making.",
+      "specializations": {
+        "talent_acquisition": {
+          "label": "Talent Acquisition & Recruitment",
+          "narrative": "You're the talent scout, the matchmaker between human potential and organizational needs, the strategist who builds teams that drive business success. Modern recruiting combines traditional relationship skills with sophisticated technology, data analysis, and employer branding expertise.",
+          "tips": [
+            "Recruiting metrics should tell stories about quality, efficiency, and business impact. Don't just mention time-to-fill—explain how your sourcing strategies improved candidate quality, reduced hiring costs, enhanced diversity",
+            "Technology proficiency spans multiple platforms and tools. ATS systems, LinkedIn Recruiter, sourcing tools, assessment platforms—show comfort with the full recruiting technology stack",
+            "Sourcing creativity and diversity initiatives demonstrate strategic thinking. How do you reach passive candidates? Build diverse talent pipelines? Create compelling employer value propositions?",
+            "Stakeholder management and consultative approach show business partnership. Can you advise hiring managers? Influence recruiting strategy? Balance candidate and client needs?",
+            "Employer branding and candidate experience focus reflects modern recruiting priorities. Show understanding of how recruiting impacts overall organizational reputation and talent brand"
+          ],
+          "keywords": [
+            "Talent Acquisition",
+            "Recruitment",
+            "Sourcing",
+            "ATS",
+            "LinkedIn Recruiter",
+            "Boolean Search",
+            "Interviewing",
+            "Candidate Assessment",
+            "Employer Branding",
+            "Diversity Recruiting",
+            "Campus Recruiting",
+            "Passive Candidate Sourcing",
+            "Recruiting Metrics",
+            "Candidate Experience",
+            "Onboarding"
+          ],
+          "interviewTips": [
+            "Sourcing strategies discussions will test both creativity and systematic thinking. How do you find difficult-to-source candidates? Build talent pipelines? Develop sourcing plans for different roles?",
+            "Recruiting metrics and data analysis show business impact. Be prepared to discuss your key metrics, how you measure success, how you use data to improve recruiting outcomes",
+            "Stakeholder management examples demonstrate consultative skills. How do you partner with hiring managers? Manage expectations? Influence recruiting decisions?",
+            "Diversity and inclusion initiatives show strategic awareness. What approaches have you used to build diverse candidate pools? How do you measure and improve diversity outcomes?"
+          ],
+          "currentMarket": {
+            "outlook": "Talent acquisition remains critical as organizations compete for skilled workers across industries. The focus has shifted toward quality of hire, candidate experience, and building sustainable talent pipelines rather than just filling immediate openings.",
+            "salaryRange": "£25,000 - £55,000 (UK), $50,000 - $90,000 (US)",
+            "hotSkills": [
+              "AI-powered recruiting tools",
+              "Diversity recruiting",
+              "Remote recruiting",
+              "Candidate experience design"
+            ],
+            "trends": [
+              "Increased use of AI and automation in candidate screening and sourcing",
+              "Growing emphasis on candidate experience and employer branding",
+              "Focus on skills-based hiring over traditional credential requirements",
+              "Need for recruiters who can manage remote and hybrid recruiting processes"
+            ]
+          }
+        },
+        "hr_generalist": {
+          "label": "HR Generalist",
+          "narrative": "You're the HR Swiss Army knife, equally comfortable with policy development and employee coaching, compliance management and organizational development. The generalist role requires breadth of knowledge, adaptability, and the ability to wear multiple hats while maintaining focus on both legal requirements and human needs.",
+          "tips": [
+            "Broad HR knowledge should be demonstrated through diverse project examples. Show experience across recruiting, employee relations, performance management, compliance, training, compensation",
+            "Employee relations and conflict resolution skills are critical differentiators. Can you handle difficult conversations? Mediate conflicts? Support managers through challenging people situations?",
+            "Compliance knowledge and legal awareness show risk management capability. Understanding employment law, policy development, investigation procedures—these protect both employees and organizations",
+            "HRIS and HR technology proficiency demonstrates operational efficiency. Show experience with various HR systems, report generation, process automation, data analysis",
+            "Business partnership and strategic thinking separate good generalists from great ones. How do you align HR initiatives with business objectives? Provide strategic counsel to leadership?"
+          ],
+          "keywords": [
+            "HR Generalist",
+            "Employee Relations",
+            "Performance Management",
+            "Policy Development",
+            "Compliance",
+            "HRIS",
+            "Benefits Administration",
+            "Training and Development",
+            "Onboarding",
+            "Offboarding",
+            "Employment Law",
+            "Workplace Investigations",
+            "Conflict Resolution",
+            "Change Management"
+          ],
+          "interviewTips": [
+            "Employee relations scenarios will test your judgment and communication skills. Be prepared to discuss difficult situations you've handled, how you approach conflict resolution",
+            "Compliance and legal knowledge questions assess risk management capability. Show understanding of employment law basics, investigation procedures, policy development",
+            "Business partnership examples demonstrate strategic value. How have you supported business objectives through HR initiatives? Provided strategic counsel to leadership?",
+            "Technology and systems experience shows operational efficiency. Discuss your experience with HRIS, report generation, process improvement, data analysis"
+          ],
+          "currentMarket": {
+            "outlook": "HR generalists remain in demand as organizations seek professionals who can handle diverse HR responsibilities while partnering strategically with business leaders. The role continues evolving toward more analytical and strategic responsibilities.",
+            "salaryRange": "£25,000 - £50,000 (UK), $45,000 - $80,000 (US)",
+            "hotSkills": [
+              "HR analytics",
+              "Remote workforce management",
+              "Change management",
+              "Employee experience design"
+            ],
+            "trends": [
+              "Increased focus on employee experience and engagement",
+              "Growing use of HR analytics and data-driven decision making",
+              "Emphasis on change management and organizational resilience",
+              "Need for HR professionals who understand remote and hybrid work challenges"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "universalGuidance": {
+    "cvOptimisation": {
+      "philosophy": "Your CV isn't a biography—it's a strategic document designed to open doors, start conversations, and position you as the solution to someone else's problem. Every word should earn its place, every bullet point should advance your narrative, every section should reinforce why you're the candidate they can't ignore.",
+      "strategies": [
+        "Lead with impact, not just duties. Instead of 'Responsible for managing a team,' write 'Led 8-person development team through successful product launch, delivering 2 weeks ahead of schedule and 15% under budget.'",
+        "Quantify everything quantifiable. Numbers create credibility—percentage improvements, budget sizes, team sizes, timeline achievements, customer satisfaction scores, cost savings.",
+        "Tailor ruthlessly for each application. This doesn't mean lying—it means emphasizing the experiences, skills, and achievements most relevant to each specific role and company.",
+        "Use action verbs that convey leadership and impact: 'Orchestrated,' 'Spearheaded,' 'Transformed,' 'Delivered,' 'Architected,' 'Negotiated.' Avoid passive language like 'Worked on' or 'Assisted with.'",
+        "Professional summary should be a compelling elevator pitch, not a list of adjectives. Focus on what you've accomplished and what unique value you bring to the next role.",
+        "Skills section should balance technical competencies with soft skills, but always prioritize relevance to the target role. Include proficiency levels where appropriate.",
+        "Education and certifications should be prominently placed if recent or highly relevant, otherwise move them lower. Always include graduation dates unless you're concerned about age discrimination.",
+        "Keep formatting clean, consistent, and ATS-friendly. Use standard fonts, clear headings, bullet points rather than paragraphs, and save in both PDF and Word formats."
+      ]
+    },
+    "coverLetterExcellence": {
+      "philosophy": "Your cover letter is the conversation starter, the personality preview, the chance to show how you think and why you care. It should complement, not repeat, your CV—offering context, demonstrating communication skills, and making the human connection that technology can't replicate.",
+      "structure": [
+        "Opening paragraph should grab attention immediately. Reference specific aspects of the role or company that genuinely excite you. Avoid generic openings like 'I am writing to apply...'",
+        "Body paragraphs should tell stories that illustrate your qualifications. Use specific examples that show how your experience translates to their needs. Connect your achievements to their challenges.",
+        "Research the company deeply enough to reference recent news, initiatives, or challenges. This shows genuine interest and helps you stand out from template letters.",
+        "Address potential concerns preemptively. Career gaps, industry transitions, location changes—acknowledge these honestly while focusing on the value you bring.",
+        "Closing should be confident and action-oriented. Express enthusiasm for next steps, mention when you'll follow up (then actually do it), and thank them for their consideration."
+      ]
+    },
+    "interviewMastery": {
+      "philosophy": "Interviews are conversations, not interrogations. Your goal isn't to be perfect—it's to be authentic, prepared, and compelling. Show them who you are, how you think, and why you'd be valuable to their team.",
+      "preparation": [
+        "Research goes beyond the company website. Read recent news, understand their competitive landscape, identify challenges they're facing, learn about their culture and values.",
+        "Prepare STAR examples (Situation, Task, Action, Result) for common behavioral questions. Focus on stories that show leadership, problem-solving, collaboration, and growth.",
+        "Practice your elevator pitch until it feels natural, not rehearsed. You should be able to summarize your background and value proposition clearly and confidently.",
+        "Develop thoughtful questions that show genuine interest and strategic thinking. Ask about challenges, growth opportunities, team dynamics, company direction.",
+        "Understand the role deeply enough to explain how you'd approach the first 30/60/90 days. Show strategic thinking about priorities and relationship building."
+      ],
+      "mindset": [
+        "Confidence comes from preparation, not arrogance. Know your worth, but stay humble and curious about learning opportunities.",
+        "Authenticity trumps perfection. It's better to admit knowledge gaps honestly than to fake expertise you don't have.",
+        "Show enthusiasm genuinely. People want to work with colleagues who are excited about the work, the team, and the mission.",
+        "Listen actively and ask follow-up questions. Interviews should feel like conversations, with you showing genuine curiosity about their challenges and opportunities."
+      ]
+    },
+    "linkedinPresence": {
+      "philosophy": "Your LinkedIn profile is your digital handshake—the first impression you make on potential employers, collaborators, and industry connections. It's not about perfect polish; it's about authentic representation of your professional value and personality. The best profiles feel human while demonstrating expertise.",
+      "strategies": [
+        "Craft a headline that goes beyond job title—show the value you bring: 'Marketing Manager → Growth Strategist helping SaaS companies scale from £1M to £10M ARR'",
+        "Write a summary that tells your professional story, not just lists achievements—connect the dots between your experience and future aspirations",
+        "Use a professional photo that reflects your industry culture—formal for finance, more relaxed for tech startups",
+        "Optimise for search with industry keywords, but weave them naturally into conversational content",
+        "Keep your experience descriptions results-focused with quantifiable achievements rather than job duty lists",
+        "Share industry insights, lessons learned, and professional challenges you've overcome in your posts",
+        "Comment thoughtfully on others' posts—add value rather than just congratulating",
+        "Use LinkedIn articles for longer-form thought leadership on topics you're passionate about",
+        "Post consistently but not constantly—aim for 2-3 quality posts per week rather than daily generic updates",
+        "Engage during business hours in your target market for maximum visibility"
+      ],
+      "contentStrategy": [
+        "Use compelling opening lines that make people want to read more",
+        "Include relevant hashtags (3-5 maximum) to increase discoverability",
+        "Tag relevant people and companies when appropriate, but don't overdo it",
+        "Mix different content types: text posts, images, documents, and occasional video",
+        "Ask questions to encourage engagement and start meaningful conversations"
+      ]
+    },
+    "networkingNaturally": {
+      "philosophy": "Networking isn't about collecting contacts—it's about building authentic relationships based on mutual interest, shared challenges, and genuine desire to help others succeed. The best networking happens when you're genuinely curious about other people's work and challenges.",
+      "strategies": [
+        "Give before you take. Share interesting articles, make introductions, offer insights, provide value before asking for anything in return.",
+        "Quality over quantity. Better to have meaningful conversations with fewer people than superficial exchanges with many.",
+        "Send personalized connection requests that reference something specific about the person or their content",
+        "Follow up with new connections—suggest a coffee chat, offer to help with something they're working on",
+        "Join and actively participate in industry-specific LinkedIn groups",
+        "Industry events and conferences offer face-to-face opportunities to build relationships. Come prepared with questions, follow up within 48 hours, look for ways to continue conversations.",
+        "Informational interviews can be incredibly valuable for learning about roles, companies, or industries. Approach with genuine curiosity, respect people's time, always follow up with thanks.",
+        "Internal networking within your current organization can be just as valuable as external relationships. Build relationships across departments, volunteer for cross-functional projects.",
+        "Attend LinkedIn Local events and other professional networking events in your area",
+        "Use LinkedIn's advanced search to find people working at target companies or in specific roles"
+      ],
+      "eventNetworking": [
+        "Research attendees and speakers beforehand—identify 5-10 people you'd genuinely like to meet",
+        "Prepare your introduction, but make it conversational, not a sales pitch",
+        "Ask open-ended questions that get people talking about their passions and challenges",
+        "Take notes after conversations (discrete notes on business cards or phone) to personalise follow-up",
+        "Attend smaller breakout sessions and workshops where deeper conversations happen naturally",
+        "Volunteer or speak at events—it positions you as a giver and makes you more approachable"
+      ],
+      "maintenance": [
+        "Set up a simple CRM or spreadsheet to track important connections and last contact dates",
+        "Send periodic updates to your network about your professional journey and wins",
+        "Share relevant opportunities, articles, or connections with people in your network",
+        "Remember personal details and check in about them—family, hobbies, challenges they've mentioned",
+        "Celebrate others' successes publicly—like, comment, and share their achievements",
+        "Host your own networking events or informal gatherings to bring people together"
+      ]
+    },
+    "jobSearchStrategy": {
+      "philosophy": "Job searching is itself a full-time job requiring strategy, organization, and persistence. Success comes from being systematic about your approach while remaining adaptable to opportunities that emerge.",
+      "tactics": [
+        "Multiple channel approach maximizes opportunities. Job boards, company websites, networking, recruiters, industry associations—use all available channels.",
+        "Application tracking helps you stay organized and follow up appropriately. Track applications, contact information, follow-up dates, interview stages.",
+        "Early application advantage is real. Apply within the first 48 hours when possible—hiring managers often see the most applications early and may stop reviewing after finding strong candidates.",
+        "Quality over quantity in applications. Better to submit fewer, highly tailored applications than many generic ones. Each application should feel crafted for that specific role and company.",
+        "Follow-up strategy should be professional and persistent without being annoying. One follow-up email after 1-2 weeks is appropriate, mentioning specific aspects of the role that excite you.",
+        "Rejection as redirection—not every 'no' is personal. Market conditions, internal candidates, budget freezes, timing issues—many factors outside your control influence hiring decisions.",
+        "Continuous skill development during job search shows commitment to growth. Take courses, earn certifications, work on projects that strengthen your candidacy for target roles."
+      ]
+    },
+    "salaryNegotiation": {
+      "philosophy": "Salary negotiation is about finding mutually beneficial arrangements, not winning battles. Your goal is to be compensated fairly for the value you bring while building positive relationships with your future colleagues.",
+      "preparation": [
+        "Market research should be thorough and location-specific. Use multiple sources: Glassdoor, PayScale, industry reports, networking contacts. Consider total compensation, not just base salary.",
+        "Know your worth based on your specific experience, skills, and the value you'll bring. Generic market data is a starting point—your unique qualifications determine your specific value.",
+        "Understand the complete package: base salary, bonuses, equity, benefits, professional development budget, flexible work arrangements. Sometimes non-salary benefits can be more valuable.",
+        "Timing matters enormously. Wait until you have an offer before discussing compensation in detail. Let them invest in you emotionally before negotiating terms.",
+        "Have alternatives if possible. Other offers, current role satisfaction, freelance options—alternatives give you confidence and leverage in negotiations."
+      ],
+      "strategies": [
+        "Express enthusiasm first, negotiate second. Always start by reaffirming your interest in the role and organization before discussing compensation adjustments.",
+        "Use data, not emotions. Present market research, specific achievements, unique qualifications that justify your compensation expectations.",
+        "Negotiate the entire package, not just base salary. If salary is fixed, explore signing bonuses, earlier review cycles, additional holiday time, professional development budgets.",
+        "Be collaborative, not adversarial. Frame negotiations as finding a solution that works for everyone, not as demands or ultimatums.",
+        "Know your walk-away point before entering negotiations. What's the minimum acceptable offer? What would make you decline? Be prepared to act on these boundaries."
+      ]
+    }
+  },
+  "careerStages": {
+    "earlyCareer": {
+      "label": "Early Career (0-3 years)",
+      "narrative": "You're building the foundation, learning the rhythms of professional life, discovering what energizes you and what drains you. This stage is about competence development, relationship building, and beginning to understand where your unique talents might take you.",
+      "challenges": [
+        "Imposter syndrome feels overwhelming when everyone seems more experienced, more confident, more certain about their career direction",
+        "Learning curve steepness can be intimidating—so much to absorb about industry knowledge, company culture, professional norms, technical skills",
+        "Limited network means fewer mentors, fewer internal advocates, fewer people to provide guidance and opportunities",
+        "Financial pressures combined with student loans can create stress and limit career exploration options"
+      ],
+      "strategies": [
+        "Embrace the beginner's mind. Your fresh perspective and willingness to ask questions can be valuable assets. Don't apologize for learning—lean into curiosity",
+        "Seek feedback actively and specifically. Don't wait for annual reviews—ask for regular input on your work, your communication, your professional development",
+        "Build relationships intentionally across different levels and departments. Future opportunities often come from unexpected connections",
+        "Document your achievements as they happen. Keep a running record of projects, results, praise, challenges overcome—this becomes invaluable for performance reviews and job applications",
+        "Invest in skill development strategically. Choose learning opportunities that build both current job competence and future career options",
+        "Find mentors formally and informally. Most experienced professionals are willing to share insights if approached respectfully and specifically"
+      ]
+    },
+    "midCareer": {
+      "label": "Mid-Career (5-15 years)",
+      "narrative": "You've found your professional rhythm, developed expertise, and now face the complex challenge of choosing between depth and breadth, between specialist excellence and generalist leadership. This is when career strategy becomes crucial.",
+      "challenges": [
+        "Plateau fears as initial rapid learning slows and advancement becomes more competitive and political",
+        "Work-life balance complexity increases with family responsibilities, financial commitments, and higher job demands",
+        "Specialization versus generalization decisions that will shape the next decade of career trajectory",
+        "Increased competition for senior roles requiring both deeper expertise and broader business acumen"
+      ],
+      "strategies": [
+        "Develop your unique value proposition. What combination of skills, experience, and perspective makes you irreplaceable? How do you want to be known?",
+        "Build leadership skills gradually through project management, mentoring, cross-functional collaboration, volunteer opportunities",
+        "Strategic networking becomes crucial. Focus on building relationships with senior leaders, industry experts, potential future colleagues",
+        "Consider lateral moves that broaden your experience, expose you to different challenges, build diverse skill sets",
+        "Invest in executive education, advanced certifications, or graduate degrees that position you for senior roles",
+        "Begin giving back through mentoring, speaking, writing, industry participation—building your professional brand and network"
+      ]
+    },
+    "seniorCareer": {
+      "label": "Senior/Executive (15+ years)",
+      "narrative": "You're now expected to be a strategic thinker, a culture shaper, someone who sees around corners and makes decisions that affect many lives. Your experience is your greatest asset, but staying relevant requires continuous adaptation.",
+      "challenges": [
+        "Age discrimination concerns in industries that prioritize youth and 'digital nativity'",
+        "Technology evolution requiring constant learning to remain current and credible",
+        "Overqualification for some roles while underqualified for others due to highly specialized experience",
+        "Succession planning and legacy building while still driving current performance"
+      ],
+      "strategies": [
+        "Emphasize recent achievements and current relevance rather than extensive career history. Focus on the last 10-15 years in detail",
+        "Showcase adaptability and continuous learning through new certifications, technology adoption, industry involvement",
+        "Leverage your network strategically. At this level, many opportunities come through relationships rather than applications",
+        "Consider portfolio careers, consulting, board positions, or advisory roles that utilize your experience differently",
+        "Mentor actively and visibly. This demonstrates leadership while building relationships with emerging leaders",
+        "Stay current with industry trends, emerging technologies, changing business models that affect your field"
+      ]
+    },
+    "careerTransition": {
+      "label": "Career Changer",
+      "narrative": "You're rewriting your professional story, leveraging existing skills while acquiring new ones, convincing skeptics while managing your own uncertainty. Career transitions require courage, strategy, and patience.",
+      "challenges": [
+        "Credibility gap when transitioning between industries or functions—you lack direct experience in your target area",
+        "Potential salary reduction as you move from senior roles in one field to more junior roles in another",
+        "Convincing employers of genuine commitment rather than just escaping current situation",
+        "Network limitations in your target field requiring significant relationship building"
+      ],
+      "strategies": [
+        "Identify and articulate transferable skills clearly. How does your unique background create value in the new field? What perspectives do you bring?",
+        "Build credentials through education, certifications, volunteer work, side projects that demonstrate commitment and competence",
+        "Network intensively in your target field through industry associations, conferences, informational interviews, online communities",
+        "Consider transitional roles that bridge your current and target fields, providing stepping stones rather than dramatic leaps",
+        "Craft compelling narrative about why you're changing careers. Avoid negative comments about previous field—focus on positive attraction to new direction",
+        "Be prepared for some steps backward in title or compensation in exchange for opportunity and future potential"
+      ]
+    }
+  },
+  "industryInsights2025": {
+    "technology": {
+      "marketDynamics": "The tech sector is experiencing a fascinating paradox—while software developer job listings have hit five-year lows, demand for specialized skills remains intense. AI tools are reshaping how we work, with companies seeking developers who can effectively collaborate with AI assistants rather than being replaced by them. The focus has shifted from volume hiring to quality hiring, with the average technical interview score required for offers rising 12% last year.",
+      "compensationTrends": "While entry-level hiring has slowed, experienced professionals command premium salaries. Companies are willing to pay significantly more for developers who can work effectively with AI tools, understand system architecture, and contribute to strategic decision-making beyond just coding.",
+      "skillsEvolution": "AI-assisted development, microservices architecture, and cloud-native development are becoming table stakes. The most valuable professionals are those who combine technical depth with business understanding and can bridge the gap between engineering and product strategy."
+    },
+    "healthcare": {
+      "marketDynamics": "Healthcare faces its most severe staffing crisis in modern history. Nearly 20% of the healthcare workforce left during pandemic years, with 31% of nurses considering leaving direct patient care within the next year. This creates both unprecedented opportunities and significant workplace challenges.",
+      "compensationTrends": "Hospital labor expenses have increased 36.9% compared to pre-pandemic levels, creating upward pressure on salaries across all healthcare roles. Travel nursing and contract work command premium rates, though permanent roles offer better long-term stability.",
+      "skillsEvolution": "Telehealth delivery, electronic health records proficiency, and technology integration are now essential skills. Healthcare professionals who can adapt to new care delivery models and work effectively with emerging health technologies are particularly valued."
+    },
+    "finance": {
+      "marketDynamics": "Investment banking is experiencing a recovery with increased deal flow driving expanded hiring, including more off-cycle opportunities. However, traditional banking roles are being reshaped by fintech innovation and regulatory changes.",
+      "compensationTrends": "Competition for top finance talent remains intense, with starting salaries for investment banking analysts typically ranging from $100,000-$200,000. However, work-life balance considerations are becoming more important to candidates.",
+      "skillsEvolution": "ESG integration, technology sector expertise, and cross-border transaction experience are increasingly valuable. Financial professionals who understand both traditional finance and emerging technologies like blockchain and AI have significant advantages."
+    }
+  }
+}

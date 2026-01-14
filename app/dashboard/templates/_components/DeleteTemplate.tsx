@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 
 import { getQueryClient } from "@/lib/getQueryClient";
+import { isSuperAdmin } from "@/lib/roleUtils";
 
 interface Template {
   id: string;
@@ -44,7 +45,7 @@ export default function DeleteTemplate({
   const queryClient = getQueryClient();
 
   // Only show delete button for superadmins
-  if (sessionUser.role !== "SUPERADMIN") {
+  if (!isSuperAdmin(sessionUser)) {
     return null;
   }
 
